@@ -1,0 +1,281 @@
+Algorithms : 
+	
+	Josephus problem : 
+		https://www.geeksforgeeks.org/josephus-problem-set-1-a-on-solution/
+		
+Topic : Bitmanipulation : 
+		
+	left shift : 
+		left shift moves the bits to the left by given value.
+		for example :
+			x<<y means that :
+				move the bits in x to the left by y.
+				5<<2 means 
+				00101 -> 10100
+				
+				this actually means :
+					2^2 + 2^0 = 5
+					applying left shift gets us :
+						2^4 + 2^2 = 16+4 = 20
+				
+				which is :
+					2^2(2^2 + 2^0) 
+				which means :
+					2^y*(x)
+			
+		Therefore : 
+			when we left shift a number we are multiplying that number by 2^number_of_shifts
+			
+			x << y = 2^y (x)
+			
+	right shift : 
+		Similar to left shift, right shift shifts the bits to the right by y shifts :
+			x>>y :
+			
+			as the left shift multiplies the number by power of 2,
+			
+			right shift divides the number by the power of 2.
+			
+			x>>y = x/2^y
+			
+	
+	checking if the number is even or odd using bit manipulation:	
+		
+		To check if a number is even or odd we can use the and operator. bitwise and with 1, if answer is 1 it is odd else even.
+	
+	Finding the ith bit of a number :
+		
+		To find the ith bit of a number, the idea is similar to finding the even odd bit, just the difference is that the activated bit needs to be the ith bit so to do that,
+		we need to left shift 1 by i steps,
+		so we create this mask which then when used with bitwised, will give the value of that bit in 2^x format,
+		so to find the ith bit, if the answer is greater than 0 the bit value is 1 else the value is 0.
+		
+		ex. 10 -> 1010 find 1st bit(zero indexed from right), 
+			then 
+			we will create the mask as 0001<<1 -> 0010
+			
+			after :
+			1010 & 0010 = 0010 -> 2 > 0 -> the answer is 1
+			
+	Clear the ith bit of a number :
+		
+		To clear the ith bit, the idea is simple we need to create a mask such that only the ith bit is zero and all the other bits are 1.
+		
+		to create such a mask, left shift 1 by i bits, and then negate all the bits.
+		
+		Once the mask is created then we need to perform bitwise and with the given number to reset/clear the ith bit.
+		
+		ex :
+			
+			13 -> 1101 clear the 2nd bit(zero indexed from right)
+			
+			mask -> 1<<2 = 0100 -> ~0100 = 1011
+			
+			now :
+			1101 & 1011 = 1001 -> 9
+			
+	Set the ith bit :
+		
+		To set the ith bit, the idea is similar to setting or getting the ith bit, only difference is to use the bitwise or operation.
+		
+		idea is simple create a mask by performing left shift on 1 by i. 
+		and then perform bitwise or using this mask.
+		
+		ex :
+			5 -> 101 set the 1st bit(zero indexed from right)
+			mask :
+			1<<i -> 001<<1 = 010
+			
+			101 | 010 = 111 -> 7
+	
+	update ith bit :
+		
+		to update the ith bit, meaning to clear or set the ith bit, there are multiple ways, one option is to use setbit and clearbit methods depending on the value of the update value.
+		else we can first clear the ith bit and then create a mask using 1 or 0 depending upon the update value and then left shift it by i, using this mask, perform the bitwise or operation with the given number. this will update the ith bit as per user input.
+
+
+	clear the last i bits :
+	
+		to clear the last i bits(last n bits going left to right), the idea is simple use the bitwise and operation using a mask. 
+		the mask should contain 1s for first n-i bits and 0 for last i bits.
+		To create this mask, we need to perform left shift operation on -1 or ~0 by i steps.
+		
+		ex :
+			15 -> clear last 2 bits -> 1111 -> 1100
+			for this mask :
+				we use -1 -> 1111<<2 = 1100 
+				
+			then we 
+			1100 & 1111 = 1100.
+			
+	Clear bits in the range i to j :
+		
+		To clear the bits in the range i to j, zero indexed from left,
+		
+		    j   i  0th 
+			|   |  |
+ 		111100001111
+		
+		The idea is similar to the previous methods, we need a mask, then we either and/or the input with this mask. 
+		So here since we need to clear the range, we will perform bitwise and operation.
+		
+		To create this mask, we need to set the bits from range i to j as 0 and rest should be set to 1.
+		
+		We can split this mask into two parts, 
+			1st part -> the left part, for this we can left shift -1 or ~0 by j bits.
+			This will create the following mask :
+				111111111111<<j = 111100000000
+			
+			2nd part -> the right part, for this we can calculate the 
+			(2^i) - 1
+			we can directly calculate this or we can do this by left shifting as well.
+				(1<<i) - 1
+			This will create the following mask :
+				1<<i = 000000010000 - 1 = 000000001111
+			
+			
+			now combine the two parts of the masks, by performing bitwise or operation.
+			
+			111100000000 | 000000001111 = 111100001111
+			
+		now using this mask we will perform bitwise and operation with the input.
+		
+	replace bits in the given range :
+	
+		we are given 2 numbers n and m, we need to replace the bits from range i to j in n by the bits from m.
+		the idea for this is really simple, first clear the range from i to j from n.
+		Then left shift the number m by i bits.
+		and the use this newly created number m as mask.
+		Use this mask to perform bitwise or operation with the number n.
+		
+		this is just the combination of above methods.
+		
+	Check if the number is a power of 2 :
+		
+		The idea is simple, 
+		a number which is 2 to the power x will have the xth bit set to 1(zero indexed from right) and all the other numbers will be set to 0.
+		and the number n-1 will be all the numbers till x-1 set to 1(zero indexed from right).
+		since the set bits are not common in both the numbers, the bitwise and operation will return 0.
+		
+		Therefore, to check if the given number is a power of 2 or not, the algo is as follows :
+			
+			perform the bitwise and of two numbers n and n-1. if the answer is 0, the number is a power of 2 else the number is not a power of 2.
+			
+		This is a constant order time complexity of finding if the given number is power of 2 or not.
+	
+	count the set bits of a number :
+	
+		first method for this is to perform bitwise and operation with 1 and then right shift the input value until it is greater than 0. 
+		if the operation returns 1 increase the counter.
+		This will take log(n) time to find the count.
+		
+		second method :
+			this is a bit tricky method, but on an average this will run faster than the first method.
+			the idea is to perform bitwise and operation with input-1 and count the iterations until input is greater than zero.
+			so n = n & n-1
+			count += 1
+			This removes the last set bit from the number and hence the number of iterations are less as compared to the first method.
+			
+	Unique number 1 :
+		
+		there are 2n + 1 numbers and we need to find that one number which is not repeated again. all the numbers will occur twice except 1 unique number. Find that number :
+		
+		1. using brute force 
+			space -> O(1)
+			time -> O(N^2)
+			
+		2. using dict/hash table :
+			space -> O(N)
+			time -> O(N)
+		
+		3. using bitmanipulation :
+			take the xor of all the numbers, since
+			a ^ a = 0 and b ^ 0 = b,
+			so when we take the xor of all the numbers, the duplicate numbers will cancel each other out and the unique number will br found.
+			
+			ex : 1 ^ 2 ^ 3 ^ 5 ^ 3 ^ 2 ^ 1 = 0 ^ 0 ^ 0 ^ 5 = 5
+			
+			space -> O(1)
+			time -> O(N)
+			
+	Unique number 2 :
+		
+		The question is similar to unique number on only difference is that the total number of numbers as input is 2n + 2, and there are two different unique numbers. We need to find those two unique numbers.
+		
+		1. Using hashmap :
+			time -> O(N)
+			space -> O(N)
+		
+		2. Using bit manipulation :
+			
+			the idea is simple, take the xor of all the numbers, the final answer of the xor will be the xor of unique numbers. 
+			Now how can we find the two unique numbers from this xor? 
+				for this we can use the final xor, we need to find the first set bit of this xor. for this we can create a simple mask. we right shift the number till we find the set bit, and then keep a counter, using this we will left shift 1 by these many counts. Now we use this mask.
+				
+				now why do we need to find the first set bit? 
+				
+				this bit represents the first bit position which are not common in both the numbers.
+				
+				now using this mask we need group the elements into two parts, each of these parts will have one of those unique numbers, we need to write a condition of anding with mask and if the condition is true then we xor the number. Now this final xor is one of the unique number.
+				
+				this is the first unique number. Now using this number we can find the second unique number, just xor with the first xor(the xor of all the numbers).
+		
+	Unique Number 3 :
+		
+		The question is that the input will contain 3N + 1 elements. Each number will repeat 3 times except for 1 element. we need to find that 1 unique number.
+		
+		for this there is a separate method we cannot use the xor method because 0 ^ x = x. Since there are odd number of x's it wont reduce the other numbers to zero.
+		
+		for this we need to find the number of set bits at each position. These totals will be of the form 3N or 3N+1
+		the position of 3N suggests that the unique number does not have a set bit at this position.
+		to find the unique number, we take a mode of 3 with all the total numbers. this will get us a binary number, this binary sequence is the binary representation of the unique number.
+		
+		Now we might think why take the sum and why will be the total set bits equal to 3N or 3N+1 and why does the mode 3 operation return the binary representation of unique number?
+		
+			1st of all this method should work for all Odd x, where x = aN + 1 where a is odd number.
+			because since the number of non unique number is lets say 3, the number of set bits will always be in the factor of 3. And the unique number will contribute to that 3N + 1 total.
+			
+			So basically we are removing all the sets of 3 from the total set bits number. Since the unique number will contribute to that extra 1, we are able to extract the unique number.
+			
+			This will also work for 5N + 1. Here the total number of set bits will be equal to 5N or 5N + 1. And then to find the unique number, we need to take a mode 5 with each individual total bit count.
+			
+			The resulting number will be a binary representation of unique number.
+			
+			This was actually out of the box. sala he kasa suchat jail bc.
+			
+	Finding Subsets :
+		
+		Find all the combination of the given sequence,
+		
+		1. bit masking :
+			Create the masks for each combination, for this we need to find the binary representation of all the numbers from either 1 or 0 depending upon the need, till 2^N - 1(1<<N - 1)
+			Using this binary mask, only those index should be selected whose value is 1 in the mask.
+			
+			ex : 001, 010, 100 ... 111
+			this will give us a sequence of all the combination of 3 chars.
+			
+Topic : bigIntegers :
+	
+	Large Factorial : 
+		The factorial causes multiplication of big integer with the smaller integer. 
+		The below method needs to be called multiple times, when doing the factorial multiplication.
+		integer multiplication :
+			The algorithm is as follows, we have the larger number in the array and the smaller number in int variable.
+			Result will be stored inside the result array. So the idea is to store the answer in the reverse order because we can append numbers in the array but we cannot push the elements in the front because that will be expensive(O(n)) operation. 
+			So to do this, we first reverse the bigger number which is stored in the array. And then we iterate one number at a time on the bigger array. We take the number and multiply it with the smaller number and store the unit digit at the first available place in the result array and keep track of the carry. The carry should be used while multiplying. If the last carry is there then we need to get the last digit of the carry add it in the array and do this step while the carry is greater than zero.
+			e.g. : 
+				multiply : 250 * 12
+				reverse the larger number which is to be stored in an array.
+				250 -> 0 5 2 
+				iterate and multiply the number 12 with each element in the array.
+				0 5 2
+				1 -> 0*12 -> 0
+				add the answer's unit place in result array -> 0
+				2 -> 5*12 -> 60
+				add the answer's unit place in result array -> 0 0 
+				carry -> 6
+				3 -> 2*12 -> 24 + carry -> 24 -> 24 + 6 -> 30
+				add the answer's unit place in result array -> 0 0 0 3
+				
+			Then the final answer is stored in the array in the reverse order. 
+			So in our example, the answer is 3000.

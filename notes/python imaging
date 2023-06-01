@@ -1,0 +1,103 @@
+Pillow:
+	Python imaging library(PIL)
+	it is a 3rd party library.
+	We can use its contents by importing the PIL.
+		
+		import PIL
+help():	
+	Thw built in function in python known as help() takes object as an argument and returns object's built-in documentation.
+		help(PIL)
+	obviously if the object is not defined/created yet then we cannot use help function.
+
+when we pass the reference of the function we only enter the name of the function and the parenthesis are not entered behind the fucntion.
+
+dir():
+	This method will list the contents of the object.
+
+image class:
+	The PIL library have an Image class.
+	We can import only the Image class :
+		from PIL import Image
+		help(Image)-> this will return all the built-in documentation.
+	
+	open():
+		The function opens and identifies the given image file.
+		this is a lazy operation; this function identifies the file, but the file remains open and the actual image data is not read from the file until we try to process the data.
+		It is just like the open function in python that we used to open a file. 
+		It takes file name as first parameter and mode as the second parameter.  The argument for mode must be 'r' for reading.
+		The function returns PIL.Image.Image object.
+	
+	
+	show():
+		we have the show() method which takes the open object as an attribute. It should display the image.
+	
+	copy():
+		This method does not take any argument but returns object of the image object itself.
+	
+	save():
+		This method saves the image by the given file name.
+		It takes 3 argument of which the last one is the variable length parameter meaning it can take any number of optional parameter(parameters with default value. These are dictionaries). The first parameter is name by which the image is saved.
+		Second is the format of the image. It have a default value as none.
+			
+			from PIL import Image
+			im=Image.open(fp)
+			im.save('abc.jpeg')
+	
+	filter():
+		This function takes the filter object. We can take apply different filters to the image.
+	
+	conver():
+		The convert method is used to convert image from one format to another. This is necessary because some filters need specific format.
+		
+	.width and .height attributes:
+		We can use the image_obj.width and image_obj.height to get the width and the height of the image.
+		These are the number of pixels.
+		
+	crop():
+		As the name suggest it is used to crop the image to a given dimension.
+		It takes a parameter named as box. The default value is none.
+		The box meaning the parameter takes a 4-tuple :
+			left,upper,right,lower
+		The fucntion returns a rectangular region from this image of the dimensions of the box meaning the given parameter which is a tuple.
+		The tuple contains the value of starting pixel to end pixel. Meaning start from x pixels from the left, y pixel from up till z pixel to right and w pixel in downwards direction.
+		
+		The image returns only a copy like other functions and does not change the original image.
+	
+	new():
+		It creates a new image with the given mode and size.
+		IT takes 3 parameters :
+		mode:
+			the mode to use for the new image.
+		size:
+			a tuple containing(width,height) in pixels.
+		color=0:
+			what color to use for the image.
+		
+	paste():
+		It is used to paste a given image on another image. 
+		It takes 2 parameters.
+			1. the object of the image we want to paste.
+			2. the position tuple containing x and y.
+			eg. contact_sheet.paste(img,(x,y))
+	resize():
+		used to resize a image. Takes new width and height.
+		eg.
+			contact_sheet.resize(width,height)
+			
+			
+Tesseract:
+	To work with tesseract we import pytesseract module.
+	image_to_string():
+		It is used for optical character recognition. The function returns a string from the image.
+		It takes image object as a parameter. There are other optional parameters like 
+		lang, config, nice, output_type(default value is string)
+		
+	The problem with this is that this method struggles with images having noise. Here noise means any data other than text. Meaning there could be a colorfull picture on which the text is written.
+	To deal with this we can convert the image into gray-scale. The 3 channels, RGB are converted into a single channel. 
+	
+	Binarization:
+		If it does not work then we can use binarization, meaning we seperate a given image into two parts.
+		This technique works on threshold values.
+		If the pixel value is greater than the threshold value then it is converted into a black pixel.
+		If the pixel value is lower than threshold value then it is converted into white pixel.
+		

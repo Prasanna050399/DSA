@@ -1,0 +1,1684 @@
+So what is a program?
+A program is a set of instruction for a computer to perform.
+When a python code executes successfully it returns 0. This exit status value is stored in an environtment variable. We can access that variable to understand the error in a program.
+
+Precidence of operators in python:
+	1. Paranthesis
+	2. Exponential x^y
+	3. mult and div and mod and floor division (* / % // ) 
+	4. addition and sub
+	5. comparison operator
+	6. not operator
+	7. and , or operator
+	For the operators having the same precidences, the value is calculated from left to right. But for exponential the sequence goes from right to left.
+	meaning if in an expression if the 
+	it is 
+	-+--+ it goes from left to right
+	same for 
+	* / // * it goes from left to right
+	for 
+	** ** it goes from right to left
+	for 
+	+ - ** ** * / for exponential it goes from right to left but for others it goes from left to right.
+
+""" """ are also used to span several lines in python:
+	meaning:
+	print(""" hello
+	hi
+	hey""")
+	the output will be exactly like this:
+		hello
+		hi
+		hey
+	
+
+Ternary Operators in Python:
+	[on_true] if [expression] else [on_false] 
+	we can write a nested if else also meaning that after else we can add one more if.
+	eg:
+		a,b=1,2
+		big= a if a>b else b
+	Using tuples:
+		(if_test_false,_if_test_true)[test]
+		eg:
+			a,b=1,2
+			(b,a)[a>b]
+
+main function:
+	__name__:
+		It is the variable which stores the data that in what context the code/script is loaded.
+		Meaning if we use an interactive interpreter or in another module then the value in __name__ will be 'name of the module/code.'
+		If we use the command line interface in that case the __name__ will contain the value '__main__'.
+		This is specifically useful in case we want to implement the main function.
+		eg.
+			if __name__=='__main__':
+				main()
+	We need to define a function name main(). Then just like we enter the code we want to execute in the main function in any other language, we can do it in this main function.
+	Remember anything else in the script should be written as a function or in class.
+	All the calling of the functions should be in main function. Then we need to write the condition that checks the execution mode of the code meaning whether the code is executed in command line or if the code is executed in the interactive interpreter or whether it is imported as a module. We get this information using the __name__ variable. 
+	If the variable contains the value '__main__' Then it means the code is being executed using command line interpreter. Then we can just write a condition checking this and call the main() function if the condition is true.
+	eg. 
+	def main():
+		all the calling of function
+	if __name__=='__main__':
+		main() --> here we are calling the main function and as result the interpreter will execute everything 	inside the main function.
+		
+variables in python:
+	when we assign a value,
+	the value is first evaluated. Then the object of the values is created and in the end the variable is assigned to the object.
+
+docstring of function can be view by run help(function_name) in interpreter after the module is imported,
+
+while comment only can be access by open up the source code
+
+docstrings are not omitted by the interpreter but comments are omitted.
+
+use doctstring before the function definition. 
+
+Memory management in python:
+
+https://medium.com/@tyastropheus/tricky-python-i-memory-management-for-mutable-immutable-objects-21507d1e5b95
+
+Lists are like linked list.
+
+datatypes:
+Sorted():
+	It works on any sequence like len(). It returns a list of sorted sequence.
+	l1=sorted(string)
+	l2=sorted(list)
+	l3=sorted(tupple)
+
+To see the datatypes of the variable use the type function
+type(variable)
+https://www.geeksforgeeks.org/python-type-function/
+
+floating point->fact that the position of  decimal point depends on exponent.
+
+simultenious assignment:
+eg.
+	(x,y)=(y,x%y)
+	x takes old value of y
+	y takes  value x%y
+
+	(count,i,list1)=(0,1,[])
+	meaning:
+		count=0
+		i=1
+		list1=[]
+	(count,list1)=(count+1,list1+[x])
+	
+How assignment of values work in mutable and immutable:
+	immutable:
+		each variable gets a fresh copy of the value.
+		eg	
+			x=5
+			y=x
+			x=7
+			the final values of x and y are 7 and 5 respectively.
+	mutable:
+		the variables are just pointing to a same value .
+		eg.
+			list_1=[1,2,3,4,5]
+			list_2=list_1
+			list_1[0]=10
+			then the values are:
+				list_1=[10,2,3,4,5]
+				list_2=[10,2,3,4,5]
+		i.e there is no seperate copy of list for each variable.
+		
+		So then how can we make a copy of a list or in general any mutable data type?
+			we use slicing.
+			slice creates a new sub list.
+			now using the entire list also known as full slice we can create a copy  of the list.
+			list_var1[:] just  using the ':' meaning by default start from 0 and stop at len(list_var).
+			here list_var1[:] is full slice.
+			list_2=list_1[:]-> will create a sub list which will be a fresh copy. i.e any change in list_1 will not reflect in list_2.
+		we have 'is' keyword which checks whether x and y refer to the same objects.(two variables pointing to the same memory location.)
+			eg.
+				x=[1,2,3]
+				y=[1,2,3]
+				z=y
+				x == y  is true
+				y == z is true
+				x is y is false
+				y is z is true
+Numbers:
+	int ->1 (immutable)
+	float	->1.1	(immutable)
+	complex		-> x=25j (we append j to the number)	
+	boolean		-> true/false(d=a<c type(d) will give bool as output)	(immutable)
+	
+String:
+	var_1="abc"
+	var_2='abc'
+	when we use input() function the variable data type is string.
+		eg.
+			a1=input()
+			print(type(a1))
+			output:<class 'str'>
+	we can use index to access the character.
+	
+	Strings are immutable.
+	(In object-oriented and functional programming, an immutable object is an object whose state cannot be modified after it is created.
+	 This is in contrast to a mutable object, which can be modified after it is created.)
+	 
+	we can use the range to access the string (series of characters) slicing and cutting of string
+	var_1[start:stop:steps] all of the arguments are optional 
+		if the index is equal to stop it not select the letter at that index.
+		Slice stops one position short than the given stop index.
+		s[i:j]
+		here s[0]==s[0:1]
+		starts -> s[i]
+		stops  -> s[j-1]
+		eg.
+			first_character = test[:1]
+			print("First Character: ", first_character)
+ 
+			# Last one character
+			last_character = test[-1:]
+			print("Last Character: ", last_character)
+			 
+			# Everything except the first one character
+			except_first = test[1:]
+			print("Except First Char.: ", except_first)
+			 
+			# Everything except the last one character
+			except_last = test[:-1]
+			print("Except First Char.: ", except_last)
+			 
+			# Everything between first and last two character
+			between_two = test[2:-2]
+			print("Between two character: ", between_two)
+			 
+			# Skip one character
+			skip_one = test[0:18:2]  # [start:stop:step]
+			print("Skip one character: ", skip_one)
+			 
+			# Reverse String
+			reverse_str = test[::-1]
+			print("Reverse String: ", reverse_str)
+			
+		In python we can use -ve index to traverse the string.
+		the -ve index starts from last element in an array.
+			eg.	var="abc"
+				print(var[-1])
+					output is c
+				[-1]=c
+				[-2]=b
+				[-3]=a
+		We can use len(x) function	to get the length of the string.		
+				
+List:
+	A list is a data structure in Python that is a mutable, or changeable, ordered sequence of elements.
+	we can merge different data types in lists.
+	We can also have a list of functions:
+		eg.
+		we have 3 functions named as f1,f2,f3
+		we can create a list of these functions:
+		l1=[f1,f2,f3]
+		we can iterate over the list or we can use indexing to refer to a function.
+		So to call a function we can write something like this:
+			l1[0](parameters)
+			or we can use a iterating variable:
+			for i in l1:
+				print(i(parameters))
+	we can update the values of the list.
+	we can perform slicing operations on lists,
+	List can contain duplicate entries.
+	*********Concatination creates new list.**********
+	This has to be taken into consideration as if we are using this method in a function a new list is created and the updates we are making wont reflect in the list.
+	Append fuction will not make a new list. It can be used in the function so that whenever we add a new element in the list it wont create a new list.
+	Append function returns none.
+	so if we do something like this,
+		a=x.append('2')
+		then a will point to none.
+	In python terminology list_var is an object and the given methods are the function.
+	We can also assign to a slice in place.
+	To create a new list we can use the list() function which will return a new list. Meaning the new variable wont be pointing to the same list.
+	
+	So to create a new list from an already created list:
+		1. We can use concatination (+) (One thing to remember if we use += then it wont create a new object. But using a normal + makes a new object 
+		meaning y+='x' is different than y=y+'x' the first does not create a new object but the second one does.)
+		2. We can use slicing
+		3. We can use the type casting meaning typecast a list to a list again (var=list(lst)).
+		4. We can also use multiplication to create a new list. In multiplication the list is repeated n number of time. So if we multipy the list by 1 we will create a new list.
+		eg.
+			a=[1,2,3,4]
+			b=a*1
+			print(a is b) -> this will print false meaning that both the lists are different.
+	One thing to notice is that arithmatic operations on list follow same rules like normal operations meaning that + will have a lower precedence over * meaning * will be done first and also the if multiple same precedence operators are there then in that case the operation will carry from left to right. 
+	meaning:
+		list1=[1,2,3,4]
+		list2=list1
+		list1[2:]=[6,7]
+		this will make both list1 and lsit2 = [1,2,6,7]
+	we can also expand or shrink the list using above method.
+	
+	here list_var[0]!=list_var[0:1] because list_var[0:1] will give a sublist of list_var and list_var[0] will give the value of 0th element.
+	eg.
+		var_1=[1,'string',1.12]
+		print(var_1[1:2])(start from index 1 increament when index is equal to 2 stop dont print.)
+		print(var_1[1:-1])(list size-1 is 2 and 2 is the last index)
+		output:['string']
+		
+		var_2=[1,2,3,4,5,6]
+		var_2[2]="hello human"
+		print(var_2)
+		
+		output:[1, 2, 'hello human', 4, 5, 6]
+		
+	functions of the list data structure:
+	Nested list: List within list. where inner list can contain anything list,string,dictionary,tuple
+	
+	nested=[[2,[37]],4,["hello"]]
+	nested[0] is [2,[37]]
+	nested[1] is 4
+	nested[2][0][3] is "l"->element at 2nd position which is a list in which element at 0th postion which is string in which letter at 3rd position. 
+	nested[0][1:2] is [[37]] which is sublist of list of the element at position 0
+	nested[2][0] is 'hello' it drops the list and just give us the string
+	
+	concatination:
+	list1=[1,2,3]
+	list2=[4,5,6]
+	list3=list1+list2
+	list3 will give [1,2,3,4,5,6]
+	
+	now '+' creates a new list.
+	eg	
+		list1=[1,2,3,4]
+		list2=list1
+		list1=list1+[9]
+		this will create a new list with 9 in it and list1 will point towards this new list.
+		now if we update list1 it will not reflect in list2
+	pop:
+		used to pop the last element. Meaning that we can implement the stack behaviour.
+		syntax:
+			var.pop()
+			
+	
+	append:
+		used to append.
+		syntax:
+			var.append(value)
+		eg.
+			var_2.append(11)
+			print(var_2)
+			output:[1, 2, 'hello human', 4, 5, 6, 11]
+			list1=[1,2,3]
+			list2=list1
+			list1.append(4)
+			list1 would be [1,2,3,4]
+			list2 would also be [1,2,3,4]
+	insert:
+		used to insert in the list. All the elements will be shifted by one position to the right.
+		syntax :
+			var.insert(index,value)
+		eg.	
+			var_2.insert(0,"inserted at the start")
+			print(var_2)
+			output:['inserted at the start', 1, 2, 'hello human', 4, 5, 6, 11]
+			
+	reverse:
+		used to reverse the list.
+		syntax :
+			var.reverse()  # this modifies the original list.
+		eg.
+			var_2.reverse()
+			print(var_2)
+			
+			output: [11, 6, 5, 4, 'hello human', 2, 1, 'inserted at the start']
+		it returns none.	
+		we can use the reversed function in for each loop to reverse the list. This will not modify the actual list.
+	
+	extend:
+		used to append a list to another list.
+		syntax:
+			list1.extend(list2)
+			elements of list1+ elements of list2
+	
+	remove:
+		used to remove an element from the list.
+		here the index is not given in the parameter we give the element value.
+		the function will remove the first occurance of that element from that list.
+		syntax:	
+		if there is no occurance of x, it will give an error.
+			list1.remove(x)-> removes first occurance of x.	
+	sort:
+		used to sort the list in ascending order.
+		It returns none.
+		to sort in descending order just add parameter reverse=True.
+		meaning we cant assign this.like eg.
+			a=lst.sort() -> a=none.
+	sorted():
+		This a function that takes a list as an arguement and returns a sorted list. The function does not change the original list but returns a sorted list. It works on any sequence like tupple string and returns a list of sorted sequence. just like sort we can use the optional argument reverse=True. Another optional parameter is the  key parameter. The key parameter takes a function name without paranthesis as an argument and then call that funtion for all the elements in the sequence and takes the return value of the function as a property of notes according to which the sequence will be sorted. The function must take only one parameter for each element in the sequence and must return a value which can be treated as property. Optionally we can use a lambda funtion in place of function name.
+		When we are giving tuples as input sequence, the tuples are sorted based on their 1st then 2nd if needed and then nth if needed. 
+		This is very useful since if we want to sort on more than one property of the element we can return a tuple to the key parameter and then sort on those tuple properties.eg.
+			x= sorted(d1,key=lambda x : (d1[x],len(d1)))
+		eg.
+			var=sorted(l1)
+			where var will be a sorted list.
+	index:
+		we can use index to get the leftmost index of the element.
+		syntax:
+			list1.index(x)-> returns the leftmost index of x.
+	rindex:
+		we can user rindex to get the rightmost index of the element.
+		syntax:
+			list1.rindex(x)-> returns the rightmost index of x.
+			
+	To delete an element from a list we can use the del keyword.
+	eg.:
+		del l1[index/slice]
+		this will delete the elements/element from the given list.
+		
+	count:
+		just like in string count takes a value and then returns the number of occurance of that value in the list.
+		eg.
+		var=	l1.count(value)
+dictionary:
+	Dictionary in Python is an "UNORDERED COLLECTION" of data values, used to store data values like a map, which unlike other 
+	Data Types that hold only single value as an element, Dictionary holds key:value pair. 
+	We can change the elements in dictionary.
+	Key values should be unique. Values can have duplicate entries.
+	Dictionary uses hashing to store each key by using the inbuilt hash function. The key is used to find the value.
+	Key in dictionary must be a immutable object while value can be any object.
+	By default the for loop iterates over the keys in a dictionary.
+	Syntax:
+		name={key1:value,key2:value.....}
+	eg.	
+		dict={1:"apple",2:2,"key_1":"value"}
+		print(dict)
+		output: {1: 'apple', 2: 2, 'key_1': 'value'}
+	we can get the key as indexes to get the value of that key.
+	eg.
+		print(dict['key_1'])
+		output:	value
+	updating values of the keys:
+	eg.
+		dict[1]="hello human"
+		print(dict)
+		output:{1: 'hello human', 2: 2, 'key_1': 'value'}
+	
+	To add new value to the dictionary :
+	syntax:
+		dictionary_name['key_not used yet']="new value"
+	eg.
+		dict['key_not used yet']="new value"
+		print(dict)
+		output:	{1: 'hello human', 2: 2, 'key_1': 'value', 'key_not used yet': 'new value'}
+	
+	Deleting a key : value pair in Dictionary:
+		we use the del keyword.
+		Syntax:
+			del dic_name[key]
+	
+	There are many methods for dictionaries:
+		keys():
+			It returns the keys of the given list.
+			syntax:
+				dic.keys()
+				we can also do this:
+					var=list(dic.keys())
+					which will give us the list of keys in dictionaries.
+		values():
+			It returns the values of the given list.
+			Syntax:
+				dic.values()
+		There are more methods like items which returns all key value pairs. Then there is get method which takes key as an argument and returns value if present if not present then returns none. Also if we add another parameter to get function which is alt then if the key value is not present then it returns alt. Here alt is an alternate value that will be returned. eg. dic.get(key,0) if key is not present then it will return 0.
+		One thing to note is that the item method returns a tuple object consisting of key value pair. Meaning if a dic have 4 k-v pair it will return 3 tuples of key value pair.
+	
+	If we assign a dic to another var then both the variables will point to the same dic.(just like lists)
+	So if :
+		dic={1:2,2:3,3:4}
+		var=dic
+		then print(dic is var) will give true as output.
+		and if we do
+		var[3]=6
+		and print(dic[3]) -> it will print 6.
+	This is because dictionaries are mutables.
+		
+	Copy():
+		If we want to copy a dic to new var meaning creating a new dic with same values we need to use copy method. 
+		syntax:
+		var = dict.copy() -> here both variable point to different objects there for if we use var is dict it will return false.
+		
+	list comprehensions:
+		The list comprehensions are use to either map a sequence or to filter a sequence.
+		The list comprehension returns a list.
+		eg:
+			l1=[<transformer-expression> for i in sequnce <filter expression>]
+			Note the filter function is optional meaning we can add it depending on our need.
+			The transformer-function is an expression whose value is returned.
+			
+			eg.
+				l1= [x*2 for x in nums] -> it will return a list whose elements are doubled.
+				l1= [x for x in nums if x%2==0]  -> it will return a number only if it is even.
+		The list comprehension does the same task as the map and filter function.
+tuple:
+	A tuple is a sequence of immutable Python objects. Tuples are sequences, just like lists.
+	The differences between tuples and lists are, 
+	the tuples cannot be changed unlike lists and tuples use parentheses, 
+	whereas lists use square brackets.
+	But we can have duplicate values in a tuple.
+	To create a tuple with one element we need to add comma at the end or else the element will be considered as single element.
+	When the python interpreter sees multiple values seperated by commas are assigned to a variable it automatically packs them to tuples.
+	Therefore, if there are no paranthesis around multiple data still it will be considered as a tuple.
+	This also holds true for returning multiple values in python. When we return multiple values those values are packed into a tuple. So basically we are returning a tuple. Remember even without a paranthesis the values are packed as a tuple hence the return part.
+	Assigning values to a single variable is known as packing.
+	The opposite to packing is unpacking. In which we can simulteniously assign values to different variables the values of tuple in a sequence.
+	eg.
+		a=1,2,3,4,5
+		b,c,d,e,f=a -> this will work like b=a[0],c=a[1].....
+		this is unpacking. 
+	Remember in unpacking the number of variables should be equal to the length of the tuple no more no less.
+	
+	This also works when passing actual parameters. Meaning we can pack the values in a variable and pass the variable as an argument. 
+	When the argument is passed we need to add '*' before the variable which tells the interpreter that the variable needs to be unpacked.
+	The unpacking will be similar to normal unpacking.
+	eg.
+		a=1,2
+		func(*a) -> passing tuple as argument.
+	
+	One point to remember is that unpacking also works with list, or any other sequence type.
+	
+	Tuple unpacking is also useful in swapping.
+	eg.:
+		a=1
+		b=2
+		a,b=b,a
+	
+	One of the most important use of unpacking is the use in iterators.
+	consider a situation when we are iterating through a sequence with another sequence in it it can be a tuple or anything.
+	then we can unpack this into iterating variables.
+	eg.:
+		for k,v in dict.items():  -> items returns a key value tuple which is unpacked into k,v.
+			print(k,v)
+	
+	syntax:	
+		tup_name=(value1,"value2",.....)
+	eg.
+		tup=(1,2,3,4,"hello human",2)
+		print(tup)
+		print(type(tup))
+		output:
+			(1, 2, 3, 4, 'hello human', 2)
+			<class 'tuple'>
+	tuples are indexed as well, we can use index to access elements in tuple.
+	eg.	
+		print(tup[2])
+		output:	3
+	we can use a function called count to count the no. of duplicate values in tuple.
+	syntax:
+		tuple_name.count(element_name/"element_name")
+	eg.
+		print(tup.count(2))
+		print(tup.count('hello human'))
+		output:	1
+				2
+
+Set:
+	A Set is an unordered collection data type that is iterable, 
+	mutable and has no duplicate elements. 
+	The major advantage of using a set, as opposed to a list,
+	is that it has a highly optimized method for checking whether a specific element is contained in the set.
+	This is based on a data structure known as a hash table.
+	
+	To create an empty set we use:
+	var=set()
+	because the {} are used for dictionary.
+	We can convert any  list into set by using set().
+	String is a list.
+	So if give a stirng to set() then we will get a set without duplicates.
+	var=set("banana")
+	output:
+		{'a','b','n'}
+	syntax:
+		set_name={value1,"value2".....}
+		
+	eg.
+		set_1={10,10,20,30,"hello",'human'}
+		print(set_1)
+		print(type(set_1))
+		output:
+			{'hello', 10, 'human', 20, 30}
+			<class 'set'>
+		
+	set does not have any indexes
+		
+	We can use the set operations on the set data structure.
+	
+	For union:
+		we use:
+			var_1 | var_2(bar):- This will create the union.(no duplicates.)
+		Order maybe arbritrary.
+	For intersection:
+		we use:
+			var_1 & var_2:- This will create the intersection.		
+		Order maybe arbritrary.
+	For set difference:
+		we use:
+			var_1-var_2:- This will give the difference of the sets.
+	
+	For Exclusive Or:
+		we use:
+			var_1 ^ var_2:- This will give the exclusive or of the sets meaning elements which are exclusive are printed. 
+			var_1={1,2,3,4,5}
+			var_2={1,3,5,6}
+			
+			var_1^var_2={2,4,6}
+			
+range:
+	range is used to get the sequence of numbers.
+	it also end with end-1.
+	eg
+		range[i,j] ->   i to j-1.
+		range[0,5] ->  0 to 4
+	syntax:
+		range(start,end)
+	eg. 
+		list=range(0,10)
+		print(list)
+		print(list[8])
+		print(type(list))
+		
+		output:
+			range(0, 10)
+			8
+			<class 'range'>'
+	in python 2 :
+		range(0,10)==[0,1,2,3,4,5,6,7,8,9]?
+		answer : yes it is true
+	
+	in python 3 :
+		range(0,10)==[0,1,2,3,4,5,6,7,8,9]?
+		answer : it is false that is range is not a list in python3.
+		
+	to convert range to list we us the list() function.
+	list(range(i,j))
+		
+			
+we can make list of other data types like a list,tuple,dictionary,set,etc.
+syntax:
+	var_list=[list,list,dict,tuple....]
+
+eg.
+	var_3=[var_1,var_2,tup,dict,set_1]
+	print(var_3)
+	print(type(var_3))
+	
+	output:
+	[[1, 'string', 1.12], ['inserted at the start', 1, 2, 'hello human', 2, 3, 4, 5,6, 11], 
+	(1, 2, 3, 4, 'hello human', 2), {1: 'hello human', 2: 2, 'key_1': 'value',
+	'key_not used yet': 'new value'}, {'hello', 10, 20, 'human', 30}]
+	<class 'list'>
+	
+arithematic operators:
++ :addition
+- :subtraction
+* :mult
+/ :div
+//:returns quotient (it returns the floor value of the division if the input is int the ans is int but if the number is float even after // the answer is float)
+% :returns remainder
+**:power to (x**y -> x raise to y)
+there are more operations like sin(),log(),sqrt(),etc which are in math library which we have to import first to use.	
+DATACONVERSION(typecasting):
+	converting the data type of the variable into another data-type.
+	So we have functions in python for type conversion.
+	
+	1.int()- converts into int
+	2.float()- converts into float.
+	3.tuple()- converts into tuple.
+	4.list()- converts into list.
+	5.set()- converts into set.
+	6.dict()- converts into dictionary.
+	7.str()- converts into string.
+	8.ord()- converts or rather returns the ascii value of the character. e.g ord('A') will give me 65. The type of return value is int().
+	9.chr()- Converts or rather returns the character of the ascii value. e.g chr(65) will give me 'A'.
+	syntax:
+		data-type(variable)
+	eg.
+		x=int(input())		#Now here the data-type is string
+		y=10
+		print(x)
+		if x==y:
+			print("yes")
+		else:
+			print("no")
+			
+		output:
+			10
+			yes
+			
+	eg.
+		s1=dict
+		print(s1)
+		print(type(s1))
+		s1=list(dict)
+		print(s1)
+		print(type(s1))
+	output:
+		{1: 'hello human', 2: 2, 'key_1': 'value', 'key_not used yet': 'new value'}
+		<class 'dict'>
+		[1, 2, 'key_1', 'key_not used yet']
+		<class 'list'>
+		
+flow control statements:
+
+conditional:
+
+	if condition:
+		statement1
+		statement2
+			.
+			.
+			.
+		statementn
+	else:
+		statement
+	numeric 0 is treated as False.
+	empty sequence ""/[] is treated as False.
+	everything else is treated as True.
+	
+	for else if ladder:
+	if condition:
+		statement
+	elif condition:
+		statement
+	elif condition:
+		statement
+	else:
+		statement
+		
+loops :
+	used when the no. of times the iteration should occur is known.
+	We have an else statement to the loop as well.
+	
+	for variable in sequence:
+		statement
+		
+	eg.
+		for x in [1,2,3,4,5]/range[1,6]/string/etc:
+			counter+=1
+			
+while :
+	used when we dont know how long the iteration occurs.
+	
+	while condition:
+		statement
+		contion terminating statement(which will make sure that the loop won't go on forever)
+		
+Functions in python:
+	any():
+		This function returns true if any item in an iterable is true. 
+		This function takes an iterable as a parameter. Meaning list, tuple, dictionaries.
+		eg.	
+			var=(0,1,False)
+			temp=any(var) --> This will return true, because second element is 1 which is interpreted as true. 
+	map():
+		this is the function which takes a function name as the first input and second input as a sequence. Each element in the sequence is applied to the function. 
+		The map function takes a function name and a sequence then apply each element in that sequence to the function and creates a map object. It basically creates iterator which creates the elements as we need them. We can still use this map object as a list. We can use it in for loop. But to create a list we can simply pass this entire map function as a parameter to the list function.
+		eg.
+			l1=list(map(int,sequence))
+			Here l1 is a list.
+		The function can be a built in function or a user defined funtion. It can also be lambda function. Make sure the function returns some value.
+		eg.
+			l1=map(function,sequence)
+			eg:
+				l1=map(int,input().split())
+				here l1 is not a list although we can iterate over l1 but we cannot use indexing.
+	filter():
+		This is a function which takes a function(which returns either true or false) name as first input and second input as a sequence. Each element in the sequence is feeded to the function.
+		Depending on the input and the function output, if the output is true the element is kept else it is eleminated. Just like the map() function the filter function does not return a list but it returns a iterator meaning we it returns a filter object which can be iterated over. Then again we can convert the iterotor into the list using list() function.
+		eg:
+			var=filter(function->boolean,sequence)
+			we can also use lambda function.
+			eg:
+				l1=list(filter(lambda x : x%2==0,seq))  -> l1 will contain even numbers only.
+	
+	zip():
+		This function takes n number of sequences(list or a string) as parameters and then for each element in the list it returns a tuple of those elements.
+		Meaning 
+			l1=[1,2,3]
+			l2=[4,5,6]
+			s1='123'
+			l4=list(zip(l1,l2,s1)) -> returns a list of tuples:[(1,4,1),(2,5,2),(3,6,3)]
+		One thing to remember if the lists are of unequal sizes then the number of tuples created in the final list is equal to the number of elements in the smallest list. Meaning if l1 have 3 elements and l2 have 4 elements then the list l3 will have 3 tuples only.
+		Also just like filter and map, the zip() method does not return  a list it returns a object of type zip which is a iterator meaning we can iterate over it. To convert it into list we use the list() method.
+		
+	In python all functions return somthing. If we have not written any return statement then the python function none as a value.
+	If a variable is ever assigned in a function then it becomes the local variable(even if the assignment is after the use of the variable). However if the variable is not assigned in the function then the function looks up in the global namespace and use the global value.
+	In python we can return multiple values because if we are having multiple values then it is basicaly a tuple. Read tuple for more info.
+	arbitrary arguments:
+		def fun(*arg):
+			pass
+		fun(1,2,3,4)
+		Here a tuple of arguments is passed to the function.
+	
+	arbitrary keyword arguments:
+		def fun(**arg):
+			pass
+		fun(x=1,y=2)
+		Here a dictionary of arguments is passed to the function.
+	
+	def function_name(arg1,arg2....argn):
+		statement1
+		statement2 
+			.
+			.
+			.
+		return x/x,y...n (optional)
+		
+	now if the arguments are mutable then if the function changes the value of the parameters it will reflect in the actual data.
+	If the arguments are immutable then the function wont change the actual values of the variables passed to the function.
+	The second tricky thing is that if the default value is set to a mutable object, such as a list or a dictionary, that object will be shared in all invocations of the function.
+	A function must be defined before it is invoked.
+	consider the given code which will give error:
+	
+	def f(x):
+		return (g(x+1))
+	z=f(77)
+	def g(y):
+		return(y+3)
+	
+	as the interpreter has not gone passed the z=f(77) statement it does not know what g(x+1) is . It will give an error stating that g is not defined.
+	
+	Recursion:
+		function calling itself.
+		def func():
+			statement
+			func()
+			return statement
+		
+		
+Assert:
+	assert(expression)->boolean:
+		This function takes an expression as an argument and if it is false the interpreter will raise a runtime error.  The use of assert is in testing.
+		We can also use a fucntion or call a function and then check the answer.
+	assert takes one more parameter which is the string which we want to display after the assertion error so that user can understand the problem.
+	eg.	
+		assert type(string)==str,'The data is not string'
+	syntax:
+		assert expression/function
+		
+Access specifiers in python:
+
+public :
+	By default all the variables or functions in a class are public in nature(accessed from anywhere)
+protected:
+	Only accessible to class functions and by functions of inheriting class.
+	variables are declared as protected by adding '_'(single underscore) before the variable declaration.
+	_var1=None
+private
+	members are accessible within the class only.
+	variables are declared as private by adding '__'(double underscore) before the variabale declaration.
+	
+lambda functions:
+	The lambda functions are annonymous functions. It does dont have a name:
+	it have the following syntax:
+		var=lambda input_var1,input_var2,...:operation
+	dont add paranthesis
+	to call the function just use the  variable. e.g:
+		k=lambda x,y:x+y -> definition
+		temp=k(1,3)-> calling
+	the parameters can be optional meaning they can have a default value.
+		var=lambda a,b=1: a+b
+		
+String functions:
+Strip:
+	In python for removing blank spaces from string :
+	we use strip functoin.
+	s="		hello 		"
+	t=s.rstrip()
+	it will remove the trailing blank spaces.
+
+	t will be "		hello"
+
+	t=s.lstrip()
+	it will remove the leading blank spaces.
+
+	t will be "hello 		"	
+
+	t=s.strip()
+	it will remove all the blank spaces.
+
+	t will be "hello"
+
+next is find function which is used to find the pattern in the given string.
+
+	string_var.find(pattern)
+	it will return the index of the first occurance of the pattern.	
+	if the pattern is not found then it will return -1.
+	
+	it is also possible to find a pattern in a given slice.
+	string_var.find(pattern,start,end)
+
+	difference is that index will give an error for this type of statement.
+	hence if we use 
+	string_var.index(pattern)
+	will give the index if the pattern exist but if the pattern does not exist
+	then it will give an error unlike find function.
+
+next in replace function which finds pattern and replaces it all of those patterns.
+
+	string_var.replace(fromstr,tostring)
+	fromstr will be replaced by tostring
+
+	to control the no. of replaces we add an extra parameter
+
+	str_var.replace(fromstr,tostr,n)
+	it will replace first n occurance of the pattern.
+
+****Remember that strings are immutable hence replace won't change the string. It will return changed state.****
+
+next is the split function
+
+	here the string is splitted according to the seperator string(,.* anything).
+	var=string_var.split("seperator string")
+
+	it returns list.
+
+	st="1,2,3,4,5,6"
+	l1=s.split(",")
+	splits the string on comma.
+
+	output will be a list with elements 1,2,3,4,5,6 .
+	hence l1[1] will give 2
+
+	we can also give the limit of splits.
+
+	l1=str_var.split(",",n)
+	after n splits the rest will be just appended as chunk
+
+	the splitted part is still a string. We will still need to	typecast.
+	If we dont give any parameters to the split function it splits over white spaces.
+
+then there is join which joins the list to create a string.
+
+	l1=['1','2','3']
+	st1=",".join(l1)
+	st2="-".join(l1)
+	here we can use any string joiner.
+	so the joining element is the one in quotes and the elements getting joined are parameter to join function.
+	
+	output for st2 :st2='1-2-3'
+	
+	join method takes list as an argument and also the elements should be string. Other data types will give error.
+	
+next is capitalize which make the first letter of the string in uppercase.
+
+	st1.capitalize()
+
+next is upper and lower to convert the entire string to upper case and lower case respectively.
+	st1.lower()
+	st2.upper()
+
+next is isalpha and isnumeric which checks whether the string is complete alphabates of complete numeric respectively.
+
+	s1.isalpha() returns true if consist only of alphabates.
+				else false
+	s2.isnumeric() returns true if consist numbers only.
+				else false.
+	s3.isalnum() returns true if consist of only numbers and alphabets.
+				else False.	
+
+
+next is the format:
+
+	"x={0} and y={1}".format(1,2)
+	output : x=1 and y=2
+	will enter 1 at position 0 and 2 at postion 1.
+	i.e we the no. in curly braces in string are the arguments and the format is used to map them.
+
+	"x={1} and y={0}".format(1,2)
+	output: x=2 and y=1
+
+	it follows the same behaviour of arguments in fucntion. i.e we can use the argument name to specify the actual parameter.
+
+	"x={x} and y={y}".format(x=1,y=2)
+	
+	We can also use this to assign values to a string variable:
+	eg:
+		st1="{},{},{}".format("asd","asd","asd")
+
+	we can use format to specify the number of digits after decimal. In {} we add ':.2f' -> {:.2f} which specifies the number of digits after decimal point.
+	we can change the length by changing 2 in the :.2f more generic would be :.xf where x is the number of digits after decimal point.
+	We can use format to align the data to left or right leaving some spaces. In {} we add ':>2' meaning align to the right leaving 2 spaces. 
+	We can combine the above two formatting expressions by simply writing them one after the other. Eg. {:>2.3f} which means align right leaving 2 spaces and limit the decimal precision to 3. 
+	
+	
+similar to format is end:
+	by default the print statement have the end value as '\n'.
+	Due to this it adds new line to the output in print statment.
+	But we can change this.
+	
+	syntax:
+		print(" ",end=" ") -> by doing this we can add any ending sequence. 
+	
+	This can be used to avoid newline at the end of each print statment.
+		
+	
+global scope:
+
+	In python the function first checks for the variable in the function and then it looks outside the class.
+	If the variables are immutable then then if the code is as follows:
+
+	def f():
+		y=x
+		print(y)
+		x=22
+
+	x=5
+	f()
+
+	then this will give an error.
+
+	On the other hand if the given variable is mutable then the assignment is allowed.
+
+	def f():
+		y=x[0]
+		print(y)
+		x[0]=22
+
+	x=[5]
+	f()
+
+	OutPut:
+	5
+	this is allowed.
+
+	So if we want to update the value of an immutable object in a function and want it to persist then we use global concept.
+
+	def f():	
+		global x
+		y=x
+		print(y)
+		x=22
+
+	x=5
+	f()
+	print(x)
+
+	this will tell that the x we are refering in the function is actually the same x as the x outside.
+	so the output will be:
+	
+		5
+		22
+	
+	so we are getting the updated value.
+	Immutable value accessible within the python program.
+
+	global allows us to transfer an immutable value from outsidein to a function and make it updatable within a function. 
+
+
+Quick Sort:
+	time complexity is O(nlogn)
+	worst case:
+		elements are already sorted in ascending or descending order.
+		which takes O(n^2) as time complexity.
+		
+Heap:
+	To insert element in a heap it is better to enter elements and start heapify() from the bottom.
+	
+Heap sort:
+	It is an inplace sorting algorithm.
+	Just build a heap(max heap) and then delete root and enter the deleted element at the end of the same array.
+	This will give us an array sorted in ascending order.
+	(First element is inserted at n-1 pos,
+	 second element is inserted at n-2 pos,
+	 third element is inserted at n-3 pos and so on)
+	
+	As for ascending order we will use min heap.
+	
+
+with block:
+	Syntax:
+		with <<create some object that understands context> as <some name>>:
+			do some stuff with the object
+			...
+	
+	When the program exits the with block,  the context manager handles the common stuff that normally happens at the end, in our case closing a file.
+	It ensures proper acquisition and release of resources.
+	eg of file handling:
+		with open('mydata.txt', 'r') as md:
+			for line in md:
+				print(line)
+			temp=md.readlines()
+			print(len(temp))
+		# continue on with other code
+	
+File Handling:
+	To open a file,
+	we use rhe open() fintion
+	it takes 2 parameters  first is the name of the file and second is the mode (read/write)
+	Once the file is open it becomes a python object like others.
+	Which is interesting as if we see the type of the variable containing the reference of the file, we get:<class '_io.TextIOWrapper'> as output.
+	If we use 'w' mode i.e write mode it will create a new file if not exist but if the file exist it will delete all the content of the file.
+	all the modes of opening the file are as follows:
+		r -> for reading
+		w -> for writing
+		a -> for appending
+		r+ -> for both reading and writing.(This method does not delete the already existing content)
+	If we use the 'a' mode i.e append mode it will not delete the content of the file and let us write at the end of the file.
+	
+	We can iterate through the file using the file object just like we do with a list or string.
+	eg.
+		with open('name.txt') as file:
+			for i in file:
+				print(i)
+				
+	This will automatically iterate through all the contents of the file.
+	
+	When we open a file the OS checks if we have permission to open the file and then gives our code a file descriptor. This is a token generated by that allows the program to do more operations with file. In python this file descriptor is stored as an attribute of file system.
+	eg.
+		f=open("name.txt",'r/w/a')
+		here we will use the variable f for further operations.
+		here the file object reference is stored in variable named f.
+	
+	On thing to notice is that both the parameters are in quotes.	
+	To read from the file we use the read() and readline() methods.
+	read():
+		This method returns the entire file as a string.
+		eg.
+		x=f.read()
+		print(x)
+		this will print the entire content of the file. So if we check the type of x we will get string class as output.
+	readline():
+		We can also read a single line at a time.
+		The readlind() function returns a single line along with the new line character(\n).
+		This function when called in succession will return next line.
+		meaning if there are 10 lines then calling this function 10 times will return all the 10 lines of the file.
+	readlines():
+		The readlines returns all the sentence from the file as a list.
+		each senctence in the file will be returned as a list element.
+		eg.
+			var=f.readlines()
+			print(type(var)) -> this will give class list as output.
+		As the file is returned as list we can perform all the list operaions.
+	write():
+		We use this to write a string to the list.
+		It takes a single string as a parameter. Only string can be given as an input. Hence we need to convert other datatypes to string when passing it to write function.
+		
+		One important point to know is that the write() fucntion when successful in writing in the file returns the number of characters written on the file.
+		eg.
+			f.write("abc\n")
+	
+	truncate():
+		We use this method to truncate contents of the file.
+	
+	We can also open the file usig with block:
+		The with statment ensures clean-up. Meaning it will automatically close the file.
+		eg.
+		with open("filename.txt",'r') as f:
+			var=f.readlines()
+			for i in var:
+				print(i)
+		this will automatically close the file.
+	
+	
+	To close the file we use the close method.
+	eg. 
+		f.close()
+	It is important to close the file after we open it. This is because when we open the file it locks the file. Hence other programs cannot use the file. And another reason there is a limit to the number of file descriptors the file system can create.
+	
+	A common error that novice programmers make is not realizing that all these ways of reading the file contents, use up the file. After you call readlines(), if you call it again you’ll get an empty list.
+	
+	One more thing to notice is that we can directly iterate over the file object. 
+	eg.
+		for i in file_reference_variable:
+			print(i.strip())
+		
+		
+		This will iterate through the file just like in readlines(). Now since the while iterating the newline char is also taken hence we used the strip() method to get rid of those blank lines.
+	
+	One of the major point to focus is that name of the file:
+		If the file is in the same directory then we can use only the name of the directory.
+	
+		But if the file is not in the same directory as the python program is then we need to give the relative path from the current directory in which the python program is to the directory in which the file is. Remember we need relative path.
+		
+			So if the we need to go one derectory back from the current directory we will use the '..' characters. The ../ means to go up one level in the directory structure. Followed by the nomal path to the destination directory.eg.
+				'../abc/xyz.txt'
+			
+			If the directory is inside current dictionary we will just use the normal convention. eg:
+				abc/xyz.txt
+				
+		Now we can also use an absolute path that starts with '/'.
+		eg.
+			'/user/comp_name/dir/folder/file.txt'
+		But this is not recommended since the code wont be portable.
+		Using a relative path the code can be portable since there is no specific comp_name given its just going from current file to other file.
+		
+
+
+
+
+Polymorphism:
+Overloading:
+Must have at least two methods by the same name in the class.
+
+Must have a different number of parameters.
+
+If the number of parameters is the same, then it must have different types of parameters.
+
+Overloading is known as compile-time polymorphism.
+
+Overriding:
+
+Must have at least one method by the same name in both parent and child classes.
+
+Must have the same number of parameters.
+
+Must have the same parameter types.
+
+Overriding is known as runtime polymorphism​.
+
+
+
+Classes In python:
+		A class consist of attributes and methods that perform operations on those attributes. Also it defines what an object can do i.e the properties of the object.
+		An object is an instance of a class meaning it is an example or occurance of the class.
+		
+		By default python does not support method overloading because it uses the latest defination of the function. So if want to do this we can use variable parameters to achieve method overloading.
+		
+		In python to define a class we use the following syntax:
+			class Class_name():
+				pass
+		__init__(self, args......):
+			This the constructor of the class
+			We can also have multiple constructors in python, but the one written at last is considered by the object.
+			How ever since only the last of the constructor is considered, constructor overloading is not allowed in python.
+			Meaning if there are 2 constructors one parametrized and other default it wont work as in c++ or java. It will give error if the constructor from before is called.
+		__str__(self , args....):
+			This method tells what to print if object is called in print method. It tells python how to represent that object if we print it. Without this method it will print that it is an object of specified class.
+		This is known as overriding.
+		We can override a method called add and sub. There are many methods that we can override and all of them follow the __name__ format.
+		__add__(self, another object):
+			This takes only 2 arguments and we can perform + on the object of this class.
+			
+		__sub__(self,anotherobject):
+			This also takes only 2 arguments and we can perform - on objects of this class.
+		We can return an instance of the class from a method. Meaning we can make a class method to return an instance of a class and make a reference variable point to that instance.
+		eg.
+			class P:
+				def maker(self,arg):
+					return P(args...)
+			p1=P()
+			p2=p1.maker()
+			
+	Inheritance in python:
+		multiple inheritance:
+			In multiple inheritance , a class is derieved from more than one base class.
+			syntax:
+				class child(base1,base2):
+					pass
+			The position of the parameters have importance. If there is a situation that both the base classes are inherited from a super class then in that case there is a problem of ambiguity. Which base class method to use is the ambiguity. If there is no class specified by default the first class inherited is used and its method is called.
+			we can specify the method to call by calling the method of the parent class.
+			If we use super() in the child class then the method in the first base class is called and then the method in the second base class.
+		To call the method of the parent class we can use 3 techniques:
+			1. Using the super().func_name() 
+			2. Using the parentname().func_name()
+			3. Using the parentname.func_name(self) (Note the difference between 2nd and 3rd method. The syntax is important.)
+Static variable and static functions:
+	The Python approach is simple, it doesn’t require a static keyword. All variables which are assigned a value in class declaration are class variables. And variables which are assigned values inside methods are instance variables.
+	All the variables that changes value according to the instance of the class are called instance variable and the one which do not are called class variable.
+	To access a class variable inside a method we use the class name followed by '.' (dot operator) followed by name of the variable.
+	eg.
+		class temp():
+			n=0
+			def __init__(self):
+				temp.n+=1
+				print(temp.n)
+	
+		t1=temp()
+		t2=temp()
+		t3=temp()
+		print(t1.n)
+		
+		output:
+			1
+			2
+			3
+			3
+
+	eg.
+	
+		# Python program to show that the variables with a value  
+		# assigned in class declaration, are class variables 
+  
+		# Class for Computer Science Student 
+		class CSStudent: 
+			stream = 'cse'                  # Class Variable 
+			def __init__(self,name,roll): 
+				self.name = name            # Instance Variable 
+				self.roll = roll            # Instance Variable 
+  
+		# Objects of CSStudent class 
+		a = CSStudent('Geek', 1) 
+		b = CSStudent('Nerd', 2) 
+  
+		print(a.stream)  # prints "cse" 
+		print(b.stream)  # prints "cse" 
+		print(a.name)    # prints "Geek" 
+		print(b.name)    # prints "Nerd" 
+		print(a.roll)    # prints "1" 
+		print(b.roll)    # prints "2" 
+  
+		# Class variables can be accessed using class 
+		# name also 
+		print(CSStudent.stream) # prints "cse" 
+		
+
+
+is operator:
+	It checks whether both the variables point to the same object or not.
+	eg:
+		print(var is ver) -> it will print true if both var and ver points to same object.
+		
+enumerate:
+	It adds a counter to the iterable(string , tuple, list).
+	The function creates a enumerate objects which adds a counter to the iterable.
+	It takes two arguments. Second is optional. By default 2nd is 0.
+	syntax:
+		ob1=enumerate(list/string/tuple,counter_start)
+	
+		eg.
+			l1=[1,2,3]
+			ob1=enumerate(l1,3)
+			print(list(ob1)) -> output is [(3,1),(4,2),(5,3)] Notice here the list elements are tuples.
+	We can use enumerate in for loop as well.
+	It will return a tuple which we can use by either using a tuple variable or by unpacking the tuple.
+	
+
+
+exception handling:
+	In python all errors are Exceptions but not all exceptions are error.
+	In python we can handle exception by using the try and except blocks.
+	The code with possible exception can be written in the try block. If an exception occurs then the code the code jumps to except block.
+	The except block has a type of exception written in front of the except keyword. If an exception of different type occurs then the code will generate an error and the program will stop executing.
+	We can use the Exception class which is the parent of all exceptions and can catch all the exceptions. 
+	we can also get the type of error by using the exception class. We will just assign a reference and then print the reference out. The reference will print the type of error.
+	try:
+		some code
+	except Exception as e:     -> here the ' as e ' part is optional. We can also skip the Exception key word but lets just dont do it.
+		some code
+		print(e)
+	We can have muliple except blocks in python.
+	We can write a seperate except block for each different type of errors. 
+	eg.
+		try:
+			code
+		except zerodivisionError:
+			code
+		except idexError:
+			code
+	raise:
+		In python we can raise our own error. We use the raise keyword followed by the type of exception.
+		We can use the keyword Exception as well.
+		eg.
+			if x>0:
+				raise Exception('greater that zero.')
+JSON module:
+	The json format is easy to read and send over internet.
+	we can use the json library in python.
+	To convert a string to the respected data structure we use the loads() method.
+	eg.
+		temp=json.loads(string) -> the temp variable will be pointed to the datastructure along with the given value in the string.
+	
+	To convert a given datastructure like a dict or list to a string we use the dumps() method.
+	eg.
+		temp=json.dumps(dict/lst/tuple/set) -> it converts the datastructure to string along with the data in it. We can also use optional parameters like indent=x(x is an integer) to make the string pretty.
+		
+requests module:
+	The requests module is used to use the api. Meaning to get data from an api and to upload data.
+	The requests module have a get() method to download data from the api. It creates a response object i think. 
+	We can use the .text() method on the response obeject to accese the text that we downloaded.
+	We can apply the json functions to convert the downloaded string data to the python usable datatype. We can use response object.json() to convert the string into python datatypes. this is similar to using loads() method of json module. 
+	
+	
+	
+	
+OS module:
+	We need this module to rename a file, to delete a file, to move a file and to get information of the file like the last time when the file was modified.
+	remove():
+		This method of the os module is used to delete the file.
+		It takes the name of the file as an argument.
+			os.remove('filename.extension')
+		And obviously if we try to remove a file that is already deleted then we will get an error : file not found.
+		
+	rename():
+		This method is used to rename an already existing file.
+		It takes old_name as first parameter and new_name as second parameter.
+			os.rename('oldname','newname')
+			
+	The OS module has a sub module named os.path sub module:
+		We can get file information like file exist or not from this sub module. We can also get the information of the file from the os.path submodule.
+		exists(): (There is another method which does the same task as exists() does named as isfile() method)
+			This funtion belongs to the os.path submodule. This method is used to see if the file exist in the computer or not.
+			It takes the name of the file as an arguement so we can even give the absolute path. And the function returns boolean value based on whether the file exists or not.
+			eg.
+				var=os.path.exists('filename')
+				type(var)=boolean
+				
+		getsize():
+			This method returns the size of the files in bytes.
+			It take the name of the file as an argument.
+			eg.
+				size=os.path.getsize('filename')
+		getmtime():
+			This function is used to get the time when the file was last modified. The function returns a timestamp.
+			This method takes the name of the file as an argument.
+			eg.
+				timestamp=os.path.getmtime('name of the file')
+				We can use this timestamp as an input to the datetime module to convert it into more human readable format.
+				
+		abspath():
+			This function returns the absolute path of the file.
+			The function takes the name of the file as an input and returns the files absolute path.
+			eg.
+				absolute_path=os.path.abspath('name of the file')
+				
+		isdir():
+			This function is used to see if the file is a directory.
+			It takes the full name of the directory as an argument.
+			eg.
+				os.path.isdir('full name of the directory')
+				
+		join():
+			This function is used to join the name of the directory to create a full path.
+			This is useful because it connects the path based on the operating system.
+			eg.
+				os.path.join(child dir, parent dir)
+				
+	getcwd():
+		This method is used to get the absolute path of the current directory the python program is in.
+		This is useful if we want to navigate to other directories using relative path.
+		This method dont need arguments.
+		eg.
+			os.getcwd()
+			
+	mkdir():
+		This method is used to make a new directory.
+		It takes the name of the directory as an argument.
+		eg.
+			os.mkdir('name of the directory')
+			now this will create  a new directory in the same directory.
+			
+	chdir():
+		This method is used to change the directory.
+		It takes one argument and that is the new location. We can use the relative path or absolute path.
+		eg.
+			os.chdir('new location')
+	
+	rmdir():
+		This method is used for removing the empty directory.
+		It take the name of the directory. But I think we can use the relative and absolute path also.
+		eg.
+			os.rmdir('name of the directory(we can use the absolute path as well)')
+			
+		Since this is used to remove empty directory if we try to remove a directory which is not empty then we get an error. And we first need to remove all the files/sub directories contained in that directory.
+			
+	listdir():
+		It returns the list of all the files in that directory.
+		It takes the name of the directory as an arguement.
+		eg.
+			os.listdir('name of the dir')
+			
+	The os have environ dictionary:
+		We can access the environment variables from within the python program using this dictionary named environ.
+		Since this is a dictionary we can use dictionary methods on it.
+		So to get the value of a particular environment variable, we can use the get method.
+		eg.
+			os.environ.get('Home','')
+			
+	https://docs.python.org/3/library/os.html
+	https://docs.python.org/3/library/os.path.html
+	https://en.wikipedia.org/wiki/Unix_time
+	
+	
+csv module:
+	reader():
+		It is used to read the context of the csv file.
+		It takes the file pointer as an arguement.
+		eg.
+			f=open('file.csv')
+			c=csv.reader(f)
+			for i in c:
+				print(i) -> We can unpack i which confirms that i is a tuple.
+				
+	writer():
+		This is a class available in csv module to create a csv file.
+		It takes file pointer as an arguement.
+		eg.
+			f=open('file.csv')
+			c=csv.writer(f)
+			
+		There are 2 methods available:
+			writerow():
+				Used to write a single row in csv file.
+				eg.
+					c=csv.writer(f)
+					c.writerow(value/list)
+				
+			writerows():
+				Used to write all the containts at a time.
+				eg.
+					c.writerows(values)
+					
+	DictReader():
+		This is used to access each row value of the csv file with the help of column name.
+		eg.
+			d=csv.DictReader(f)
+			for i in d:
+				print(i['key'])
+				
+	DictWriter():
+		creating a csv with the context of dictionaries. Each key is a field in the csv file. 	
+		
+	https://docs.python.org/3/library/csv.html
+	https://realpython.com/python-csv/
+	
+	
+re module:
+	This module is used to use regular expression in python.
+	
+	'.' matches with any character. Its like wildcard.
+	'^' is used to see whether the sentence start with the given pattern. 
+	eg:
+		grep ^pattern filename
+	'$' is used to see whether the sentence end with the given pattern.
+	eg:
+		grep patter$ filename
+	We can use the character class for matching different types of patterns. We use square brackets for this purpose. 
+	eg. r'[a-zA-Z]pattern' just like we did it in spos lab.
+	IF WE USE A CIRCUMFLEX INSIDE A SQUARE BRACKET, IT WILL WORK AS PATTERN NOT IN THE STRING. IT WILL SEARCH IN THE SENTENCE THAT INDICATES THAT THE PATTERN IS NOT IN THE SENTENCE.
+	eg.	
+		ans=re.search(r'[^a-zA-Z]','this is a sentence with spaces.')
+		answer will be ' ' because it is the first non alphabate in the string.
+		IF WE ADD A SPACE IN THE SQUARE BRACKET THEN IT WILL EXCLUDE THE SPACES ALSO AND HENCE THE ANSWER WILL BE '.' IN THE ABOVE EXAMPLE.
+	'|' we use this to match either of the given pattern.
+	
+	'*' This is closure and is used for zero or more occurance of a pattern.
+	'+' This is positive closure.
+	'?' This is used to check that the pattern before is present 0 or 1 time.
+	'\' This is known as a escape character. This is used so that we can use the special characters in the regular expression to match patterns.
+		eg.
+			if we want to find  a pattern which contains '.'. We can use the escape character to include '.' in the pattern.
+			var=re.search(r'\.com','temp')
+			returns none meaning pattern not found.
+			var=re.search(r'\.com','xyz.com')
+			this will return the match object, position and the actual matched string.
+	{number} THis is used to control the exact number of repeatitions in the string.
+	We can implement the behaviour similar to indexing using '\' followed by the number of the capture group. Starting from 1.
+	
+	
+	https://docs.python.org/3/howto/regex.html
+	https://docs.python.org/3/library/re.html
+	https://docs.python.org/3/howto/regex.html#greedy-versus-non-greedy
+	
+	search():
+		We can use the search function to find the first regular expression in the string. Meaning if there are 2 or more matches only the first one is matched. And returned.
+		It take the regular expression as first parameter and the string in which we want to find the the pattern as the second parameter.
+		eg.
+			var=re.search(r'pattern',string)
+			here the r in the first parameter is for raw string. Meaning it tells the interpreter that string should be passed as it is and do not process. There are no special characters.
+		The value that the search function returns is a match object. It also tells the position in the string that matched the patter. And finally the matched pattern.
+		IF THE PATTERN DOES NOT EXIST IN THE STRING THEN THE FUNCTION RETURNS NONE AS A RESULT.
+		We can use the anchor characters with the pattern in the search function.
+		There is one more optional parameter to the search  function which is used to ignore the cases.
+		eg.
+			var=re.search(r'pattern',string,re.IGNORECASE)
+			
+	findall():
+		If we want to return all the matches in the string then we use the findall funtion.
+		The syntax is similar to the search function.
+		Only difference is that it will return all the matches in the string as list.
+			
+		
+		
+	split():
+		It works same as split function which we use on string object with a slight change. It takes a regular expression and string as inputs and returns a list of strings which are seperated on the regular expression. For example if we want to split sentences based on punctuation marks,
+		eg.
+			var=re.split(r"[,.?!]","sentence one,sentence two.sentence three?sentence four!")
+			
+			it will return a list with all the sentences as a seperate element in the list. This will skip the elements we used in the re. 
+			IF we want to add the elements in the list, we can add the capturing paranthesis:
+			
+			var=re.split(r"([.?!])",'sentence one.sentence two?sentence three!')
+			
+			This will include the elements used in the re in the list as well.
+			var=['sentence one','.','sentence two','?','sentence three','!']
+			
+	sub():
+		This function is same as replace function of the string object. It takes three arguments first is the regular expression, second is the pattern that we want to enter in place of the re pattern and last the string on which we want to apply this function on.
+		re.sub(r'[capture grp 1]',r'[capture group 2]',r'\2\1','string')	here first capture grp and second capture grp is swapped.
+		
+	https://regexcrossword.com/
+	
+
+sys module:
+	If we are using an external file as an input, we can use the stdin redirection method. '<' is used for this.
+	The second option is piping.
+	For this we can use the stdin attribute of the sys module.
+	This attribute will hold the input data from the external file. Then we can just use the attribute as entry or iterate over it as we need.
+	argv:
+		This variable refers to a list object.
+		It stores the path of the current program.
+		IT ALSO STORES THE ARGUMENTS PASSED WHILE EXECUTING THE PROGRAM. MEANING IT STORES THE COMMAND LINE ARGUMENTS IN A LIST.
+	exit():
+		This function is used to terminate the program with the specified exit code. This can be useful to understand which type of error has occured.
+		eg.
+			if some condition:
+				sys.exit(1)
+
+subprocess module:
+	run():
+		The run function takes a list as an argument.
+		The list will contain the command that we want to execute along with any additional parametes needed.
+		eg.
+			subprocess.run(['command','par1','par2'])
+		We can use any command line argument in the list of the run method. 
+		We can use the ls command to return if the specified file exist or not in the directory.
+		eg.
+			result=subprocess.run(['ls','file name'])
+			if the file does not exist,
+			the return code/exit code will not be 0 and we can check that by accessing the returncode attribute of the completedprocess object which is the object returned by the subprocess.run.
+			eg.
+				print(result.returncode)
+				this will print 0 if file exist or another value if file does not exist.
+		This function allows us to implement system command from within the python script.
+		Like we can use the ping command in the get function to send an ICMP packet to the server to check connection.
+		This method is usefull only when we want to run a command and only see whether the command ran successfully or not. The output will be printed to the screen. 
+		WE DO NOT HAVE ANY CONTROL OVER IT.
+		If we want to use the output of any command by setting the parameter capture_output to true. Now this parameter was add in 3.7 so previous versions wont support it.
+		eg.
+			temp=subprocess.run(['command','par'],capture_output=True)
+		Now that we have saved the output of the command, to access it, we use the stdout attribute of the completedprocess object.
+		All the outputs captured are stored in stdout attribute.
+		eg.
+			print(temp.stdout)
+			This will print the output stored.
+			Now the format of the output is an array of bytes. Python does not how to display this command and so it just shows a series of bytes. So we can use the decode method to convert he bytes to string which python understands and can display.
+			
+			eg.
+				print(temp.stdout.decode())
+				
+		Similarly, errors are stored in stderr attribute of the completedProcess instance. So if we want to access any error, we can use the stderr attribute just like we did with stdout.
+		eg.
+			print(print(temp.stderr))
+			This can be usefull when we are debugging.
+			Also for this to work we need to capture the output by setting capture_output to true.
+		
+		date:
+			We can get the current date by using the run method of the subprocess module.
+			We use the date command to get the current date.
+			This will create a child process so until the child process is completed the parent script which is our python script will be locked and will resume only after the run the child process finishes its execution.
+			It returns an object of CompletedProcess type. And from this we can observe the exit code/ return code.
+			eg.
+				subprocess.run(['date'])
+				this will return the date and the completedProcess object.
+		sleep:
+			This command is used to stop program execution for the specified amount of time. The number of seconds are provided as an argument.
+			After the specified number of seconds, the parent process i.e our python script will continue its execution from the point where it left.
+			While the sleep command is executing the interpreter is blocked and we cannot interact with it.
+			eg.
+				subprocess.run(['sleep','2'])
+				This will suspend the execution for 2 sec.
+				
+		https://docs.python.org/3/library/subprocess.html
+		
+unittest module:
+	This module is used for unit testing.
+	This module consists testCase class with methods for testing our functio.
+	But to access those methods we need to inherit this class.
+	We will write different function for different test cases in the class which inherits testCase class from unittest module.
+	In each function defined inside the class we manually decide the input and an expected output. We use the assertEqual() method from the class and then enter the name of the function as the first parameter and the expected output as the second paramter.
+	
+
+	To run the unit test and the class with the testcases inside we use unittest.main()
+	
+	
+
+I/O streams:
+	There are 3 streams:
+	1.Input stream for input
+	2.Output stream for output
+	3.standart output which is used for output as well but is specifically used for error channels.
+	
+yield:
+	This keyword is used to return from a function. The difference between return and yield is that yield preserves the state of the local variables. Meaning it does not destroy the state of the member variables. So when the execution starts from the last yield function.
+	
+diff:
+	There is a command in Ubuntu named as diff. This command can be used to get the difference between 2 files. The command only returns the lines where the difference exists.
+	eg.
+		diff file1.py file2.py
+	It shows the difference.
+	Meaning > and < 
+	where  < means the first line was removed from the first file.
+	and   >  means the second  line  was added to the first file.
+	Its only shows what was the lines that were changed and if changed what were the changes.
+	If there are more than one line changed then the changes are shown in different sectors. And the line numbers are shown in the first and the second files.
+	If the numbers contains 'c' in between them then that means the lines are changed.
+	If the numbers contains 'a' in between them then that means the lines are added.
+	
+patch:
+	This command used in ubuntu is used for making the changes in the file. The changes are given by the diff file.
+	The diff file returns the changes. We  can save those changes using the > symbol.
+		diff file1.py file2.py > file3
+	Now using this file as an input to the patch command.
+		patch file1 < file3
+		
+itertools:
+	This package provides a way to directly find a permutation and combination of a sequence.
+	
+	permutations:
+		This method is used to find all the permutations on the the given sequence. This method takes the list as an argument and an optional argument which is the length of permutation and returns a list of tuples as an output.
+		It does not return a list it returns a iterable object of type permutation.
+		
+bin():
+	This method takes int and returns the binary representation of the int. The representation is of string datatype.
+	syntax:
+		temp = bin(x)
+
+hex():
+	This method takes int and returns hexadecimal string.
+	sytnax:
+		temp=hex(x)

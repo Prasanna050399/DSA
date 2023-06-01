@@ -1,0 +1,156 @@
+
+Digital root:
+	To find the digital root of a number, we only need to return number%9.
+	We know that if a number 9 is present in a number or numbers which add up to 9, we can replace 9 by 0.
+	So basically we are checking divisibility test of a number by 9.
+	algo.
+		if a number is divisible by 9:
+			return 9
+		else :
+			return number%9
+
+rolling hash ADT:
+	Given a hash value r,
+	r maintains a string x
+	Treat the string x as a multidigit number u in base a where a is alphabet size.
+		-r.append(c)
+			add char c to end of x
+		-r.skip(c):
+			delete first char of x (assuming it is c)
+			
+Karp rabin:
+	To find a substring of length n in a string of length m,
+	using the naive approch, we need time complexity of theta(n.(m-n)) which is O(n.m).
+	So karp rabin string algorithm does this in O(n+m)
+	It uses the rolling hash ADT.
+	algorithm:
+		first compute the hash value of substring.
+		consider a string re,
+		for c in substring s: rs.append(c)  --> rs is the rolling hash value of substring.
+		for c in string t: rt.append(c)  --> rt is the rolling hash value of string.
+		if rs==rt:
+			----
+		for i in range(len(s),len(t)):
+			rt.delete(first character)
+			rt.append(t[i])
+			if rs==rt:
+				these are the hash value of the substring and part of string.
+				so there is a possibility that there are 2 values mapped at the same value.
+				So we have to check 
+				if s==t[i-len(s)+1:i+1]
+					return found
+				else:
+					continue
+	So this takes O(n+m)
+
+Hashing open addressing:
+	In open addressing we take a table which is atleast of the size m where m is the total number of elements.
+	In open addressing, we use  probing.
+	Meaning we design such a hash function that when a collision occures the hash function is called once again and this time it generates some other key.
+		For this the hash function takes 2 arguments,
+			1. element
+			2. counter
+	So if we insert a number and a collision occurs then in that case we call the function again with increased counter and keep calling hash function until we find a delete_flag or empty slot.
+	So the hash function is as follows:
+		h : U x {1,2,3....m-1} -> {1,2,3....m-1}
+		h -> hash function
+		U -> Universe of keys
+		The number of counters 
+	
+	insert():
+		In this function we follow the following steps:
+			1. compute a key with the hash function.
+			2. if collision occurs then compute the hash function again with increased counter.
+			3. insert in the table if the we find a empty slot or a delete_flag.
+			
+	Search():
+		In this function we keep computing the function until we get data!=key or we encounter a delete_flag.
+		Return success/key if we find a the key or we return fail if we encounter empty slot.
+
+	delete():
+		We search for the element and then replace the key with delete_flag. 
+		Now the question is that why dont we replace it with null?
+			The answer is if we replace it with none, if we delete a key by replacing it with none, we create a situation in which we delete a key in middle of the counter.
+				eg.
+					we insert 1,2,3 which were inserted at the same position. And then we  insert 1,2,3 with probing.
+					Now we delete 2 an replace it by none.
+					Then we search 3 in the table. For this we go through 1 and then we find an empty slot. By the definition of search this will terminate the search stating element not found. But this is an incorrect termination.
+					So for this the solution is for delete operation we replace the deleting item with delete_flag.
+	
+	linear probing:
+		h(k,i)=(h'(k) + i) mod m  --> The problem with this is clustering. This get going.
+		This hashing works as following,
+			if the hash function is mapped to i in first try,
+			for the second try it will hash to i+1
+			and for the next try it will hash to i+2,i+3,etc
+			
+	Double Hashing:
+		h(k,i) = (h1(k)+ih2(k)) mod m
+		if h2(k) is relatively prime to m => permutation
+	
+	Open addressing works well if alpha ( alpha=n/m where n is number of elements and m is number of slots in the hash table) is atmost 0.5.
+Insertion Sort:
+	Insertion sort iterates over the array and then inserts the element at its appropriate position.
+	the number of comparisons are theta(n^2).
+	The number of swaps are theta(n).
+	The total comarisons are theta(n^2).
+	There for the time complexity is O(n^2).
+	
+Binary insertion sort:
+	Since the elements from 0 to i-1 are sorted, we can apply binary search to the sorted data to reduce the number of comparisons.
+	There for the number of comparisons become nlogn.
+		n for number of elements in the array.
+		logn comparisons for finding the position of insertion.
+		therefore, total nlogn comarisons, for each element logn comarisons.
+
+Binary search tree:
+	In binary search tree all the elements in the left subtree are smaller than the parent node and all the elements in the right subtree are larger than the parent node.
+	To insert an element in BST,
+	We use the same principle used in binary search. depending on the element, traverse the left or the right subtree and when we find the suitable position insert the node.
+	insert():
+	AVL Trees:
+		An avl tree is a binary tree is a bst in which the height of both the left and the right subtree differ by at most 1. Meaning lh-rh<=(-1,1)
+		The height of the tree is logn.
+		
+		insertion():
+			1. Simple insertion in bst.
+			2. Fix the avl property.
+
+
+
+dynamic programming schema to be followed:
+	Show that the problem can be broken down into optimal sub-problems.
+	Recursively define the value of the solution by expressing it in terms of optimal solutions for smaller sub-problems.
+	Compute the value of the optimal solution in bottom-up fashion.
+	Construct an optimal solution from the computed information.
+	
+	Tips:
+		if we are assigning a value to a key in a dictionary and you are told to reduce the answer to a particular factor,
+		reduce the answer first and then enter in the dictionary this save the space and it have a greater impact on the space complexity.
+	
+for dfs we use Stack
+for bfd we use queue
+
+Implement queue using stack:
+	We use 2 stacks to implement a queue. Stack1 and Stack2.
+		enqueue:
+			1.	While stack1 is not empty, push all the elements from stack1 to stack2.
+			2.	Enter new element in stack1.
+			3.	Push all the elements from stack2 back to stack1.
+		This way we can make sure that oldest element is at the top.
+		dequeue:
+			1. 	We simply pop the element from the top of stack1.
+
+Implement stack using queue:
+	We use 2 queues to implement a stack. Queue1 and Queue2.
+		push:
+			1.	While queue1 is not empty enqueue elements from queue1 to queue2.
+			2.	Enter the new element in queue1.
+			3.	Enqueue all the element from queue2 to queue1.
+		This we we can make sure that newest element is at the front of queue1.
+		pop:
+			Just use the dequeue operation.
+			
+
+Level order traversal of a tree (Breadth first traversal on a tree):
+	

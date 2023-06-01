@@ -1,0 +1,164 @@
+linked List : 
+	what is linked list? 
+		
+	Types of linked lists : 
+		singly linked list :
+			what is singly linked list?
+			
+		doubly linked list :
+			what is doubly linked list?
+		
+		circular linked list :
+			what is circular linked list?
+			
+		doubly circular linked list :
+			what is doubly circular linked list?
+		
+		Header linked list :
+			what is header linked list?
+				in header linked list, the start/head pointer is not pointing to the first node but pointing to a head node instead. This node contains the pointer to the first node. It also contains global information of the entire linked list. eg. length of the linked list.
+		
+		find the lenght of the linked list :
+			time complexity :
+				O(n)
+			iterative method : 
+				space complexity :
+					O(1)
+				def findLength(head):
+					count = 0
+					current = head
+					while current != None:
+						count += 1
+						current = current.next
+					return count
+					
+			recursive method : 
+				space complexity :
+					O(n) -> because of the recursion call stack 
+				def findlength(head):
+					if head == None: 
+						return 0
+					else :
+						return 1 + findLength(head.next)
+				
+				space Complexity : 
+					O(1) -> using tail recursion 
+					
+					What is tail recursion ?
+						It is a type of recursion, in which the recursion call is the last thing done in a function. Last means literally the last, for example, in recursive factorial calculation, the last statement is fact(n-1) which is multiplied by n in the return. this is not tail recursion because the value of the recursion is not the last thing function is finding the last thing done is multiplying the returned number with n.
+						eg : 
+							def fact(n):
+								if n == 1 or n == 0:
+									return 1
+								else :
+									return n * fact(n-1)
+						here fact(n-1) is not the last operation
+						tail recursion version : 
+							def fact(n, total):
+								if n == 0:
+									return total
+								return fact(n-1, n * total)
+								
+						in tail recursion, since the recursion is the last call, the compiler does not need to keep track of the function information in the stack.
+						
+	detecting loop in a linked list :
+		ways to detect loop in the linked list :
+			hashset :
+				time complexity and space complexity : O(n)
+				
+				here we are storing the address of the node in the hash table and if the entry is already present in the hash table, then there is a loop in the linked list.
+				
+			visited flag :
+				time complexity and space complexity : O(n)
+				
+				here we modify the structure of the node. we add one more field as flag along with the data and the next pointer. when we traverse the linked list, we change the flag value. if the flag is already present, then there is a loop in the linked list.
+				
+			floyds cycle finding algorithm :
+				time complexity : O(n)
+				space complexity : O(1)
+				
+				The idea is to use 2 pointers, slow pointer and fast pointer. The slow pointer is increamented by 1 node and fast pointer is increamented by 2 nodes. The idea is to keep traversing, if the fast pointer(also the next of fast pointer is null) or next slow pointer is null then there is no loop. If while traversing, fast pointer is equal to slow pointer, then there is a loop present. 
+
+			changing the next pointer to point to third party temp node :
+				
+				time complexity : O(n)
+				space complexity : O(1)
+				
+				here the idea is to change the next to some temp node while traversing, if while traversing we find that the node is already pointing to this temp node, then there is a loop in the linked list.
+			
+			changing the value to something which is out of range :
+				
+				time complexity : O(n)
+				space complexity : O(1)
+				
+				the idea is to change the data of the node to something which is out of the range of values specified. For example if the value range is between 0 and 10^5, then change the value to some negative value. So while traversing the linked list, if the value is negative, then there is a loop present in the linked list.
+			
+			using the length of the linked list :
+			
+				time complexity : O(n^2)
+				space complexity : O(1)
+				
+				use two pointers to point to first and last. and calculate the length between these two pointers. if the length is not increasing then there is a loop if while changing the last to point to next node, there is an increase in the length, then there is no loop present.
+				
+	Finding the length of loop in linked list :
+		to find the length of the loop in the linked list, there are a couple of approach. 
+		using hashtable of flag : 
+			time complexity : O(n)
+			space complexity : O(n)
+			
+			idea is to keep the count while traversing the linked list along with either setting the flag or adding the reference in the hashtable. if the loop is detected meaning the current node has the flag set or the address/reference is there in the hashtable, all we need to do now is start from the start again till the loop detected node and keep the count of the nodes. Just subtract total length - the length that we just calculated and this will be the length of the loop.
+			
+		Now better solution :
+			using the floyds cycle detection algorithm:
+				time complexity : O(n)
+				space complexity : O(1)
+				
+				Idea is to use two pointers fast and slow pointers as we did to detect the loop in the linked list. When slow == fast, there is a loop present. else if slow or fast is null then return 0. Now if there is a loop, meaning slow == fast, then create a counter and increament the counter while traversing from slow to fast. meaning start traversing from slow pointer till it reaches slow again and keep counting the number of nodes.
+				
+	finding the intersection of two linked list :
+		the task is to find the node where the two list merge.
+		
+		using nested loops :
+			the idea is to use two loops, one traversing on one linked list. the inner loop will traverse on other loop.
+			and then we just will check if the current node and the inner iteration node is equal or not. The first same node is the intersection point.
+			
+			time complexity : O(n*m)
+			space complexity : O(1)
+			
+		using the flag or hashset :
+			traverse the first list and store the node address in the hash set or mark the node as visited.
+			traverse the second list, check in the hash set or check if visited node. If found either of the one, the intersection is found.
+			
+			time complexity : O(n+m)
+			space complexity : O(n+m)
+			
+		finding the length of the two linked list and then using the difference to change the start of longer list to the node such that both the pointers for list one and list two are equidistant from the intersection :
+			
+			the idea is to find the height of both the list, find the difference between the heights, now traverse number of nodes equal to the difference of heights in the longer list. both the pointers on the lists are equidistant from the intersection. So now when we traverse the lists, the first common list is the intersection.
+
+			time complexity : O(n+m)
+			space complexity : O(1)
+			
+		traversing the list and then pointing the last node to first node creating the loop. Now when we traverse the second list, it is finding the loop and then finding the intersection :
+			
+			create a loop in the linked list, now traverse the number of nodes equal to the height of the first linked list. Now we need to start another traversing from the start. now while traversing using both the pointers, when they are equal is the intersection of the linked list.
+			
+			time complexity : O(n+m)
+			space complexity : O(1)
+			
+		using two pointer technique : 
+		
+			start traversing both the linked list at a time, when the pointer reaches the end of the linked list, re allocate to the start of the other linked list. this just places the pointers to the nodes which are equidistant from the common node. Then just check if both the pointers are pointing to the same node. That will be the intersection.
+			
+			time complexity : O(n + m)
+			space complexity : O(1)
+			
+	circular linked list : 
+		
+		there is no null at the end.
+		
+		what is circular linked list?
+		
+		advantages of circular linked list?
+		
+		

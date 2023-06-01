@@ -1,0 +1,315 @@
+Personal : 
+
+Release : 23 / 01 / 1996
+
+Introduction : 
+	Class is the blueprint or model for creating the objects.
+	
+	JVM will allocate/deallocate the memory needed by a java program.
+	
+	which part of jvm will allocate the memory needed for java program??
+		Class loader subsystem of jvm will allocate the necessary memory needed by the java program.
+		https://www.geeksforgeeks.org/classloader-in-java/
+	
+	For deallocating the memory garbage collector of jvm is used. The algorithm that is most commonly used by garbage collector is "mark and sweep". 
+		https://www.geeksforgeeks.org/mark-and-sweep-garbage-collection-algorithm/
+=====================================================================================================================
+Coursera	
+Classes:
+	Classes are user defined data types.
+	So we define the behaviour of the class by defining the attributes and the methods of the class.
+	Its like a factory, it can produce a piece of data with a template that we define.
+	A class is a type of data.
+	In java the filename of the code should be same as that of  class name.
+	syntax:
+		access-specifier class classname
+		{
+			class defination
+		}
+		
+	Member/instance variables:
+		These are the variables defined inside the class but outside the function.
+		These are the variables that are accessible throughout the class.
+		This is the data the object needs to store.
+		syntax:
+			access-specifier datatype variable_name;
+	
+	Methods:
+		Methods represents the behaviour of the class. How the data will be used etc.
+		These are the functions that interact with the member variables.
+		Parameters in java are always passed by value and not by reference.
+			So even if we are writing a variable name as an argument, we are passing it by value and not by reference meaning the name of the variable is first evaluated and then passed to the function. Just like python.
+		
+		No these are the things that are important for defining a function:
+			1. access-specifier
+			2. return type
+			3. function name
+			4. Paranthesis() with optional parameters
+			5. curly braces
+			6. exception handler which is optional.
+		syntax:
+			access-specifier return_type function_name(parameters...)
+			
+	Constructor:
+		These are the functions that are automatically called when the object is created.
+		These are the methods with the same name as that of the class. And does not have a return type. Constructors can only be public meaning the access-specifier is public.
+		These methods are used to initialize the member variables.
+		When the constructor is over, meaning it is finished executing, the variable are removed from the scope. Because when a method ends its scope disappears.
+		syntax:
+			access-specifier classname()
+		
+		Types of constructors:
+			1. Default constructors:
+				This is the constructor which do not take any parameters.
+			2. Parametrized constructors:
+				This is the constructor which takes parameters.
+	
+	this keyword:
+		It is similar to self in python.
+		'this' refers to the calling object, which is the object that called the method, on which the method was called.
+		'this' stores the reference of the object that is created. With this we can say that it is literally the copy of 'self' which we learned about in python.
+		Also 'this' have a local scope.
+
+Object:
+	This is the instance/example of the class. 
+	It is a piece of data that the factory created. It is one piece of data of class type of data.
+	Each individual object can be customized and changed without affecting other objects.
+	Whenever a new object is created it is stored in a heap.
+	So when an object is created, the reference of that object is stored in our variable.
+Packages:
+	Packages organizes java classes into namespaces. Classes in packages can access package-private and protected members. Basically package is a collection of classes.
+Access specifier:
+	These are the keywords with which specifies where the given variables will be accessible from.
+	types:
+		public:
+			This means that the given variable can be accessed from any class.
+			Meaning we can access and control the value of instance variable from other classes.
+			Consider we have a main method is some other class.
+			We can access the variable and set its value using the object of the respected class.
+			eg.	
+				Classname ob1=new Classname; ---> this is the creation of an object
+				ob1.var=10;
+				System.out.println(ob1.var);
+			Similar to variables, methods can also be public. This is used often because we want to access the functions from the main funcion.	
+			
+		private:
+			This means that the given variable is accessible only within the same class it is declared in.
+			We cannot access these variables using the object. Same thing goes for methods if we make a method private it cannot be accessed from outside the class.
+			This is very useful when we want to control the access of variables.
+			Private methods are used as a helper methods.
+			Trying to access the private member of a class leads to a compile time error.
+		protected
+		
+getter and setter:
+	These are the methods which as the name suggest are used to get the value of the data member or set the value of the date member. The variable can be returned using the getter function. On the other hand we can set the value of a private member from outside the class using the setter variable.
+	Then the question is if we are providing access to the variable then why dont we make the variable public in the first place?
+	The setter functions allow us to get more control over the variable. We can apply insertion constraints, we can only provide this function to selected users etc.
+	These are the methods which as the name suggest are used to get the value of the data member or set the value of the date member. The variable can be returned using the getter function. On the other hand we can set the value of a private member from outside the class using the setter variable.
+Variables:
+	syntax:
+		datatype variable_name;
+		
+	types of variables:
+		1. Local variables:
+			These are the variables which are only valid or accessible inside that block.
+		2. Parameters :
+			These are similar to local variables. These are also valid only inside the block and also inaccessible outside the block/function.
+		3. Member variable:
+			These are the variables which are defined inside the class and are accessible depending on there access specifier. So if the variable is public it is accessible from anywhere eg. from another class. If the variable is private it is accessible only within the class. And if the variable is protected it is accessible within that class and the child class meaning the class which inherited the given class.
+
+Array:
+	syntax:
+		return_type var[] = new return_type[size];
+	In java the arrays are always initialized by the return type. Meaning if array is of type int, the array is initialized to 0, if float the value will be 0.0 and so on.(For Bool it is false.)
+	
+Method overloading:
+	Method overloading is the technique when we define different functions with the same name but with different number of parameters or the datatype of parameter is different.
+	Java wont allow different return type as a way to overload methods.	 But we can use different return types while overloading although it is not used to overload a function. 
+	This is because when javac compiler is compiling a code, it takes help of the argument list and not the return type list. This is the reason we cannot overload a function using only the return type of the function.
+	We can also overload constructors for this we use different number of parameters since constructors dont have a return type.
+	
+Lists in java:
+	List is a java interface. Its an abstract data type. 
+	And since its an interface, it specifies a certain behaviour but does not define how that behaviour is implemented.
+	
+	ArrayList:
+		ArrayList a class that implements all the behaviour of the list interface.
+		ArrayLists are resizable. Just like lists in python.
+		It is an ordered collection.
+		How to define an arraylist?
+			ArrayList<datatype,...> variable = new ArrayList<datatype,...>();
+		set():
+			This function is used to modify an element in the array list.
+			This function take 2 arguments,
+			1. The index at which we want to store the element.
+			2. The element itself.
+			eg.	
+				var.set(0,x);
+		size():
+			In array we use length attribute. In arraylist, we use the size method to retain the size of the list.
+			eg.
+				var.size();
+		add():
+			Now this method is overloaded. There are 2 methods named as add one with boolean return type and second with void return type.
+			If we use one argument, the return type is boolean and it append the given element at the end of the array list.
+				eg.
+					var.add(x);  --> similar to append in python
+			If we use two arguments, then the return type is void and it enters the given element at the given position.
+				eg.
+					var.add((int) index,element); --> similar to insert in python
+		get():
+			This method takes the index of the list and returns that element of the list.
+				eg.
+					var.get(index);  --> No this method return type is generic, it returns element of the type that is specified by the us while declaration.
+		remove():
+			This method is used to remove the element at the given index.
+		
+		We can use the for each loop to access the elements of the arraylist.
+		
+		clear():
+			This function is used to clear the entire list.
+			eg.
+				var.clear();
+	Collections.sort():
+		To sort an arraylist we need to use the Collections class. The Collections class contains a static method known as sort() which takes an arraylist as an argument. 
+		eg.
+			Collections.sort(arr1); --> here arr1 in an arraylist.
+			
+	LinkedList:
+		Similar to the array list we also have linked list.	
+		How to create a linkedlist?
+			eg.
+				LinkedList <datatype,...> variable = new LinkedList<datatype,...>();
+				
+		addFirst()	Adds an item to the beginning of the list.	
+		addLast()	Add an item to the end of the list	
+		removeFirst()	Remove an item from the beginning of the list.	
+		removeLast()	Remove an item from the end of the list	
+		getFirst()	Get the item at the beginning of the list	
+		getLast()	Get the item at the end of the list
+		
+	
+HashMap:
+	We can use HashMaps to implement hashing in java.
+	The Hashmap is a key value pair.
+	It is unordered.
+	How to define HashMap?
+		HashMap<key_datatype,value_datatype> variable = new HashMap<key_datatype,value_datatype>();
+	
+	put():
+		This method is used to add an element in hashtable.
+		The function takes two parameters. The key and the value.
+		eg.
+			variable.add(key,value);
+			
+	get():
+		This method is used to access the element of the hashmap.
+		It takes a single argument, the key.
+		eg.
+			var.get(key);
+		
+	remove():
+		This method is used to remove the key and its value.
+		It takes the key as parameter.
+		eg.
+			var.remove(key);
+			
+	size():
+		This returns the size of the hashmap.
+		eg.
+			var.size();
+	clear():
+		This is used to clear the entire hashmap.
+		eg.
+			var.clear();
+			
+	keySet() and values():
+		We can use these to iterate using for each loop.
+		eg.	
+			for(key_datatype x : variable.keySet())
+		same goes for values.
+		
+HashSet:
+	This is like set in python
+	How to define a hashset?
+		HashSet <datatype> var = new HashSet<datatype>();
+		
+	add():
+		To insert element in the hashset
+	contains():
+		To check if a given element is in the hashset
+	remove():
+		To remove an element.
+	size():
+		returns the size of the set.
+Loops:
+	For each:
+		Syntax:
+			for (data_type var : iterable(array list etc))
+			{
+				code;
+			}
+		This is similar to for each loop in python.
+		
+		
+SOLID JAVA Code:
+	S : Single responsibility Principle
+	O : Open close principle
+	L : Liskov Substitution Principle
+	I : Interface Segregation Principle
+	D : Dependency inversion Principle
+
+Polymorphism:
+	1. Overloading:
+		a. Static binding (compile time polymorphism)
+		b. Same name but different method signature
+		c. Same class
+		d. Faster than overriding
+	2. Overriding:
+		a. Dynamic binding (run time polymorphism)
+		b. Same name and same method signature
+		c. Different Class
+		d. Cannot reduce accessibility of the overridden method. Meaning if method is public in parent class then it cannot be protected, private or class private.
+		e. But we can increase the accessibility of the method meaning if it is protected we can make overridden method public.
+		f. Cannot override private, static, and final method 
+		g. Slower that overloading.
+
+
+final:
+	Final keyword is used to restrict a class,method or variable from the user.
+	
+	final variable:
+		this variable cannot be changed. It can only be initialized in the constructor. It cannot be edited.
+		blank final variable is a final variable which is uninitialised. So to initialize this we need to use constructor. This variable cannot be changed after this.
+	final method:
+		this method cannot be overridden.
+	
+	final class:
+		this class cannot be extended.
+
+Abstract:
+	abstract class:
+		abstract class is the class that cannot be instantiated. However we can inherite it.
+		this is like the blue print of the class. It tells the class what to do but not how to do.
+		if the inherited class does not provide the defination of abstract method then in that case the inherited class must also be declared as abstract.
+		This class can have all normal methods as well. We can also declare normal variables with normal access specifier.
+		
+	abstract method:
+		The method without a body and is preceeded by abstract keyword.
+		
+		
+Interfaces:
+	This defines the behaviour that a class must implement.
+	Like abstract classes, interfaces cannot be used to create objects (in the example above, it is not possible to create an "Animal" object in the MyMainClass)
+	Interface methods do not have a body - the body is provided by the "implement" class
+	On implementation of an interface, you must override all of its methods
+	Interface methods are by default abstract and public
+	Interface attributes are by default public, static and final
+	An interface cannot contain a constructor (as it cannot be used to create objects)
+	
+Method hiding:	
+	If we implement a method with same signature and name as that of parent class, but the difference is that the methods are static.
+	In this case the child class method hides the parent class method. However we can still call the method using the name of the class.
+
+Graphical User interface(GUIs):
+	
