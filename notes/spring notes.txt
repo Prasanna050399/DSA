@@ -1,0 +1,10 @@
+java core :
+java JDBC :
+java servlet : 
+	what is servlet ? 
+		servlet is small java program that runs on server side
+JSP :
+java threads : 
+networking in java :
+
+spring tutorial :
