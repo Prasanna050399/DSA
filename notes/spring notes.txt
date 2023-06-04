@@ -1,8 +1,26 @@
 java core :
 java JDBC :
 java servlet : 
+	what is CGI(common gateway interface)?
+		https://www.geeksforgeeks.org/common-gateway-interface-cgi/
+		Common gateway interface is a standard that facilitates communication between server and the database or any other information source.
+		It acts as a middleware between the server and the application that processes the data to generate the http response.
+	What is RMI(Remote method invocation) ?
+		RMI allows the java object which exist on one method to invoke a method of an object which exists on another machine.
+		RMI is supported by java.rmi package.
 	what is servlet ? 
-		servlet is small java program that runs on server side
+		servlet is small java program that runs on server side. It is a component of server that creates dynamic web page.
+		it is a class that extends the capabilities of the server and responds the incoming http requests.
+		
+	
+	Servlet life cycle?
+		The life cycle of the servlet contain 3 methods which are invoked at a specific time : 
+			init()
+			service()
+			destroy()
+		These methods are implemented by every server.
+		page number : 1698
+	
 JSP :
 java threads : 
 networking in java :
