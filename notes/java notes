@@ -313,3 +313,32 @@ Method hiding:
 
 Graphical User interface(GUIs):
 	
+	
+	
+	
+====================================================================================================================================================================
+
+What is local variable type inference ?
+	It allows the programmer to define a variable without specifying the type of it using the var keyword.
+	The compiler will infer the type of the variable based on the value that is provided to it.
+	
+	
+History and evolution : 
+
+	Any computer language innovation and development occurs for two fundamental reasons : 
+		1. To adapt to changing environment and uses
+		2. To implement refinements and improvements in the art of programming
+	The development of java was driven by both of these elements in nearly equal measure.
+	C was invented to have a high level programming language which can be used to create a computer program with medium complexity, basically a need for structured language. 
+	C ++ was invented to have a high level programming language which can be used to create a compute program with high level of complexity, basically a need for object oriented programming language.
+	Java was invented to have a high level programming language which can be platform independent. The initial requirement was to provide support for different processors because different processors will need different compilers which are expensive to create. But then the internet came which had this requirement of programs being platform independent. This catapulted the java language to its glory/under the focus light. When we are saying platform independent we also mean architecture-neutral programming language (the one which is independent of the processor)
+	c# is created by microsoft to support the .net framework. c# is closely related to java.
+	
+	
+Java Applets :
+	
+	
+Spaghetti code :
+	What is spaghetti code?
+		It is a code which contains tangled jumps and conditional branches which makes the code virtually impossible to understand.
+	
