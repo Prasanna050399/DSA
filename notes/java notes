@@ -317,7 +317,7 @@ Graphical User interface(GUIs):
 	
 	
 ====================================================================================================================================================================
-
+The internet made java.
 What is local variable type inference ?
 	It allows the programmer to define a variable without specifying the type of it using the var keyword.
 	The compiler will infer the type of the variable based on the value that is provided to it.
@@ -334,10 +334,104 @@ History and evolution :
 	Java was invented to have a high level programming language which can be platform independent. The initial requirement was to provide support for different processors because different processors will need different compilers which are expensive to create. But then the internet came which had this requirement of programs being platform independent. This catapulted the java language to its glory/under the focus light. When we are saying platform independent we also mean architecture-neutral programming language (the one which is independent of the processor)
 	c# is created by microsoft to support the .net framework. c# is closely related to java.
 	
+	Java also addressed couple of biggest issues associated with the internet, them being :
+		portability and security
+	
 	
 Java Applets :
+	Applets are java programs that are designed to be transmitted over the internet and automatically runs on the browser which is compatible.
+	Used to display the data from server, take user inputs, basically small functions that could be executed on local instead of server.
+	If the user clicks on a link that contains an applet, the applet will get downloaded and run on the browser. Seems like security problem to me.
+	There are two types of objects that are transmitted between the server and the client : 
+		passive information :
+			emails, programs on there own, text messages basically static data 
+		dynamic, active programs : 
+			applets, self executing programs because these are active agents on the client computer, but are initiated by the server.
 	
 	
+	Security : 
+		The problem with applets or lets say any dynamic, active programs/objects which are transmitted on the internet and executed on the client browser is security. Because these are programs that are running on client computer but initiated by server. 
+		
+		Java dealt with this problem by confining the execution of a program to the Java execution environment. So the programs running on java execution environment will not have any access to the files on the computer. Thus providing the security.
+		
+	Portability : 
+		The issue with portability was that different systems on the internet have different OS, browser, CPUs. So the same program was supposed to be compatible with different environments. 
+		The same solution for security solves this problem.
+		The java execution environment sovles the dependency issue.
+	
+	
+	Bytecode :
+		When we said that the security and portability was handled using the jave execution environment we were talking about the JVM (java virtual machine).
+		JVM is a part of java runtime environment which resides on the browser/client. 
+		When the java code is compiled, the compiler does not convert it into native code or executable code directly. It converts it into Bytecode. Bytecode is highly optimized set of instruction to be executed by JVM.
+		The original JVM is designed as an interpreter for the bytecode.
+		This solves the security problem, because the JVM creates a restrictive execution environment called the sandbox, that contains the program which prevents any unrestricted access to the machine.
+		
+		For the portability issue, if JRE exists on the system then java program can run on it.
+		
+		SO IF SOMEONE ASKS IF WE NEED JDK OR JRE, WE NEED ONLY THE JRE TO RUN A PROGRAM, BECAUSE IT CONTAINS THE JVM.
+		
+		Coming back to the portability, since the program is now converted into a bytecode, which is interpreted by the JVM, the code on its own is independent of the OS, CPU, browser. However, the implementation of JVM will differ as per the underlying architecture.
+		
+		The issue with JVM was that it interprets the bytecode. This may look like performance bottle-neck, but it is not. The compiled bytecode is highly optimised. And on top of that, the HotSpot technology was introduced not log after java release. This hotSpot technology provides a just in time compiler(JIT compiler) for the bytecode.
+		
+		When a JIT compiler is part of the JVM, selected portion of the bytecode is compiled into execution code in real time, on a piece-by-piece, demand basis.
+		The entire code is not compiled all at once, piece by piece. Also only that part of the code will be compiled which will benefit from compilation. Rest is interpreted. This just in time approach yields a significant boost.
+		This dynamic compilation does not affect the portability and security because JVM is still in charge.
+		
+		There is one more specialized feature called as on ahead-of-time compilation, which compiles the code before execution by the JVM.
+		
+		In JDK 9, applets were deprecated
+		and starting JDK 11, the support for applet was removed.
+		
+Web start :
+	This was a deployment mechanism that allowed the application to be dynamically downloaded from the web page and start its execution. The difference in the web start and java applet was that the web start was not executed on the browser. Instead it ran as a stand alone program on the system. Hence it required a JRE installed on the system with web start support in it. JDK 11 removed its support.
+
+Servlets :
+	What are servlets?
+		servlet is a small program that is executed on the server. Servlets are used to create dynamically generated data that is sent to the client.
+		
+		However, dynamically generated content is available through mechanims such as CGI (common gateway interface), but servlet offer several advantages like increased performance.
+		
+		What is common gateway interface(CGI)?
+			Common gateway interface is a standard that facilitates the communication between the server and the database or the data source. It acts as a middleware, allowing web servers to interact with applications that process data and send back response.
+			
+		Advantages : 
+			servlets are converted into bytecode and is executed on the JVM therefore, they are highly portable and secured.
+		The only requirement for the servlet is that the server contains JVM and a servlet container.
+		We will come back to this.
+		
+Java characteristics (BuzzWords): 
+	What are the characteristics of java??
+		simple : 
+			Java is simple and easy to understand high level programming language. It inherits its features from c and c++ therefore programmers usually find it easy to understand.
+		portable : 
+			Java is portable because of the JVM which resides within the JRE. 
+			Java code --compiler--> bytecode --JVM(interpreter/JIT compiler)--> native/executable code
+		secure : 
+			Java is secured because JVM have a full control over the execution environment of the code. So the environment can be restricted and any unauthorized access to the machine is prevented.
+		high performace : 
+			The bytecode which is generated from the source code using the compiler is highly optimised. Along with this JVM provides JIT as well which further increases the preformance.
+		robust : 
+			In programming robust means reliable. Java compilers can detect multiple flaws earlier that may show up at run time.
+			Java does not support pointers therefore the issue of handling memory is avoided. It also provides exception handling to prevent run time exceptions.
+		object oriented : 
+			Java is object oriented which means the software design is around the data instead of functions and logic.
+		architecture-neutral : 
+			Java is independent of the underlying architecture i.e. the cpu and the OS.
+		multithreaded : 
+			Java supports multi threading. Meaning it supports execution of different part of the program to run simultaneously.
+		interpreted : 
+			Java compiler converts the source code to byte code using the compiler. This byte code is then converted into the native/executable code using the JVM interpreter. Now the JVM have both the interpreter and the JIT compiler. So a part of the byte code which will not gain advantage using the JIT compiler is interpreted.
+		distributed : 
+			Distributed computing involves the collaboration of multiple computers over a network. Java was created with the goal of making the distributed computing simple.
+		dynamic : 
+			The class files are loaded at runtime. java programs carry with them substantial amount of run time type information that is used to verify and resolve accesses to objects at run time.
+jlink : 
+	what is jlink??
+		jlink is a tool which enables the programmer to create a run-time image of an application that contains only the necessary modules.
+What is ubiquitous??	
+
 Spaghetti code :
 	What is spaghetti code?
 		It is a code which contains tangled jumps and conditional branches which makes the code virtually impossible to understand.
