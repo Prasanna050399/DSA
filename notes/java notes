@@ -391,7 +391,7 @@ Servlets :
 	What are servlets?
 		servlet is a small program that is executed on the server. Servlets are used to create dynamically generated data that is sent to the client.
 		
-		However, dynamically generated content is available through mechanims such as CGI (common gateway interface), but servlet offer several advantages like increased performance.
+		However, dynamically generated content is available through mechanism such as CGI (common gateway interface), but servlet offer several advantages like increased performance.
 		
 		What is common gateway interface(CGI)?
 			Common gateway interface is a standard that facilitates the communication between the server and the database or the data source. It acts as a middleware, allowing web servers to interact with applications that process data and send back response.
@@ -431,8 +431,9 @@ jlink :
 	what is jlink??
 		jlink is a tool which enables the programmer to create a run-time image of an application that contains only the necessary modules.
 What is ubiquitous??	
-
+	found everywhere, present, appearing
 Spaghetti code :
 	What is spaghetti code?
 		It is a code which contains tangled jumps and conditional branches which makes the code virtually impossible to understand.
+	
 	
