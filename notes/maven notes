@@ -1,0 +1,216 @@
+maven notes :
+	what is maven?
+		apache maven is a software project management and comprehension tool. Based on the concept of a project object model(POM), maven can manage a project's build, reporting and documentation from a central piece of information.
+		
+		maven follows convension over configuration. Meaning that the structure of the files is pre-defined also what is the order in which different steps will be executed.
+		All the source code should be in src/main/java folder
+		All property files or all the configuration should be in src/main/resources
+		All test files should be in src/test/java same for resources src/test/resources
+		
+	creating and importing a maven project:
+		we can create the maven project using the spring initializer website.
+		
+		we need to provide the name of the project. The artifactId is the name of the project.
+		
+		when importing project, what maven does is that it reads the pom.xml file and then downloads all the dependencies that are specified in it.
+		
+	dependency is a maven concept where in all the things that we want to use in the project becomes a dependency.
+	
+	why do we need maven?
+		understanding problem without maven :
+			1. Adding set of jars in each project. 
+				we need to add set of jars in each project. It must include all the dependencies of jars as well.
+			2. Creating the right project structure.
+				We need to create right project structure for servlet, struts, otherwise it will not be executed.
+			3. Building and deploying the project.
+				
+		maven simplifies the given problems. It does mainly following tasks.
+			1. makes project easy to build.
+			2. provides uniform build process.
+			3. it provides project information
+			4. it is easy to migrate to new features of maven.
+		maven helps to manage :
+			builds
+			documentation
+			reporting
+			SCMs
+			releases
+			distribution
+			
+	what is build tool?
+		a build tool takes care of everything for building a process. It does following tasks :
+			1. generates source code (if auto-generated code is used)
+			2. generates documentation from source code.
+			3. compiles source code.
+			4. packages compiled code into jar of zip file
+			5. installs the packaged code in local repository, server repository or central repository
+			
+	Maven repository :
+		It is a directory of packaged JAR file with pom.xml file. Maven searches for dependencies in the repositories. There are 3 types of maven repository.
+			1. local repository :
+				this repository is present on our local system. It is created by maven when we run any maven command. Default location is .m2 directory.
+				We can change the location of local repository by changing the settings.xml file. We can set the new location of local repository using the <localRepository> tag.
+			2. central repository :
+				central repository is located on the web. It has been created by the apache maven community.
+				The path of central repository is:
+					http://repo1.maven.org/maven2/
+			3. remote repository :
+				This is also located on the web. We need to define the remote repository in pom.xml file.
+			
+		Maven searches for dependencies in the repository in the following order :
+			local -then-> central -then-> remote
+			
+		When maven is resolving dependencies, if the dependency is not found in local, it will download it from the remote or central and copy it in the local repository(local repository sort of acts like a cache)
+		Project makes use of the jar from local repository.
+			
+		if dependency is not found in these repositories, then maven stops processing and throws an error.
+		
+	pom.xml file :
+		Project object model(pom) file contains the project information and configuration information for the maven to build the project. Inforamation such as dependencies, build directory, source directory, test source directory, plugin, goals etc.
+		
+		maven reads pom.xml and then executes the goals.
+		
+		elements of project object model :
+			project : root element of pom.xml
+			modelVersion : sub-element of project. it should be set to 4.0.0
+			groupId : sub-element of project. Specifies the id for project group. unique base name of company or group that created the project.
+			artifactId : sub-element of project. It specifies the id for the project(artifact). An artifact is something that is either produced or used by the project. Also it is the name of that project.
+			version : sub-element of projects. It specifies the version of the artifact under given group. If it is SNAPSHOT -> it usually means that the project is under development
+			
+			packaging : defines the packaging type, jar or war(web archive) or ear(enterprise archive).
+			name : defines the name of maven project.
+			url : defines url of the project.
+			dependencies : defines the dependencies for this project.
+			dependency : sub-element of dependencies. Defines a particular dependency.
+			scope : sub-element of dependency. defines the scope, it can be compile, provided, runtime, test and system.
+			
+			parent : just like java files, pom file can also inherit from a parent. We specify the groupid and the artifact id of the parent in this section.
+			properties : this section defines the properties. One of the important property is
+			<java.version>version</java.version>
+			
+			repositories : this defines the configuration of the repositories.
+			
+		when we add a dependency in pom.xml, it will download the child dependencies of the current dependencies as well. These child dependencies are called as transitive dependencies.
+generate a java maven project :			
+	To generate a simple java project using maven we need to use the archetype:generate command of maven tool.
+	syntax : 
+		mvn archetype:generate -Dgroupid=value -DartifactId=value -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=true/false.
+	
+	if we use maven-archetype-webapp instead of quickstart it will generate a simple maven web application.
+	
+	There are are three files that this(quickstart) will create, app.java, app-test.java and pom.xml.
+	
+	If we are using webapp, in the archetype, then it will create following files instead :
+		pom.xml
+		index.jsp
+		web.xml
+	
+compile the maven java project :
+	we need to execute the following command in the project directory to compile the maven java project: 
+		mvn clean compile
+	this will create a target directory in the project directory which will contain the class files.
+	
+run the maven java project :
+	we need to execute the following command in the target/classes folder to run the maven java project :
+		java com.packageName.MainClassName
+		
+build or package maven project :
+	The following command will package the maven project :
+		mvn package
+		This will create a jar file inside the target directory.
+		
+	The build life cycle of a maven project have the following steps :
+		validate
+		compile :
+			this have two important steps :
+				1. compiling the source code.
+				2. compiling the test code.
+			this also generates the class files in the target folder.
+		test :
+			all the unit tests in the project are ran.
+		package :
+			build a jar file.
+			takes all the class files and puts it into a jar file.
+		integration-test 
+		verify
+		install :
+			taking the artifact which is generated and putting it in local repository
+		deploy :
+			taking the artifact which is generated and deploy it to a remote maven
+	
+	if we select any one phase/step, all the previous phases are executed in default order.
+	
+	generally when we use these commands to build a maven project, we do mvn clean followed by the phase/step from build life-cycle.
+	here clean is used to delete everything from the target folder.
+	
+run maven project by the jar file :
+	java -jar jarfile.jar
+	
+maven plugins :
+	maven plugins are central part of maven framework, it is used to perform specific goal.
+	
+	what are maven goals :
+		it represents a specific task that contributes to the building and managing of a project.
+		
+	There are 2 types of maven plugins :
+		1. build plugins :
+			These plugins are executed at the time of build. These plugins should be declared inside the <build> element.
+		2. reporting plugins :
+			These plugins are executed at the time of site generation. These plugins should be declared inside the <reporting> element.
+			
+	List of core maven plugins :
+		clean : clean up after build
+		compiler : compiles java source code
+		deploy : deploys the artifact to the remote repository
+		jailsafe : runs the junit integration tests in an isolated classloader.
+		install : installs the built artifact into the local repository
+		resources : copies the resources to the output directory for including in the jar
+		site : generates a site for the current project
+		surefire : runs the junit tests in an isolated classloader.
+		verifier : verifies the existence of certain conditions. It is useful for integration tests.
+		
+How to stop propogation of plugins to child poms ?
+	set the <inherited> to false
+	
+	
+ANT vs maven :
+	1.
+	ant doesnt have formal conventions, so we need to provide information of the project structure in build.xml file.
+	maven has a convention to place source code, compiled code. so we dont need to provide structure in pom.xml file
+	
+	2. 
+	ANT is procedural, we need to provide information about what to do and when to do through code. we need to provide order.
+	Maven is declarative, everything we define in the pom.xml file 
+	
+	3.
+	There is no life cycle in ant
+	there is a life cycle in maven
+	
+	4.
+	ant is a tool
+	maven is a framework
+	
+	5.
+	ant is mainly a build tool
+	maven is a project management tool
+	
+	6.
+	ant scripts are not reusable
+	maven scripts are reusable
+	
+	7.
+	less preferred
+	more preferred
+	
+	
+mvn commands :
+	mvn test-compile : compiles the test source code.
+	mvn site : generate the project documentation
+	mvn package : compiles the source code and package it in distributable format meaning generates the jar file in the target folder.
+	mvn install : compiles the source code and package it and then install it in the local repository for other local projects to use.
+	mvn help:effective-settings : this gives us all the settings used by the maven will be displayed.
+	mvn help:effective-pom : the entire content of the pom including the super pom will be printed.
+	mvn dependency:tree : all the dependencies coming in the code.
+	mvn dependency:sources : all the source code for all the dependencies will be download to our local machine.
+	
+	All the commands can be ran with a --debug flag. This will run those commands in debug mode which provides more information.

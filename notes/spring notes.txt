@@ -25,4 +25,139 @@ JSP :
 java threads : 
 networking in java :
 
-spring tutorial :
+spring :
+
+	spring offers a container often referred to as the spring application context.
+	The spring container creates and manages application components.
+	these components are called beans and are wired together inside the container or spring application context.
+	the act of wiring together the beans is based on a pattern known as dependency injection.
+	a dependency-injected application relies on a separate entity(the container) to create and maintain all components and inject those into the beans that need them. This is done through constructor arguments or property accessor methods.
+	
+	eg. 
+		components : 
+			inventory service(for fetching inventory levels)
+			product service(for providing basic product information)
+	
+	
+	files in spring project :
+		mvnw and mvnw.cmd : 
+			these are maven wrapper scripts that are used to build the project even when maven is not installed in the system.
+		
+		pom.xml :
+			This is the maven build specification
+		
+		projectNameApplication.java :
+			This is the spring boot main class that bootstraps the project.
+			
+		application.properties :
+			This file is empty initially. We can specify configuration properties here.
+			
+		static :
+			This folder is where you can place the static contents like images, stylesheets, js files.
+		
+		templates :
+			this is the folder where we can keep the template files used to render the content to the browser.
+		
+		applicationApplicationTest.java :
+			This is a simple test class that ensures that the spring application context loads successfully. We can add more tests here as well.
+			
+	
+	pom.xml :
+		<packaging> :
+			There are two options, JAR or WAR. 
+			Traditionally java web applications are packaged as WAR files.
+			And JAR files are the packaging choice for libraries and the occasional desktop UI application.
+			All cloud platforms are capable of running JAR files therefore, they are the default choice for packaging by the spring initializer.
+			
+			If we intend to deploy the application on a traditional java application server, then we'll need to choose WAR packaging and include a web initializer class.
+		
+		<parent> :
+			This specifies that your project has spring-boot-starter-parent as its parent POM. This parent POM provides dependency management for several libraries commonly used in spring projects. For those libraries specified in parent pom we dont need to specify version, as it is inherited from the parent.
+			<version> :
+				this specifies the version of the parent.
+				In our case this specifies the version of the spring boot version.
+		
+		<dependencies> : 
+			This element specifies different dependencies.
+		
+		If we observer, the dependencies contain starter in their artifact id. Spring boot starter dependencies are special in that they typically dont have any library code themselves, but instead transitively pull in other libraries.
+		These starter dependencies provide three primary benefits :
+			1. The build file will be significantly smaller and easier to manage because you won't need to declare a dependency on every library needed.
+			2. We are able to think dependencies in terms of what dependencies they provide, rather than in terms of library names. If we are developing web application, we will add just the web starter dependency instead of a list of individual dependencies.
+			3. We dont need to worry about the library versions. The starter will provide compatible versions.
+			
+		<plugin> :
+			finally the build specification ends with the spring boot plugin. This plugin performs a few important functions :
+				1. It provides a maven goal that enables you to run the application using maven.
+				2. It ensures that all dependency libraries are included within the executable JAR file and available on the runtime classpath.
+				3. It produces a manifest file in JAR file that denotes the bootstrap class(application.java) as the main class for the executable JAR.
+		
+	Bootstrapping the application :
+		projectNameApplication.java :
+			Since we are running the application fron an executable JAR, we need to a main class that will be executed when the JAR is run. 
+			We need minimal amount of spring configuration to boostrap the application. This configuration is found/specified in the projectNameApplication class.
+			
+			@SpringBootApplication :
+				This annotation signifies that the current project is a spring boot application.
+				This annotation is a composite annotation and combines three other annotations: 
+					@SpringBootConfiguration :
+						Designates this class as the configuration class. We can add java-based spring framework configuration to this class.
+						This is a specialized form of @configuration annotation
+					@EnableAutoConfiguration :
+						Enables spring boot automatic configuration. This tells spring boot to automatically configure any components that it thinks is needed.
+					@ComponentScan :
+						This annotation enables component scanning. This lets us declare another classes with annotations like, @Component, @Service, @Controller and then to have spring automatically find them and register them as a component in the spring application context(container)
+			The main method runs when the JAR file is executed. This method is boilerplate code for most of the applications.
+			This main method calls the SpringApplication.run() method. The run() method is a static method of the SpringApplication class and does the actual bootstraping of the application and creates the spring application context.
+			The run method takes 2 arguments : 
+				the configuration class meaning the class with @SpringBootApplication becasuse it is contains @SpringBootConfiguration that is the projectNameApplication class. However, it is not mandatory that the configuration class should be the bootstrap class, it can be any configuration class but usually it is the boostrap class.
+				The command line arguments same as the main method.
+	
+	Tests :
+		projectNameApplicationTest.java :
+			Even though the test method provided is empty, it checks one essential tast, that is to ensure that the spring application context can be loaded successfully.
+			If the spring application context fails from being created, this test fails.
+			This class is annotated with couple of annotations :
+				@RunWith(SpringRunner.class) :
+					This is a JUnit annotation that provides a test runner that guides JUnit in running test.
+					This can be considered as applying a pluging to JUnit to provide custom testing behavior.
+					
+					SpringRunner.class :
+						this is the test runner that provides for the creation of a spring application context against which the test will run.
+				
+				@SpringBootTest :
+					This tells JUnit to bootstrap the test with a spring boot capabilities. We can think of this as the test class equivalent of calling spring-application.run() in main() method.
+					
+			Then there is the actual test method, even though the runwith and springbootTest are the annotations to load the spring application context, they wont have anything to do unless there is a test to run.
+			Without any assertion, this method will prompt the annotations to load the spring application context. If there is any problem to load, the test will fail.
+
+
+Spring comes with a powerful web framework known as spring MVC : 
+	Spring MVC :
+		Controller :
+			This is a class that handles requests and responds with information.
+			In case of a browser facing application, a controller responds by optionally populating model data and passing the request to a view to produce HTML which is then returned to the browser.
+			
+			To mark a class as a controller, we add the @Controller annotation on top of the class.
+			The @Controller on its own does not do much, it just identifies the given class as a component for component scanning.
+			The class which is annotated with controller will be scanned automatically by spring and will be added as a bean in the spring application context.
+			
+DevTools dependency :
+	it have the following properties :
+		automatic application restart :
+			any changes to the java code or the properties are reflected after a small amount of time.
+			When the devtool is in play, the application is loaded into two separate class loaders in the JVM. 
+			One class loader loads all of our java code, property files etc.. These are items that can change.
+			The second class loader loads all the other dependecy libraries which are not likely to change.
+			When the changes are detected the devtools only loads the first class loader and restarts the spring application context.
+			Issue with this is changes to the dependencies are not reflected and we need to do a hard refresh for them to take effect.
+			
+		Automatic browser refresh and teplate cache disabled :
+			Thymeleaf is configured to cache in results of template parsing, DevTools address this issue while development and disables the caching
+			There is also a live reload server which does not need a refresh of browser page to reflect changes.
+			
+		Built in H2 console :
+			The devtools will automatically enable h2 console that we can access from the web browser.
+			http://localhost:8080/h2-console
+			
+	

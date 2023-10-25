@@ -318,10 +318,26 @@ Graphical User interface(GUIs):
 	
 ====================================================================================================================================================================
 The internet made java.
+
 What is local variable type inference ?
 	It allows the programmer to define a variable without specifying the type of it using the var keyword.
 	The compiler will infer the type of the variable based on the value that is provided to it.
+	The idea is that if the type of the variable should be same or compatible for both left hand and right hand side then we can use this to define the type of variable using the rhs.
 	
+	declaration :
+		var idenifier = value;
+	
+	We cannot just declare the variable we need to initialize it as well in the same line.
+	
+	restrictions :
+		1. only one variable can be declared at a time using var.
+		2. we cannot write the [] in front of identfier or the var keyword while defining array.
+		3. it requires initializer. Only declaration is not allowed.
+		5. cannot use null as initializer.
+		6. cannot use var keyword with an array initializer.
+		7. var cannot be written as a name of a class, interface, enumeration, annotation or generic type parameter.
+		8. var cannot be used to declare the exception type caught by the catch block.
+		9. also neither lambda expressions nor method references can be used as initializer.
 	
 History and evolution : 
 
@@ -437,3 +453,577 @@ Spaghetti code :
 		It is a code which contains tangled jumps and conditional branches which makes the code virtually impossible to understand.
 	
 	
+	
+Object oriented programming (OOP) : 
+	Types of paradigms : 
+		There are two types of paradigms based on what the program is conceptually organised around. 
+		Program can be organised around : 
+			code
+			data
+		If the program is written around "what is happening" then it is process oriented.
+		If the program is written around "what is getting affected" then it is object(data) oriented.
+		
+	C is procedural language. The issue with process oriented is that more the program grows in complexity, it gets more difficult to manage.
+	Java and cpp are object oriented.
+	
+	
+	abstraction : 
+		Hiding the complexity of implementation from the user.
+	Inheritance :
+		inheritance is the process by which one object acquires the properties of another object.
+	Encapsulation :
+		encapsulation is the mechanism that binds together code and the data that it manipulates and keeps them safe from outside interfernece and misuse.
+	polymorphism :
+		polymorphism is a feature that allows one interface to be used for a general class of action.
+		this concept can be expressed by the phrase "one interface, multiple methods"
+
+Identifiers :
+	Identifiers are used to name things like classes, methods, variables.
+	It can contain, alpha numeric characters, underscore and dollar.
+	it cannot start with a number
+	also they are case sensitive
+
+whitespaces :
+	java is a free form language so we can have all the program in a single line as long as the tokens are separated by white spaces.
+
+literals :
+	A constant value is called a literal.
+	it can be : 
+		1 or a or 1.1 or "this is a literal"
+
+comments :
+	There are three ways to give comments in java
+	single line : //
+	multi line : /* */
+	documentation comment : /**   */
+
+separators :
+	what are all the separators :
+		They are used to differentiate different region of block of code and arrange groups of codes or statements.
+		
+		() : used to contain the list of parameters in method. Also used to define precedence in expression
+		{} : used to define local scope or a block of code. Also used to initialize array
+		[] : used to define arrays and access the array elements
+		; : used to terminate statements
+		, : used to define variable identifiers, also used to chain statements together inside a for statement
+		. : used to call instance variable or method
+		:: : used to create a method or constructor reference
+		... : variable length parameters
+		@ : begins annotation
+		
+keywords : 	
+	total number of keywords : 
+		61 + 4 reserved(true, null, false and var i think)
+datatypes :
+	java have 2 types of datatypes :
+		primitive and non primitive
+	primitive datatypes : 
+		primitive data types are also known as simple data types. They only hold a single value. Primitive types are not object oriented like non primitive.
+		integer :
+			This data type holds the whole numbers. In java all the integers are signed. There is no concept of unsigned integers in java. Java provides an operator called as the unsigned right shift operator which eleminates the need of unsigned int.
+			To define integers in hexadecimal value, we need to use :
+				0x1234567890abcdef
+			To define integers in binary value, we need to use :
+				0b1001
+			While defining integers we can use the _ in the literals. This is ignored by the compiler. This is just for visual representation, like we add comma "," while writing number on a paper.
+			int :
+				it is a 4 byte that is 32 bits datatype. 
+			byte :
+				it is a 1 byte that is 8 bits datatype. When this type is used in an expression, it is automatically promoted to int.
+			short :
+				it is a 2 byte that is 16 bits datatype. When this type is used in an expression, it is automatically promoted to int.
+			long :
+				it is a 8 byte that is 64 bits datatype. To define if a literal is long we have to append the value with a "l" or "L".
+		floating point : 
+			This data type holds the real numbers. By default all the real numbers are converted into double. If we want to create float, we need to add "f" or "F" at the end of the number. Similarly if we want to define double explicitly then we need to append "d" or "D".
+			float :
+				it uses 32 bit that is 4 byte of storage. 
+				this is used when we need to store a fractional value but higher precision is not required.
+				the storage breakdown is as follows :
+					1 bit for sign
+					8 bits for exponent
+					23 bits for mantisa
+				it ranges from : 
+					1.4e-45  to 3.4e+38
+			double :
+				it used 64 bit that is 8 bytes of storage
+				this is used when we need fractional value with higher precision.
+				the storage breakdown is as follows :
+					1 bit for sign
+					11 bit for exponent
+					52 bit for mantisa
+				it ranges from :
+					4.9e-324 to 1.8e+308
+		char :
+			This datatype is used to store a single character.
+			Java uses unicode to represent all the characters. 
+			It is of size 2 bytes or 16 bits.
+			there are no negative characters and the value of these char can vary from 0 to 65536.
+			If we want to specify a character that is impossible to enter we add a "\" before the character.
+		boolean :
+			Boolean is a 1 bit datatype and can contain the value true of false.
+			
+	Non-primitive data types :
+		arrays : 
+		string :
+		classes :
+variables :
+	A variable is a basic unit of storage. It is like a label given to a memory location that we want to use.
+	A variable is defined by a combination of identifier, datatype and an optional initializing literal. In addition to these all the variables have a scope that define their lifetime and their visibility.
+	All the varibles should be declared before using them.
+	The variables can be initialized both statically meaning while declaring and dynamically while running.
+	
+	Variables can be declared in any block of code that is within any curly braces. The block defines the scope of the variable.
+	Scope determines the visibility and lifetime of that variable.
+	
+	variables are created when the scope is entered and are destroyed when the scope is ended/left.
+	
+	we cannot declare a variable with a name which already exist in the outer scope.
+
+
+type conversion :
+	If the variables are compatible then java will allow automatic type conversion. if the variables are not compatible then we need a to type cast the variable(use a cast).
+	automatic conversion/ implicit type casting :
+		When the conversion of data type is done without an external cast metioned it is implicit or automatic type casting.
+		it happens if one of the two conditions below is satisfied : 
+			the two types are compatible
+			the target type is larger than the given source type.
+			
+		The second condition is also called the widening conversion. In case of widening conversion for numerical types, incuding integer and floating point numbers are compatible with each other.
+		There is no automatic conversion to char and boolean. 
+		Similarly char and boolean are not automatically convertable.
+		There is implicit conversion while storing integer literal while storing in byte, short, long and char.
+		When we store in integer in the char variable, java implicitly converts it into a character based on the ascii value.
+	
+	explicit type casting : 
+		When the variables are to be converted from a large source type to a small source type, then we need explicit type conversion. 
+		This type of conversion is called narrowing conversion. 
+		For explicit type conversion we need a cast : 
+			(target-type) value
+			
+		There is one more type of conversion called the truncating. 
+		Example of truncating conversion is float to int. Here the values after decimal is lost. 
+		
+		When we are converting from a larger type to a smaller type and the value is exceeding the range of the smaller type. Then the actual value is reduced by the following logic :
+			newType var = (smaller type) some_value
+			here the var will contain value = some_value % range of the smaller type.	
+			Eg. :
+				int x = 257;
+				byte y = (byte) x;
+				System.out.println(y)
+				This will print 1 because 257 % 256
+				byte is 8 bits. But its range is from -2^7 to 2^7 - 1. 
+				So the reason we are taking 256 instead of 127 which is the range of byte, is because there are 8 bits. 
+				So when 257 is written in binary that is with respect to bits,
+					int will be like this : 0(sign) 0000000000000000000000100000001
+					so when we convert it into byte it will be like :
+					0(sign) 0000001
+					Taking the last 8 bits 
+					which is 1.
+					
+	Automatic type promotion :
+		java automatically promotes the byte, short and char to int while evaluating the expression. This can cause confusing compile time errors. 
+		for example :
+			byte x = 1;
+			x = x*2;  -> this will throw error because the operand were automatically promoted to int while the expression was being evaluated.
+			Thus we cannot assign the value without the cast operator.
+			
+		type promotion rules : 
+			1. all byte, short, and char are promoted to integer
+			2. if one operand is long in the expression then all the operands will be automatically promoted.
+			3. if one operand is float in the expression then all the operands will be promoted to float.
+			4. if one operand is double in the expression then all the operands will be promoted to float.
+			5. the promotion with int and float is float. So int + float will give float.
+			
+Arrays : 
+	arrays are collection of elements with same datatype. Arrays can be of one dimension or of multiple dimensions.
+	Arrays are stored in a continous memory location. And hence can be accessed using an offset.
+	One dimensional arrays :
+		declaration :
+			type idenifier[];
+		this declaration tells that this is an array but no array exist yet.
+		
+		initialization :
+			identifier = new type(int/float/string/char)[size];
+			
+		if the datatype is ordinal i.e int, long, byte, short, float, char then gets initialized with 0.
+		if the datatype is boolean it gets initialized with false.
+		if the datatype is other than that it gets initialized with null.
+		
+		In java all the arrays are dynamically allocated.
+		
+		can also be defined like this : 
+			type var[] = new type[size]
+			
+	Multi dimensional arrays : 
+		in java multi dimensional arrays are declared as arrays of arrays.
+		
+		declaration :
+			2D
+			type var[][] = new type[rows][columns]
+			
+			type var[][] = new type[size][]
+			var[0] = new type[new_size]
+			
+			
+			3D
+			type var[][][] = new type[size][size][size]
+			
+	we can also declare the array like this :
+	
+	type[] indentifier = new type[size];
+	
+String : 
+	it is not primitive type.
+	It is a class.
+	declaration :
+		String indentifier;
+		
+
+Operators :
+	4 types of operators :
+		arithmetic : 
+			used in mathematical operations similar to algebra.
+			The following are the arithmetic operators :
+				+
+				-
+				++ (pre increment, post increment)
+				-- (pre decrement, post decrement)
+				%
+				/
+				*
+				=
+				/=
+				+=
+				-=
+				*=
+				%=
+			cannot use these types on boolean but we can use them on char.
+			when the division operator is attached to an integer there will be no fractional component attached to it.
+		bitwise :
+			these operators act upon individual bits of the operand.
+			~ bitwise not
+			&
+			|
+			^
+			>> : right shift operator. Shifts the bits by given number of time to the right.
+				2>>1 so right shift all the bits in 2 by 1 position.
+				right shift retains the sign bit. Meaning that if a number is negative then the sign bit is set, when we shift it right, the new bit which comes in positon of old sign bit is also set. So we right shift more than the number of bits in the variable we get -1 because all the bits will be set.
+			>>> : unsigned right shift operator. Shifts the bits by given number of time to the right, without preserving the sign bit.
+				-2 >> 99 so right shift all the bits in -2 by 99 positions.
+				unsigned right shift does retain the old sign bit. Instead it replaces it with a 0. So after 100 shifts ideally all the types will contain 0.
+			<< : left shift operator. Shifts the bits by given number of time to the left.
+				New bit will contain 0. And the left most bit is lost.
+			^=
+			|=
+			&=
+			>>=
+			>>>=
+			<<=
+			
+			Note :
+				automatic type promotion give unexpected result when shifting operators left or right. Because when the byte and short are shifted, java first converts them into int and then perform the shift operation this can cause unexpected results.
+		boolean logical :
+			these operators operate only on boolean operands.
+			&
+			|
+			^
+			&&
+			||
+			!
+			&=
+			|=
+			^=
+			!=
+			==
+			? : ternary operator
+		relational :
+			these operators are used to determine the relationship between operands.
+			==
+			<
+			>
+			!=
+			>=
+			<=
+			The outcome of these operators is always boolean.
+	
+	Operator precedence : 
+		precedence from highest to lowest (same priority if on same line):
+			++(postfix) --(postfix)
+			++(prefix) --(prefix) ~ ! +(unary) -(unary) (type cast)
+			* / %
+			+ -
+			>> << >>>
+			> >= < <= instanceOf
+			== !=
+			&
+			^
+			|
+			&&
+			||
+			? :
+			->
+			= op=
+			
+	instanceOf operator: 
+	
+	-> (lambda) operator:
+	
+	
+Control statements :
+	there are 3 kinds on control statements :
+	selection statement :
+		the statement which allows selection of a particular flow in a program
+		if statement 
+		switch statement :
+			we can write switch within a switch 
+			switch statement only work on 
+			int, byte, short, char, or enumeration and string.
+			break statement exits the switch block
+	iteration statement :
+		statements which cause a certion code to repeat its execution
+		for(initialization(can contain comma separated values); condition(can contain comma separated values); interation(can contain comma separated values)) {}
+		while (condition) {}
+		do{ } while(condition);
+		for-each : for(type var : list) {}
+		
+		we can use a local variable type inference in both the traditional and for-each loop.
+	jump :
+		statements which allows program to execute in a non linear fashion. Meaning jumping from one part to another
+		java supports 3 jump statements :
+			break :
+				exit switch
+				exit loop
+				using break as a form of Goto :
+					labelled break statement :
+						this is equivalent of a goto statement. 
+						We can use this statement to exit any block of code not just the loop or switch statement. And not just exit the block it can specify where to resume its execution as well.
+						The general form of labelled break statement is as follows :
+							break label;   -> label is a name of label that identifies a block of code.
+							when this form of break executes, the control is transfered out of the named block.
+						
+						the break should be within the block, but this doesnt mean that the block should be the immediate enclosing block.
+						so basically we can escape a nested block but we cannot escape a block for which the break is not a part of.
+						
+						
+					To name a block we need to add a label in front of it.
+					We can use this label to target the transfer from that block. When the break is used with this label, the control will jump to the end of that labelled block.
+					
+					l1: {
+						break l1; -> this will transfer us to the end of this block.
+					}
+					
+					first: {
+						second: {
+							third: {
+								break second; -> this will get us out of second block completely skipping rest of third and second block.
+							}
+						}
+					}
+			continue : 
+				used to force an early iteration of the loop. 
+				Uses to skip the rest of the execution and continue with the next iteration. 
+				In for loop, the control is transfered to the iteration(increment/decrement) and then to the condition. 
+				In while and do-while, the control is transfered to the condition directly.
+				
+				Just like the break, we can use a label with continue to stop the current loop's execution and skip to some different iteration of some parent loop up the hierarchy.
+				eg. 
+					first : for() {
+						for() {
+							continue first; -> this will terminate the inner loop and will jump to the next iteration of parent loop.
+						}
+					}
+				
+			return :
+				It is used to immediately terminate the current execution of the method and transfer the control back to the caller method. 
+				In case of main method, the control is returned to run-time system, because run-time system calls the main method.
+				If return is not the last statment in a method and return is not conditional, then the compiler throws an exception stating that there is an unreachable code in the program.
+		exception handling is also used for jumping.
+		
+label :
+	a label is any valid identifier with a colon in front of it.
+	we can give a label to a for loop as well :
+		loop1: for(int i = 0; i < n; i ++) {
+			loop2: for(int j = 0; j < n; j++) {
+				break loop1; -> this will break both the loops.
+			}
+		}
+		
+		
+Java virtual machine :
+	JVM is the heart of java program execution. It is a part of java runtime environment(JRE). JVM acts as a run-time engine to run java application. It is the one that actually calls the main method present in a java code. JVM is the reason that java is platform independent.
+	Java compiler converts the java program into byte-code i.e. .class file. This byte-code is taken for further execution by the jvm.
+	Architecture :
+		class loader subsystem :
+			This loads the .class file in the memory.
+			Then it verifies if the byte code instructions are proper or not if not it will terminate the execution.
+			if the byte code instructions are proper, it will allocate necessary amount of memory to execute the program.
+			class loader does three things :
+				loading :
+					for each .class file, jvm stores the following information in the method area.
+				linking :
+					this performs :
+						verification :
+							It ensures the correctness of the .class file. It checks whethere this file is properly generated by the compiler. If the verification fails, we get run time exception stating java.lang.verifyError. ByteCodeVerfier is the component that verfies the bytecode.
+						perparation :
+							allocates the memory for class static variables and initialize the values of default variables.
+						resolution(optional) :
+							it is the process of replacing the symbolic references from the type with direct references. It is done by searching into the method area to locate the referenced entity.
+				initialization :
+					In this phase, all the static variables are assigned with their values defined in the code and static block. This is executed from top to bottom in a class and from parent to child in the class hierarchy.
+			there are three class loaders :
+				bootstrap class loader : Every jvm implementation should hava a boostrap class loader, capable of loading trusted classes. It loads core java api classes present in the JAVA_HOME/jre/lib directory. This is known as the bootstrap path. It is implemented in the native languages like c/c++
+				extension class loader : It is a child fo the boostrap class loader. It loads the classes present in the extension directories or any other directory specified  by the java.ext.dirs system properties.
+				System/application class loader : it is a child of the extension class loader. It is responsible to load classes from the application classpath.
+				
+				JVM follows delegation-hierarchy principle to load classes. System class loader delegate load request to extension class loader. Extension class loader delegates instruction to bootstrap class loader. If a class found in the boot-strap path, the class is loaded otherwise a request is made to the extension class loader if class is found, it is loaded else another request is made to the system class loader. If the system class loader fails to find the class, then we get run-time exception java.lang.classNotFoundException.
+		
+		JVM memory/runtime data area :
+			heap :
+				This is the place where all the objects, object information and instance variables are stored. There is only one heap area per JVM. It is also a shared resource.
+			java stack area/JVM language stacks: 
+				For every thread, JVM creates one run-time stack which is stored here. Every block of this stack is called acitvation record/stack frame which stores method calls. This stack frame will contain all the information related to that method and the local variables of that method.
+				When the thread terminates, its run time stack gets destroyed as well by the JVM. It is not a shared resource(run time stack).
+			native method stack :
+				For every thread, a separate native method stack is created. It stores the native method information.
+			program counter register (PC register) :
+				Stores address of current execution instruction of a thread. Each thread has separate PC register.
+			method area : 
+				This includes all class level information like name, immediate parent class name, methods and variable information including static variables. There is only one method area per JVM, so this is a shared resource.
+		
+		execution engine :
+			It reads the bytecode line by line, uses data and various information present in the JVM memory/runtime data area and executes the instructions.
+			JIT compiler :
+				It is used to increase the efficiency of the interpreter. It compiles the code which can take advantage of compilation and executes it.
+			Interpreter : 
+				It interprets the byte code line by line and executes it. The disadvantage here is that if a method is getting executed in loop, it reads it line by line everytime(everytime interpretation is required).
+			garbage collector :
+				It destroys un-referenced objects.
+				This is the process by which java programs perform automatic memory management.
+				When the program runs on jvm, the objects are created on heap, which is a portion of memory dedicated to the program. The garbage collector finds unused objects on the heap and deletes them to free up memory.
+				Main object is to free heap memory by destroying unreachable objects.
+				The garbage collector is the best example of Daemon thread because it is always running in the background.
+				
+				In-use object or referenced oject is the object that is still in use in the program meaning a pointer to this object is still maintained.
+				Unused object or un-referenced object is the object that is not in use and there is no pointer in the program pointing to this object.
+				
+				The garbage collection implementation lives in the JVM.
+				
+				Types of activities in java garbage collection :
+					The two types of collection activites that happen in java are :
+						What is old generation and young generation garbage collection :
+							The heap is divided into two sections : 
+								young generation(where new objects are generated)
+								old generation(objects are moved here from young generation)
+							Young generation heap contains all the initial objects that are created on start up. 
+							The garbage collector iterates through all the objects and mark them if they are in use and in the next iteration it deletes all the unmarked objects. This is one cycle of garbage collection.
+							So if an object survives couple of garbage collection cycle, then the object from the young generation heap is transfered to old generation.
+							The idea is that most application objects are short lived and therefore will be destroyed frequently using the young generation heap.
+							The old generation heap will contain objects which need not be deleted frequently.
+						minor or incremental garbage collection :
+							It is said to have occured when the garbage collection is done in young generation heap. This is done more frequently.
+						major or full garbage collection :
+							It is said to have occured when the object from old generation of permanent generation is removed. This is done less frequently.
+				
+				Ways to make an object unreachable(eligible for garbage collection) :
+					1. nullifying the reference variable
+					2. re assigning the reference variable
+					3. an object created inside the method
+					4. island of isolation(group of object that reference each other but not referenced by any active object in the application. A sinle unreferenced object is also an island of isolation)
+				
+				
+				How to request JVM to run garbage collector :
+					1. using System.gc()
+					2. using Runtime.getRuntime().gc()
+					There is not guarantee that any of the above method will run garbage collector.
+					the call System.gc() is equivalent to the call Runtime.getRuntime().gc()
+					
+				Just before destroying an object the GC calls the finalize() to perform cleanup activities. We can override this method to provide a custom cleanup activity. finalize() method is called by GC not the JVM. The default implementation of finalize() is empty(no actions).
+				if there is an exception in finalize() method the finalization terminates but the exception is ignored as well and the object will be destroyed.
+				Garbage collector is one of the modules of JVM.
+				
+				Advantages :
+					it is automatic process and we need not provide extra efforts
+					it makes java memory-efficient because it frees up un-referenced memory. 
+		native method interface :
+			It is an interface that interacts with the native method libraries and provides the native libraries required for the execution. It enables jvm to call c/c++ libraries.
+		
+		native method libraries :
+			It is a collection of native libraries which are required by the execution engine.
+		
+classes :
+	The class forms the basis of object-oriented programming in java.
+	It defines the shape and nature of the object.
+	Any concept which we want to implement in java must be encapsulated in the class.
+	Class defines a custom new data type. Once defined we can use this new datatype to define objects. 
+	Class is a template for an object. Object is an instance of a class.
+	The method or the code defined in the class provides the interface to its data.
+	
+	Syntax :
+		class identifier {}
+		
+	the data/variables can be defined within the class called as instance variables.
+	the code is written inside the method.
+	collectively the method and the instance variables are the members of the class.
+	Generally the variables can be accessed through the methods of the class. Therefore, the methods determine how the class variables are used.
+	Instance variables are called instance because each object/instance have its own copy. Meaning that each object will have its unique instance variable independent of another object.
+	
+	Only that class have a main method which is the starting point of the application.
+	
+	Object creation syntax :
+		type identifier = new type();
+		This statement creates an object and brings reality to the class. The class declaration on its own does not bring the class to reality. Its just a template of what that datatype can do. Creating object actually allocates memory and gives it its own existance.
+		
+		type identifier; -> declares reference variable
+		identifier = new type(); -> allocates the reference to identifier.(identifier will just hold the memory address to the object)
+		
+	NOTE :
+		WHEN WE WRITE A FILE WITH TWO CLASSES THE COMPILER WILL CREATE TWO SEPARATE .CLASS FILES ONE FOR EACH CLASS. 
+		
+	All class objects must be dynamically allocated.
+	
+	Java primitive types are not implemented like objects. Therefore, we don't need new while defining primitive types like int, char, float, etc.
+	
+	Class is a logical construct, object has physical reality.
+	
+	When one reference variable is assigned to another reference variable, it does not create a separate object in the memory, the same reference is assigned to the new reference variable. So any changes to the new variable will be reflected for the old reference variable as well because the object is the same.
+	
+	methods :
+		
+		syntax :
+			return_type identifier(type param(optional)...) {}
+			
+			return_type can be either void or any other valid datatype including new classes defined by the user.
+			
+		methods define the interfaces to most of the classes. This hides the specific layout of internal data behind cleaner method abstraction.
+		In addition to methods which give access to data, internal methods that are used by classes are also there.
+		
+new keyword :
+	The new operator dynamically (at run time)allocates memory for the object and returns its reference.
+	
+constructors :
+	The constructor defines what occurs when an object of that class is created.
+	If we dont define a constructor, then java provides a default constructor.
+	constructor do not have a return type. This is because the implicit return type of a class's constructor is the class type itself.
+	It is constructor's job to initialize the internal state of an object.
+	If we do not define a constructor in the class, then java provides a default constructor.
+	For default constructor all the instance variables will be given their default initialization values of 0, null and false for numeric, reference and boolean instances.
+	when we define our own constructor, the default constructor by java is no longer used.
+	
+	parameterized constructors :
+		constructor with parameters is called parameterized constructor.
+		
+this keyword:
+		It is similar to self in python.
+		'this' refers to the calling object, which is the object that called the method, on which the method was called.
+		'this' stores the reference of the object that is created. With this we can say that it is literally the copy of 'self' which we learned about in python.
+		Also 'this' have a local scope.
+		
+		This refers to the object on which the method was invoked.
+
+instance variable hiding :
+	It is illegal to have two variables with the same name in a same scope as per java.
+	But we can have local variables which include formal parameters with the same name as that of the instance variable. 
+	In this case the local variables hide the instance variables.
+	Because this keyword allows us to access the object variable, we can it to resolve any namespace collision that might occur between instance variables and local variables.
+	Therefore, we can use this keyword to overcome instance variable hiding.

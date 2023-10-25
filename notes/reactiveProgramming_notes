@@ -1,0 +1,3 @@
+what is reactive programming?
+	Reactive programming is a declarative programming paradigm that is based on the idea of asynchronous event processing and data streams.
+	Asynchronous processing means that the processing of an event does not block the processing of another event.

@@ -1,0 +1,2540 @@
+what is spring framework?
+	it is a lightweight and popular open source java base framework produced by Rod Johnson to build simple, reliable and scalable enterprise applications. It is an application framework and IOC container for the java platform.
+	It provides support to other frameworks that is why it is called the framework of frameworks. It is a collection of sub frameworks also known as layers such as :
+		spring AOP (aspect oriented programming)
+		spring ORM (object relational mapping)
+		spring web flow
+		spring web MVC
+	Spring framework is loosely coupled because of dependency injection.
+
+why to use spring? 
+	open source
+	feather weight (the basic version is about 2mb)
+	can create any java application using spring.
+	offers POJO-based programming model. Using this spring aims to make the J2EE development easier to use and promote good programming habits.
+
+what is EJB?
+	Enterprise java beans is one of the several java apis for standard manufacturing of enterprise software.
+	it is a server side software element that summarizes business logic of an application.
+	EJB is an acronym for enterprise java bean. It is a specification provided by sun microsystem to develop distributed applications which are robust, secured and scalable.
+	Basically a distributed application which is created using the (EJB)specifications provided by sun microsystem.
+	To run EJB application we need an application server which is also refered to as EJB container. Examples of EJB container is JBoss, Glassfish, Weblogic, websphere.
+	The EJB container performs :
+		a. life cycle management
+		b. security
+		c. transaction management
+		d. object pooling
+	The EJB application is deployed on server therefore it is called server side component as well.
+	
+when to use EJB ?
+	application is distributed meaning needs remote access.
+	application needs to be scalable.
+	application needs encapsulated business logic
+
+what are the types of EJB?
+	there are three types of EJB :
+		1. session bean :
+			It contains business logic that can be invoked by local or remote or webservice client. 
+			There are two types of session beans :
+				1. stateful session bean :
+					it performs business task with the help of state. Eg.: Shopping site, the item chosen must be stored as data.
+				2. stateless session bean :
+					It implements business logic without having a persistent storage mechanism, such as state or database.
+		2. message driven bean :
+			It contains business logic that can be invoked by a passing message.
+		3. entity bean :
+			It summerizes the state that can persist in a database. It is deprecated and is replaced by JPA(Java persistent API)
+			The two types of entity beans :
+				1. bean managed persistent :
+					here the programmer has to write the code for database calls.
+				2. container managed persistence :
+					here the container takes care of database calls.
+
+Advantages of EJB :
+	1. The EJB repository is responsible for system level services such as transaction management and security authorization. The bean developer can focus of solving business problem.
+	2. The bean will contain the business logic and not the client. This makes the client thiner and light weight. The client does not have to code the business rules.
+	3. The EJB are portable elements, the application assembler can build new application from the beans that already exists.
+
+Disadvantages of EJB :
+	1. requires application server
+	2. requires only java client. For other language client we need to go for webservices.
+	3. complex to understand and develop EJB applications.
+	
+what is EJB container?
+	EJB container is a server side component that comprises the business logic. 
+	It provides local and remote access to the enterprise beans. In other words, it provides a runtime environment for EJB applications within the application server.
+	Single container can contain more than one EJB modules.
+	
+	The behavior envisioned by the Java EE specification is that the developer writes an enterprise java bean, a single component, and the EJB container adds the necessary infrastructure for communication, transaction and data access. It turns the business logic into something that executes.
+	Along with this, the container provides lifecycle management for the component to ensure its creation, usage and destruction are both efficient and in accord with the specification.
+	
+	what does EJB container do?
+		The EJB container does the following tasks :
+			1. instantiate beans on demand
+			2. manages the pool of bean instances
+			3. manage transactions
+			4. loads/saves bean data from/to a database
+			5. handles security
+			6. provides other system services
+	
+	What are EJB container services?
+		services for enterprise application development :
+			transaction support
+			security model
+			persistence support
+			timing services and job scheduling
+			messaging
+			remote access
+			distribution
+			web-services
+			component pooling
+			component life-cycle
+			interceptors
+			asynchronous interactions
+			thread-safety and concurrency control
+			
+Applications of spring :
+	1. POJO based :
+		Spring allows the developers to create the enterprise-class apps using POJOs. The advantage of using POJOs is that we dont need an EJB container product, instead we can use a powerful servlet container like tomcat	
+	2. modular :
+		Spring is set up in a modular approach making development easy because the modules can be developed independently.
+	3. Integration with existing frameworks :
+		Spring does not reinvent the wheel, rather it uses existing technologies.
+	4. Testablity :
+		Because the environment dependent code is pun into this framework, testing a spring-written application is trivial. It uses java bean style POJOs to make it easier to employ dependency injection for injecting test data.
+	5. Web MVC :
+		Spring's web framework is a well designed web mvc framework that is an excellent alternative to web frameworks like struts.
+	6. central exception handling :
+		Spring provides an api for converting technology specific exceptions into consistent, unchecked exceptions.
+	7. lightweight :
+		IoC containers are lightweight, especially when compared with EJB containers. This is useful on systems with limited memory and cpu resources.
+
+Introduction to spring framework : 
+	Before EJB, java developers needed to use java beans to create web applications. Although java beans helped in the development of user interface components, they were not able to provide services such as transaction management and security which are required for a robust and secure enterprise applications.
+	
+	The arival of EJB was seen as the solution to this problem. EJB extends the java components such as web and enterprise application development.
+	However, EJB development was not easy, as the developer needed to do various tasks, such as creating Home and Remote interfaces and implementing lifecycle callback methods which lead to complexity of providing code for EJB.
+	
+	The spring framework arrived as a solution to this complexity.
+	
+	Spring uses new techniques such as Aspect oriented programming, plain old java object and dependency injection to develop enterprise applications thus removing the complexity involed while developing enterprise applications using EJB.
+	
+features of spring framework :
+	IoC container :
+		IoC container refers to the core container that uses the DI or IoC patterns to implicitly provide an object reference in a class during runtime. This pattern acts as an alternative to the service locator pattern.
+		The IoC container contains assembler code that handles the configuration management of application objects.
+	data access framework :
+		Allows the developers to use persistence APIs, such as JDBC or hibernate, for storing persistence data in database. It helps in solving various problems of the developers like how to interact with the database, how to make sure that the connection is closed, how to deal with exceptions and how to implement transaction management. It also enables the developers to easily write code to access the persistence data throughout the application.
+	spring mvc framework :
+		Allows us to build the web application based on MVC architecture.
+		All the requests made by the user will first go to through the controller and are then dispatched to different views, that is, to different JSP pages or servlets.
+	transaction management :
+		Helps in handling transaction management of an application without affecting its code. Spring framework provides java transaction API (JTA) for global transactions managed by an application server and local transactions managed by using the JDBC hibernate, java data objects or other data access APIs
+	spring web service :
+		Generates web service endpoints and definitions based on java classes, but it is difficult to manage them in an application.
+		To solve this problem, spring web service provides a layered-based approaches that are separatly managed by XML parsing.
+		Spring provides effective mapping for transmitting incoming XML message request to an object and the developer to easily distribute XML message between two machines.
+	jdbc abstaction layer :
+		Helps the user in handling errors in an easy and efficient manner. The JDBC programming code can be reduced when an abstraction layer is implemented in a web application.
+	spring testcontext framework :
+		Provides the facilities of unit and integration testing for the spring applications.
+		Moreover, the spring testContext framework provides specific integration testing functionalities such as context management and caching DI of test fixtures, and transactional test management with default rollback semantics.
+		
+		
+###########################################################################################################################
+
+What is framework :
+	framework in broader sense is a structure where we find solution of various technical problems.
+	It is a layered structure indicating what kind of programs can or should be built and how they would interrelate.
+	It is a structure that we can use as a base and build software on. It serves as a foundation so we are not starting from scratch.
+	
+	
+Spring framework modules :
+	The spring framework comprises of several modules like :
+		IoC (inversion of control)
+		DAO (data access object)
+		AOP (aspect oriented programming)
+		context
+		ORM (object relational mapping)
+		WEB
+		MVC
+		
+		
+IoC(inversion of control) and dependency injection :
+	These are the design patterns that are used to remove dependency from the programming code.
+	They make the code easier to test and maintain.
+	IoC makes the code loosely coupled.
+	
+	IoC :
+		Inversion of control is a principle in software engineering which transfers the control of objects or portion of a program to a container or framework.
+		
+		We most often use it in terms of object oriented programming.
+		
+		In contrast with traditional programming where the our custom code makes call to a library, IoC enables the framework to take control of the flow of a program and make calls to our custom code.
+		To enable this, frameworks use abstractions with additional behavior built in. If we want to add our own behavior, we need to extend the classes of the framework or plugin our own classes.
+		
+		Advantages :
+			1. decoupling the execution of a task from its implementation
+			2. making it easier to switch between different implementation of code
+			3. greater modularity of the program
+			4. greater ease in testing a program by isolating a component or mocking its dependencies and allowing components to communicate through contracts.
+		
+		To achieve inversion of control we can use different mechanisms :
+			strategy design pattern
+			service locator pattern
+			factory pattern
+			dependency injection
+		
+		dependency injection :
+			It is a pattern we can use to implement IoC, where the control being inverted is setting an object's dependencies.
+			Design pattern that removes the dependency from the programming code so that it can be easy to manage and test the application.
+			makes the code loosely coupled.
+			
+			to understand DI, we need to understand Dependency Loopup(DL)
+			dependency lookup :
+				The dependency lookup is an approach where we get the resource after demand.
+				For example when we use the new keyword directly in the program we are creating the instance and hence getting the resource directly.
+				Other option is the use of factory methods where we get the resource by calling the static factory method.
+				Other option is option is to use the java naming directory interface.
+				
+				2 main problems with dependency lookup :
+					Tight coupling :
+						The dependency lookup approach makes the code tightly coupled. If the resource changes, we need to perform a lot of code modification.
+					Not easy for testing :
+						this approach creates a lot of problems while testing especially black box testing.
+			
+			Since DI removes the dependency from the prgrams, the information related to dependency is provided from an external source such as XML file either by constructor or setter method. This makes our code loosely coupled and easier for testing.
+			
+			connecting objects by other objects or "injecting" objects into other objects is done by an assembler rather than by the objects themselves.
+			
+			DI in spring can be done through constructors, setters or fields :
+				constructor based DI : 
+					In constructor based DI the container will invoke a constructor with arguments each representing a dependency we want to set.
+				setter based DI : 
+					We use a setter method to set the dependency.
+				Field based DI :
+					In case of field-based DI, we can inject the dependency by marking the instance variable with @Autowired annotation.
+					While constructing the object, if there is no constructor or setter method, the container will use reflection to inject bean into the object.
+					
+					It is not recommended to use this method because it has a few drawbacks :
+						this method uses reflections and they are costlier than constructor and setter.
+						Its really easy to keep adding multiple dependencies using this approach. This can violate the single responsibility principle.
+		dependency injection :
+			It is a pattern we can use to implement IoC, where the control being inverted is setting an object's dependencies.
+			
+			connecting objects by other objects or "injecting" objects into other objects is done by an assembler rather than by the objects themselves.
+			
+			DI in spring can be done through constructors, setters or fields :
+				constructor based DI : 
+					In constructor based DI the container will invoke a constructor with arguments each representing a dependency we want to set.
+					The <constructor-arg> subelement/property of the <bean> tag is used for constructor injection.
+					1. Injecting primitive or string based values :
+						For injecting primitive type or string based values in the bean, we use the same <constructor-arg> subelement of the <bean> tag.
+						The <constructor-arg> element have the following properties to configure the dependencies :
+							value : to set the value of the elements
+							type : to identify which constructor should be used and if there are more than one constructor argument, then which argument should be assigned the value to.
+							name : to identify the property of the constructor using the name
+						
+						E.g : 
+							if we have 3 constructors in the same class like :
+								public className(int x);
+								public className(String y);
+								public className(int x, String y);
+								
+							then with the bean tag with :
+								
+								<bean id = "beanId" class = "abc.xyz.className">
+									<contructor-arg value = "10" type = "int"></constructor-arg>
+								</bean>
+								Here the type will decide the constructor to be called and the value will be set to that property
+								
+								<constructor-args value = "10"></constructor-args>
+								Here since we are not specifying the type, the constructor with string parameter will be called.
+								
+								if we want to call the constructor with more than one parameter then we need to specify multiple constructor arg
+								<constructor-arg value = "19" type="int"></constructor-arg>
+								<constructor-arg value="someString"></constructor-arg>
+								
+					2. Injecting dependent objects :
+						If there is a HAS-A relationship between objects, we create the instance of the dependent object first and then send it to the constructor of the main class.
+						This object is called the dependent object.
+						So the idea is to create a bean for the dependent object and then use that bean id as the value for the <ref/> sub-element of the the <constructor-args> element.
+						So for example :
+							we have an employee and an address class
+							employee HAS-A address
+							employee has the constructor like this :
+								public Employee(int id, Address address) {}
+							address has the constructor like this :
+								public Address(String address) {}
+							
+							And the configuration file would be like this :
+								<bean id = "adBean" class = "abc.xyz.Address">
+									<constructor-arg value = "address value"></constructor-arg>
+								</bean>
+								<bean id="empBean" class = "abc.xyz.Employee">
+									<constructor-arg value="1" type="int"></constructor-arg>
+									<constructor-arg>
+										<ref bean="adBean"/>
+									</constructor-arg>
+								</bean>
+								Here the <ref> sub-element is providing the dependent object
+						There is another way to inject objects, it is using the bean tag as is in the constructor-arg element :
+							<bean id="" class="">
+								<constructor-arg>
+									<bean class="dependentClass"></bean>
+								</constructor-arg>
+							</bean>
+					3. Injecting collection values :
+						We can use list, set and map inside the constructor-arg element
+						Each collections can have a string based and non string based values.
+						For injecting list, we use the 
+						<list> sub-element of the constructor-arg element.
+						Eg :
+							public Question(int id, String name, List<String> answers) {}
+							
+							<bean id = "qBean" class="abc.xyz.Question">
+								<constructor-arg value = "10" type="int"></constructor-arg>
+								<constructor-arg value = "some question"></constructor-arg>
+								<constructor-arg>
+									<list>
+										<value>answer1</value>
+										<value>answer2</value>
+										<value>answer3</value>
+									</list>
+								</constructor-arg>
+							</bean>
+						For set and map we are mostly going to use <set> and <map> sub-elements of the constructor-arg element.
+						
+						The above example displays collection injection with string based elements.
+						
+						For constructor injection with non-string collection :
+							For non string collection in constructor injection, we use list, map, set sub-element with <ref> as a sub-element in it.
+							So if there is a list of answer class, to be injected into question class, the configuration will be like this :
+							
+							<bean id="answer1" class="">
+								<constructor-arg value="" name=""></constructor-arg>
+							</bean>
+							<bean id="answer2" class="">
+								<constructor-arg value="" name=""></constructor-arg>
+							</bean>
+							
+							<bean id="question1" class="">
+								<constructor-arg>
+									<list>
+										<ref bean="answer1"/>
+										<ref bean="answer2"/>
+									</list>
+								</constructor-arg>
+							</bean>
+							
+							here the <value> sub-element is replaced by <ref>
+						
+						For map :
+							we use the sub element :
+								For string based map :
+									<constructor-arg>
+										<map>
+											<entry key = "" value = ""></entry>
+											<entry key = "" value = ""></entry>
+										</map>
+									</constructor-arg>
+								For Non-string based map :
+									to use a bean as a key and value, 
+									we need to use 
+									key-ref and value-ref property of the entry sub-element.
+									
+									<constructor-arg>
+										<map>
+											<entry key-ref = "beanId" value-ref = "beanId"> </entry>
+											<entry key-ref = "beanId" value-ref = "beanId"> </entry>
+										</map>
+									</constructor-arg>
+						
+						Inheriting bean in spring :
+							A child bean definition will inherit constructor argument values, property values and method overrides from the parent. The child bean definition also can add new values. If the child bean contains init-method, destroy-method and/or static factory method settings, they override the corresponding parent settings.
+							
+							In this case, the parent bean values are inherited in the current child bean
+							to do this we use the parent attribute of the bean tag.
+							
+							<bean id="beanId" class="className" parent="parentClassBeanId">
+								we can also assign values here if required
+							</bean>
+				setter based DI : 
+					We use a setter method to set the dependency.
+					Here we use the <property> sub-element of <bean> tag. The property sub-element is used for setter injection.
+					
+					We are going to inject :
+						1. primitive and string based values
+							The <property> sub-element of the bean tag will invoke the setter method. The value sub-element of the property tag will assign the specified value.
+							
+								<bean id = "beanId" class = "classPath">
+									<property name = "instanceVarName">
+										<value>20</value>
+									</property>
+								</bean>
+								or
+								<bean id = "beanId" class = "classPath">
+									<property name = "instanceVarName" value = "20">
+									</property>
+								</bean>
+						2. dependent object
+							Like the constructor injection, we can inject the dependent objects using the setter methods as well.
+							We use the <property> sub-element of the <bean> element.
+							It is used in a HAS-A relationship scenario.
+							We are injecting the dependent class.
+							We use the ref attribute of the property element.
+							
+								<bean id = "beanId2" class = "classPath">
+									<property name = "instanceName" ref = "beanId1"></property>
+								</bean> 
+						3. collection values
+							We can inject collections using the setter methods as well.
+							For this we can use the <map>, <set>, <list> in the property element.
+							Each collection can have a string based and non string based values.
+							
+							list :
+								we can use the list sub-element in the property element.
+								So to inject a list in the bean, 
+								
+								String based values :
+									<bean id="beanId" class="classPath">
+										<property name="instanceVarName">
+											<list>
+												<value>value1</value>
+												<value>value2</value>
+											</list>
+										</property>
+									</bean>
+								
+								Object bases values :
+									<bean id="beanId" class="classPath">
+										<property name="instanceVarName">
+											<list>
+												<ref bean = "objectBeanId1"/>
+												<ref bean = "objectBeanId2"/>
+											</list>
+										</property>
+									</bean
+							map : 
+								string based values :
+									<property name="instanceVar">
+										<map>
+											<entry key = "" value = ""><//entry>
+											<entry key = "" value = ""><//entry>
+										</map>
+									</property>
+								
+								Object based values :
+									<property name="">
+										<map>
+											<entry key-ref = "" value-ref = ""></entry>
+										</map>
+									</propetry>
+				Field based DI :
+					In case of field-based DI, we can inject the dependency by marking the instance variable with @Autowired annotation.
+					While constructing the object, if there is no constructor or setter method, the container will use reflection to inject bean into the object.
+					
+					It is not recommended to use this method because it has a few drawbacks :
+						this method uses reflections and they are costlier than constructor and setter.
+						Its really easy to keep adding multiple dependencies using this approach. This can violate the single responsibility principle.
+		
+			Autowiring in spring :
+				Autowiring enables dependency injection implicitly using the setter or constructor.
+				
+				Autowiring does not allow to inject string based and primitive values. We can only inject references using autowiring
+				
+				Advantage of autowiring :
+					It requires less code.
+					If there is a change in the constructor, autowiring will automatically take care of it no need to change the code.
+				Disadvantage of autowiring :
+					No control of programmer
+					We cannot use the primitive and string values.
+					explicit dependency injection in property and constructor-args setting always override autowiring
+					
+				modes of autowiring :
+					There are following autowiring modes :
+						no : 
+							It is the default mode meaning no autowiring byDefault
+						byName :
+							The byName mode injects the object dependency according to the name of the bean. In this case, the bean name and the property name must be same. It internally calls the setter methods.
+						byType :
+							This mode injects object dependency according to the type. So property name and bean name can be different. It internally calls setter method.
+							The limitation here is that there must be only one one bean of a given type.
+						constructor :
+							This mode injects the dependency by calling the constructor of the class. It calls the constructor having large number of parameters.
+							In other words spring injects the dependency by highest parametrized constructor.
+						autodetect :
+							It is deprecated since spring 3
+				
+				We need to use the autowire attribute of bean element to apply autowire modes.
+				example : 
+					<bean id = "" class = "" autowire = "byName/byType/constructor">
+					</bean>
+			
+			Dependency injection by factory method : 
+				Spring framework allows to inject bean using factory method. 
+				To inject beans using factory method we need to use the following attributes of bean element :
+					factory-method : this represents the factory method that will be invoked to inject the bean
+					factory-bean : represents the reference of the bean by which the factory method will be invoked. This is used in case of non-static factory methods where we need to create the bean instance before calling its factory method.
+				Both of these attributes are needed depending upon the method being static or not.
+				
+				There are three types of factory methods :
+					static factory method that returns the instance of its own class :
+						<bean id = "a" class = "abc.xyz.A" factory-method = "getA()"></bean>
+						creates bean of A
+					
+					static factory method that returns instance of another class, here the instance is not known and decided at run-time :
+						<bean id = "b" class = "abc.xyz.A" factory-method = "getB()"></bean>
+						creates bean of B even though the class is A because the factory method is getB()
+						here A can be considered as a FactoryClass.
+						
+					non-static factory method that returns instance of another class, here the instance is not known and decided at run-time :
+						<bean id = "a" class = "abc.xyz.A></bean>
+						<bean id = "b" class = "abc.xyz.A" factory-method = "getB" factory-bean = "a"></bean>
+						Creates bean of b. A is a factoryClass with a non static factory method. Here the non-static factory method. Therefore, we need to create a bean of A before creating the bean for b.
+		
+		What is a factory method?
+			A method that returns an instance of a class is called a factory method.
+			
+		Difference between constructor and setter injection :
+			
+			partial dependency injection :
+				We cannot do partial dependency injection with constructor. We need to provide all the arguments present in that constructor.
+				However, for setter injection, we can provide partial dependency because we can call the property tag for a particular element using the setter method.
+				
+			Overriding :
+				Setter injection overrides the constructor injection. If we use both the injections construtor and the setter, the IoC container will use the setter injection.
+				
+			changes :
+				The constructor injection creates a new bean instance every time. The same is not true for the setter injection. Setter injection allows easy change for the value. So setter injection is flexible than constructor injection.	
+		
+		Lazy initialized beans :
+			By default, the container creates and initailizes all the singleton beans during initialization. If we want to avoid this we can set the initiliztion property to lazy so that the beans wont be initialized when the container is initialized.
+		IoC Container :
+			It is a common characteristic of frameworks that implement IoC.
+			In spring, the interface ApplicationContext represents the IoC container.
+			The spring container (spring application context) is responsible for instantiating, configuring and assembling objects known as beans, as well as managing their life cycles.
+			
+			The spring framework provides several implemenations of applicationContext interface : 
+				standalone applications: 
+					classPathXmlApplicationContext
+					fileSystemXmlApplicationContext
+				web applications:
+					WebApplicationContext 
+			In order to assemble beans, the spring container uses configuration metadata, which can be in the form of XML configuration or annotations.
+			
+			@Configuration :
+				This annotation indicates that the class is a source of bean definitions.
+				We can also add it to multiple configuration classes.
+			
+			@Bean :
+				we use this annotatiton to define a bean.
+				IF we dont specify a custom name, then the bean name will default to the method name.
+				We can also define the scope of the bean. If we specify the default singleton scope then it will check for a cached instance of the bean and will only create a new bean if it doesnt exist. If we specify a prototype scope, the container returns a new bean instance for each method call.
+				Another method to create the configuration of beans is through XML configuration.
+				<bean id = "item1" class="org.package.classname"/>
+				<bean id = "store" class="org.package.classname">	
+					<constructor-arg type="ItemImpl1" index="0" name="item" ref="item1"/>
+				</bean>
+			
+			The main tasks performed by the IoC container are :
+				to instantiate the application class
+				to configure the object
+				to assemble the dependencies between the objects
+			There are 2 types of IoC containers :
+				BeanFactory
+				ApplicationContext
+			
+			Both the BeanFactory and ApplicationContext are the interfaces that acts as the IoC containers.
+			The ApplicationContext is built on top of beanFactory therefore, it add some extra functionality than BeanFactory like simple integration with Spring's AOP, message resource handling, event propogation, application layer specific context like webApplicationContext for web applications. So it is better to use the ApplicationContext
+			
+			
+			Using BeanFactory :
+				To use the BeanFactory we need its implementation. XmlBeanFactory is one such implementation of the beanfactory interface.
+				To use beanFactory we need to create an instance of the XmlBeanFactory class.
+					Resource resource = new ClassPathResource("applicationContext")
+					BeanFactory factory = new XmlBeanFactory(resource);
+			
+			using ApplicationContext :
+				The ClassPathXmlApplicationContext is the class that implements the applicationContext interface. To use applicationContext interface we need to create an instance of the ClassPathXmlApplicationContext class.
+					ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+					the class takes a string value : the name of the xml file that we created.
+advantages of spring framework : 
+	predefined templates :
+		spring provides template for different technologies like JDBC, Hibernate, JPA etc. So there is no need to write too much code. It hides the basic steps of these technologies.
+	Loose coupling :
+		The spring applications are loosely coupled because of dependency injection.
+	Easy to test :
+		The DI makes it easier to test the applications. The EJB or struts application require server to run the application but spring framework does'nt require server.
+	Lightweight :
+		Spring framework is light weight because of its POJO implementation. The spring framework does'nt force the programmer to inherit any class or implement any interface that is why it is said non-invasive.
+	Fast development :
+		Because of the support for different framework and DI, spring makes it easy to develop Java EE applications.
+	powerful abstraction :
+		provides powerful abstraction to JavaEE specification such as JMS, JDBC, JPA and JTA.
+	Declarative support :
+		provides declarative support for caching, validation, transactions and formatting.
+
+spring modules :
+	spring framework comprises of many modules such as :
+		core
+		bean
+		context
+		expression language
+		AOP
+		aspects
+		instrumentation
+		JDBC
+		ORM
+		OXM
+		JMS
+		transactions
+		WEB
+		servlets
+		struts
+	These individual modules are grouped into 7 types :
+		1. core container : 
+			This contians the following modules :
+				core :
+				beans : 
+					The core and bean modules provide IoC and DI features.
+				context :
+					this module supports internationalization(I18N), EJB, JMS, Basic Remoting
+				expression language
+					It is an extension to the EL defined in JSP. It provides support to setting and getting property values, method invocation, accessing collections and indexers, named variables, logical and arithemetic operators, retrieval of objects by name etc.
+		2. AOP :
+		3. Aspect :
+		4. Instrumentation :
+			These modules (AOP, aspects, instrumentation) support aspect oriented programming implemenations where you can use Advices, pointcuts etc to decouple the code.
+			The aspects module provides support to integration with AspectJ.
+			The instrumentation module provides support to class instrumentation and classloader implemenations.
+		5. Test :
+			This layer provides support of testing with JUnit and TestNG.
+		6. WEB(MVC/Remoting) :
+			This group comprises of Web, Web-struts, Web-servlet and Web-portlet. These modules provide support to create web applications.
+		7. Data Access/integration :
+			This group comprises of JDBC, ORM, OXM, JMS and transaction modules. These modules provides support to interact with database.
+
+What is JMS :
+	The java messaging service(JMS) api is a messaging standard that allows application components based on the Java EE to create, send, receive and read messages. It enables distributed communication that is loosely coupled, reliable and asynchronous.
+
+What is remoting :
+	Remoting is a word describing technologies that allow code in one process invokes a servvice in another process.
+
+Spring example :
+	Steps to create a spring application :
+		1.create a java class
+		2.create XML file
+			In the bean tag, we have a sub tag known as property tag.
+				<bean>
+					<property name ="instanceVariableName" value = "value"></property>
+				</bean>
+			The value specified by the property is in the student class object by the IoC container.
+		3.create the test class
+			We can write a test class and get the bean of the class using the getBean method of the beanFactory class.
+			The getBean method takes the resource object, the Resource object represents the information of applicationContext.xml file. The Resource is an interface and the ClassPathResource is the implementation of that interface.
+			The BeanFactory is the interface and the XmlBeanFactory is the implementation of that class.
+			getBean() -> returns the object of the associated class.
+		4.Load the jar files required for spring framework 
+			there are three jar files that are required by the spring framework. core, beans, apache.commons.logging
+		5. run the test class
+
+Aspect oriented programming(AOP) : 
+	AOP compliments the OOPs in the sense that it also provides modularity. But here the key unit of modularity is aspect.
+	In AOP the programming logic is broken into different parts called as the concerns. Modularity is increased by cross-cutting concerns.
+	Cross-cutting concern is a concern that can affect the whole application and should be centralized in one location in code as possible. Example :
+		transaction management, authentication, logging, security etc.
+		
+	AOP can be defined as breaking a code into different modules, also known as modularisation, where the aspect is the key unit of modularity.
+	
+	why do we need to use AOP?
+		It provides a pluggable way to dynamically add additional concern before, after and around the actual logic.
+	
+	where do we need to use AOP?
+		to provide declarative enterprise services such as declarative transaction management.
+		It allows users to implement custom aspects.
+	
+	AOP conscepts and terminologies :
+		Aspect :
+			An aspect is a class that implements enterprise application concerns that cut across multiple classes, such as transaction management. Aspects can be a normal class configured through spring xml configuration or we can use spring AspectJ integration to define a class as Aspect using @Aspect annotation.
+			
+			It is a class that contains advices, join points etc.
+		Join point :
+			It is any point in the program like, method execution, exception handling, field access etc. In spring AOP, a join point always represents a method execution.
+		Advice :
+			Advice is a set of actions taken by the aspect for a particular join point. In terms of programming, they are the methods that get executed when a certain join point with matching pointcut is reached in the application.
+			
+			There are different types of advices :
+				before advice : it executes before a join point
+				after returning advice : it executes after a join point completes normally
+				after throwing advice : it executes after method exits by throwing exception
+				after (finally) advice : it executes after a join point exits, regardless of exception or normal return.
+				around advice : it executes before and after a join point.
+		Pointcut :
+			These are the expressions that are matched with join points to determine whether advices needs to be executed or not.
+		introduction :
+			It means introduction of additional method and fields for a type. It allows you to introduce new interface to any advised object
+		Target Object :
+			These are the objects on which advices are applied. Spring AOP is implemented using runtime proxies so this object is always a proxied object. What it means is that a subclass is created at runtime where the target method is overridden and advice are included based on their configuration.
+		Interceptor :
+			It is an aspect class that contains only one advice.
+		AOP Proxy :
+			Spring aop implementation uses JDK dynamic proxy to create the proxy classes with target classes and advice invocations, these are called AOP proxy classes.
+		Weaving :
+			It is a process of linking the aspects with other objects to create the advised proxy objects. This can be done at compile time, load time or at run time. Spring AOP performs weaving at run time.
+	
+	AOP implementation : 
+		the following provides aop implementation :
+			AspectJ
+			Spring AOP
+			JBoss AOP
+			
+		Sprign AOP can be used by 3 different ways :
+			1. by spring1.2 old style(dtd bases)
+			2. by aspectJ annotation style
+			3. by spring xml configuration style
+			
+		Implementing AOP using spring1.2 old style :
+
+			we will create 3 classes
+			A.java
+			BeforeAdvisor.java implementing method before advice interface.
+			
+			In the xml configuration file, we need to create 3 beans,
+			1. bean for class A.java
+			2. bean for the beforeAdvisor.java
+			3. bean of proxyFactoryBean class
+			
+			The proxyFactoryBean class bean takes target that is a reference object and list of interceptorNames as an input.
+			
+			The proxyFactoryBean class is provided by Spring framework. It have 2 properties target and interceptorNames, the target takes the reference of a class we want to add our advice to and the interceptor names are the list of reference of the advisor class.
+			
+			The above description is related to methodBeforeAdvice interface, the same can be used for AfterReturningAdvice interface and for throwsAdvice interface.
+			
+			MethodInterceptor (aroundAdvice) example :
+				Here the main logic remains the same
+				The advisor class is changed.
+				We implement the MethodInterceptor interface and then override the invoke method which then will include 3 parts :
+					1. concern or code to be executed before the actual logic
+					2. calling the methodInvocation instance's proceed method. This executes the actual logic
+					3. concern or code to be executed after the actual logic.
+				The xml configuration file remains the same.
+		
+		Implementing Spring AOP using AspectJ annotation :
+			Spring framework recommends us to use spring AspectJ AOP implementation instead of spring 1.2 old style dtd base AOP implemenation because it provides more control and is easy to use.
+			
+			There are two ways to use spring AOP AspectJ implementation : 
+				1. by using annotations 
+				2. by using xml configuration
+			
+			1. by using annotations :
+				Spring AspectJ AOP implemenation provides many annotations :
+					1. @Aspect declares the class as aspect.
+					2. @Pointcut declares the pointcut expression
+				
+				The following are the annotations used to create advices :
+					1. @Before : declares the before advice.
+					2. @After : declares the after advice. It is applied after calling the actual method and before returning result.
+					3. @AfterReturning : declares the after returning advice. It is applied after calling the actual method and before returning result. But we can get the result value in the advice.
+					4. @Around : declares the around advice. Applied before and after calling the actual method.
+					5. @AfterThrowing : declares the throws advice. It applied if actual method throws exception.
+				
+				Understanding the pointcut : 
+					Pointcut is an expression language of Spring AOP.
+					To define a pointcut we need to give the @Pointcut annotation. We can refer the pointcut expresiion by name as well.
+					e.g.: 
+						@Pointcut( "execution(Operation.(..))"
+						private void doSomething() {}
+						
+					The name of the pointcut expression is doSomething(). it will be applied to all the methods of operation class regardless of return type.
+					
+					The expression will define on which methods, the pointcut is applied :
+						
+						@Pointcut("execution(public**(..))")
+						this means it will be applied to all the public methods
+						
+						@Pointcut("execution(public Operation.*(..))")
+						this means it will be applied to all the public method of the operation class.
+						
+						@Pointcut("execution(Operation.())")
+						this means it will be applied to all the methods of operation class.
+						
+						@Pointcut("execution(public Operation.set*(..))")
+						This means it will be applied to all the public setter methods of operation class.
+						
+						@Pointcut("execution(int Operation.*(..))")
+						This means it will be applied to all the methods of operation class that return int value.
+				
+				@Before :
+					we can use this to apply any operation before the actual business logic method is implemented.
+					
+					The @Before() takes the method name of the pointcut.
+					
+					for example : 
+					We need to create an aspect class 
+					@Aspect
+					public class TrackOperation {}
+					
+					this will have a pointcut like this :
+					
+						@Pointcut("execution(Operation.(..))")
+						public void k() {}
+					
+					then we need to define the @Before like this :
+						
+						@Before("k()") //applying pointcut on before advice
+						public void advice1(JoinPoint jp) {}
+				
+				After the aspect class is written we need to write the context.xml file. This file will contain the bean creation for both of these files along with creation of bean for 
+				AnnotationAwareAspectJAutoProxyCreator class.
+				
+				@After :
+					The after advice is applied after calling the actual business logic method. Can be used to maintain log, security, notification, etc.
+					
+					The format is similar to that of @Before advice. Except instead of usign the @Before we will use @After.
+				
+				@AfterReturning :
+					By using after returning, we can get the result in the advice.
+					
+					eg: 
+						@AfterReturning( pointcut = "execution(Operation.(..))", returning= "result")
+				
+				@Around :
+					Around advice is applied before and after calling the actual business logic.
+					
+					We need to pass the preceedingJoinPoint reference in the advice method, so that we can proceed the request by calling the proceed() method.
+					
+				@AfterThrowing : 
+					@AfterThrowing(pointcut = "execution(* Operation.*(..))", throwing= "error")  
+
+Spring JDBC template :
+	Spring JDBC is a powerful mechanism to connect to the database and execute SQL queries. It internally uses JDBC api, but eliminates a lot of problems of JDBC API.
+	
+	problems of JDBC API :
+		Manual handling of creating and closing connections, resultset, etc.
+		Need to perform exception handling code on the database logic
+		Need to handle transaction
+		Repetition of all these codes from one to another database logic is a time consuming task.
+
+Design patterns : 
+	strategy pattern :
+	service locator pattern :
+	factory pattern :
+	
+	
+	
+	
+######################################################
+
+what is spring framework?
+	spring is a dependency injection framework.
+	Spring framework does dependency injection meaning it instantiates the object and populates the dependencies.
+	the programmer tells the spring framework what are the objects that it needs to manage and what are its dependencies.
+	
+	There are two annotations that tells spring framework what objects it needs to manage and what are the dependencies of a particular class:
+		
+		1. @Component : 
+			Tells spring that we need to manage the instances of that class which is annotated by the component annotation.
+			As soon as we put @Component on a class, it means that spring starts to manage the instance of that class. It will create instance of this class for us.
+		2. @Autowired :
+			Tells spring that the instance variable  that is annotated with the autowired annotation is a dependency and it needs to be managed. 
+			As soon as we put @Autowired it will start looking for that dependency amoung all the components that it manages.
+			The issue with autowired is that it does not allow primary datatypes as a dependencies.
+			
+		Internally spring would create an instance of the dependency and will pass that instance to the constructor of that required class which requires that dependency.
+		
+		spring will make sure that all the instances of the classes that it manages are created with dependencies properly populated.
+
+@Autowired :
+	there are two types of autowiring methods :
+		by name :
+			in this case the name of the variable was used along with the type to identify and autowire the dependency. For this consider the binary search algorithm example with two options for sorting dependency, quick sort and bubble sort.
+			So all the classes were annotated with the @Component annotation
+			None is annotated with @Primary
+			The instance variable in the binary search class, is defined as follows :
+				@Autowired
+				private SortAlgorithm bubbleSortAlgorithm;
+				
+				here the class BubbleSortAlgorithm is implementing the sortAlgorithm interface.
+				here a combination of the type and the identifier of the instance variable is used to resolve the dependency. 
+			In this case we wont get the error of 2 options available for resolving the dependency.
+			we dont use @Primary here
+		by type :
+			the case which we went through first was autowiring through type, we were looking at the interface and then looking at the implementation of that interface.
+			So here the annotations that we were using was:
+				@Autowired : plain autowired
+				@Component : specified on the dependency which implemented the interface.
+				@Primary : this was optional in case two components/beans were available which implemented the interface. In that case one with primary will be autowired.
+		
+		In this case @Primary have higher priority over the by name method. 
+		So if we have @Primary on bubbleSort and the name of the instance variable is quickSort, in that case the bubbleSort will be used to resolve the dependency
+	
+	Another way to resolve the dependency if there are multiple candidate beans present.
+	@Qualifier("name") :
+		We need to specify the Qualifier on class as well as on the instance variable.
+		this annotation will exist along with the @Component as well as @Autowired annotations.
+		example :
+			QuickSort will have the following annotations :
+				@Component
+				@Qualifier("quick")
+			BubbleSort will have the following annotations :
+				@Component
+				@Qualifier("bubble")
+			BinarySearch will have the following annotations on the instance variable :
+				@Autowired
+				@Qualifier("quick") => if we are using quick sort
+				or
+				@Qualifier("bubble") => if we are using bubble sort
+
+	Which method to use :
+		general suggestion :
+			if the choice is clear and should be used everywhere use @Primary
+			else use by name method
+			by name does not make changes to the dependency class, but @Qualifier we need to add that annotation on the dependency class. 
+			this is just a suggestion.
+General architecture of web application (Java EE typical architecture) :
+	contains 3 layers :
+		web -> concerned with how we are interfacing with the external world. If it is a web application it will deal with how to take business logic and expose it to the UI. If a web service then how to convert the data coming from the business logic into json and then to the outside world.
+		Here we are considering both the angular and the controller part in the web layer. Controller present here is dependent on the business layer for the logic.
+		business -> business
+		data -> talks to external interfaces as well as database
+		
+		business layer is dependent on the data layer because if it needs something from the database it will call a class in the data layer.
+		similarly web layer is dependent on the business layer because it will call a class in the business layer if it needs something.
+
+What is dependency injection?
+	
+	What is a dependency?
+		A dependency of a class is basically what all things it needs to perform its designated task.
+		
+		
+	tight coupling :
+		when a class is directly instantiating its dependency it is called as tight coupling.
+	
+	Issue with tight coupling :
+		If there is tight coupling present in the code, then if there is a minor change in the requirement, we need to change multiple blocks of code.
+	
+	How to remove tight coupling?
+		remove direct instantiation of dependencies from the code.
+		Instead provide a constructor or a setter method with the dependency as an argument.
+		
+		So that whoever is using that business service can provide which particular implementation of the code to use.
+		
+		A dependency which is not tightly coupled is called as loosely coupled dependency which is desirable.
+		
+	How to implement loose coupling so that we can dynamically change the class used?
+		The solution to this is using interfaces.
+		Create an interface and then make all the classes that we want to change dynamically implement that interface.
+		Then in the class where we are using this dependency, we need to create the instance variable with the interface type.
+		And then we can use a constructor or a setter method to inject this dependency.
+		this way the dependency can be changed dynamically.
+		this way the construtor argument or setter argument will take any implementation as input and will assign the dependency.
+		
+		Interfaces make the applications loosely coupled.
+		
+		This way the business implementation is independent of a particular dependency.
+		
+		without spring in place, this will still need manual creation of both the instances that is the main class and the dependency class. And then calling the constructor or the setter method.
+		
+		remember the binary search and its dependency on sorting algorithm example, where we are creating a sort interface and then quicksort and bubblesort classed implementing this interface. This way the sorting part that is the dependency can be changed dynamically using constructor and interface type instance variable and without changing the binary search code.
+		
+		Spring helps us to avoid manual creation of beans and managing its dependencies.
+
+	@Primary :
+		the dependency injection using autowiring is done by type. Meaning spring component scan will try to find the bean of the required type.
+		example given :
+			when sortAlgorithm was autowired in binarySearch class, and only bubbleSort had the @Component annotation, when dependency injection by type was done, there was only one class matching and hence program ran fine.
+			But when we add @Component to quickSort as well, then there are 2 possible matches for resolving the dependency.
+			This throws an error and the program wont run. 
+			To solve this we can use the @Primary annotation.
+			This is a class level annotation that will tell spring which component to give more priority and should be used if there are more than one component available for resolving dependency.
+			This @Primary is given along with the @Component annotation.
+			
+	constructor injection :
+		When the dependency injection is done using a constructor, it is called as constructor injection. Meaning that a constructor is used to set the property for the dependency
+	Setter injection :
+		When a setter method is used to set the dependency, it is called as setter injection.
+		
+	constructor vs setter injection :
+		earlier it used to be straight forward, all the mandatory dependencies were autowired using the constructor injection.
+		for all the other dependencies, the recommendation was to use setter injection.
+	
+	
+
+what is wiring?
+	the process of creating an instance of dependency and populating it in the bean is called as wiring.
+	
+Terminologies in spring framework :
+	beans :
+		The class instances that spring manages are called beans. 
+	autowiring:
+		The process of identifying dependencies in a class, identifying the matches for those dependencies and populating them is called as autowiring.
+	dependency injection:
+		The process of populating the dependency for creating a particular class instance is called as dependency injection. Basically instead of directly declaring the instance in a class, we are injecting it using a constructor or a setter method.
+	inversion of control:
+		the process of transfering the control of creating the dependency by the class to the framework is known as inversion of control
+	IoC container:
+		it is a generic terminology to represent anything that is implementing inversion of control.
+	Application context:
+		what is an application context?
+			it is the one where all the beans are created and managed.
+		This is the most important part of the spring framework. All the core logic of spring framework happend here.
+		In spring framework a application context is a typical IoC container
+		
+Spring project structure :
+	source/main/java :
+		this is where java code will be written
+	source/main/resources :
+		this is where our application properties that is the configuration will reside
+	source/test/java :
+		this is where the test will be written
+		
+To make use of spring to manage the beans and its dependencies, we need to tell spring 3 things :
+
+	what are beans that it needs to manage?
+		The way we can tell spring that which is the bean that it needs to manage is using the 
+		@Component annotation.
+		One thing to remember is that, dependencies are also instances hence they are also beans and should be annotated by @Component if we want them to be managed by spring.
+		
+	what are the dependencies for those bean?
+		to tell spring that certain instance variable is a dependency is by annotating that instance variable using 
+		@Autowired annotation.
+		This tells that the bean is dependent on the instance variable and the instance variable is the dependency of that bean
+		
+	where to search for beans?
+		For telling spring to scan for the beans in the package we use annotation called as componentScan.
+		By default spring boot scans the entire package of which the main class is a part of. It has the @SpringBootApplication annotation. It automatically scans all the package and sub-packages.
+	
+	The SpringApplication.run method returns application context which we can use to access the beans.
+	ApplicationContext manages all the beans.
+	Spring will manage the entire life-cycle of these beans
+	
+	These are the three things that we need to tell spring so that spring can wire them for us.
+	
+	For this as well remember the binary search example which requires the array to be sorted and hence have a dependency on the sorting algorithm which can be either quick sort or bubble sort.
+	
+what happens in the background?
+	spring starts with component scan. It needs to know where the beans are.
+	once the beans are found, it will start identifying the dependencies.
+	once the dependencies are found, then spring will create instance of those dependencies and will then create instance of the other class.
+	
+Spring modules :
+	the modularity of spring framework : 
+		Spring is built in a very modular way. So we can use a specific module of spring without using the other module.
+	
+	spring framework comprises of many modules such as :
+		core
+		bean
+		context
+		expression language
+		AOP
+		aspects
+		instrumentation
+		JDBC
+		ORM
+		OXM
+		JMS
+		transactions
+		WEB
+		servlets
+		struts
+	These individual modules are grouped into 7 types :
+		1. core container : 
+			This contians the following modules :
+				core :
+				beans : 
+					The core and bean modules provide IoC and DI features.
+				context :
+					this module supports internationalization(I18N), EJB, JMS, Basic Remoting
+				expression language
+					It is an extension to the EL defined in JSP. It provides support to setting and getting property values, method invocation, accessing collections and indexers, named variables, logical and arithemetic operators, retrieval of objects by name etc.
+		2. AOP :
+		3. Aspect :
+		4. Instrumentation :
+			These modules (AOP, aspects, instrumentation) support aspect oriented programming implemenations where you can use Advices, pointcuts etc to decouple the code.
+			The aspects module provides support to integration with AspectJ.
+			The instrumentation module provides support to class instrumentation and classloader implemenations.
+		5. Test :
+			This layer provides support of testing with JUnit and TestNG.
+		6. WEB(MVC/Remoting) :
+			This group comprises of Web, Web-struts, Web-servlet and Web-portlet. These modules provide support to create web applications.
+		7. Data Access/integration :
+			This group comprises of JDBC, ORM, OXM, JMS and transaction modules. These modules provides support to interact with database.
+
+What is JMS :
+	The java messaging service(JMS) api is a messaging standard that allows application components based on the Java EE to create, send, receive and read messages. It enables distributed communication that is loosely coupled, reliable and asynchronous.
+
+What is remoting :
+	Remoting is a word describing technologies that allow code in one process invokes a servvice in another process.
+
+why is spring popular?
+	1. enables writing testable code.
+	2. no plumbing code meaning we only need to concentrate on the bussiness logic no need to worry about setup code.
+	3. no need for writing specific exception handling
+	4. flexible architecture : spring is very modular. we have flexibility to choose other framework
+	5. staying with current trend like microservices and spring cloud.
+	
+Scope of a bean : 
+	The container manages the beans. so the beans are created and the life cycle is managed by the container.
+	when we are calling the getBean method of the application context, we get the same bean with the same reference every time we call the method. Meaning that the application context have a single instance of the bean created and the getBean method is just returning it back.
+	These type of beans are called singleton beans.
+	In spring by default the beans are singleton beans.
+	So singleton beans will have one instance per spring context.
+	
+	We can also define the scope of the bean. If we specify the default singleton scope then it will check for a cached instance of the bean and will only create a new bean if it doesnt exist. If we specify a prototype scope, the container returns a new bean instance for each method call.
+	
+	
+	bean scope :
+		singleton : one instance per spring context
+		prototype : new bean whenever required
+		request : one bean per http request
+		session : one bean per http session
+		
+	To specify the scope of a bean, we need to specify the @Scope annotation on top of class.
+	This annotation is declared along with the @Component annotation
+	
+	@Scope :
+		this annotation is used to define the scope of a particular bean.
+		syntax :
+			@Scope("scope")
+		eg.
+			@Component
+			@Scope("prototype")
+			class className {}
+		
+		Hardcoding the scope is not a good practice, therefore, we can use ConfigurableBeanFactory.SCOPE_PROTOTYPE as a value in @Scope annotation
+	
+	What will happen if the dependency of a singleton bean is with scope prototype?
+		In case if the dependency is a prototype and the bean is a singleton, the parent class will be a single instance and even the dependency will be a single instance. This is because spring does not know that the dependency have the scope as prototype. 
+		If we want to have a separate instance for each dependency, instead of giving the object directly, we need to give it a proxy. This will give us a new instance each time.
+		To do this, we need to add another argument to the @Scope annotation called as the proxyMode.
+		Here we are giving the value as ScopedProxyMode.TARGET_CLASS.
+		What this does is that instead of autowiring the dependency bean it autowires the proxy.
+		What this will do is that whereever we are having the dependency, spring will provide a proxy instead. So wherever this is used a new instance will be created.
+	What will happen if the dependency is singleton and the bean is with scope prototype?
+		If the bean is with scope prototype, calling the getBean method of the applicationContext class will return a separate instance of the parent bean. But the dependency will still be a same instance in both the beans.
+		
+	Note : 
+		We want to keep the number of instances/objects as low as possible.
+	
+What is DAO :
+	data access object pattern is a structural pattern that allows us to isolate the business layer from the persistence layer(usually a relational database) using an abstract API.
+	
+Singleton :
+	according to gang of four design pattern, whenever they say singleton, they mean one instance per JVM. Per java virtual machine we have one instance of that bean.
+	
+	but when we say singleton in spring, we say one instance per application context.
+	
+	So by gang of four definition, even if there are multiple application context running in a jvm, only one instance of that specific class should be there.
+	
+Component scan :
+	consider an example :
+		we have 2 packages :
+			component package :
+				it has the following classes :
+					componentDAO
+					componentJDBCConnection
+			componentDAO has one dependency called the componentJDBCConnection class.
+			So it is autowired.
+			Both the classes have the @Component annotation.
+			
+			main package :
+				it contains application.java class.
+				In this class, we care calling the getBean method of the application context. And we are asking for the componentDAO bean.
+				
+	When we run this we get an error stating that no such bean definition exception. It is not able to find the componentDAO bean.
+	
+	When we get this error, first thing that we need to check if 
+	@Component is present or not on the class.
+	
+	In our case, the package is not part of the componentScan.
+	
+	Whenever we define @SpringBootApplication it defines a component scan on that package and all of its sub-packages.
+	
+	The solution to this is that we can define 
+	@ComponentScan annotation on the spring application class.
+	This annotation takes the package that we want to scan as an input.
+	
+	In our above example if we add the component scan annotaiton on top of application class, we wont get the exception stating unable to find bean.
+	
+what is spring IoC container?
+	it is a program that injects dependencies into an object and make it ready for our use.
+	We use DI to implement IoC.
+	
+life-cycle of a bean :
+	@component on a bean, the entire life cycle of the bean will be managed by spring. 
+	
+	the IoC container will create the beans and will also destroy them once they are no longer needed.
+	
+	So the entire life cycle of the  bean is managed by spring IoC container.
+	
+	Now if we want to do certain thing at the creation of that bean or do something before the bean is destroyed then we can use the following annotations :
+		1. @PostConstruct : 
+			this is the annotation that we need to use if want to perform certain actions after the bean is created and all its dependencies are managed.
+			
+			This is a method level annotation. And the method return type should be void.
+			
+			The method will be executed as soon as the bean is created and all its dependencies are initiated.
+			
+		2. @PreDestroy :
+			Similar to PostConstruct, we have PreDestroy. 
+			This is also a method level annotation and is called just before the IoC container is going to destroy the bean.
+			
+			The method that will be annotated with this should also be void.
+			
+			This method will be used as a callback on the instances which are in the process of being removed by the container.
+			
+Context and dependency injection (CDI) : 
+	CDI tries to standardize dependency injection and IoC as a part of Java EE.
+	CDI is like an interface, it defines different annotations.
+	It says that @Inject(@Autowired), @Named(@Component & @Qualifier), @Singleton(Defines a scope of singleton) are the different annotations and it needs to be used. And the CDI implemented frameworks will provide the functionality.
+	
+	CDI is an interface defining how to do dependency injection.
+	
+	
+	To use CDI in our spring project, we need to add the dependency called as :
+		javax.inject
+		
+	Once the dependency is added in the pom.xml, we can use CDI in our project.
+	
+	To use CDI, we replace the followig annotations with the given annotations in the spring project :
+		@Component -> @Named
+		@Autowired -> @Inject
+	
+	The project will run similar to the spring project because spring implements CDI.
+	
+	CDI also have the @Scope which is similar to our scope which is used to set the singleton and prototype scopes.
+	
+	Qualifier is also similar
+	CDI provides @Singleton annotation to define the class as singleton. So instead of writing the @scope and then defining, we can directly add @Singleton annotation.
+	
+	So in addition to spring annotations we can also use cdi annotations.
+	
+	Thats pretty much for CDI. It does not do anything other than defining annotations. It is an interface.
+	
+	So which annotations to use CDI or spring?
+		spring is the implementation of CDI so ultimately we are going to use spring
+		However, CDI is a Java EE standard which should be used idealy.
+		
+
+How to use spring without spring boot ?
+	Remove spring-boot-starter dependency
+	And add the spring-core dependency
+	
+	Base thing for spring is spring-core.
+	spring-core is where our bean factory is defined the basic management of our beans is defined in spring-core.
+	
+	In addition to this we need application context,
+		so we need to add spring-context as dependency.
+	
+	So basically spring-boot-starter is replaced by spring-core and spring-context
+	
+	if spring-boot-starter-test is still in the pom.xml we wont get compilation error, because spring-boot-starter-test have a transitive dependency on spring-boot-starter so while running test it will have that spring-boot-starter
+	
+	So tests will run fine but the program wont run.
+	This is because our program contains @SpringBootApplication which is in spring boot starter package.
+	
+	Steps to make the project runnable :
+		1. initialize the spring application context.
+			The way we define an application configuration is by adding the annotation @Configuration on the main class. This will be in place of the @SpringBootApplication.
+			This is the java way of configuring
+		2. To create an application context, we cannot use the SpringApplication.run method because it is from spring boot package.
+		So we need to use instance of AnnotationConfigApplicationContext class to create application context. This will take the current class as input.
+		3. By default spring does not do component scan. So to access all the beans available in the packages and sub-packages, we need to provide the @ComponentScan annotation. This will be along with the @Configuration annotation.
+		4. close the applicationContext by calling the method close() of the AnnotationConfigApplicationContext class. Or we can make use of the new try catch block which will close the application context even if there is an exception.
+	
+	these are the steps that we need to implement to make use of the basic spring.
+	
+	When we annotated the class with @SpringBootApplication, it was internally initializing the application context.
+	
+@Configuration :
+	@Configuration defines that this is a spring configuration.
+@ComponentScan : 
+	Component scan defines that this specific package needs to be scanned for components.
+	
+AnnotationConfigApplicationContext : 
+	This is the class which we use to create instance of application context.
+	
+Defining spring application context using XML :
+	In this case, we wont be using annotations. Instead of that we will use xml configuration file.
+	
+	For this we are going to use the following example :
+		We have a package called as xml.
+		This package have 2 classes :
+			1. XmlPersonDAO
+			2. XmlJdbcConnection
+		Both the classes have a constructor.
+		XmlPersonDAO have a dependency on XmlJdbcConnection.
+		XmlPersonDAO also have a setter method for setting the instance variable that is the xmlJdbcConnection.
+		
+	Before spring 2.5 all the dependencies had to be wired manually using XML.
+	
+	So we are going to create applicationContext.xml file in the resources folder.
+	
+	In applicationContext file we need to provide first the namespace.
+	
+	<beans>
+		//this will contain the beans of our project.
+		<bean id="xmlJdbcConnection" class="org.x.y.xml.XmlJdbcConnection">
+		<bean id="xmlPersonDAO" class="org.x.y.xml.XmlPersonDAO">
+			//to add dependency :
+			<property name="propertyName" ref="requiredBeanName"
+		</bean>
+	</beans>
+	
+	even though we have created application context here we still need to create an application file for that so that we can launch it.
+	So we need to create a java file which we can name SpringContextApplication.java.
+	In this class we need to create an instance of :
+		ClassPathXmlApplicationContext
+	Now this ClassPathXmlApplicationContext takes the xml file path as parameter.
+	So we need to provide the path of the applicationContext.xml file.
+	
+	Example :
+		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml")
+		here since the file is in resource, we can directly use the file name as value. Else we need to provide the file path.
+	
+	DI in spring can be done through constructors, setters or fields :
+				constructor based DI : 
+					In constructor based DI the container will invoke a constructor with arguments each representing a dependency we want to set.
+					The <constructor-arg> subelement/property of the <bean> tag is used for constructor injection.
+					1. Injecting primitive or string based values :
+						For injecting primitive type or string based values in the bean, we use the same <constructor-arg> subelement of the <bean> tag.
+						The <constructor-arg> element have the following properties to configure the dependencies :
+							value : to set the value of the elements
+							type : to identify which constructor should be used and if there are more than one constructor argument, then which argument should be assigned the value to.
+							name : to identify the property of the constructor using the name
+						
+						E.g : 
+							if we have 3 constructors in the same class like :
+								public className(int x);
+								public className(String y);
+								public className(int x, String y);
+								
+							then with the bean tag with :
+								
+								<bean id = "beanId" class = "abc.xyz.className">
+									<contructor-arg value = "10" type = "int"></constructor-arg>
+								</bean>
+								Here the type will decide the constructor to be called and the value will be set to that property
+								
+								<constructor-args value = "10"></constructor-args>
+								Here since we are not specifying the type, the constructor with string parameter will be called.
+								
+								if we want to call the constructor with more than one parameter then we need to specify multiple constructor arg
+								<constructor-arg value = "19" type="int"></constructor-arg>
+								<constructor-arg value="someString"></constructor-arg>
+								
+					2. Injecting dependent objects :
+						If there is a HAS-A relationship between objects, we create the instance of the dependent object first and then send it to the constructor of the main class.
+						This object is called the dependent object.
+						So the idea is to create a bean for the dependent object and then use that bean id as the value for the <ref/> sub-element of the the <constructor-args> element.
+						So for example :
+							we have an employee and an address class
+							employee HAS-A address
+							employee has the constructor like this :
+								public Employee(int id, Address address) {}
+							address has the constructor like this :
+								public Address(String address) {}
+							
+							And the configuration file would be like this :
+								<bean id = "adBean" class = "abc.xyz.Address">
+									<constructor-arg value = "address value"></constructor-arg>
+								</bean>
+								<bean id="empBean" class = "abc.xyz.Employee">
+									<constructor-arg value="1" type="int"></constructor-arg>
+									<constructor-arg>
+										<ref bean="adBean"/>
+									</constructor-arg>
+								</bean>
+								Here the <ref> sub-element is providing the dependent object
+						There is another way to inject objects, it is using the bean tag as is in the constructor-arg element :
+							<bean id="" class="">
+								<constructor-arg>
+									<bean class="dependentClass"></bean>
+								</constructor-arg>
+							</bean>
+					3. Injecting collection values :
+						We can use list, set and map inside the constructor-arg element
+						Each collections can have a string based and non string based values.
+						For injecting list, we use the 
+						<list> sub-element of the constructor-arg element.
+						Eg :
+							public Question(int id, String name, List<String> answers) {}
+							
+							<bean id = "qBean" class="abc.xyz.Question">
+								<constructor-arg value = "10" type="int"></constructor-arg>
+								<constructor-arg value = "some question"></constructor-arg>
+								<constructor-arg>
+									<list>
+										<value>answer1</value>
+										<value>answer2</value>
+										<value>answer3</value>
+									</list>
+								</constructor-arg>
+							</bean>
+						For set and map we are mostly going to use <set> and <map> sub-elements of the constructor-arg element.
+						
+						The above example displays collection injection with string based elements.
+						
+						For constructor injection with non-string collection :
+							For non string collection in constructor injection, we use list, map, set sub-element with <ref> as a sub-element in it.
+							So if there is a list of answer class, to be injected into question class, the configuration will be like this :
+							
+							<bean id="answer1" class="">
+								<constructor-arg value="" name=""></constructor-arg>
+							</bean>
+							<bean id="answer2" class="">
+								<constructor-arg value="" name=""></constructor-arg>
+							</bean>
+							
+							<bean id="question1" class="">
+								<constructor-arg>
+									<list>
+										<ref bean="answer1"/>
+										<ref bean="answer2"/>
+									</list>
+								</constructor-arg>
+							</bean>
+							
+							here the <value> sub-element is replaced by <ref>
+						
+						For map :
+							we use the sub element :
+								For string based map :
+									<constructor-arg>
+										<map>
+											<entry key = "" value = ""></entry>
+											<entry key = "" value = ""></entry>
+										</map>
+									</constructor-arg>
+								For Non-string based map :
+									to use a bean as a key and value, 
+									we need to use 
+									key-ref and value-ref property of the entry sub-element.
+									
+									<constructor-arg>
+										<map>
+											<entry key-ref = "beanId" value-ref = "beanId"> </entry>
+											<entry key-ref = "beanId" value-ref = "beanId"> </entry>
+										</map>
+									</constructor-arg>
+						
+						Inheriting bean in spring :
+							A child bean definition will inherit constructor argument values, property values and method overrides from the parent. The child bean definition also can add new values. If the child bean contains init-method, destroy-method and/or static factory method settings, they override the corresponding parent settings.
+							
+							In this case, the parent bean values are inherited in the current child bean
+							to do this we use the parent attribute of the bean tag.
+							
+							<bean id="beanId" class="className" parent="parentClassBeanId">
+								we can also assign values here if required
+							</bean>
+				setter based DI : 
+					We use a setter method to set the dependency.
+					Here we use the <property> sub-element of <bean> tag. The property sub-element is used for setter injection.
+					
+					We are going to inject :
+						1. primitive and string based values
+							The <property> sub-element of the bean tag will invoke the setter method. The value sub-element of the property tag will assign the specified value.
+							
+								<bean id = "beanId" class = "classPath">
+									<property name = "instanceVarName">
+										<value>20</value>
+									</property>
+								</bean>
+								or
+								<bean id = "beanId" class = "classPath">
+									<property name = "instanceVarName" value = "20">
+									</property>
+								</bean>
+						2. dependent object
+							Like the constructor injection, we can inject the dependent objects using the setter methods as well.
+							We use the <property> sub-element of the <bean> element.
+							It is used in a HAS-A relationship scenario.
+							We are injecting the dependent class.
+							We use the ref attribute of the property element.
+							
+								<bean id = "beanId2" class = "classPath">
+									<property name = "instanceName" ref = "beanId1"></property>
+								</bean> 
+						3. collection values
+							We can inject collections using the setter methods as well.
+							For this we can use the <map>, <set>, <list> in the property element.
+							Each collection can have a string based and non string based values.
+							
+							list :
+								we can use the list sub-element in the property element.
+								So to inject a list in the bean, 
+								
+								String based values :
+									<bean id="beanId" class="classPath">
+										<property name="instanceVarName">
+											<list>
+												<value>value1</value>
+												<value>value2</value>
+											</list>
+										</property>
+									</bean>
+								
+								Object bases values :
+									<bean id="beanId" class="classPath">
+										<property name="instanceVarName">
+											<list>
+												<ref bean = "objectBeanId1"/>
+												<ref bean = "objectBeanId2"/>
+											</list>
+										</property>
+									</bean
+							map : 
+								string based values :
+									<property name="instanceVar">
+										<map>
+											<entry key = "" value = ""><//entry>
+											<entry key = "" value = ""><//entry>
+										</map>
+									</property>
+								
+								Object based values :
+									<property name="">
+										<map>
+											<entry key-ref = "" value-ref = ""></entry>
+										</map>
+									</propetry>
+				Field based DI :
+					In case of field-based DI, we can inject the dependency by marking the instance variable with @Autowired annotation.
+					While constructing the object, if there is no constructor or setter method, the container will use reflection to inject bean into the object.
+					
+					It is not recommended to use this method because it has a few drawbacks :
+						this method uses reflections and they are costlier than constructor and setter.
+						Its really easy to keep adding multiple dependencies using this approach. This can violate the single responsibility principle.
+		
+			Autowiring in spring :
+				Autowiring enables dependency injection implicitly using the setter or constructor.
+				
+				Autowiring does not allow to inject string based and primitive values. We can only inject references using autowiring
+				
+				Advantage of autowiring :
+					It requires less code.
+					If there is a change in the constructor, autowiring will automatically take care of it no need to change the code.
+				Disadvantage of autowiring :
+					No control of programmer
+					We cannot use the primitive and string values.
+					explicit dependency injection in property and constructor-args setting always override autowiring
+					
+				modes of autowiring :
+					There are following autowiring modes :
+						no : 
+							It is the default mode meaning no autowiring byDefault
+						byName :
+							The byName mode injects the object dependency according to the name of the bean. In this case, the bean name and the property name must be same. It internally calls the setter methods.
+						byType :
+							This mode injects object dependency according to the type. So property name and bean name can be different. It internally calls setter method.
+							The limitation here is that there must be only one one bean of a given type.
+						constructor :
+							This mode injects the dependency by calling the constructor of the class. It calls the constructor having large number of parameters.
+							In other words spring injects the dependency by highest parametrized constructor.
+						autodetect :
+							It is deprecated since spring 3
+				
+				We need to use the autowire attribute of bean element to apply autowire modes.
+				example : 
+					<bean id = "" class = "" autowire = "byName/byType/constructor">
+					</bean>
+			
+			Dependency injection by factory method : 
+				Spring framework allows to inject bean using factory method. 
+				To inject beans using factory method we need to use the following attributes of bean element :
+					factory-method : this represents the factory method that will be invoked to inject the bean
+					factory-bean : represents the reference of the bean by which the factory method will be invoked. This is used in case of non-static factory methods where we need to create the bean instance before calling its factory method.
+				Both of these attributes are needed depending upon the method being static or not.
+				
+				There are three types of factory methods :
+					static factory method that returns the instance of its own class :
+						<bean id = "a" class = "abc.xyz.A" factory-method = "getA()"></bean>
+						creates bean of A
+					
+					static factory method that returns instance of another class, here the instance is not known and decided at run-time :
+						<bean id = "b" class = "abc.xyz.A" factory-method = "getB()"></bean>
+						creates bean of B even though the class is A because the factory method is getB()
+						here A can be considered as a FactoryClass.
+						
+					non-static factory method that returns instance of another class, here the instance is not known and decided at run-time :
+						<bean id = "a" class = "abc.xyz.A></bean>
+						<bean id = "b" class = "abc.xyz.A" factory-method = "getB" factory-bean = "a"></bean>
+						Creates bean of b. A is a factoryClass with a non static factory method. Here the non-static factory method. Therefore, we need to create a bean of A before creating the bean for b.
+		
+		What is a factory method?
+			A method that returns an instance of a class is called a factory method.
+			
+		Difference between constructor and setter injection :
+			
+			partial dependency injection :
+				We cannot do partial dependency injection with constructor. We need to provide all the arguments present in that constructor.
+				However, for setter injection, we can provide partial dependency because we can call the property tag for a particular element using the setter method.
+				
+			Overriding :
+				Setter injection overrides the constructor injection. If we use both the injections construtor and the setter, the IoC container will use the setter injection.
+				
+			changes :
+				The constructor injection creates a new bean instance every time. The same is not true for the setter injection. Setter injection allows easy change for the value. So setter injection is flexible than constructor injection.	
+		
+		Lazy initialized beans :
+			By default, the container creates and initailizes all the singleton beans during initialization. If we want to avoid this we can set the initiliztion property to lazy so that the beans wont be initialized when the container is initialized.
+
+
+Mixing XML context with component scan for beans defined with annotation :
+	how to load beans in xml application which have annotations on it.
+	
+	We need to use componentScan for this.
+	It doesnt matter if we are using a java definition or XML definition for component scan.
+	
+	To run a componentScan in project which is using the xml file for configuration, the only thing needed is that we need to define the component scan in the applicationcontext.xml
+	We need to add schema for context.
+	we need to add schemalocation for context.
+	
+	and then we can use the <context:component-scan base-package="locationOfBasePackage"/>
+	
+	So now what will happen is that this component scan will add beans which are declared using annotations as well. So both the beans declared in xml and using annotations will be available.
+	
+	So we are basically using xml context with annotations.
+	
+	
+IoC container vs application context vs bean factory :
+	What is IoC?
+		Inversion of control is a principle in software engineering which transfers the control of objects or portion of a program to a container or framework.
+		In our case the creation of object is not handled by the code but is handled by the framework
+		
+	The program or the framework that provides inversion of control is called IoC container. 
+	IoC container is the one that manages all the beans. It creates them resolves their dependencies etc.
+	IoC container is a concept. So whatever thing that does wiring, bean creation etc, will be called an IoC container.
+	
+	
+	In spring there are two implementations of IoC container. They are  :
+		1.bean factory : 
+			The core features of spring are available inside the jar called as spring-core. And thats what bean factory provides.
+			It provides basic management of beans and wiring of dependencies thats it nothing more.
+		2.application context : 
+			it is an upgraged version of bean factory. So it is called as bean factory++
+			Application context provides features which are typically required  by enterprise applications.
+			The features that application context contains but the bean factory does not are :
+				spring's AOP features
+				internationalization(we want to customize the text based on the locality of the user)
+				webApplicationContext for web applications
+			
+			Spring suggests that we should go with application context if the system have ample amount of memory.
+			If we have limited memory the we should go for bean factory.
+			So all typical enterprise application scenarios, we can go for application context.
+			
+			
+@Component vs @Service vs @Repository vs @Controller :
+	These are the various steriotype annotations.
+	When to use which one ?
+		@Component is generic, if we are not sure whether the current class belongs to which layer of web business data.
+		The other three annotations are very specific to the layers.
+		@Controller is used to define a controller in the web layer. So it is related to the MVC pattern
+		@Service should be used in the business layer. So this is related to business logic.
+		@Repository annotations should be used in the data layer. So this is related to getting the data.
+		
+	
+	Example :
+		In our case of personDAO, it is a data access object which is supposed to isolate the business logic from the database and provide an interface.
+		So PersonDAO class should have @Repository annotation
+		
+		In our case of BinarySearch class, it is a business logic. So it should have @Service annotation. Similarly, the quicksort and bubblesort algos are also business logic. So they should also be annotated with @Service.
+		
+	These annotations dont change the functionality. So why do we need to specify the corrent annotations?
+		As per the AOP section, we can identify the annotations and add functionality over to that specific thing.
+		
+	So @service, @repository, @controller allows us to classify components into different categories and we can apply logic for each of the different categories.
+	
+	eg. 
+	1. @Repository provies a default exception translation facility.
+	2. We can implement a logic to provide logs for all the services. So we will identify all the components with @Service annotation and provide this log functionality to them.
+	
+	
+Reading values from external properties file:
+	Applications have a lot of configuration properties that needs to be handled. For example, database base url for different environments, its connection informations, or some other external service related information.
+	So it is a good practice to store these configuration values in an external property file.
+	
+	Usually the property files are stored in src/main/resources folder.
+	The file extension is .properties
+	
+	To read a value from property file we need to use the annotation @Value.
+	
+	@Value :
+		This annotation is used to read a value for a given property from the properties file.
+		It needs the name of the property as input.
+		The syntax is :
+			@Value("${propertyName}")
+		This can be used with beans managed by spring.
+	
+	But we have not told which file to use, that is spring doesnt know where to look for the propertyName in.
+	
+	So we need to specify the file name while we are loading the application context.
+
+	To define the property file in the application context, we need to provide the @PropertySoruce annotation
+	
+	@PropertySoruce :
+		this annotation provides the name of the property file that we need to use for reading configuration values from external property file.
+		It takes the name of the property file as input.
+		Syntax :
+			@PropertySource("classPath:app.properties")
+	
+	This is how we will define external configuration in our spring project.
+	
+	
+	
+JUnit :
+	What is JUnit?
+		it is a unit testing framework
+	What is unit testing and why do we need it ?
+		Testing a specific unit of application code for example a method or a group of method is called as unit testing. In unit testing, we only care about that specific unit of code.
+		
+		Unit testing helps us find bugs early in the development process.
+		It is also easy to fix those bugs which are reported by using unit tests because we dont need to debug the entire thing.
+		Reduces cost in the long run.
+		
+	In jave most famous unit testing frameworks are JUnit and Mockito.
+	JUnit is unit testing framework
+	Mockito is a mocking framework
+	
+	
+	NOTE : We dont write unit test in the same folder as source. We need to create separate folder.
+	
+	Absence of failure is success.
+	So we will write a bunch of assertions and if none of those assertions fail, we say that the test has passed.
+	
+	
+	To define a unit test, we need to annotate our test method with 
+	@Test annotation.
+	
+	@Test : 
+		It tells java that the followng method is a test method.
+	
+	assertEquals : 
+		this is an assertion method that test the output of our code.
+		
+	Most of the assertion methods have one more parameter apart from expected and actual values, it is a error message meaning what message to show if the test case fails.
+	
+	Note : JUnit tests are not executed in a sequence. These tests are executed in any order.
+	
+	JUnit also provides other annotations like :
+		These all are method level annotations.
+		@BeforeAll :	
+			It needs to be static method because it runs the following method before all the tests. This is used to setup for all the tests.
+		@BeforeEach :
+			It specifies that the following method will be executed before each test case runs. Mainly used for setup.
+		@AfterAll :
+			It needs to be static as well because it runs after all the test cases completes. This is used for cleanup after all the tests.
+		@AfterEach : 
+			It specifies taht the following method will be executed after each test case ran. Mainly used for cleanup.
+			
+mockito : 
+	mockito is a mocking framework.
+	For writing unit test cases with multiple dependencies we have 2 options :
+		1. stubs
+		2. mocks
+		
+	For using mockito we dont need to add a separate dependency in our spring project. spring-boot-starter-test have its transitive dependency.
+	It also brings in other testing dependencies that are required.
+	
+	While writing unit tests we want to isolate the method of the unit of code that we want to test. To do so we need to mock or stub the dependency out.
+	
+	stubs : 
+		stubs are methods or classes that are used as a replacement for an existing dependency. 
+		This is used for isolating the unit of code and to safely test a unit of code without using actual dependency.
+		
+		Lets take an example : 
+			we have a class called as AbcImpl which has a dependency called as DataService.
+			
+			Now if we are testing AbcImpl we cannot use DataService as is.
+			
+			Consider we are using a constructor to inject the dependency in our class, in that case we need to send the dependency instance as a parameter to the constructor.
+			
+			Stubs are replacements, so in our case since DataService is an interface, we can implement a temporary class called as DataServiceStub and send instance of this class to the constructor.
+			
+			Now what will happen is that the stub class method will be called instead of actual class. This way we can test the unit of code without touching the actual data and isolating it from other dependencies.
+			
+			The issue with stub is that for different test cases where we need different responses we need to write different stubs. 
+			Also change in the interface which the stub is implementing will cause a change in the test case which becomes hard to maintain.
+			
+	Mocks :
+		In case of mocks we dont implement the dependency interface with our own method.
+		Instead we use the static method called as mock to get us an implementation of the required interface dependency.
+		This will return a class instance which implements given interface.
+		Once we have that object all we need to do is write the custom responses using the when(object.methodCall()).thenReturn() or thenThrow()
+		We also have a doThrow().when().method name
+		
+		This is requires less code as compared to writing stubs also this is easy to write.
+		
+	Simplifying writing test case with mocks :
+		We can use following annotations to mock dependencies :
+			1. @Mock : this is a variable level annotation like the @Value annotation.
+			2. @InjectMocks : 
+				this injects the mocked dependency in our program.
+		
+		The remaining testing process is similar
+		
+	
+	We can add muliple then section after the when() method.
+	example :
+		when(listMod.method()).thenReturn(ResponseForFistCall()).thenReturn(responseForSecondCall());
+	The last value will be the default subsequent value after the number of calls are executed.
+	So after the second call all the other calls will have the same response.
+	
+Testing with spring :
+	need to add few dependencies to add tests in spring this is because we are not using spring-boot-starter-test: 
+		1. spring-test
+		2. junit
+		3. mockito-core
+		
+	In our test we want to launch the entire spring context. And from that context we want our target class.
+	
+	So how to load the context ?
+		We need to define the test class with @ContextConfiguration annotation.
+		To this annotation we need to tell which context configuration to use.
+		In our case we will use the java configuration. So we will give the application.java. The property name is classes = application.class
+		eg. 
+			@ContextConfiguration(classes=SpringApplication.class)
+		After the context is provided we need to run it. To run the context we need to provide runner.
+		The runner will help us run the context. 
+		The runner we are using is SpringRunner
+		For this we are using @RunWith annotation.
+		eg.
+			@RunWith(SpringRunner.class)
+		Spring runner class and context configuration is a part of spring test module
+	how to get the bean from the context ?
+		for this we can use the @Autowired annotation. This way the bean will be automatically injected in the class.
+		
+	One thing to note is that test code should never be a part of production code.
+	Therefore, all the test code is in src/test/main.
+	Test should never be a part of jar file and should only be present in repository.
+	
+	Spring unit testing with XML context :
+		To use xml context in test class, we need to provide the location of xml configuration file path to the locations property o the @ContextConfiguration annotation.
+		
+	If we want to have a test configuration different than the regular class configuration context, then we can create a new folder called src/test/resources and then create the xml file in it.
+	We also have to use the <import> in the xml file.
+	
+	using mockito : 
+		In most of our implementations the tests that we are using to test on the methods is dependent on data layer or some other dependencies. Which is not ideal because we dont want to alter the database or other dependencies.
+		So we need to create mocks.
+		
+		
+		When we are using mockito in the tests, we dont need to add the applicationContext. So @ContextConfiguration is not required.
+		We need to provide MockitoJUnitRunner in the @RunWith annotation.
+		eg. 
+			@RunWith(MockitoJUnitRunner.class)
+			
+		Now we just need to create mocks and inject it into the business object.
+		eg :
+			@InjectMocks
+			Business businessObject;
+			
+			@Mock
+			DependencyClass dependencyObject;
+			
+			then in the testcase we will provide the actual mock method.
+			when(businessObject.method()).thenReturn(SomeValue);
+		
+		We we are not loading the entire spring context. Hence it will be faster.
+		
+Spring boot :
+	Overview of spring boot : 
+		world before spring boot :
+			1.Setting up spring project before spring was not easy.
+			2.required lots of configurations for production-ready application :  
+				dependency management : 
+					required to manage frameworks and their versions : 
+						1. REST API : spring framework, spring mvc framework, json binding framework
+						2. Unit Tests : spring test, mockito, Junitl, etc
+				web.xml : 
+					need to configure lot of things for web application.
+					eg. : 
+						configure dispatcherServlet for spring MVC.
+				spring configuration : 
+					need to define component scan
+					data source if we are building database related application
+					if we are desinging web application we need to provide a view resolver.
+				Non functional requirements (NFRs) :
+					logging
+					error handling
+					monitoring
+					metrics
+		
+		creating spring boot project :
+			Avoid using snapshot versions for creating project. Because snapshot versions are versions under active development.
+			
+			For creating a project for giving REST API, we need to provide spring web dependency.
+			This is used to build web applications and rest APIs using spring mvc. 
+			This uses apache tomcat as embedded container. So it provides a java application server.
+			
+			
+			For creating a spring boot project again use spring initializer
+				select maven,
+				select java,
+				select spring boot version,
+				enter groupid, artifactid, name, packaging
+				add dependencies
+				click generate and download.
+				extract the zip
+				import in IDE, give time for IDE to resolve dependencies.
+		
+		launching spring project :
+			go to the applciationClass file and run it as java application.
+			This application is launched on tomcat server on a specific port by default 8080.
+			
+		creating REST API : 
+			controller : 
+				First we would create a controller 
+				eg.:
+					we want a rest api with the following api :
+						http://loclahost:8080/courses
+					we want to return courses details with following values :
+						id, name, author
+				In this controller we want a REST API, therefore, we will use @RestController annotation.
+				
+				In this class create methods and expose a link that we want to use.
+				
+				We need to map a url to the method which will get executed.
+				So when we use the URL the given method will be used.
+				
+				@RequestMapping : 
+					we use this method level annotation to map a url to the annotated method.
+					In this annotation we will provide the url
+					eg. 
+						@RequestMapping("/courses")
+		
+		Here as we can see we are only concerned with the business logic we dont need to worry about the configuration.
+		We are using 2 annotations, @RestController and @RequestMapping to create a simple REST api.
+	
+	Most important goal of spring boot : 
+		The most important goal of spring boot is to build production ready application quickly.
+			build quickly : 
+				following features allow developers to develop applications quickly :
+					spring initializer
+					sprin boot starter projects : 
+						helps to quickly define dependencies for our starter projects
+					spring boot auto configuration : 
+						This will automatically provide configuration based on the dependencies which are in the class path
+					spring boot devTools : 
+						This helps us to make application changes without having to manually restart our server.
+			production ready :
+				features for production ready app : 
+					logging 
+					different configuration for different environment :
+						for this spring boot provides profiles, configuration properties.
+					monitoring(spring boot actuator) : 
+						we would want to see if sufficient memories are present. Should be able to look at the metrics of our app.
+	understanding spring boot magic : 
+		spring boot starter project :	
+			spring boot starter defines all the the dependencies that you would need to build a specific kind of application.
+			this is one of the most important feature.
+			We need a lot of frameworks when creating an application.
+				building rest apis : 
+					we need : 
+						spring mvc, 
+						spring,
+						tomcat,
+						json conversion
+				write unit tests : 
+					we need :
+						spring test
+						JUnit,
+						mockito
+			How can we group them together and make it easy to build applicatons ?
+				This is what starter projects provide.
+				Starter projects provide convenient dependency descriptors for different features.
+			NOTE: 
+				Spring-boot-starter-web enables us to build rest apis and web applications. Spring-boot-starter-test helps us write unit tests.
+				Spring-boot-starter-json helps us convert response to JSON
+				Spring-boot-starter-tomcat helps us run the application in tomcat.
+				Spring-webmvc helps us build our rest api.
+				spring-boot-starter-data-jpa helps us use database using jpa
+				spring-boot-starter-jdbc helps us use databse using jdbc
+				spring-boot-starter-security helps us secure our application
+		
+		spring boot auto configuration : 
+			Spring boot starter project brings in a lot of dependencies and spring boot auto configuration would look at the dependencies and will provide automatic configuration for our application.
+			we need to configure a lot of things while creating an application using spring.
+				e.g : component scan, dispatcherServlet, data source, JSON conversion, etc.
+			To simplify this we have the concept of autoconfiguration
+			This is automated configuration for our application. How it is generated, it is based on which framework are in the class path
+			
+			The autoconfiguration is decided based on : 
+				frameworks present in the class path we can autoconfigure few things.
+				what is the existing configurations are present(Annotations)
+			
+			Spring boot provides default configuration however we can override it by providing our own configuration.
+			
+			where is the autoconfiguration logic defined ?
+				SpringBootAutoConfigure.jar contains all the logic related to the auto configuration logic.
+			
+			We can specify the configuration logic in the application.properties
+			If we have set the logging level to debug, we will get a section in the logs called as condition evaluation report. 
+			This report contains two sections :
+				Positive matches :
+					Things which get autoconfigured.
+				Negative matches :
+					Things which did not get autoconfigured.
+			ErrorMvcAutoConfiguration class takes care of the errors that occur when we submit a request. For example, 404. Using this spring boot automatically configure an error page.
+			SpringBootStarterWeb autoconfigures dispatcherServlet, embedded servlet container(tomcat by default), default error pages, bean<->JSON(Jackson)
+		
+		Spring boot devTools :
+			Increases developer productivity.
+			It solves the problem of manually restarting the server when there is a code change. 
+			Spring boot devTools automatically restarts the server so that the changes are reflected.
+			for this we need to add the following dependency in pom.xml file :
+				spring-boot-devtools
+			dev tools will pick up changes in java class file and property files and the server will reflect new changes.
+			
+			however, devtools dont pick up changes from pom.xml. If we have added new dependencies or removed any one, basically any changes in pom.xml requires the server to be restarted manually. 
+			
+	features spring provide to create production ready code : 
+		1. managing application configuration using profiles :
+			applications have different environments.
+			and different environment need different configurations.
+			profiles help us define different configuration for different environments.
+			Each environment will have a separate profile. And using these profiles we will provide different configurations.
+			when profiles are not defined, the application uses the default configurations provided in application.properties.
+			So how to define which profile to use?
+				we need to use the following property in the application.properties file : 
+					spring.profiles.active=profile_name.
+			Whatever is configured in the application.properties and the whichever profile we have used will be combined as the final configuration.
+			Configuration from the profile which is selected or is activated will have higher priority over configs written in application.properties.
+			The syntax is as follows :
+				application-{profile}.properties
+				or
+				application-{profile}.yml
+		2. How to setup complex configuration for our application :	
+			If we wanted to define lot of properties in our application, it is recommended to use configuration properties.
+			We should create a new class called as {feature}Configuration.java.
+			We need to add annotation on this class : 
+				@ConfigurationProperties()
+				
+			@ConfigurationProperties : 
+				We need to follow naming convention where all the properties for some feature will be starting with featureName.property.
+				Now we need to define this prefix in the configurationProperties.
+				@ConfigurationProperties(prefix="featureName")
+				
+				Once the prefix and annotation is defined, we can add the properties as a instance variable in the class.
+				We need to define constructor and getter and setter for these properties/instance variables.
+				
+				Also we need spring to manage this. Therefore, we need to add @Component on top of the class.
+				
+				Now our application understands this, but now how to configure these properties?
+				We will configure them in application.properties file.
+				
+				So the configuration will be mapped to the properties that we have defined in properties file.
+				
+				We can have as many properties as we want in the configurationProperties class.
+		3. How to simplify deployment with springboot embedded servers :
+			When we are deploying to production we want the deployment to be simple. Since we have multiple environments we will have multiple deployments so we want to make the process simple.
+			
+			Old approach of deploying application : 
+				WAR Approach : 
+					install java
+					install web/application server(tomcat/weblogic/websphere)
+					deploy the application war file.
+			
+			Embedded server :
+				this is a simpler approach. Because the server is already a part of JAR file.
+				So all we need to do is :
+					install java 
+					run jar file
+				All we need is java and the jar file no need for explicitly installing the server.
+			
+			spring-boot-starter-web has spring-boot-starter-tomcat as a part in its dependency. Therefore, we only need java for running the server.
+			This simplifies the entire deployment process. 
+			Spring supports multiple embedded servers :
+				spring-boot-starter-tomcat
+				spring-boot-starter-jetty
+				spring-boot-starter-undertow
+		
+		monitoring : 
+			we would want to look at what is happening in the background with our application.
+			The spring boot feature which allows us to do this is called as spring boot actuator.
+			Actuator helps us to monitor and manage our application in production.
+			
+			Actuator provides a number of endpoints : 
+				beans : 
+					gives complete list of spring beans in our app
+				health : 
+					application health information, is it up and running
+				metrics :
+					application metrics
+				mappings : 	
+					details around request mappings that are configured in our application.
+			How to use spring actuators : 
+				We need to add dependency in pom.xml like we did for devtools.
+				The dependency is :
+					spring-boot-starter-actuator
+				
+				When this dependency is added another set of endpoints are made avaible to us.
+				
+				They are routed through : 
+					localhost:8080/actuator
+				
+				this will return a response which will have other endpoints like health
+				
+				By default actuator provides only the health endpoint.
+				
+				If we want to enable other endpoints, we need to enable them in the application.properties. The properties are  :
+					management.endpoints.web.exposure.include = *
+					
+				This will expose all the endpoints provided by actuator.
+				
+				If we use actuator/beans : 
+					it will return a list of all the beans which are loaded in the context container.
+					
+				if we use actuator/configprops : 
+					it will tell us all the things that we can configure from the application properties.
+				
+				if we use actuator/env :
+					it give information about the environment that is currently used.
+				
+				if we use actuator/metrics : 
+					this gives us a list of all the metrics.
+					eg.
+						application started time
+						application ready time
+						disk free
+						http server request -> info for all the server request.
+				One thing to understand is that when we enable a lot of endpoints we are gathering a lot of information which takes up cpi and memory. Therefore, we need to specifically configure each metrics.
+				So we should specify the endpoints like this :
+					management.endpoints.web.exposure.include = health, metrics
+					this will only enable health and metrics.
+	
+	spring boot vs spring vs spring mvc : 
+		spring framework : 
+			it is all about DI.
+			its about defining, identifying and autowiring dependencies.
+		
+			just DI is not enough for developing applications. Therefore, spring provides good integration with other frameworks.
+		
+		Spring MVC (it is a spring module) :
+			The focus of spring mvc is simplifying building web applications and REST APIs.
+			It only focuses on web apps and rest apis.
+			Before spring mvc, the most populer framework was struts.
+			But struts is very complex because of tight coupling.
+			
+			With spring mvc we can make use of annotations like @Controller, @RestController, @RequestMapping()
+			These are all the things defined in spring mvc
+		Spring boot (it is a spring project):
+			as we procceeded with spring and spring mvc we need a lot of configuration that is needed in our program xml, application context, etc.
+			This is where spring boot comes in.
+			Spring boot is a spring project.
+			Goal is to build production ready code quickly.
+			features :
+				spring projects 
+				auto configuration
+				enables non functional requirements: 
+					actuator
+					embedded server
+					logging and error handling
+					profiles and configurationProperties.
+					
+		Spring boot is not a competitor for spring and spring mvc.
+		It is simply a wrapper that makes it easy to use spring mvc and spring.
+	
+What is dispatcherServlet?
+	dispatcherServlet acts as the front controller for spring-based web applications.
+	In simple words what it will do is it will handle all the incoming requests by assigning appropriate controller to the request.
+	For example :
+		we have an incoming request for saving a data. DispatcherServlet will recieve a request and will assign that request to an appropriate controller to handle and returns the response.
+	Definition : 
+		DispatcherServlet handles an incoming HttpRequest, delegates the request, and processes that request according to the configured HandlerAdapter interfaces that have been implemented within the Spring application along with accompanying annotations specifying handlers, controller endpoints, and response objects.
+		
+Apache Tomcat :
+	Apache tomcat is a free and open-source implementation of the jakarta servlet, jakarta expression language, and websocket technologies. 
+	Tomcat provides a "pure java" HTTP web server environment in which java code can also run.
+	It is a java web application server, although not a full JEE application server.
+			
+			
+what is REST API ?
+	REST stands for representational state transfer.
+	REST is an architectural style that does not follow strict standards but follows six constraints defined by Roy Fielding.
+	The 6 constraints are as follows : 
+		uniform interface
+		client-server
+		stateless
+		cacheable
+		layered system
+		code on demand
+	REST is not restricted to XML for exchanging information. It depends on the implementor which media type to use like XML, plain-text or JSON. REST can use SOAP protocol but SOAP cannot use REST.
+	REST is easy to implement and requires less bandwidth such as smartphones
+	REST lacks ACID compliance transaction.
+	On the basis of security, REST have SSL and HTTPS.
+what is SOAP API ?
+	SOAP stands for simple object access protocol
+	SOAP is a protocol therefore it follows strict standards to allow communication between server and client.
+	SOAP only use XML for exchanging information in its message
+	SOAP is difficult to implement and requires more bandwidth
+	SOAP has ACID compliance transaction. Some of the application require transaction ability.
+	On the basis of security, SOAP has SSL(secure socket layer) and WS-security. For bank password, card numbers, SOAP is used over REST.
+	SOAP cannot make use of REST, because SOAP is a protocol without any architectural pattern, REST can make use of SOAP because it is an architectural pattern having protocol.
+	
+How to run a jar file :
+	java -jar fileName.jar
+	
+	
+Spring AOP :
+	Spring initializer has removed the aop dependency.
+	So we need to add the following dependency into our pom.xml : 
+		spring-boot-starter-aop
+		
+		This will bring in two main dependencies : 
+			spring aop 
+			aspectJ
+			
+		Spring AOP is the AOP implementation provided by spring but it is not as powerful a aspectJ.
+		
+		We can intercept any calls to beans using spring aop. However, aspectJ is much more powerful as we can intercept change of values on the fields.
+		
+	AOP stands for aspect oriented programming
+	Typically we have different layers in an application like web, business and data. Each of these layers have their own concern. However, there are things called as cross-cutting concerns like logging, security which are not specific to a particular layer.
+	AOP is the best approach for implementing cross-cutting concerns.
+	
+	We want to intercept any calls made to the business logic or database.
+	Defining a @Before advice : 
+		We need to define few things :
+			1. We need to define that the current class is configuration :
+				use @Configuration
+			2. This is related to AOP : 
+				use @Aspect
+			3. What kind of method calls do we want to intercept : 
+				use method level annotation @Before("execution(pointcut())") : 
+					pointcut means which method we want to intercept.
+			4. Define method that will be used when the request is intercepted :
+				normal method definition.
+				we can define a parameter called the JoinPoint. Which will help us to identify which method is intercepted.
+				
+	
+	AOP compliments the OOPs in the sense that it also provides modularity. But here the key unit of modularity is aspect.
+	In AOP the programming logic is broken into different parts called as the concerns. Modularity is increased by cross-cutting concerns.
+	Cross-cutting concern is a concern that can affect the whole application and should be centralized in one location in code as possible. Example :
+		transaction management, authentication, logging, security etc.
+		
+	AOP can be defined as breaking a code into different modules, also known as modularisation, where the aspect is the key unit of modularity.
+	
+	why do we need to use AOP?
+		It provides a pluggable way to dynamically add additional concern before, after and around the actual logic.
+	
+	where do we need to use AOP?
+		to provide declarative enterprise services such as declarative transaction management.
+		It allows users to implement custom aspects.
+	
+	AOP conscepts and terminologies :
+		Aspect :
+			An aspect is a class that implements enterprise application concerns that cut across multiple classes, such as transaction management. Aspects can be a normal class configured through spring xml configuration or we can use spring AspectJ integration to define a class as Aspect using @Aspect annotation.
+			
+			It is a class that contains advices, join points etc.
+		Join point :
+			It is any point in the program like, method execution, exception handling, field access etc. In spring AOP, a join point always represents a method execution. Its a specific execution instance.
+		Advice :
+			Advice is a set of actions taken by the aspect for a particular join point. In terms of programming, they are the methods that get executed when a certain join point with matching pointcut is reached in the application. Or in simpler terms, when a method is intercepted what are the set of actions that are to be executed are called as advice.
+			
+			There are different types of advices :
+				before advice : it executes before a join point
+				after returning advice : it executes after a join point completes normally
+				after throwing advice : it executes after method exits by throwing exception
+				after (finally) advice : it executes after a join point exits, regardless of exception or normal return.
+				around advice : it executes before and after a join point.
+		Pointcut :
+			These are the expressions that are matched with join points to determine whether advices needs to be executed or not.
+			In other words this is the expression which is evaluated to determine which method is to be intercepted.
+		introduction :
+			It means introduction of additional method and fields for a type. It allows you to introduce new interface to any advised object
+		Target Object :
+			These are the objects on which advices are applied. Spring AOP is implemented using runtime proxies so this object is always a proxied object. What it means is that a subclass is created at runtime where the target method is overridden and advice are included based on their configuration.
+		Interceptor :
+			It is an aspect class that contains only one advice.
+		AOP Proxy :
+			Spring aop implementation uses JDK dynamic proxy to create the proxy classes with target classes and advice invocations, these are called AOP proxy classes.
+		Weaving :
+			It is a process of linking the aspects with other objects to create the advised proxy objects. This can be done at compile time, load time or at run time. Spring AOP performs weaving at run time. In simple words, the process of advice getting executed at the right time in the execution of the application which is managed by AOP framework is called as weaving.
+			
+			So the process of implementing the AOP around our method is called as weaving
+			
+		Weaver : 
+			The framework which implements weaving that is implementing AOP around method is called as weaver.
+	
+	AOP implementation : 
+		the following provides aop implementation :
+			AspectJ
+			Spring AOP
+			JBoss AOP
+			
+		Sprign AOP can be used by 3 different ways :
+			1. by spring1.2 old style(dtd bases)
+			2. by aspectJ annotation style
+			3. by spring xml configuration style
+			
+		Implementing AOP using spring1.2 old style :
+
+			we will create 3 classes
+			A.java
+			BeforeAdvisor.java implementing method before advice interface.
+			
+			In the xml configuration file, we need to create 3 beans,
+			1. bean for class A.java
+			2. bean for the beforeAdvisor.java
+			3. bean of proxyFactoryBean class
+			
+			The proxyFactoryBean class bean takes target that is a reference object and list of interceptorNames as an input.
+			
+			The proxyFactoryBean class is provided by Spring framework. It have 2 properties target and interceptorNames, the target takes the reference of a class we want to add our advice to and the interceptor names are the list of reference of the advisor class.
+			
+			The above description is related to methodBeforeAdvice interface, the same can be used for AfterReturningAdvice interface and for throwsAdvice interface.
+			
+			MethodInterceptor (aroundAdvice) example :
+				Here the main logic remains the same
+				The advisor class is changed.
+				We implement the MethodInterceptor interface and then override the invoke method which then will include 3 parts :
+					1. concern or code to be executed before the actual logic
+					2. calling the methodInvocation instance's proceed method. This executes the actual logic
+					3. concern or code to be executed after the actual logic.
+				The xml configuration file remains the same.
+		
+		Implementing Spring AOP using AspectJ annotation :
+			Spring framework recommends us to use spring AspectJ AOP implementation instead of spring 1.2 old style dtd base AOP implemenation because it provides more control and is easy to use.
+			
+			There are two ways to use spring AOP AspectJ implementation : 
+				1. by using annotations 
+				2. by using xml configuration
+			
+			1. by using annotations :
+				Spring AspectJ AOP implemenation provides many annotations :
+					1. @Aspect declares the class as aspect.
+					2. @Pointcut declares the pointcut expression
+				
+				The following are the annotations used to create advices :
+					1. @Before : declares the before advice.
+					2. @After : declares the after advice. It is applied after calling the actual method and before returning result.
+					3. @AfterReturning : declares the after returning advice. It is applied after calling the actual method and before returning result. But we can get the result value in the advice.
+					4. @Around : declares the around advice. Applied before and after calling the actual method.
+					5. @AfterThrowing : declares the throws advice. It applied if actual method throws exception.
+				
+				Understanding the pointcut : 
+					Pointcut is an expression language of Spring AOP.
+					To define a pointcut we need to give the @Pointcut annotation. We can refer the pointcut expresiion by name as well.
+					e.g.: 
+						@Pointcut( "execution(Operation.(..))"
+						private void doSomething() {}
+						
+					The name of the pointcut expression is doSomething(). it will be applied to all the methods of operation class regardless of return type.
+					
+					The expression will define on which methods, the pointcut is applied :
+						
+						@Pointcut("execution(public**(..))")
+						this means it will be applied to all the public methods
+						
+						@Pointcut("execution(public Operation.*(..))")
+						this means it will be applied to all the public method of the operation class.
+						
+						@Pointcut("execution(Operation.())")
+						this means it will be applied to all the methods of operation class.
+						
+						@Pointcut("execution(public Operation.set*(..))")
+						This means it will be applied to all the public setter methods of operation class.
+						
+						@Pointcut("execution(int Operation.*(..))")
+						This means it will be applied to all the methods of operation class that return int value.
+				
+				@Before :
+					we can use this to apply any operation before the actual business logic method is implemented.
+					
+					The @Before() takes the method name of the pointcut.
+					
+					for example : 
+					We need to create an aspect class 
+					@Aspect
+					public class TrackOperation {}
+					
+					this will have a pointcut like this :
+					
+						@Pointcut("execution(Operation.(..))")
+						public void k() {}
+					
+					then we need to define the @Before like this :
+						
+						@Before("k()") //applying pointcut on before advice
+						public void advice1(JoinPoint jp) {}
+				
+				After the aspect class is written we need to write the context.xml file. This file will contain the bean creation for both of these files along with creation of bean for 
+				AnnotationAwareAspectJAutoProxyCreator class.
+				
+				@After :
+					The after advice is applied after calling the actual business logic method. Can be used to maintain log, security, notification, etc.
+					This is called in both the senarios when the method returns a value or throws an exception.
+					The format is similar to that of @Before advice. Except instead of usign the @Before we will use @After.
+				
+				@AfterReturning :
+					By using after returning, we can get the result in the advice.
+					So we need to add Object result as a part of the advice method parameter.
+					eg: 
+						@AfterReturning( pointcut/value = "execution(Operation.(..))", returning= "result")
+				
+				@Around :
+					Around advice is applied before and after calling the actual business logic.
+					
+					We need to pass the preceedingJoinPoint reference in the advice method, so that we can proceed the request by calling the proceed() method. The method is for joinPoint object which is in the parameters.
+					eg. 
+						@Around("execution()")
+						public void around(ProceedingJoinPoint joinPoint) {
+							logic;
+							joinPoint.proceed();
+							logic;
+						}
+					
+				@AfterThrowing : 
+					@AfterThrowing(pointcut/value = "execution(* Operation.*(..))", throwing= "error")
+			
+			Common pointcut configuration :
+				for each aspect class, we have to define advice and different advice may have same pointcut. This becomes a problem in huge projects. So the solution to this is to define a separate file which will contain all the pointcuts.
+				
+				how to create separate file :
+					1. create a new class
+					2. define an empty method
+					3. annotate it with the @Pointcut("execution(expression)")
+					4. copy the methods qualified name and paste it in the @Before() or @AfterReturning or @After or @AfterThrowing. (the qualified name is like "com.spring.aop.springaop.commonJoinPointConfig.method()")
+				We can use this same pointcut for different methods.
+
+			More information about pointcuts : 
+				We can use conditions to combine the joinPoints. For example, @Pointcut(com.aspect.commonconfiguration.method() && someOtherPath) using this the it would intercept both the conditions.
+				
+				We can also define pointcut using bean names
+				public void beanStartingWithDao()
+				for this we will use,
+					@Pointcut("bean(*expression*)")
+				
+				similarly if we want to execute the advice on all the methods, we can also use :
+					@Pointcut("within(packageNames)")
+			
+			
+			creating custom annotations and an aspect for tracking time : 
+				We want to create a custom annotations so that when the annotation is used, automatically the method call will be intercepted and we can execute the advices.
+				To create a custom annotation, 
+					1. create an annotation :
+						public @interface Tracktime{}
+						We want to annotation to be used only on methods and we would like to be able to have that information at runtime : 
+							1. so to restrict the annotation to method, we need to use @Target Annotation :
+								@Target(ElementType.METHOD)
+							2. to have this information at run time, we need to use @Retention annotation :
+								@Retention(RetentionPolicy.RUNTIME)
+						These two annotations are to be placed at the top of the annotation interface.
+							eg. 
+								@Target(ElementType.METHOD)
+								@Retention(RetentionPolicy.RUNTIME)
+								public @interface Tracktime {} 
+					2. annotate the method which we want to intercept meaning, the one which we give the expression for
+					3. use this annotation to define the pointcut. Go to the common joinPointConfig file and define a new method with the @Pointcut("@Annotation(the qualified name of the annotation class)")
+					4. go to the class where we have defined the @Around or @Before annotation and give the qualified name of the method that we have defined in joinPointConfig file.
+					
+				So now using this, tracking of only those methods will be done which have the annotation that we have defined. In this case @TrackTime.
+
+
+How to autowire in application.java file ? 
+	Make the current class implement the commandLineRunner interface.
+	Implement the run method.
+	now we can use the @Autowired in SpringApplication.java file.
+	Without this we cannot use the @Autowired because the main method is static method and it calls the SpringApplication.run method. 
+	The run method that we have implemented is called by the SpringApplication.run method.
+	
+	
+Spring JDBC and JPA : 
+	Setup project for JDBC : 
+		go to spring initializer and add the following dependencies :
+			JDBC,
+			JPA,
+			H2,
+			Webs
+			
+	
+	changes in the latest version of spring boot :
+		H2 database name is randomly generated each time we restart the server.
+		Data loading from data.sql needs additional configuration.
+		
+		It is recommended to use the following properties in application.properties :
+			spring.datasource.url = jdbc:h2:mem:testdb;NON_KEYWORDS=USER
+			spring.h2.console.enabled=true
+			spring.data.jpa.repositories.bootstrap-mode=default
+			spring.jpa.defer-datasource-initialization=true
+	
+	Connect to H2 and launching H2 console : 
+		Spring boot has autoconfiguration, therefore, it will automatically configure a connection to the H2 database. So it will automatically configure a datasource which is connecting to the H2 database.
+		use the following property to enable h2 console : 
+			spring.h2.console.enabled=true
+		To access the h2 console use browser and access the following URL :
+			localhost:8080/h2-console
+		In-memory database is only live as long as the application is running. If the application stops running it will fail. The data is also cleared when we stop the application and run it again.
+	
+	Spring boot version 2+ changes :
+		All DDL - table creations and data updates should be done in schema.sql
+		schema.sql : 
+			create table person(
+				id integer not null,
+				name varchar not null,
+				location varchar,
+				primary key(id)
+			);
+			
+			insert into person(id, name, location) values(1001, 'name', 'location');
+	
+	creating a database table in h2 : 
+		data.sql file if created and placed in the resource file, it gets automatically executed. This file is used to initialize the database.
+		This is one of the autoconfiguration feature that is provided by the spring boot.
+		we can write a create query and then insert query in this sql file which will get executed on startup of the application.
+	
+	populate data in the table in h2 :
+		the same data.sql file, we can also insert data in the table.
+	
+	Implement spring JDBC query method : 
+		JDBC :
+			We need to autowire JdbcTemplate for connecting to the database.
+			Annotate the class with @Repository
+			
+			If we are using JdbcTemplate, we need to use the query method of the jdbcTemplate instance variable.
+			eg.
+				jdbcTemplate.query("select * from tabelName", new BeanPropertyRowMapper(tableName.class));
+				
+				when the query runs, it returns a resultset back. This result set needs to be mapped to the destination.
+			This way we can get the list of all the rows using the query above.
+			When we are using BeanPropertyRowMapper, we need to create a no argument constructor for the mapper.
+	Execute using commandLineRunner : 
+		When the application context launches the code in the commandLineRunner gets executed.
+		This command line runner is implemented by the main application class.
+		Implement the run method. Use the autowired database class and call the method.
+	
+	
+	JDBC vs Spring JDBC : 
+		in jdbc we required :
+			1. establish connection with the database
+			2. create a preparedStatement
+			3. execute the query
+			4. extract the values individually out of the result set and add it to the list.
+			5. close the connection
+			6. return the list.
+		The issue here was too many manual configurations along with exception handling. If there was an exception before the connection was closed, then the connection will remain open and this is a leak
+		So if we implement that exception handling as well the code becomes even more complex.
+		
+		in spring JDBC :
+			1. we need less amount of code.
+			2. We dont need to handle connections therefore less mistakes.
+			3. exception is handled by spring jdbc so even if there was an exception, it will close the connection.
+			
+	
+	implementing findbyId : 
+		using the JdbcTemplate, we can execute a query by simply returning the result of the jdbcTemplate.query() method.
+		However, query() returns a list of objects.
+		So if we are returning a list of objects, we need to use the following method : 
+			jdbcTemplate.query("query", new BeanPropertyRowMapper<type>(type.class))
+		if we are returning a single object, we need to use the following method :
+			jdbcTemplate.queryForObject("query", new Object[] {}, new BeanPropertyRowMapper<type>(type.class));
+			
+			As you can see here that we have given a list of objects as a parameter, this is because we want to send in a list of parameter. If there are more than one parameter, we can add them in the {}.
+			
+	implementing deleteById : 
+		To delete an entry from the table, we need to use the update method of the jdbcTemplate.
+		The update method does not return an object, it returns an int stating how many rows were affected by the query.
+		eg.
+			jdbcTemplate.update("delete from person where id = ? ", new Object[] {id})
