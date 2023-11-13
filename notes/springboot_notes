@@ -1177,5 +1177,70 @@ spring boot caching :
 	what data should be cached ?
 		The data that do not change frequently
 		The frequently used read query in which results does not change in each call, at least for a period.
+	
+	types of caching : 
+		1. in-memory caching : 
+			increases the performance of the application.
+			It is the area that is frequently used
+			memcached and redis are examples of in-memory caching.
+			it stores key-value between application and database.
+		2. database caching :
+			Database caching is a mechanism that generates web pages on-demand (dynamically) by fetching the data from the database.
+		3. web server caching : 
+			Web server caching is a mechanism that stores data for reuse.
+			It is cached for the first time when a user visits the page. If the user requests the same next time, the cache serves a copy of the page
+		4. CDN caching : 
+			It is a component used in modern web applications. It improves the delivery of the content by replicating commonly requested files (such as HTML Pages, stylesheet, JavaScript, images, videos, etc.) across a globally distributed set of caching servers.
+			The CDN reduces the load on an application origin and improves the user experience. It delivers a local copy of the content from a nearby cache edge (a cache server that is closer to the end-user), or a Point of Presence (PoP).
+	
+	spring boot cache annotation : 
+		@EnableCaching : 
+			class level annotation
+			to enable caching in the spring boot we use this annotation.
+			It is defined in cache.annotation package.
+			Used with @Configuration class. The same class with @SpringBootApplication.
+			The auto-configuration enables caching and setup a CacheManager, if there is no already defined instance of CacheManager. It scans for a specific provider, and when it does not find, it creates an in-memory cache using concurrent HashMap.
 		
+		@CacheConfig :
+			It is a class-level annotation that provides a common cache-related setting. It tells the Spring where to store cache for the class. When we annotate a class with the annotation, it provides a set of default settings for any cache operation defined in that class. Using the annotation, we need not to declare things multiple times.
+		
+		@Caching : 
+			this annotation is used when we need both annotations @CachePut or @CacheEvict at the same time on the same method.
+			But Java does not allow multiple annotations of the same type to be declared for a given method. To avoid this problem, we use @Caching annotation.
+			
+		@Cacheable : 
+			method level annotation
+			defines a cache for a method's return value.
+			The Spring Framework manages the requests and responses of the method to the cache that is specified in the annotation attribute
+			We can also apply a condition in the annotation by using the condition attribute. When we apply the condition in the annotation, it is called conditional caching
+			
+		@CacheEvict : 
+			It is a method level annotation. It is used when we want to remove stale or unused data from the cache. It requires one or multiple caches that are affected by the action. We can also specify a key or condition into it. If we want wide cache eviction, the @CacheEvict annotation provides a parameter called allEntries. It evicts all entries rather than one entry based on the key.
+
+			One important point about @CacheEvict annotation is that it can be used with void methods because the method acts as a trigger. It avoids return values. On the other hand, the annotation @Cacheable requires a return value that adds/updates data in the cache. 
+		
+		@CachePut : 
+			It is a method level annotation. It is used when we want to update the cache without interfering the method execution. It means the method will always execute, and its result will be placed into the cache. It supports the attributes of @Cacheable annotation.
+
+			A point to be noticed that the annotations @Cacheable and @CachePut are not the same because they have different behavior. There is a slight difference between @Cacheable and @CachePut annotation is that the @Cacheable annotation skips the method execution while the @CachePut annotation runs the method and put the result into the cache.
+	
+	If we want to enable cache mechanism in a Spring Boot application, we need to add cache dependency in the pom.xml file. It enables caching and configures a CacheManager.
+		spring-boot-starter-cache
+cache vs buffer : 
+	https://www.javatpoint.com/spring-boot-caching
+spring boot cache provider : 
+	spring boot framework allows the integration of various cache providers.
+	The cache providers allow the developers to configure cache transparently and explicitly in an application.
+	cache is used because it improves the performance of the application.
+	
+	The cache abstraction does not provide the actual space in spring boot.
+	It depends on the abstraction that occured by the cache.Cache or cache.CacheManager interfaces.
+	
+	caching auto-configuration : 
+		the spring boot provides auto-configuration support which simplifies the implementation of caching.
+		It searches for the libraries and configuration-files in the classpath and initializes the required dependency beans at the time of application startup 
+		The auto configuration of startup include following steps : 
+			add annotation @EnableCaching in the configuration file
+			add required caching libraries in the class path
+			in the root of the classpath, add the configuration file for the cache provider.
 swagger :
