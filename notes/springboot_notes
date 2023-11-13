@@ -1125,4 +1125,57 @@ Spring boot jdbc :
 				spring.h2.console.enabled = true
 			We can access the console using browser and visiting  :
 				localhost:8080/h2-console
+				
+		CrudRepository vs JpaRepository : 
+			https://www.javatpoint.com/spring-boot-crud-operations
+		
+spring boot thymeleaf : 
+	It is an open source java library, licensed under apache 2.0. It is a HTML5/XHTML/XML template engine.
+	it is server-side java template engine for both web(servlet based) and non web(offline) environments
+	provides full integration with spring framework
+	
+	The goal of thymeleaf is to provide a stylish and well-formed way of creating templates.
+	It is based on xml tags and attributes.
+	These XML tags define the execution of predefined logic on the dom instead of explicitly writing that logic as code inside the template.
+	It is substitute for JSP.
+	
+	why we use thymeleaf ? 
+		jsp is more or less similar to html but it is not completely compatible with html like thymeleaf.
+		We can open and display thymeleaf template file normally in browser while the jsp file does not.
+		
+	what kind of templates can the thymeleaf process ?
+		thymeleaf can process six types of templates AKA tempalte mode. They are as follows : 
+			XML
+			valid XML
+			XHTML
+			Valid XHTML
+			HTML5
+			legacy HTML5
+
+spring boot caching : 
+	spring framework provides caching in spring application, transparently.
+	In spring, the cache abstraction is a mechanism that allows consistent use of various caching methods with minimal impact on the code.
+	The cache abstraction mechanism applies to java methods.
+	Main objective of using cache abstraction is to reduce the number of executions based on the information present in the cache.
+	
+	For each method calls, the abstraction applies a cache behavior to the method. It checks whether the method has already been executed for the given argument or not.
+	If yes, the cached result is returned without executing the actual method.
+	If no, the method executes, result is cached and returned to the user.
+	Note: This approach works only for the methods that are guaranteed to return the same result for a given input. It does not matter how many times the method executes.
+	
+	The developers take care of two things while working with cache abstractions : 
+		1. cache declaration : 
+			It identifies the method that need to be cached
+		2. cache configuration :
+			The backing cache where the data is stored and read from.
+	Caching
+		Caching is a part of temporary memory (RAM). It lies between the application and persistence database. It stores the recently used data that reduces the number of database hits as much as possible. In other words, caching is to store data for future reference.
+	
+	why should we use the cache?
+		The primary reason for using cache is to make data access faster and less expensive. When the highly requested resource is requested multiple times, it is often beneficial for the developer to cache resources so that it can give responses quickly.
+	
+	what data should be cached ?
+		The data that do not change frequently
+		The frequently used read query in which results does not change in each call, at least for a period.
+		
 swagger :
