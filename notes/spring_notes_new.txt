@@ -2538,3 +2538,514 @@ Spring JDBC and JPA :
 		The update method does not return an object, it returns an int stating how many rows were affected by the query.
 		eg.
 			jdbcTemplate.update("delete from person where id = ? ", new Object[] {id})
+			
+			
+		
+	implementing insert and update using spring jdbc : 
+		we will use the update method of the JdbcTemplate. This method takes 2 parameters, one is the query and second is the object input for that query.
+		So for example inserting in the database will be like : 
+			jdbcTemplate.update("insert into person (id, name, location) values(?, ?, ?, ?)",
+			new Object[] {1, "name", "location"});
+			
+		example for updating in the database : 
+			
+			jdbcTemplate.update("update person set name = ?, location = ? where id = ?", new Object[] {"name", "location", 1})
+			
+		This returns the number of rows affected by the execution of this method. Therefore, the return type will be int.
+		
+	Implementing a customRowMapper : 
+		The rowmapper is used to map the result of the query to our object.
+		
+		The normal BeanPropertyRowMapper cannot be used in case where the class instances are different that the table definition or the name of the instance variables are different than column names. In that case we need a custom row mapper which we can use to map the query result to DAO class object.
+		
+		To implement custom row mapper, we need to define a class which implements the RowMapper<type> interface.
+		
+		Next we need to override/implement the mapRow(ResultSet rs, int rowNum) method. We rarely use the rowNum.
+		
+		Inside this method we will manually write the logic of mapping the resultSet entries with our class instance variables.
+		
+		Eg of manual mapping : 
+			person.setId(rs.getInt("id"));
+			person.setName(rs.getString("name"));
+			person.setLocation(rs.getSring("location"));
+			
+			return person;
+			
+	JPA : 
+		JPA stands for java persistence API. 
+		
+		In standard jdbc approach, the tables are created separately and the DAO objects are created separatly.
+		In this approach the query is made on the table and we map the data on the object.
+		
+		In JPA, we map the entity to the database. The instance variables are the ones that will be used to create the columns.
+		
+		Once we define the relationship, the JPA implementation will take care of identifying the entities and creating the right queries for us based on the operations we want to perform.
+		So the job of writing queries is shifted from programmer to the framework called JPA impelementation.
+		
+		JPA is like an interface. It defines a set of annotations and a set of interfaces.
+		
+		Hibernate is an implementation of JPA.
+		Hibernate was present before JPA though.
+		
+		
+		JPA is a standard of doing object relational mapping(ORM)
+		What does this mean?
+			object is an instance of the class.
+			we are mapping the instance of a class to a relation.
+			Relation is a table.
+			
+			ORM : 
+				ORM is a technique that lets us query and manipulate data from the database using an object oriented paradigm. 
+				An ORM library is a completely oridinary library written in any language that encapsulate the code needed to manipulate the data, so we dont use SQL anymore, we interact directly with an object in the same language we are using.
+		JPA standardises the ORM and hibernate implements JPA. Hibernate has lot more features than JPA.
+		
+		Defining entity : 
+			What is an entity ?
+				An entity in JPA is a POJO representing data that can be persisted in the database. An entity represents a table stored in a database. Every instance of an entity represents a row in the table.
+			To define an entity, we need to have JPA dependency. For this we add : 
+				spring-boot-starter-data-jpa 
+			This JPA API have a lot of annotations.
+			Hibernate-core is the implementation of this api.
+			
+			To define an entity, 
+				1. create a class with instance variable such that each instance variable will represent a table column.
+				2. annotate the class with @Entity annotation.
+			NOTE : 
+				We need a no-args constructor to be defined in the class.
+			@Entity :
+				this annotation defines the class as an entity.
+			@Table : 
+				we can define this at the class level. We can give name to the table using @Table annotation.
+			@Column : 
+				we can define this at variable level to give custom name to the column.
+			@Id : 
+				Variable level
+				used to indicate variable is a primary key.
+				@GeneratedValue : 
+					This annotation is used in combination with @Id for auto generating the value for the instance.
+					In this case typically Hibernate creates a sequence in the database and use that sequence to populate the value.
+		
+	JPA repository : 
+			How to define a repository?
+				We can use the @Repository annotation. It is a class level annotation.
+			How to define if its a transaction?
+				We want transaction so the the ACID properties will be followed.
+				
+				Ideally transactions have to be implemented around business services.
+				But we can also implement it around repository.
+				
+				We can define transaction using @Transactional annotation
+			
+			how to connect to the database?
+				We can connect the database using the EntityManager interface.
+				Entity manager is the interface to the persistence context.
+				All the operations that we are performing in a specific session are stored in persistence context.
+				All the operations are to be going through entity manager.
+				
+				We can use the instance of this entity manager for interacting with the methods.
+				We can see the example in the methods that we are providing.
+			
+			Different methods for accessing database : 
+				For accessing the database, we are using the method provided by the entity manager.
+				
+				1. findById :
+					For this we will use the find method of the entity manager.
+				2. update/insert :
+					we can use the merge method of the entity manager. The merge method will update the entry if the entry is not present. Else it will insert a new entry in it.
+				3. delete : 
+					we can use the remove method of the entity manager. This method returns void.
+				
+				Using these methods, all the queries are written by hibernate which is a JPA implementation.
+			Using named query : 
+				What is a named query?
+					In named query instead of providing the query on its own, we define the query with a name, and then use this name to execute the query.
+					For this we will use the createNamedQuery of the entityManager instance.
+					This createNamedQuery function takes two parameters :
+						1. name of the query.
+						2. the class in which the query is defined.
+					After defining the method, we can define the actual query with name in the entity class.
+					How to define that named query :
+						@NamedQuery annotation is used to define a named query.
+						@NamedQuery takes two values as input, the name of the query using the name attribute and second is the query itself which will be written in JPQL java persistence query language or HQL (hibernate query language).
+						
+		Spring data : 
+			The issue with the above implementation using JPA is that each repository class will have similar code. Only the entity will change. Therefore, spring data solves this issue.
+			Spring data defines a JPA repository which we can use to create methods to interact with the database.
+			Important point to remember that this is an interface and not a class.
+			So we need to follow the following steps to define the class : 
+				1. define an interface
+				2. make this interface extend JpaRepository Interface. While extending the jpa repository interface, we need to tell which entity we want to manage and what is the primary key in that entity. eg. 
+					public interface PersonRepository extends JpaRepository<Person, Integer> {}
+				
+			In spring data, we have different methods to interact with the database.
+			We have :
+				save() : to insert and update an entry in the database.
+				findbyid() : find by id
+				find() : to find list
+				deleteById() : to delete a row by id.
+				
+	How to connect to a specific database :
+		steps :
+			1. install the database
+			2. remove the  H2 dependency
+			3. add dependency of the required database.
+			4. configure application.properties :
+				spring.datasource.url = value
+				spring.datasource.username = databaseusername
+				spring.datasource.password = databasepassword
+				spring.jpa.hibernate.ddl-auto=none
+				hibernate.ddl-auto will create the tables in the database automatically for us if we set the value to create.
+			5. restart the server
+			
+Spring web applications : 
+	using JSP servlets :
+		Creating web application using jsp servlets.
+		Create a new project.
+		select the packaging type as WAR.
+		WAR : web archive
+		JAR : java archive
+		How to run the project :
+			1. select maven build 
+			2. in goal enter tomcat7:run
+		
+		Theory maven : 
+			We ran the web application in tomcat.
+			maven downloaded tomcat for us.
+			In the pom.xml, we have configured the following things : 
+				1. In the pom.xml, we have configured a plugin called as tomcat7-maven-plugin which takes care of downloading the tomcat and running the web application.
+				2. maven-compiler-plugin. maven takes care of compiling java classes that we create and also building the jar and wars.
+				3. adding the dependency for javaee-web-api. We need this dependency to create a servlet.
+			
+			In the web.xml, we have configured the following things :
+				1. we have defined a welcome-file. Whenever anyone visits, the localhost:8080 we want them to see the page which is defined by the file defined in welcome-file. This is a simple redirection. 
+				eg. 
+					<welcome-file>login.do</welcome-file>
+					Now when someone visits localhost:8080 it will be redirected to localhost:8080/login.do
+				2. we have given the display name of the project using the <display-name> tag.
+				
+			In login servlet file we have defined the following things : 
+				1. extends httpServlet
+		
+		what is httpServlet : 
+			what is JEE : 
+				java enterprise edition is a set of specifications that define how various things are developed in java enterprise applications.
+			
+			what is a servlet ?
+				a servlet is a simple java class which takes request in and responds back with a response.
+			
+			creating a sample servlet :
+				create the class and extend the httpServlet.
+				Second thing is what is the url to this servlet?
+					To assign a url to this servlet, we use the annotation, @WebServlet.
+					So we need to assign url to this servlet. To assign the url to the servlet, we use the urlPatterns property of the @WebServlet annotation.
+				
+					We need to define methods in this class. A method to handle different types of HTTP requests.
+					To handle http get request : 
+						we need to override the doGet method to handle get request.
+						The doGet method have 2 parameters, one is HttpServletRequest and second is HttpServletResponseq
+					
+					creating servlet from scratch and using JSP : 
+						steps to create servlet : 
+							1. create a class and extend httpServlet
+							2. add url to this class using the @WebServlet annotation and setting the urlPatterns property. The value of the urlPatterns should start with a "/".
+							3. Override the doGet method to handle the get request. This method have 2 parameters, httpServletRequest and httpServletResponse.
+							4. write to the response. Get the writer using the the following syntax :
+								PrintWriter writer = response.getWriter();
+								To write, use the writer.println().
+			@WebServlet annotation helps us define a url pattern. 
+			@WebServlet annotation helps us define a url pattern.
+	
+	
+web application with spring mvc : 
+	creating login servlet from scratch : 
+		there are four steps to create a servlet :
+			1. create a class and extend HttpServlet 
+			2. to give the url we use the @WebServlet annotation and set the urlPatterns property
+			3. override the method doGet(HttpServletRequest resquest, HttpServletResponse response) to handle the get method.
+			4. Take the printWriter from response.getWriter method and write the response to it. Using printWriter.println("")
+			
+		We can send HTML response through this println method directly, but java is more suitable implementing business logic instead of returning a static page response.
+		For this we have JSP (java server pages). JSPs are converted into servlets in the server. So there is no performance wise change in using JSP or directly sending the static html code.
+		These JSP are desinged to make the writing of dynamic content to the web browser easy.
+	
+	creating a JSP : 
+		typically, for web application, we have all the JSPs in the folder web-inf.
+		The reason we use JSP is that it makes it easier to gerenate dynamic pages.
+		JSP is a view so we can create the folder called views. Here we can create the .jsp file. This file follows typical html structure
+		
+		Now we want to use the JSP in servlet, i.e. when a request is made to the servlet, it should use the JSP that we created. In other words redirect to the JSP. 
+		To do this we need to use : 
+			request.getRequestDispatcher("path of the jsp").forward(request, response) method.
+			
+			The path of the JSP starts with web-inf. Web-Inf contains the web.xml file and the views folder that we created.
+			
+			eg. :
+				request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+	
+			if the path of the file is not valid, we get 404 error.
+		
+		How to pass parameters to the get request?
+			We can pass parameters using request parameters. 
+			So in this case, the parameters to the request url will be in the form of localhost:8080/?param1=value1&param2=value2
+			
+			To access the parameters passed to the request, we can use the request.getParameter() method.
+			
+			How to pass the parameter from the servlet to the JSP?
+				We can send parameters to the JSP using request attributes.
+				In the request we can put certain things as attributes and those attributes are available to the JSP.
+				
+				If the property we are sending is from browser to the servlet/server, it is called as parameter. If it is from servlet to JSP it is called as attribute.
+				
+				To set the attribute in the request, we use the setAttribute method.
+				eg. 
+					request.setAttribute("nameOfAttribute", value/variable);
+				
+				When we send parameters to the get request, if we send it using the request parameter, it is not secured. Therefore, either we use the header, or we should use the post request.
+	
+			How to access the attribute value in JSP : 
+				we can use the following format : 
+					<tag>
+						${nameOfAttribute} -> this is called as expression language
+					</tag>
+			
+		Post request using servlet : 
+			We can pass in information using the post request more securely. 
+			The JSP form will define the method attribute to POST.
+			We need to override the doPost method to handle a post request in the servlet.
+			Similar to the doGet method, we need to redirect the request to JSP.
+			Here as well we will call the 
+			request.getRequestDispatcher("jsp path").forward(request, response);
+					
+	When we are running the servlet in tomcat server, we dont have to start and stop the server again and again. The only time we need to restart the server manually is when we are creating a new servlet.
+	
+	
+	JSP : 
+		JSP is nothing but a servlet.
+		We can write java code in jsp. Although it is not recommended.
+		everything we can do in a servlet, we can do in JSP.
+		How to write java code in JSP :
+			The way we can write java code in JSP is using scriptlets.
+			anything that we write in <% and %> is a scriptlet.
+			we can write any java code withing <% and %>
+			
+			eg. 
+				<head></head>
+				<%
+					System.out.println("some text");
+				%>
+				<body></body>
+			
+			We can also access the request.getParameter within the scriptlet. We have request session, therefore, we have request variable available, because request session is available.
+			anything we can do in jave, we can do in scriptlets. We can write loops, libraries, control statments etc.
+			
+			Also we can access the variables declared in scriptlet in html code using the scriptlet expression.
+			eg. :
+				<% 
+					java.util.date date = new java.util.Date();
+				%>
+				<body>
+					<div>Today's date is <%=date%></div>
+				</body>
+			
+			We can also import the classes and their methods, using only the inport statement which will be declared at the top of the html page.
+			eg. : 
+				<%@page import = "java.util.Date"%>
+			
+			
+			But JSP is a view and it should not contain business logic. 
+			We should use the expresion language to access a variable in JSP and not scriptlets.
+			
+			
+			
+			How to handle forms in JSP : 
+				we need to use the <form> tag.
+				and set the property "action". This property decides who will handle this form. 
+				for example :
+					<form action = "/login.do"> -> this will specify that the servlet associated with login.do will handle this request.
+					</form>
+				
+				The issue here is that this is still a get request. If we want to change the request method type, we need to set the method property of the form tag.
+				example : 
+					<form action = "/login.do" method = "post">
+					</form>
+					
+					
+					
+	Setting up spring MVC : 
+		how to configure application to use spring mvc : 
+			1. add dependency in the pom.xml to add the required jars.
+			2. add dispatcher servlet to web.xml
+			3. create a spring application context. It requires a xml, therefore, we need to create a spring configuration xml
+			
+		adding dependency :
+			we need to add spring-webmvc dependency in the pom.xml.
+		
+		configure the front controller or dispatcher servlet : 
+			The dispatcher servlet is the one where all the requests come to and then the dispatcher servlet will send it to a controller or a JSP or anything else.
+			
+			This pattern is called a front controller pattern.
+			
+			How are servlets created, we either add the servlet in web.xml or annotation @Controller is used.
+			
+			manually adding the dispatcher servlet to web.xml : 
+				To define a servlet in web.xml, we need to define a <servlet> tag and <servlet-mapping> tag.
+				In servlet tag, we define the following things :
+					1.<servlet-name>anyNameForTheServlet</servlet-name>
+					2.<servlet-class>ClassPathThatWeWantToUse</servlet-class>
+					3.<init-param>This contains parameter and parameter value</init-param>
+						for example : 
+							for dispatcher servlet, this will contain where is the configuration for dispatcher servlet that is where is the contextConfiguration where is the spring context.
+							<init-param>
+								<param-name>contextConfiguration</param-name>
+								<param-value>/WEB-INF/servlet.xml</param-value>
+							</init-param>
+				The servlet-mapping is used to define which servlet will handle which request based on the url pattern.
+				For example, in case of dispatcher servlet, we define : 
+					<servlet-mapping>
+						<servlet-name>name of the servlet defined in servlet tag</servlet-name>
+						<url-pattern>/abc/</url-pattern>
+					</servlet-mapping>
+					
+				So now to manually add dispatcher servlet, we will add the following tags in web.xml
+					<servlet>
+						<servlet-name>dispatcher</servlet-name>
+						<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+						<init-param>
+							<param-name>contextConfiguration</param-name>
+							<param-value>/WEB-INF/servlet.xml</param-value>
+						</init-param>
+					</servlet>
+					<servlet-mapping>
+						<servlet-name>dispatcher</servlet-name>
+						<url-pattern>/spring-mvc-url/</url-pattern>
+					</servlet-mapping>
+		
+		Creating context configuration : 
+			in this context configuration we are only adding component scan.
+			<context: component-scan base-package = "org.abc.xyz"/>	
+			
+	Creating spring MVC controller : 
+		how to define a controller using spring instead of javaEE.
+		To define a controller in spring, we need to annotate the class with @Controller annotation.
+		In servlets, we used to extend HttpServlet but we dont need to extend anything to define a controller. All we need is the annotation.
+		
+		@Controller : 
+			This annotation tells spring that this is a controller and this will handle web requests.
+			Inside the controller we can add methods to handle web requests.
+		
+		Once the controller is defined, we want to add methods to handle the requests.
+		But for the method to understand which request url to cater for, we need to annotate the method with, 
+		@RequestMapping annotation.
+		
+		@RequestMapping : 
+			This annotation maps the url to the method. So when the url defined in the request mapping annotation is called, the method following the annotation will be called.
+			The requestMapping annotation have the following properties that we need to set : 
+				1. value : used to define the url endpoint.
+				2. method : defines the request type that it handles. If the method is not given a value, it will handle all the requests get, post, etc. The method can have enum of RequestMethod. eg. RequestMethod.GET.
+			
+		
+		When we define the method, we can try to run the server but we will get an error when we hit the url.
+		The reason is that if we are returning a specific text usin the method, it will throw exception.
+		
+		When the request is made to the dispatcher, it will call the controller method depending upon the sub url.
+			dispatcher -> controller
+		After the method completes its execution, it will return the value to the dispatcher.
+			controller -returns value-> dispatcher
+		Now dispatcher is trying to make sense of the returned value. If it is a simple string or number, it will throw an error.
+		To handler this error, we need to add the @ResponseBody annotation on the method below RequestMapping.
+		
+		@ResponseBody :
+			This annotation will make the spring-mvc and the dispatcher think that the response is not a name of a view, not a name of a url, but is actual value that we want to send back.
+	
+	Configuring view : 
+		For this case, we are going to add a JSP for view.
+		
+		important spring mvc concepts : 
+			1. dispatcher servlet -> the front controller. Controls the flow. It sends the request to a controller.
+			2. controller -> its also called as handler
+					dispatcher gets the request, it sends it to the controller, the controller handles the request and generates an output. This output is sent back to the dispatcher servlet.
+			3. view resolver -> the one which resolves the views
+			4. view -> 
+		In real world application we dont want to send a text back. We want to send a view back. A view is nothing but a JSP.
+		So what we want to do is return the name of the JSP.
+		
+		For the dispatcher server to understand which jsp file to return based on the name of the jsp, we need configure view resolver. The view resolver is responsible for redirecting to appropriate jsp file.
+		
+		configuring view resolver : 
+			1. add a new bean InternalResourceViewResolver.
+			2. in the bean tag we need to add properties for this resolver.
+			3. property name = prefix and its value(this is the value which will be appended in front of the jsp name that is returned by the controller. So the value will be like, '/WEB-INF/views/')
+			4. property name = suffix and its value(this is the value which will be appended at the end of the jsp name that is returned by the controller. So the value will be like, '.jsp')
+			
+			So after the value for the view is resolved, the path would be like, /WEB-INF/views/login.jsp (prefix + name + suffix) 
+			
+			We are going to add this bean to the spring context that we configured in the 3rd step of configuring spring mvc.
+			
+	
+	Architecture of spring mvc : 
+		
+		diagram : 
+			
+										
+										delegate request
+incoming request------>front Controller -----------> controller(handle request, create model)
+return response <------					<---model---
+							| ^			delegate rendering
+							| |			of response
+					return	| model
+					control	| |
+							| |render response
+							v |
+						view template	
+						
+		
+		Most important part is the front controller(dispatcher servlet)
+		It finds the right controller to handle the request. The request url pattern is defined by us in the web.xml file. So any request to the url pattern will be taken up by the dispatcher servlet which will then find the right controller for the request. 
+		The front controller checks the suffix of the url and then checks for the controllers.
+		
+		When the right method is found in the controller, the controller will run the appropriate method and will return which view to be returned to the dispatcher servlet. In this case the view is a JSP.
+		
+		The dispatcher servlet will then use the view resolver that we configured in the context configuration to resolve which view to use. It will find the appropriate JSP and will return it back to the dispatcher servlet.
+		
+		The front controller will then execute the view template and return the response back to the browser.
+		
+		In the example :
+			the front controller was configured in web.xml
+			the controller was defined with the @Controller annotation
+			the view resolver was in contextconfig.xml
+			the view template was login.jsp
+			the servlet engine was tomcat
+		
+		The controller returns one of the following : 
+			1. name of the view 
+			2. model
+			
+	Using model map and @RequestParam : 
+		The controller can send 2 things : 
+			1. name of the view (This is the name of the JSP which gets resolved by the view resolver)
+			2. model
+			
+		Earlier to access the parameters passed to the request, we were using the httpRequest.getParameter("paramName") and then used the setAttribute method to pass it to the JSP, but in spring mvc approach, we use @RequestParam.
+		
+		@RequestParam : 
+			This is a variable level parameter, we need to annotate the method parameter with this annotation in the controller method.
+			eg.
+				@RequestMapping(value = "", method = RequestMethod.GET) 
+				public String method(@RequestParam String name) {}
+			Now the name of the variable should be same as the one in the request. So that the we dont need to set the attribute here. The parameter itself will contain the value from the request.
+		
+		How to send this value coming in as request param to the JSP?
+			as per the architecture diagram of the spring mvc, to pass information from controller to the view, we use modal.
+			How to define a modal and use it?
+				Add one more parameter to the method inside the controller of type ModalMap.
+				Then use the instance of this ModalMap to pass the information to the view.
+				The instance of ModalMap have a method called as put, which takes the name of the attribute and its value.
+				We need to use this to pass the attribute.
+				
+				Eg. 
+					@RequestMapping(value = "", method = RequestMethod.POST)
+					public String method2(@RequestParam String name, ModelMap map) {
+						map.put("nameOfAttribute", name);
+						return "login";	
+					}
+			The reason this works is because the spring framework also makes the model available to the dispatcher servlet.

@@ -214,3 +214,17 @@ mvn commands :
 	mvn dependency:sources : all the source code for all the dependencies will be download to our local machine.
 	
 	All the commands can be ran with a --debug flag. This will run those commands in debug mode which provides more information.
+	
+how to exclude a dependency in pom?
+	we can use the <exclusions> and inside it <exclusion> tag inside the <dependency> tag to exclude a dependency.
+	eg: 
+		<dependency>
+			<groupid></groupid>
+			<artifactId></artifactId>
+			<exclusions>
+				<exclusion>
+					<groupid></groupid>
+					<artifactId></artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>

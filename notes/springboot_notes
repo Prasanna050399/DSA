@@ -1,0 +1,1009 @@
+Spring boot tutorial : 
+	What is RAD ? 
+		RAD or rapid application development is an adaptive software development model based on prototyping and quick feedbackk with less focus on specific planning. In other words it prioritizes the development and building of prototypes rather than planning. 
+		It will focus on the current requirement and will work on implementing it.
+		
+		steps in RAD : 
+			1. define the requirements :
+				It does not sit with the end user like in traditional software development models. It instead asks for a broader set of requirements which helps us to segment specific requirements at different points of the development cycle.
+			2. prototype : 
+				In this phase the prototype is created, but instead of following rigid set of requirements, developers create prototypes with different features and functions as fast as they can. These prototypes contains only key features and the clients decide what they like and what they dont. The final product is only created during the finalization stage where the client and the developer are in alignment with the final product.
+			3. construction : 
+				This is crucial stage and is usually long. Developers and engineers work to create a working system from a working model. Feedbacks and reviews are important in this phase and most of the bugs, issues and alterations are fixed in this stage.
+			4. deployment :	
+				This is the final stage where the product is deployed into a live production environment. This phase includes intensive testing, technical documentation, issue tracking, final customization, system simulation, debugging and running final updates and maintenance before going live.
+		
+		Features of RAD : 
+			1. cost saving
+			2. increased value generation
+			3. reduced risk
+			4. enhanced customer satisfaction
+	
+	
+	what is spring boot?
+		Spring boot is a spring module that provides the RAD(rapid application development) feature to the spring framework.
+		Spring boot is build on top of spring framework.
+		Easy and fast way to configure, setup and run simple and web based applications.
+		
+		Spring uses convention over configuration software design paradigm meaning it decreases the effort of the developer.
+		Spring Boot Extension is Spring's convention-over-configuration solution intended to aid in creating production-grade Spring applications with minimal amounts of configuration
+		
+	NOTE : 
+		SPRING BOOT = SPRING FRAMEWORK + EMBEDDED HTTP SERVERS - XML CONFIGURATION OR @CONFIGURATION
+		
+		
+	Why to use spring boot framework ? 
+		1. spring boot uses dependency injection approach
+		2. contains powerful database transaction management capabilities
+		3. simplifies integration with other frameworks like JPA/Hibernate ORM, struts, etc.
+		4. reduces development cost and time.
+
+	Spring sister projects :
+		1. spring data : simplifies data access
+		2. spring batch : 
+			provides powerful batch processing
+		3. spring security :
+			provides robust security.
+		4. spring social : 
+			supports integration with social networking.
+		5. spring integration :
+			facilitates integration with other enterprise application using lightweight messaging and declarative adapters.
+	
+	Advantages of spring boot : 
+		1. can create stand alone spring applications that we can run using java -jar command
+		2. have embedded http servers therefore, no need to deploy war files which makes it easy to test.
+		3. provides starter poms to simplify our configuration
+		4. provides production ready features.
+		5. no need for xml configuration
+		6. provides cli tool for developing and testing the spring boot application
+		7. offers number of plugins
+		8. minimizes writing of boiler plate code
+		9. increases productivity.
+		
+	Limitations :
+		Spring boot can add dependencies which are not used in the project which unecessarily increase the size of the project.
+		
+	
+	Goals of spring boot :
+		reduce development time
+		reduce testing time
+		reduce integration time
+		Spring boot achieves this by :
+			1. providing opinionated development approach
+			2. avoiding defining more annotation configuration
+			3. avoiding writing lots of import statement
+			6. avoiding xml configuration.
+	
+	features of spring boot : 
+		1. web development :
+			This is a well suited spring module for web application development. It has embedded servers like tomcat and jetty to run the application.
+		2. springApplication :
+			This is a class that provides a convenient way to bootstrap a spring application. It can be started from main method. We can call the application by calling the static run() method.
+		3. application events and listeners
+		4. admin features : 
+			Spring boot provides facilities to enable admin-related feature for the application.
+			It is used to access and manage the application remotely.
+			We can enable this feature in spring boot using the spring.application.admin.enabled property.
+			
+		5. properties file :
+			spring boot provides a rich set of application properties which we can set in properties file. So the properties file helps to organize application properties.
+		6. externalized configuration : 
+			spring boot allows to externalize configuration so that we can work with the same application in different environments. For example same code but the env will change from dev to stage or to local or to prod. The application uses YAML files to externalize conifguration.
+		7. yaml support : 
+			It is an alternative for properties file. YAML provides a convenient way of specifying hierarchical configuration. SpringApplication calls automatically supports YAML.
+		8. type-safe configuration : 
+			strong type-safe configuration is provided to govern and validate the conifguration of the application. ApplicationCOnfiguration is always a crucial task which should be typ
+		9. logging :
+			spring boot uses common loggin for all internal login
+		10. security : 
+			spring boot applications are spring bases web application. 
+			So it is secured by default on http endpoints. A rich set of endpoints is available to develop secure spring boot application.
+			
+			
+			
+Spring vs spring boot vs spring mvc : 
+	
+	spring : it is a java ee framework used to develop applications.
+	spring boot : it is a spring module used to develop rest apis
+	
+	spring : aims to simplify java ee development
+	spring boot : aims to shorten the code length and provide the easiest way to develop web application.
+	
+	spring : primary feature is DI
+	spring boot : primary feature is autoconfiguration. Automatically configures the classes based on requirements.
+	
+	spring : need to add dependencies manually
+	spring-boot : provides starter, that internally takes care of jars based on spring boot requirement.
+	
+	spring : does not support in memory db
+	spring-boot : supports in memory db like H2.
+	
+	spring : contains lot of boiler plate code
+	spring-boot : reduces boiler plate code
+	
+
+
+spring boot architecture : 
+	spring boot follows a layered architecture.
+	Each layer communicates with the layer directly below and above it.
+	There are four layers in spring boot they are :
+		presentation layer :
+			this layer handles the requests, translates the json parameter to object, authenticates the request and transfer the request to the business layer. In short it consists of views i.e, frontend part.
+		business layer :
+			this layer contains business logic. It contains the service classes and uses services provided by data access layer. It performs authorization and validation as well.
+		persistence layer :
+			this layer contains storage logic and translates business objects from and to database rows.
+		database layer :
+			in this layer, CRUD operations are provided.
+			
+	spring boot flow architecture : 
+		Spring boot uses all the modules of spring, like springmvc, spring data, etc. The architecture of spring boot is same as the architecture of spring mvc.
+		the spring architecture contains 6 main components :
+			1. client :
+				the client makes http reqeust to controller.
+			2. controller : 
+				The controller takes this request and maps the request and handles it.
+			3. service layer :
+				In performs business logic in this layer. It performs logic on the data that is mapped to JPA with model classes.
+			4. model
+			5. database
+			6.repository class extending CRUD services.
+		References : 
+		https://www.geeksforgeeks.org/spring-boot-architecture/
+		
+		
+	what is BOM : 
+		BOM stands for bill of material. It is a special kind of POM that is used to control the versions of project dependencies. It provides a central place to define and update those versions.
+		
+	While creating a project on spring initializer, we have to define the project metadata that contains the group name which defines the package name and the artifact name which defines the application name.
+	We also add dependencies in it, these are the artifacts that we can add to our project.
+
+
+	how to create a spring boot project without spring initializer ?
+		1. create a maven project.
+		2. inside the pom file, under the <properties> tag, define the java version that we want to use 
+		3. since we want to create a spring boot project, add the dependency in it.
+			artifactid : spring-boot-starter-parent
+		4. we can also add the spring boot web dependency.
+			artifactid : spring-boot-starter-web
+		5. create a new class
+		6. inside the main method that new class call the static run method of the SpringApplication class and give the class name as the parameter to this run method.
+			SpringApplication.run(className.class)
+		7. We need to annotate the class with @SpringBootApplication annotation.
+		
+		These are the steps to manually create a spring boot application. Now we can run the application by running the class containing the SpringApplication.run method as a java application.
+		If the application starts running without error we get to see the log stating the "started className in x seconds"
+		
+	
+	@SpringBootApplication : 
+		This annotation is used to mark a configuration class that declares one or more bean method and also triggers auto-configuration and component scanning.
+		
+		this single annotation enables the following 3 annotations : 
+			1. @EnableAutoConfiguration : to enable spring boots auto configuration mechanism
+			2. @ComponentScan : It scans the packages for beans
+			3. @Configuration : It enables us to add extra beans in the context or import additional configuration classes.
+			
+spring boot annotations :
+		spring boot annotations are used to provide supplemental information about a program.
+		It does not change the action of the compiled program.
+		It does not have direct effect on the operation of the code they annotate.
+		
+		core spring framework annotation : 
+			
+			@Required : 
+				it applies to the bean setter method. It indicates that the annotated bean must be populated at configuration time with the required property, else it will throw an exception stating BeanInitializationException.
+			
+			@Autowired : 
+				Spring provides annotation based auto-wiring by providing @Autowired annotation. 
+				We can use this annotation on instance variable, setter method and constructor.
+				When we use the @Autowired annotation, the spring container auto-wires the bean by matching data-type.
+			
+			@Configuration :
+				This is a class level annotation that is used to define that the class is a source of bean definition for the spring container
+			
+			@ComponentScan :
+				This annotation is used along with the @Configuration annotation to scan for the packages for beans.
+				We can define the base package to scan for spring components using this annotation.
+				
+			@Bean :
+				This is a method level annotation that is used to tell the spring container that the following method is returning a bean instance.
+				It is an alternative of XML tag.
+				
+		Spring framework stereotype annotation : 
+			@Component :
+				This is a class-level annotation. 
+				It is used to mark the class as a bean for the spring context to manage.
+				The spring framework pick it up and configure it in the application context as a spring bean.
+			@Service :
+				It is also a class level annotation and is a specialization of the @Component annotation. This annotation is used to define that the class contains business logic.
+			@Repository :
+				It is also a class level annotation and is a specialization of @Component annotation. 
+				This annotation defines that the class is a repository.
+				The repository is a DAO (data access object) that access the database directly.
+				The repository does all the operations related to the database.
+			@Controller :
+				This is also a class level annotation. 
+				It is a specialization of the @Component annotation.
+				It marks a class as a web request handler. It is often used to serve web pages.
+				It is mostly used with @RequestMapping annotation.
+				
+		Spring boot annotations : 
+			@EnableAutoConfiguration :
+				It enables the autoconfiguration feature of the spring context. Meaning it will auto-configure the bean that is present it the classpath and configures it to run the method.
+				From spring boot 1.2.0, it was added under the @SpringBootAnnotation.
+			@SpringBootApplication :
+				It is used to mark the configuration class that declares one or more @Bean methods and also triggers auto-configuration and component scanning.
+				It is a combination of multiple annotations, @Configuration, @ComponentScan, @EnableAutoConfiguration
+		
+		Spring MVC and REST annotation : 
+			@RequestMapping :
+				It is used to map the web requests.
+				It has many optional elements like :
+					consumes
+					header
+					method
+					name
+					params
+					path
+					produces
+					value
+				This is a class level as well as method level annotation therefore, we can use it with both method and class.
+			
+			@GetMapping : 
+				maps http get request on specific handler method. 
+				Used to create a web service endpoint that fetches 
+				Used instead of @RequestMapping(method = RequestMethod.GET)
+			
+			@PostMapping :
+				maps http post request on specific handler method. 
+				Used to create a web service endpoint that creates 
+				used instead of @RequestMapping(method = RequestMethod.POST)
+			
+			@PutMapping : 
+				maps http put request on specific handler method.
+				Used to create a web service endpoint that creates or updates.
+				Used instead of @RequestMapping(method = RequestMethod.PUT)
+			
+			@DeleteMapping :
+				maps http delete request on specific handler method.
+				Used to create a web service endpoint that deletes.
+				Used instead of @RequestMapping(method = RequestMethod.DELETE)
+			
+			@PatchMapping :
+				maps http patch request on specific handler method.
+				used instead of @RequestMapping(method = RequestMethod.PATCH)
+				http patch method is used for making partial changes to an existing resource.
+			
+			@RequestBody :
+				Used to bind the http request body with an object in a method parameter.
+				it uses the messageConverters to convert the body of the request.
+				This is a variable level annotation and that to for the parameter of the method. When the parameter of the method is annotated as @RequestBody, the http request body is mapped to it.
+			
+			@ResponseBody : 
+				It binds the method return value to the response body. 
+				This annotation tells spring framework to serialize and return an object as a JSON or XML format.
+			
+			@PathVariable : 
+				This is a variable level parameter. It is used to extract the values from url.
+				We can use this annotation multiple times in a method.
+			
+			@RequestParam : 
+				This is a variable level annotation. It is used to extract query parameters from the url. It can be used to set the default values if the query parameters are not present in the url.
+			
+			@RequestHeader :
+				Used to get the request headers. 
+				this is a method level annotation.
+				The optional elements of the annotation are name, required, value, defaultValue.
+				For each header we should specify separate annotations. 
+				We can use this annotation multiple times in a method.
+			
+			@RequestController : 
+				This is a combination of @Controller and @ResponseBody annotation.
+				This is a class level annotation
+				It eliminates the need to put @ResponseBody annotation on each method.
+			
+			@RequestAttribute :
+				binds method parameters to request attribute.
+				provides convenient access to request attributes from a controller method.
+				Using this annotation, we can access objects that are populated on server side.
+				
+
+Spring boot dependency management : 
+	Spring boot manages dependencies and configuration automatically. 
+	Spring boot allows overriding dependencies version if required.
+	Advantages : 
+		provides centralization of dependency information by specifying the spring boot version in one place.
+		avoids mismatch of different versions
+	
+	Maven dependency management system : 
+		We define the following parent dependency in the <parent> tag of the pom.xml file : 
+			spring-boot-starter-parent
+		The maven project inherits the following features from spring-boot-starter-parent : 
+			java compiler version
+			utf-8 source encoding
+			This inherits the dependency section from the spring-boot-dependency-pom. It manages the version of common dependencies.
+			dependencies, inherited from parent pom
+			We can override an individual dependency by overriding a property. To do this, we need to inject that dependency again inside the <properties> tag to override the previous one.
+		
+		We can change the java version by using the <java.version> tag.
+		We can also add maven plugin in our pom.xml file. It wraps the project into executable jar file.
+		
+		spring boot without using parent POM : 
+			If we don't want to use spring-boot starter-parent dependency, but still want to take advantage of the dependency management, we can use <scope>
+			eg : 
+				<dependencyManagement>
+					<dependencies>
+						<dependency>
+							<groupId>org.springframework.boot</groupId>  
+							<artifactId>spring-boot-dependencies</artifactId>  
+							<version>2.2.2.RELEASE</version>  
+							<type>pom</type>  
+							<scope>import</scope>  
+						</dependency>
+					</dependencies>
+				</dependencyManagement>
+		
+			To override dependency, we need to add the dependency in the dependency section before the main dependency
+			eg.
+				<dependencyManagement>
+					<dependencies>
+						<dependency>
+							override dependency
+							<scope>import</scope>
+						</dependency>
+						<dependency>
+							overridden dependency 
+						</dependency>
+					</dependencies>
+				</dependencyManagement>
+		
+	
+spring boot application properties :
+	Spring boot provides a built in mechanism for application configuration using a file called application.properties.
+	This file is under src/main/resources folder.
+	we can configure various properties inside the application.properties.
+	We can define our own properties in this file or we can set values for property of spring boot application.
+	
+	used to run an application in different environment.
+	
+	The application properties do 2 things,
+		1. configure spring boot framework
+		2. define our application custom configuration properties.
+		
+	Spring boot provides another way to configure the properties called yml file.
+	The YAML file works because the Snake.YAML jar is present in the classpath.
+	So we can use the yaml file instead of application.properties file. The only thing required is that the YAML file should be present in the classpath.
+	
+	
+
+spring boot property categories :
+	total 16  :
+		1. core properties
+		2. cache properites
+		3. mail properties
+		4. json properites
+		5. data properties
+		6.transaction properites
+		7. data migration properties
+		8. integration properites
+		9. web properties
+		10. template properties
+		11. server properites
+		12. security properites
+		13. RSocket properites
+		14. actuator properties
+		15. devTools program
+		16. testing properites
+		
+Spring boot starters : 
+	Spring boot starters are the dependency descriptors.
+	Spring boot provides a number of starters that allow us to add jars in classpath.
+	Spring starters have a similar naming pattern :
+		spring-boot-starter-*
+	Spring boot starters are not used to include third party dependencies.
+	Spring boot starter is reserved for official spring boot artifacts.
+	Third party starters have the following pattern :
+		projectName-spring-boot-starter
+
+spring boot starter parent :
+	Spring boot starter parent is a project starter, it gives default configuration for our application.
+	All spring boot projects use spring boot starter parent as a parent in pom.xml file.
+	All the dependencies use this internally.
+	
+	parent pom helps us manage the following things for multiple child projects and modules : 
+		1. configuration : maintains consistency of java version and other related properties.
+		2. dependency management : controls versions to avoid conflicts
+		3. source encoding
+		4. default java version
+		5. resource filtering
+		6. controls default plugin configuration.
+		
+	spring-boot-starter-parent have spring-boot-dependencies as its parent pom.
+	
+	the properties section defines the application default values.
+	<java.version> : overrides java version.
+	
+	spring-boot-starter-parent specifies the default configuration for a host of plugins including maven-failsafe-plugin, maven-jar-plugin and maven-surefire-plugin
+	
+	Spring-boot-starter-parent dependency inherit from the spring-boot-dependencies, it shares all these characteristics as well. Hence SB manages the list of dependencies as a part of dependency management.
+	If we dont want to use spring boot starter parent then we can use the dependencies individually along with the <scope> tag.
+	
+spring boot starter web : 
+	two important features for spring boot starter web : 
+		1. it is compatible for web development
+		2. auto configuration
+	
+	spring-boot-starter-web transitively pull all the dependencies that are related to web development.
+	It uses spring mvc, rest and tomcat as embedded server.
+	it transitively depends on : 
+		spring-boot-starter
+		spring-boot-starter-tomcat
+		spring-boot-starter-validation
+		jackson-databind
+		spring-web
+		spring-webmvc
+	
+	spring-boot-starter-web auto-configures the following things that are required for web development :
+		1. dispatcher servlet
+		2. error page
+		3. web jars for managing the static dependencies
+		4. embedded servlet container
+	
+	spring boot embedded web server : 
+		each spring boot application have embedded server. It is a part of deployable application. We dont need to install a server in the environment. The default embedded server is tomcat. It also supports :
+			jetty -> spring-boot-starter-jetty
+			undertow -> spring boot-starter-undertow
+		
+		Jetty server : 
+			http server and servlet container that is capable of serving static and dynamic content. 
+			Used when machine to machine communication is required.
+		
+		NOTE : WHILE USING JETTY, WE NEED TO EXCLUDE TOMCAT FROM STARTER-WEB TO AVOID CONFLICT BETWEEN SERVERS.
+		
+		Undertow server :
+			written in java and managed and sponsored by JBoss. 
+			advantage of undertow server : 
+				1. support http/2
+				2. http upgrade support
+				3. websocket support
+				4. provides support for servlet 4.0
+				5. flexible
+				6. embeddable
+		NOTE : SIMILAR TO JETTY, WHILE USING UNDERTOW, WE NEED TO EXCLUDE TOMCAT FROM THE STARTER-WEB DEPENDENCY TO AVOID CONFLICT.
+		
+		starter-web vs starter-tomcat : 
+			starter-web contains alld the dependencies required for web development which includes tomcat as well.
+			starter-tomcat includes all the dependencies related to tomcat.
+			starter-web includes : 
+				spring-boot-starter
+				jackson
+				spring-core
+				spring-mvc
+				spring-boot-starter-tomcat
+			starter-tomcat includes : 
+				core
+				el
+				logging
+				websocket
+classpath : 
+	class path is a path where the java virtual machine look for user defined classes, packages and resources in java program.
+	
+how to exclude a dependency in pom?
+	we can use the <exclusions> and inside it <exclusion> tag inside the <dependency> tag to exclude a dependency.
+	eg: 
+		<dependency>
+			<groupid></groupid>
+			<artifactId></artifactId>
+			<exclusions>
+				<exclusion>
+					<groupid></groupid>
+					<artifactId></artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+spring data jpa :
+	spring data is a high-level spring source project which aims to unify and ease access to the different kinds of persistence stores, both relational and nosql data stores.
+	main aim should be business logic and not boiler plate code and technical complexity.
+	
+	spring data jpa adds a layer on top of JPA. It means that spring data jpa uses all features defined by JPA specification, especially the entity, association mapping and jpa's query capabilities.
+	
+	spring data jpa adds its own features such as the no-code implementation of the repository pattern and the creation of database queries from the method name.
+	
+	spring data jpa handles most of the complexity of JDBC-based database access and ORM.
+	reduces boilerplate code required by JPA.
+	faster and easier implementation of persistence layer.
+	aims to improve the implementation of data access layers by reducing the efforts.
+	
+	features : 
+		1. no code repository :
+			enables us to implement our business layer at higher abstraction level
+		2. reduced boilerplate code 
+		3. generated queries : If the query is not too complex, we need to define a method on our repository interface with the name that starts with findBy. Spring parses the method name and creates a query for it.
+		4. can integrate custom repository code
+		5. is a powerful repo and custom object-mapping abstraction
+		6. supports transparent auditing
+		7. implements domain base class that provides basic properites
+		8. supports several modules such as data jpa, data mongodb, rest, cassandra
+		
+		
+	spring data repository :
+		spring data jpa provides 3 repository :
+			1. crudRepository :
+				it offers standard create, read, update and delete. It has methods like findOne(), findAll(), save(), delete(), etc.
+			2. pagingAndSortingRepository :
+				extends crudRepository and adds findAll methods. 
+				allows to sort and retrieve paginated data
+			3. JpaRepository :
+				JPA specific repository.
+				defined in spring data jpa.
+				extends both the crudRepository and pagingAndSortingRepository.
+				adds methods like flush() to trigger a flush on the persistence context.
+				
+				
+	spring boot starter data jpa : 
+		to connect spring application with relational database, spring boot provides spring-boot-starter-data-jpa.
+		spring-boot-starter-data-jpa internally uses spring-boot-jpa dependency from SB version 1.5.3
+		
+		In jpa, we store the data from objects into table and vice-versa.
+		JPA allows us to map application classes to table in the database.
+			Entity manager : after the mapping is defined, it handles all the interactions with the database.
+			JPQL(java persistence query language) : provides a way to write queries to execute searches against entities. Different than sql queries, JPQL queries already understand the mapping that is defined between entities. can add additional conditions.
+			criterial API : provides java based apis to execute searches against the db.
+			
+			
+	hibernate vs jpa :
+		hibernate is an implementation of jpa. 
+		Hibernate is most popular ORM framework.
+		JPA is an api that defines the specification.
+		Hibernate understands the mapping that we add between objects and tables. 
+		Ensures data is stored and retrieved from the database based on the mapping.
+		Provides additional features on top of JPA.
+		
+
+spring boot starter actuator: 
+	in sb, actuator is the subproject of spring boot framework.
+	It includes a number of aditional features that help us to monitor and manage the SB applications.
+	We can use http and jmx endpoints to manage and monitor the SB application.
+	For production ready features in an application, we should use spring boot actuator.
+	
+	features : 
+		3 main features :
+			endpoints :
+				actuator endpoints allows us to monitor and interact with the application.
+				spring boot provides a number of built-in endpoints.
+				can create our own endpoint
+				can enable and disable each endpoint individually.
+			metrics : 
+				actuator provides dimensional metrics by integrating with the micrometer.
+				it is an instrumentation library powering the delivery of application metrics from spring.
+				provides vendor neutral interfaces for timers, gauges, counters, distribution summaries and long task timers with a dimensional data model.
+			audit : 
+				provides a flexible audit framework that publishes events to an auditEventRepository.
+				Automatically publishes the authentication events if spring-security is in execution.
+	
+	To enable actuators we need to add spring-boot-starter-actuator dependency in pom.xml file.
+	
+	spring boot enables security for all actuator endpoints.
+	We need to override this configuration by management.security.roles property.
+	
+spring boot starter test :
+	primary dependency for test
+	contains majority of elements required for tests
+	
+	NOTE : IF WE ARE ADDING TEST DEPENDENCY MANUALLY, ADD IT TO THE BOTTOM OF THE POM FILE.
+	
+	Also while adding the test dependencies we can add the scope as test.
+		<scope>test</scope>
+	This means that when the application is bundled and packaged for deployment, dependencies with scope as test will be ignored and are available only when running in development and maven test modes.
+	
+	
+	The test class contains two annotations : 
+		1. @SpringBootTest :
+			It is applied on a test class.
+			It uses springBootContextLoader as the default contextLoader if no specific @ContextConfiguration(loader=..) is defined
+			Automatically searches for a @SpringBootConfiguration when nested @Configuration is not used, and no explicit classes are specified.
+			Provides support for different webEnvironment modes.
+			It registers a testRestTemplate or webTestClient bean for use in web tests that are using the webserver.
+			Allows application arguments to be defined using the args attribute.
+		2. @Test : 
+			used to denote that the following method is a test method.
+
+spring boot devTools : 
+	devTools stand for developer tool. 
+	aims to try and improve the development time while working with the spring boot application.
+	spring boot devTools pick up the changes and restart the application automatically.
+	
+	to implement the devTools, we just need to add the dependency in the pom file
+	
+	<dependency>  
+		<groupId>org.springframework.boot</groupId>  
+		<artifactId>spring-boot-devtools</artifactId>  
+		<scope>runtime<scope >  
+	</dependency>
+	
+	features of spring boot devTools : 
+		property defaults : 
+			when we use devTools, we dont need to set the properties. For example, we dont need to set the property for disabling caching for thymeleaf, freemarker, groovy templates etc.
+			NOTE : IF WE DONT WANT TO APPLY PROPERTY DEFAULTS ON AN APPLICATION, WE CAN SET CONFIGPROP:SPRING.DEVTOOLS.ADD-PROPERTIES[] TO FALSE IN THE APPLICATION.PROPERTIES FILE.
+		automatic restart : 
+			auto restart means reloading java classes and configure it at server side. 
+			When there are changes in the source code, it restarts the server and deploy the latest code.
+			mostly used for microservice based application.
+			Two types of classLoaders :
+				1. base classLoader for loading classes that do not change(third party jars)
+				2. restart classLoader for loading classes that are actively developed.
+			when application restarts, restart classloader is emptied and the populated again, but the base classLoader remains as is.
+			
+			NOTE : 
+				TO DISABLE THE AUTO-RESTART OF A SERVER WE CAN USE THE PROPERTY :
+					SPRING.DEVTOOLS.RESTART.ENABLED = FALSE
+			
+			devtools monitor the classpath resources.
+			the restart only happens when the classpath is updated
+			devtools require a separate classpath to work properly.
+			devtools depend on application context's shutdown hook to close it during the restart.
+		liveReload : 
+			DevTools include an embedded server called liveReload.
+			It allows the application to automatically trigger browser refresh whenever we make changes in the resources.
+			Also known as auto-refresh.
+			NOTE : 
+				WE CAN DISABLE THE LIVERELOAD BY SETTING THE PROPERTY :
+					SPRING.DEVTOOLS.LIVERELOAD.ENABLED = FALSE
+			
+			only one livereload server can be ran at a time
+			we need to ensure that no other server is running
+			only first reload server is supported at a time
+			
+		Remote debug tunneling : 
+			SB can tunnel JDWP over HTTP directly to the application.
+		Remote update and restart : 
+			devtools monitor local classpath for file changes and pushes them to a remote server, which is then restarted.
+			
+	Trigger-file :
+		automatic restart can sometimes slow down development time due to frequent restarts. To solve this problem, SB monitors a trigger file and detects modifications to that file. When this file is changed, it restarts the server.
+		To implement trigger file update, we need to set the following property : 
+			spring.devtools.restart.trigger-file : filePath/fileName
+			
+	NOTE : 
+		DEVTOOLS ARE AUTOMATICALLY EXCLUDED WHEN IN PRODUCTION USING THE JAR PACKAGING. SO WE DONT NEED TO MANUALLY REMOVE THEM. 
+		WE CAN ALSO EXCLUDE THEM USING THE EXCLUDEDEVTOOLS BUILD PROPERTY.
+		
+Spring boot multi-module project : 
+	what is a multi-module project ? 
+		A SB project that contains nested maven project is called the multi-module project.
+		in multi-module project, the parent project works as a container for base maven configurations.
+		a multi-module project is built from a parent pom that manages a group of submodule. Or a multi-module project is defined by a parent pom referencing one or more submodules
+		
+	The parent maven project must contain the packaging type pom that makes the project as aggregator.
+	For this consider the example of pipeline management, the parent pom has the packaging type as pom : 
+		<packaging>pom</packaging>
+	
+	
+	The parent pom file contains all the modules, common dependencies and properties that are inherited by the child projects. The parent pom is located in the project's root directory.
+	Child modules are actual spring boot projects that inherit the maven properties from the parent project.
+	
+	When we run the multi-module project, all the modules are deployed together in an embedded tomcat server.
+	individual module can also be deployed.
+	
+	Parent pom : 
+		it defines the group id, artifact id, version and packaging.
+		packaging is defined as pom which refers to other maven projects.
+	
+	need for multi-module project ? 
+		makes it easy to maintain 
+		we can easily edit and remove the modules as and when needed without affecting the other modules
+		useful when we need to deploy the modules individually
+		dependencies are easily maintained because the they are inherited from the parent pom.
+		
+	child modules -> EAR, WAR, JAR : 
+		child module can be any project that can have any packaging.
+		we are free to create any type of dependency between modules and bundle them together
+		For example, we are creating an EAR (Enterprise ARchive), WAR (Web ARchive), and JAR (Java ARchive) file.
+	
+	maven child projects/modules : 
+		the child projects are independent maven projects that share properties from the parent project.
+		they can be built with a single command because they are inside one big parent container
+		easy to define relationship between projects.
+	
+	multi-module project directory structure : 
+		the structure contains : 
+			parent pom
+			src folder for parent project
+			maven dependencies
+			target folder
+			childModuleFolder1
+			childModuleFolder2
+			
+		The parent pom is similar to any other spring boot project.
+		Only change is that it contains the packaging type as pom instead of jar.
+		And one more thing is that the it contains a modules section. 
+		This section is automatically configured by spring boot when we create a maven module in the project.
+		the modules section is as follows : 
+			<modules>
+				<module>module1</module>
+				<module>module2</module>
+			</modules>
+			
+		child pom file :
+			this file does not contain common dependencies like the starter-web, web-mvc etc
+			it inherits it from the parent pom
+
+
+spring boot packaging : 
+	In J2EE the application modules are packed in following compressed file formats :
+		EAR : 
+			enterprsie archive
+			ear file represents enterprise application
+			the above two files are archived as jar files with .ear extension.
+			deployed into application server
+			can contain multiple EJB(JAR) and WEB(WAR) modules.
+			it is a special jar that contains an application.xml filein the meta-inf folder
+		WAR : 
+			Web archive.
+			represents web applications
+			module contains servlet classes, JSP files, html files, js, etc. which are packaged as a JAR file with .war extension.
+			contains special directory called WEB-INF
+			
+			WAR module loads into a web container of java application server. The application server has two containers : 	
+				web container :
+					it hosts the web application based on servlet API and JSP.
+					modules should be packaged as war for this
+					it is a war file special jar file that contains a web.xmlv file in the web-inf folder
+				ejb container :
+					it hosts enterprise java beans based on EJB api.
+					requires EJB modules to be packaged as a JAR file.
+					contains an ejb-jar.xml file in the meta-inf folder
+			
+			advantage : 
+				easily deployed on client machine in a web server environment
+			needs web server or web container to execute war file
+			example of web container:
+				tomcat
+				weblogic
+				websphere
+		JAR :
+			java archive
+			An EJB module that contains bean files, a manifest and EJB deployment descriptor are packaged as JAR files with the extension .jar. 
+			Used to distribute java classes and various metadata
+			In other words a file that encapsulates one or more java classes, a manifest and descriptor is called jar file.
+			lowest level of archive
+			used in J2EE for packaging EJB and client-side java applications
+			makes it easy to deploy
+
+spring boot auto-configuration :
+	SB automatically configures the spring application based on the jar dependencies that we have added
+	For example, if the H2 database Jar is present in the classpath and we have not configured any beans related to the database manually, the Spring Boot's auto-configuration feature automatically configures it in the project.
+	
+	to enable autoconfiguration we need to annotated the main class with @EnableAutoConfiguration annotation. But this annotation is wrapped inside @SpringBootApplication annotation therefore we dont need to specify it explicitly.
+	
+	When we add spring-boot-starter-web, SB auto-configuration looks for the spring mvc on the classpath. It then auto-configures dispatcherServlet, a default error page, and web jars.
+	similarly for spring-boot-starter-data-jpa, it auto-configures a datasource and an entity manager.
+	
+	NOTE : THE AUTO-CONFIGURATION LOGIC IS INSIDE THE SPRING-BOOT-AUTOCONFIGURE.JAR
+	
+	We need auto-configuration because in its abscence, we need to configure each bean individually.
+	
+	Disabling auto-configuration : 
+		Disabling using the annotation : 
+			we can use the exclude property for excluding the classes.
+			This property can be used with both the @SpringBootApplication annotation and @EnableAutoConfiguration annotation.
+			@SpringBootApplication(exclude = {
+				className.class,
+				className.class
+			})
+		Disabling using the property file : 
+			we can disable the auto-configure for a class using the following property in the property file : 
+				spring.autoconfigure.exclude = \className,\className
+				
+	Debugging auto-configuration : 
+		1. turning on debug logging :
+			adding the following property in the application properties :
+				logging.level.org.springframework: DEBUG
+			
+			Now the logs contain a section called as auto configuration report.
+			The report includes all the classes that are auto-configured.
+			It have 2 sections : 
+				1. positive matches :
+					classes which were matched
+				2. negative matches
+					classes which were not matched
+		2. using spring boot actuator
+			we need to add the spring-boot-starter-actuator dependency.
+			we can then use the 
+				/actuator/beans 
+			endpoint to see the beans info that is auto-configured and that is not.
+
+project deployment using tomcat : 
+	how to deploy SB application using tomcat server ?
+		steps :
+			1. setting up spring boot application : set up the application and create a controller which will return a simple string
+			2. create a spring boot war : 
+				The spring framework's servlet 3.0 support is used which allows us to configure application when the servlet container launches it.
+				Steps to create a WAR : 
+					1. extend the springBootServletInitializer class in the main class.
+					2. override the configure method of springBootServletInitializer in the main class. We tell spring to build the sources from the main class : 
+						@Override
+						protected SpringApplicationBuilder configure(SpringApplicationBuilder application)   
+						{  
+							return application.sources(SpringBootWarDeploymentExampleApplication.class);  
+						} 
+					3. configure the packaging to WAR
+					4. build the package : 
+						mvn package
+						This will generate the war file in the target folder.
+			3. deploying that war to tomcat : 
+				1. add the dependency for tomcat with scope as provided
+				2. we can change the name of the war file by using the <finalName> tag.
+				3. To deploy the war file on tomcat : 
+					1. install apache tomcat server
+					2. copy the WAR file from the target folder and paste it inside the webapps folder of the tomcat folder.
+					eg : 
+						C:\Program Files\Apache Software Foundation\Tomcat 8.5\webapps  
+					3. Go in the tomcat installed directory, inside the bin folder and open cmd. Then execute the startup command.
+					eg. : 
+						C:\Program Files\Apache Software Foundation\Tomcat 8.5\bin> startup
+					4. The startup command starts the tomcat server and deploys the war file
+					The server is now running 
+			We can now access the server using the localhost:8080 : eg. http://localhost:8080/web-service/urlpath
+
+spring boot AOP : 
+	Java application has the following layers :
+		1. web layer : exposes the services using the REST or web application.
+		2. business layer : implements the business logic
+		3. data layer : implements the persistence logic
+
+	even though the functionality of all the layers is different, but there are some aspects that apply to all the layers like logging, security, validation, caching, etc. These common aspects are called cross-cutting concerns.
+	
+	To avoid duplicate implementation of the same code for each layer, we have aspect-oriented programming. AOP provides a solution to implement cross-cutting concerns.
+	It does so using the following steps : 
+		1. implement the cross-cutting concern as an aspect
+		2. defining pointcuts to indicate where the aspect has to be applied.
+	This ensures that the code is one cohesive component.
+
+
+	AOP : 
+		programming pattern
+		increases modularity by following the separation of cross-cutting concerns
+		cross-cutting concerns are different than bussiness logic
+		adding additional behavior to the code without modifying the code itself.
+		
+		Springs aop framework helps implementing these cross-cutting concerns.
+	
+		aspects are the classes where the cross-cutting concerns are implemented.
+		Using aop all the common functionality is in one place.
+		we can define how and where to apply the additional functionality.
+	
+	benefits of aspects : 
+		1. all the logic for a concern is in one place. Instead of in different classes
+		2. business layer consist of only the business logic. Secondary concern is moved to the aspect.
+		2. business layer consist of only the business logic. Secondary concern is moved to the aspect.
+	
+	apects have responsibility that is to be implemented, called advice.
+	The aspect's functionality can be implemented into program at any and at one or more join points.
+	
+	benefits of AOP :
+		implemented in pure java
+		no requirement for special compilation processing
+		supports only method execution join points
+		run time weaving is available
+		two types of AOP proxy available JDK dynamic proxy and CGLIB proxy.
+	
+	AOP terminology :
+		aspect : 
+			module that encapsulates advice and pointcuts and provides cross-cutting.
+			can have multiple number of aspects.
+			Aspect is a normal class with @Aspect annotation.
+		pointcut : 
+			expression that selects one or more join points where  advice is executed.
+			can define pointcuts using expression or patterns
+			in spring framework, AspectJ pointcut expression language is used.
+		join point : 
+			join point is a point in application where we want to apply AOP aspect.
+			or it is a specific execution instance of an advice.
+			In AOP join point can be method execution, exception handling, changing object variable value, etc.
+		advice  :
+			advice is an action that we take at join point.
+			action is a piece of code that invokes during program execution
+			five types of advices in spring AOP :
+				before : 
+					executed before the join point
+				after : 
+					executed after the join point
+				after-returning :
+					executed after method execution was successful
+					We can access the return value in the advice. We need to add one more parameter to the method which corresponds to the name of the variable returned by the join point method.
+					@AfterReturning(value="execution()", returning="name of the returning attribute" )
+				after-throwing : 
+					executed if the method execution threw exception
+					@AfterThrowing(PointCut="execution()", throwing = "name of the exception to be returned")
+					The name (ex) that we define in the throwing attribute must correspond to the name of a parameter in the advice method. Otherwise, advice will not run.
+				around advice : 
+					executed before and after method execution
+					this is most powerful advice.
+					We use the ProceedingJoinPoint as a parameter to the advice method.
+					The parameter.proceed() method is used to continue the execution of the join point method.
+					So the idea is like : 
+						code we want to execute before join point
+						proceedingJoinPoint.proceed();
+						code we want to execute after join point.
+		target object : 
+			object on which the advices are applied.
+			target object are always proxied, meaning a subclass is created at run time in which the target method is overridden and advices are included based on their configuration.
+		Weaving : 
+			process of linking aspects with other application types.
+			we can perform weaving at run time, load time and compile time.
+	
+	difference between AOP and OOP :
+		https://www.javatpoint.com/spring-boot-aop
+	differnece between spring AOP and AspectJ : 
+		https://www.javatpoint.com/spring-boot-aop
+		
+	
+	To implement AOP in application, we are required to add the Spring AOP dependency in pom.xml :
+		spring-boot-starter-aop
+	This dependency provides spring aop and aspectJ
+	Spring AOP provides basic AOP capabilities. 
+	AspectJ provides complete AOP framework
+	
+	We need to annotate the main class with the @EnableAspectJAutoProxy(proxyTargetClass=true) annotation.
+	
+	@EnableAspectJAutoProxy : 
+		This annotation enables support for handling components marked with AspectJ's @Aspect annotation.
+
+Spring boot jpa : 
+	SB JPA is a java specification for managing relational data in java applications.
+	JPA follows ORM(object relation mapping)
+	It is a set of interfaces.
+	uses platform independent object oriented query language JPQL(java persistent query language)
+	The main advantage of jpa over jdbc is that, in JPA, the data is represented in terms of objects and classes while in JDBC it is represented by tables and records. 
+	JPA uses POJO to represent persistent data that simplifies database programming.
+	
+	advantages of JPA : 
+		1. avoids writing DDL in database specific dialect of sql. Instead allows mapping in XML or using java annotations.
+		2. avoids writing DML in the database-specific dialect of sql
+		3. allows to save and load objects and graphs without using DML languages
+		4. while writing queries in JPQL, allows to express queries in terms of java entities rather than the sql table and columns.
+		
+	features of jpa : 
+		1. it is a powerful repository and custom object mapping abstraction
+		2. supports cross-store persistence. Meaning an entity can be partially stored in MySQL and Neo4j
+		3. dynamically generates queries from queries methods name
+		4. domain base classes provide basic properites
+		5. supports transparent auditing
+		6. possibility to integrate custom repository code
+		7. easy to integrate with spring framework with custom namespace
+		
+	architecture of jpa : 
+		jpa is a source to store business entities as relational entities.
+		shows how to manage POJO as an entity and how to manage entity with relation
+		
+		class level architecture of jpa : 
+			the core classes and interfaces of jpa is defined in the javax persistence package.
+			jpa architecture contains following units : 
+				
+				Persistence : 
+					Class that contains static methods to obtain instance of entityManagerFactory instance
+				EntityManagerFactory :
+					factory class for EntityManager.
+					creates and manages mulitple instances of entityManager class.
+				EntityManager :
+					Its an interface
+					controls the persistence operations on objects.
+					works for the query instance
+				Entity : 
+					The entities are the persistence objects stored as a record in the database
+				Persistence Unit :
+					defines set of all entity classes
+					In an application, EntityManager instance manages it.
+					Set of entity classes represents the data contained within a single data store.
+				EntityTransaction :
+					for each entityManager, operations are maintained by entityTransaction class.
+				Query : 
+					This is an interface that is implemented by each JPA vendor to obtain relation objects that meet the criteria.
+			
+			all the units except entity, are part of javax.persistence
+			
+		JPA class relationships : 
+			
+swagger :

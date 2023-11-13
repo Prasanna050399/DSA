@@ -1025,5 +1025,5 @@ instance variable hiding :
 	It is illegal to have two variables with the same name in a same scope as per java.
 	But we can have local variables which include formal parameters with the same name as that of the instance variable. 
 	In this case the local variables hide the instance variables.
-	Because this keyword allows us to access the object variable, we can it to resolve any namespace collision that might occur between instance variables and local variables.
+	Because this keyword allows us to access the object variable, we can use it to resolve any namespace collision that might occur between instance variables and local variables.
 	Therefore, we can use this keyword to overcome instance variable hiding.
