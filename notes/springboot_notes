@@ -1005,5 +1005,124 @@ Spring boot jpa :
 			all the units except entity, are part of javax.persistence
 			
 		JPA class relationships : 
+			entityManager and entityTransaction -> one to one
+			entityManagerFactory and entityManager -> one to many
+			entityManager and query -> one to many (can execute any number of queries by using an instance of entityManager)
+			entityManager and entity -> one to many (one entityManager instance can manage multiple entities)
+		JPA implementation :
+			jpa is an open source API.
+			Hibernate, EclipseLink, DataNucleus are implementations of JPA.
+			It is also known as ORM(Object relation mapping) tool.
+		
+		ORM (Object relation mapping) : 
+			Mapping of java objects to database tables, and vice-versa is called as object relational mapping.
+			The ORM mapping works as a bridge between a relational database and java application.
+			The ORM is an adaptor layer between the language of object graphs to the language of SQL table.
+			ORM layer is between the application and the database.
+			It converts the java classes and objects so that they can be stored and managed in relational database. 
+			By default the name that persists becomes the table name and the fields become the columns.
+			Each row in the table becomes an object.
+	JPA vs hibernate : 
+		https://www.javatpoint.com/spring-boot-jpa
+	
+	To connect SB application with relational database efficiently, we have spring-boot-starter-data-jpa dependency.
+	spring-boot-starter-data-jpa internally uses spring-boot-jpa dependency
+	
+	Apache derby : 
+		open source, embedded relational database implemented entirely in java.
+		available under apache 2.0 license.
+		advantages of apache derby : 
+			1. easy to install, deploy and use
+			2. based on java, jdbc and sql standards
+			3. provides embedded JDBC driver that allows us to embed derby in any java-based application
+			4. supports client/server mode with derby network client JDBC driver and derby network server.
+		We can integrate derby database just by adding derby dependency in pom.xml file.
+		Rest of the configuration is similar to our multi omics project.
+		create a model
+		create an interface and extend CrudRepository
+		use this interface to access the db in service
+	SB can auto-configure an embedded database such as H2, HSQL and DerbyDatabases.
+	We do not need to provide any connection URLs. All we need to do is include a build dependency on the embedded database that we want to use.
+	
+Spring boot jdbc : 
+	SB JDBC provides starter and libraries for connecting an application with JDBC.
+	In SB JDBC, the database related beans such as dataSource, jdbcTemplate and NamedParameterJdbcTemplate auto-configures and created during startup.
+	We can auto-wire these classes if we want to use it.
+	
+	JDBC connection pooling : 
+		JDBC connection pooling is a mechanism that manages multiple database connection requests.
+		In other words, it facilitates connection reuse, a memory cache of database connections, called a connection pool.
+		A connection pooling module maintains it as a layer on top of any standard JDBC driver product.
+		it increases the speed of data access and reduces the number of database connections for an application.
+		Connection pool performs the following tasks :
+			manage available connection
+			allocation new connection
+			close connection
+		
+		HikariCP : 
+			The default connection pool in spring boot 2 is HikariCP.
+			It provides enterprise-ready features and better performance.
+			it is a JDBC DataSource implementation that provides a connection pooling mechanism.
+		
+		if hikariCP is present in the classpath, SB automatically configures it.
+		if hikariCP is not present, then spring boot looks for the tomcat JDBC connection pool. 
+		if both the above options are not available, SB chooses apache commons DBCP2 as the JDBC connection pool
+	
+	we need to add the database specific driver.
+	after the driver is added in the dependencies, we need to define the datasource properties in application.properties file.
+	we need to set following properties : 
+		1. spring.datasource.url=dataSourceUrl
+		2. spring.datasource.username=username
+		3. spring.datasource.password=password
+	
+	spring boot jdbc vc spring jdbc : 
+		https://www.javatpoint.com/spring-boot-jdbc
+	
+	JDBC vs hibernate : 
+		https://www.javatpoint.com/spring-boot-jdbc
+
+	spring boot h2 database : 
+		what is in-memory database ?
+			uses system memory in place of disk space for storage of data.
+			We use the in memory database when we dont want to persist the data.
+			The in-memory database is volatile and it is lost when we restart the application.
+			widely used databases are H2, HSQLDB(HyperSQL database) and apache derby. These databases are configured automatically.
+		
+		what is h2 database? 
+			it is an embedded, open-source and in-memory database.
+			relational database management system written in java.
+			generally used for unit testing
+			stores data in memory, not persist data on disk.
 			
+		advantages of h2 : 
+			zero configuration
+			light weight and fast
+			easy to use
+			provides simple configuration to switch between a real database and in-memory database
+			supports standard sql and jdbc api
+			provides web console to maintain in the database
+		
+		configure h2 database : 
+			add h2 dependency in the pom file
+			we need to configure data source url, driver class name, username and password of h2 database
+		
+		persist the data in h2 database : 
+			if we want to persist the data in h2 database,  we should store the data in a file.
+			To achieve this, we need to change the datasource url property.
+			eg : 
+				spring.datasource.url = jdbc:h2:c:/folder/fileName
+				
+		creating schema and populating data : 
+			defining schema by creating sql file in the resource folder :
+				schema.sql
+			populating data in the table by creating a sql file in the resource folder : 
+				data.sql
+			spring boot automatically picks up the data.sql file and run it against the h2 database while starting the application.
+		
+		H2 console : 
+			by default the h2 database console is disabled, we need to enable it before accessing the console.
+			The following property is used to enable h2 console : 
+				spring.h2.console.enabled = true
+			We can access the console using browser and visiting  :
+				localhost:8080/h2-console
 swagger :
