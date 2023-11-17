@@ -1243,4 +1243,53 @@ spring boot cache provider :
 			add annotation @EnableCaching in the configuration file
 			add required caching libraries in the class path
 			in the root of the classpath, add the configuration file for the cache provider.
+		Incase of more than one cache providers available, we must specify the cache provider explicitly in the application.properties file.
+		
+changing port number of spring application : 
+	spring boot provides default embedded server to run spring boot application(tomcat server)
+	By default spring boot application runs on port 8080
+	how to change the port number :
+		1. using application.properties :
+			Recommended way to change the port number.
+			To change the port number we need to use the following property : 
+				server.port = 8180
+			We can set the port to 0.
+			If the port is set to 0, it will scan random port for application. It uses new port whenever we restart the application.
+		2. using application.yml file :
+			this is similar to the application.properties, only difference is that the format of the file is yml.
+		3. using EmbeddedServletContainerCustomizer Interface :
+			For spring boot 1.x version, it provides an embeddedServletContainerCustomizer interface to change the default port.
+			using this we can customize auto-configured embedded servlet containers.
+			All the beans of this type get a callback with the container factory before starting the container itself. Therefore, we can set the port, addresses and even the error pages.
+			The interface contains a method called customize(). 
+			It allows us to customize and specify configurableEmbeddedServletContainer.
+			It parses a parameter called container that we want to customize.
+			It contains a method called as setPort() that is used to change the port. By default, when not specified, it uses port 8080. To disable the auto-start feature of the embedded server, use the port -1. -1 represents that it will start the web application context but will not listen to any port. The setPort method is to be called within the customize method that we should override.
+		4. using webServerFactoryCustomizer interface :
+			Spring boot 2.x version provides webServerFactoryCustomizer interface to change the default port. It is defined in the package boot.web.server.
+			It takes we server factory type as input.
+			similar to embeddedServletContainerCustomizer, we have a customize method that we need to override and inside that method we need to call the setPort method. 
+			This method will set the port and if we set it to -1 then it will not listen to the port but the application context will start.
+		5. using command-line parameter :	
+			We can set the port using command line argument.
+			We need to set the --server.port=portNumber in the arguments.
+			eg.
+				java -jar springJar.jar --server.port = portNumber
+
+Spring boot rest example : 
+	We use rest applications for developing and designing networked applications.
+	It generates the HTTP requests that performs CRUD operations on the data.
+	Usually it returns data in JSON and XML format
+	
+RESTful web services : 
+	what are restful web services : 
+		restful web services are client and server applications that communicate over www.
+		These web services are based on REST architecture
+		RESTful web services provides communication between software applications running on different platforms and frameworks
+		
+	What is rest architecture : 
+		In rest architecture everything is a resource.
+	
+	what is a web service : 
+		web services are the types of internet applications that make use of standardized message protocol over the distributed environment.
 swagger :
