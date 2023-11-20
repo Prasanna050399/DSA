@@ -1291,5 +1291,159 @@ RESTful web services :
 		In rest architecture everything is a resource.
 	
 	what is a web service : 
-		web services are the types of internet applications that make use of standardized message protocol over the distributed environment.
+		web services are the types of internet applications that make use of standardized messaging protocol over the distributed environment.
+		It integrates web-based application using REST, SOAP, WSDL and UDDI over the network.
+		Example : 
+			java web service can communicate with .net application.
+		
+		what is UDDI(universal description, discovery and integration) : 
+			UDDI is an XML-based standard for discribing, publishing and finding web services.
+			UDDI stands for : 
+				universal description, discovery and integration
+			UDDI is a specification for a distributed registry of web services
+			UDDI is a platform-independent, open framework
+			UDDI can communicate via SOAP, COBRA, Java RMI protocol.
+			UDDI uses web service definition language(WSDL) to describe interfaces to web services.
+			UDDI is seen with SOAP and WSDL as one of the three foundation standards of web services.
+			UDDI is an open industry initiative, enabling businesses to discover each other and define how they interact over the internet.
+		features of web services : 
+			web services are designed for application to application interaction.
+			it should be inter-operable
+			it should allow communication over the network
+			web service can be called from different platforms
+			
+		The web service must be able to fulfill the following conditions : 
+			1. web service must be accessible over the internet
+			2. it is discoverable through a common mechanism like UDDI
+			3. it must be interoperable over any programming language or operating system.
+		
+		Uses of web services : 
+			web services are used for reusing the code and connecting the existing programs.
+			can be used to link data between two different platforms
+			provides interoperability between separate applications.
+		
+		Input to a web service is called a request
+		Output of a web service is called a response
+		
+		There are two popular formats of request and response : 
+			XML :
+				XML format is popular form of request and response in web-services.
+			JSON :
+				JSON is a readable format for structuring data. It is used for transiting data between server and web application.
+		
+		To make a web service platform independent, we make the request and response platform independent
+		
+		One question is that how does the client know about the format of the response and request.
+		For this, we have service definition. Every web service offers a service definition. It specifies the following things : 
+			request/response format 
+			request structure
+			response structure
+			endpoint
+		
+		
+		key terminology of web services : 
+			request and response : 
+				request is the input to the web service and response is the output from the web service
+			message exchange format (XML and JSON) : 
+				It is the format of the request and response.
+			service provider or server :
+				server is the one that hosts the web service
+			service consumer or client : 
+				client is the one that uses the web service
+			service definition : 
+				service definition is the contract between the service provider and service consumer.
+				service definition defines the format of request and response, request structure, response structure and endpoint.
+			transport : HTTP and MQ : 
+				transport defines how a service is called.
+				There are two popular ways of calling a service : 
+					HTTP and MQ(message queue)
+				By using the url of the service, we can call the service over the internet.
+				Message queue communicates over the queue. The service requester puts the requests in the queue.
+				The service provider listens to the request, process the request, creates the response and puts the response back in the MQ.
+		
+		characteristics of web services : 
+			web services have following characteristics : 
+				XML based : 
+				coarse-grained :
+				loosely coupled :
+				capability to be synchronous and asynchronous : 
+					synchronous web services are served by RPC-oriented messaging.
+					the documented-oriented messaging is often used for asynchronous web services.
+				supports RPC :
+		
+		architecture of web services : 
+			The architecture of web services interacts among three roles : 
+				service provider :
+					platform that hosts the service
+				service requester : 
+					its an application that is looking for or invoking or initiating an interaction with a service.
+				service registry
+			The interaction involves three operations : 
+				publish (publication of service desciption) : 
+					a service desciption must be published so that the service requester can find the service
+				find (finding of service description) :
+					service requestor retrieves the service description directly
+				bind (invoking of service based on service desciptions) :
+					in this, the service requestor invokes or initiates an interaction with the service at runtime using the binding details in the service desciption to locate, contact and invoke the service
+			These operations and roles act upon the web services artifacts.
+			The web service artifacts are the web service software module and itss description.
+		
+		Web service implementation lifecycle : 
+			phases : 
+				requirement phase
+				analysis phase
+				design phase
+				coding phase
+				test phase
+				deployment phase
+				
+		types of web services : 
+			RESTful web services :
+				Representational state transfer 
+				main goal : to make web services more effective
+				REST is an architectural approach not a protocol
+				It does not define a standard message exchange format. We can build REST services with both XML and json.
+				
+				The key abstraction is a resource in REST.
+				A resource can be anything.
+				We can access resource using a Uniform resource indentifier (URI)
+				when we request a resource, we provide the representation of the resource.
+				The important methods of HTTP are : 
+					put
+					post
+					get
+					delete
+				HTTP standard status code : 
+					404 : resource not found
+					200 : success
+					201 : created
+					401 : unauthorized
+					500 : server error
+				
+				RESTful service constraints :
+					1. There must be a service producer and service consumer
+					2. service is stateless
+					3. service result must be cacheable
+					4. interface is uniform and exposing resource
+					5. service should assume a layered architecture
+				advantages of RESTful web services : 
+					1. RESTful web services are platform-independent
+					2. can be written in any programming language
+					3. provides different data format like JSON, text, HTML and XML
+					4. it faster than SOAP because it does not have strict specifications
+					5. these are reusable
+					6. language neutral
+			SOAP web services : 
+SOAP web services : 
+	SOAP stands for simple object access protocol.
+	it is an xml based protocol for accessing web services
+	SOAP is W3C recommendation for communication between two applications.
+	platform and language independent
+	Using soap we can interact with other programming language applications.
+	advantages of soap : 
+		soap provides its own security called as WS security
+		language and platform independent
+	disadvantages of soap : 
+		SOAP uses XML format which must be parsed to be read. It defines many standards that must be followed while developing SOAP applications. So it is slow and consumes more bandwidth and resources
+		SOAP uses WSDL and doesnt have any other mechanism to discover the service.
 swagger :
