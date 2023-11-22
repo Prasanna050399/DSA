@@ -1401,6 +1401,7 @@ RESTful web services :
 			RESTful web services :
 				Representational state transfer 
 				main goal : to make web services more effective
+				RESTful web services try to define services using the different concepts that are already present in HTTP.
 				REST is an architectural approach not a protocol
 				It does not define a standard message exchange format. We can build REST services with both XML and json.
 				
@@ -1434,6 +1435,70 @@ RESTful web services :
 					5. these are reusable
 					6. language neutral
 			SOAP web services : 
+				REST defines an architectural approach whereas SOAP poses a restriction on the format of the XML.
+		
+		web services components : 
+			there are two components of web services : 
+				web service description language (WSDL) :
+					WSDL is an XML based interface description language.
+					used for describing functionality offered by a web service.
+					a.k.a WSDL file
+					extension of this file is .wsdl
+					It provides a machine-readable description of how the service can be called, what parameter it expects and what data structure it will return
+					describes service as a collection of network endpoint or ports.
+					often used in combination with SOAP and an XML schema to provide XML service over the distributed environment.
+					the purpose of WSDL is similar to type-signature in a programming language
+				universal description discovery and integration (UDDI) :
+					UDDI is an XML-based standard for discribing, publishing and finding web services.
+					UDDI stands for : 
+						universal description, discovery and integration
+					UDDI is a specification for a distributed registry of web services
+					UDDI is a platform-independent, open framework
+					UDDI can communicate via SOAP, COBRA, Java RMI protocol.
+					UDDI uses web service definition language(WSDL) to describe interfaces to web services.
+					UDDI is seen with SOAP and WSDL as one of the three foundation standards of web services.
+					UDDI is an open industry initiative, enabling businesses to discover each other and define how they interact over the internet.
+		difference between SOAL protocol and RESTful web services :
+			https://www.javatpoint.com/restful-web-services-difference-between-soap-and-rest
+			
+		Autoconfiguration of HttpMessageConvertersAutoConfiguration which is done automatically by @SpringBootApplication annotation, automatically converts the message.
+		It initializes the Jackson bean and the message converter. The Jackson2ObjectMapper does the conversion from bean to json and json to bean
+		
+		ResponseEntity class :
+			extends httpEntity and httpStatus class.
+			used in restTemplate and @Controller methods
+			also used in spring MVC as a parameter in a @Controller method
+		
+		exception handling : 
+			If there is an exception we should throw an exception.
+			we need to create a new class which extends RuntimeException.
+			Now we can annotate this class with @ResponseStatus()
+			In the @ResponseStatus() we can pass the HttpStatus enum which we can use to return status response.
+			
+			How to implement generic exception handling for all resources : 
+				create a new class 
+				at the basic level, there are three crucial things for the exection structure : 
+					timestamp 
+					message
+					detail
+				The structure is most important part and must be language independent
+				We need to extend ResponseEntityExceptionHandler abstract class from the spring framework which provides centralized exception handling. 
+				This exception handling functionality is applied to all the controllers
+				We need to create a new class with name CustomizedResponseEntityExceptionHandler which will extend ResponseEntityExceptionHandler class
+				add @ControllerAdvice and @RestController annotation
+		
+		validation for RESTful services : 
+			java validation api to add validation in our beans file
+			Add @Valid annotation. It is a Javax validation API. Its default classpath is spring-boot-starter-web. We need to use this annotation on the parameter of the controller method. 
+				eg. ResponseEntity(Object) createUser(@Valid @RequestBody User user)
+			now in the User class, we need to add annotation on the variable. We need to annotate the variables with annotations like,
+			@Size(min = 5)
+			@Past (this is for date)
+			
+			
+		Internationalization of RESTful services : 
+			Internationalization is the process of designing web applications or services in such a way that it can provide support for various countries, various languages automatically without making the changes in our application.
+			a.k.a I18N because the word internationalization has total 18 characters starting from I to N.
 SOAP web services : 
 	SOAP stands for simple object access protocol.
 	it is an xml based protocol for accessing web services
