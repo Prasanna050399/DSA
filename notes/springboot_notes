@@ -1499,6 +1499,154 @@ RESTful web services :
 		Internationalization of RESTful services : 
 			Internationalization is the process of designing web applications or services in such a way that it can provide support for various countries, various languages automatically without making the changes in our application.
 			a.k.a I18N because the word internationalization has total 18 characters starting from I to N.
+			
+			localization is performed by adding locale-specific components such as translated text, data describing locale-specific behavior, etc. 
+			
+			Java provides the foundation of internationalization for desktop and server applications. There are following important internationalized areas of functionality : 	
+				text representation : java is based on unicode character set and several libraries implement the unicode standard
+				locale identification and localization :  Locale in java are identifiers that can be used to request locale-specific behavior in different areas of functionality
+				date and time handling : java provides various calendars. It supports conversion to and from calendar independent date objects. Java supports all the timezones in the world.
+				text processing : It includes character analysis, case mapping, string comparison, breaking text into words, formatting numbers, dates, and time values into strings or parsing them back from strings. Most of these functions are locale-dependent
+				character encoding : It supports converting text between unicode and other character encodings when reading incoming text from the streams or writing outgoing text to the streams.
+				
+		content negotiation : 
+			a resource can have many representations, mostly because there may be multiple clients expecting different representation.
+			content negotiation is the process of selecting the best representation for given response when there are multiple representations available.
+			We can define the content-type in the header of the http request.
+			Http header Accept is used to determine what type of representation is desired at the client-side.
+			We can define the preference using the q parameter.
+			eg. 
+				Accept : application/json, application/xml;q=0.7,*/*;q=0.5
+			If the service created returns JSON type but the header is accepting only application/xml, it will return the status:406 Not acceptable.
+		
+		Implementing static filtering for RESTful services : 
+			filers are one of the important features provided by the JAX-RS framework.
+			It can be applied to either request to a resource or response from a resource, or to both.
+			We use filtering when we want to show only some class members in the response. 
+			Jackson has two annotations that are used in filtering : 
+				@JsonIgnore : 
+					member or method level annotation
+					it expects that the properties to be excluded are marked one by one.
+					if we want to eliminate a member from the process of serialization and deserialization, we can annotate the actual property or its setter or getter
+					eg : 
+						@JsonIgnore
+						private String salary;
+				@JsonIgnoreProperties : 
+					class level annotation
+					it ignores the logical properties in json serialization and deserialization
+					eg: 
+						@JsonIgnoreProperties({"var1", "var2"})
+						public class someBean {
+							private type var1;
+							private type var2;
+						}
+			
+			Suppose we want to filter  the property in one scenario and we dont want to filter it in another scenario then we cannot use static filtering.
+			In this scenario we need to use dynamic filtering.
+		
+		Implementing dynamic filtering for RESTful services : 
+			for this we use MappingJacksonValue class which make use of the filterProviders to filter the response.
+			
+		Versioning in RESTful web services : 
+			When the users are using the api and we make a breaking change in the api, now some users want to use the new apis but some users want to continue using the same api. In this scenario we want to implement versioning.
+			what are breaking changes : 
+				a change to the format of response for one or more api calls
+				change in the response type
+				remove any part of the api
+			breaking change should always result in a change in the major version number for an API or content response type.
+			how to version :
+				commonly used approaches fall into three categories : 
+					URI versioning :
+						most straightforward approach
+						specifies the version in the url as a query string.
+						guaranteed to break the client integration when a version is updated.
+						twitter uses this type of versioning
+						eg : 
+							http://api.demo.com/v1
+							http://apiv1.demo.com
+						
+						to implement this, we just need to create two separate handlers in the controller class with separate endpoints
+					versioning using custom request header : 
+						a custom header allows us to preserve the urls.
+						it a copy of the content negotiation behavior implemented by the existing accept header.
+						version information is specified in the request header without the need for any change in the url.
+						microsoft uses this type of versioning
+						User cannot access the request header versioning in the normal browser, we need a special plugin to access them on the browser
+						eg : 
+							Accept-version: v1
+							Accept-version: v2
+							
+						to implement this : 
+							add the headers parameter in the @GetMapping annotation
+							eg : 
+								@GetMapping(value = "/person/header", headers = "X-API-Version = 1")
+								
+								In the request header : 
+									add the key : X-API-Version
+									and value : 1
+						
+					versioning using request parameter : 
+						to implement this, 
+						change the endpoint to use the same string.
+						After the endpoint is similar, in the @GetMapping annotation add a parameter :
+							params = "version=1"
+						
+							eg. 
+								@GetMapping(value = "/person/param", params = "version=1")
+								
+								request url :
+									http://localhost:8080/person/param?version=1
+									
+					versioning using accept header : 
+						accept header define the media type and character encodings
+						we can also pass version information for web api through accept headers without changing the url.
+						AKA media type versioning or content negotiation or accept header.
+						github uses accept header versioning.
+						eg : 
+							Accept: application/vnd.demo.v1+json Accept:application/vnd.demo+json;version=1.0
+						
+						to implement this : 
+							use the produces parameter of the @GetMapping annotation 
+							eg: 
+								@GetMapping(value = "/person/produces", produces = "application/vnd.company.app-v1+json")
+								
+								in the request header :
+									add the key : Accept
+									and set the value : application/vnd.company.app-v1+json
+		
+		implementation of basic authentication :
+			In basic authentication, we send the username and password as part of our request. When the username and password is provided, we can access the resources
+			There is advanced form of authentication like digest authentication. where the password digest is created and the digest is sent across not the password to the server.
+			There is also OAuth (open authentication) or OAuth2 authentication
+			
+			basic authentication : 
+				adding the following dependency automatically configures the basic security for us : 
+					<dependency>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-starter-security</artifactId>
+					</dependency>
+				when we start the application, in the log, a password is generated.
+				While making an API request, we need to send the username and password
+				in the authorization section, we need to set the user name and the password and use the type as Basic Auth.
+				The password that is generated is a random password and will change on restart. To set a custom username and password, we need to set the following properties in the application.properties :
+					spring.security.user.name = user
+					spring.security.user.password = password
+		
+		Best practices of RESTful web services :
+			The first and last best practice is the consumer first.
+			meaning always thing about the consumer before naming the resources, think from the perspective of the customers, what do they thing about those resources, will they be able to understand those resources.
+			
+			consumer first : 
+				must have excellent documentation for our API
+				swagger is one of the most popular documentation standard for RESTful api.
+				make sure the consumer understands our documentation
+			
+			make best use of HTTP : 
+				RESTful web services are based on Http
+				make best use of the request methods.
+				use right request method, appropriate for our specific action and ensure that we are sending proper response status back
+				ensure that there is no secure information in the uri
+				when we think about resources, always use nouns for the resources. But it is not always possible. There are always exception scenarios. For all these exceptions scenarios, define a consistent approach if we are searching through user use /user/search.
 SOAP web services : 
 	SOAP stands for simple object access protocol.
 	it is an xml based protocol for accessing web services
@@ -1511,4 +1659,87 @@ SOAP web services :
 	disadvantages of soap : 
 		SOAP uses XML format which must be parsed to be read. It defines many standards that must be followed while developing SOAP applications. So it is slow and consumes more bandwidth and resources
 		SOAP uses WSDL and doesnt have any other mechanism to discover the service.
+
 swagger :
+	swagger is an open source tool
+	It is most popular API documentation format for RESTful web services.
+	provides both JSON and UPI support.
+	The main swagger tools are : 
+		swagger ui : It creates interactive API documentation
+		swagger editor : browser-based editor where we can write OpenAPI specification
+		swagger codegen : it generates server stubs, and client libraries form an openAPI specification
+	
+	An openAPI specification formerly known as swagger specification is an API documentation format for REST APIs. An open api file allows us to describe our entire API, including : 
+		available endpoints(/users) and operations on each endpoint(GET /users, POST /users)
+		operation parameters for each operation
+		authentication methods
+		contact information, license, term of use and other information.
+		
+	Generate swagger documentation for our RESTful service :
+		add the dependency for swagger in pom.xml file : 
+			<dependency>  
+				<groupId>io.springfox</groupId>  
+				<artifactId>springfox-swagger2</artifactId>  
+				<version>2.9.2</version>  
+			</dependency> 
+		add swagger ui dependency :
+			<dependency>  
+				<groupId>io.springfox</groupId>  
+				<artifactId>springfox-swagger-ui</artifactId>  
+				<version>2.9.2</version>  
+			</dependency>  
+		create a class with name swaggerConfig.java and add the following two annotations on the class : 
+			@Configuration
+			@EnableSwagger2
+		In the same class add a bean method with @Bean annotation which will return :
+			new Docket(DocumencationType.SWAGGER_2);
+		
+		Run the application
+		we can access the api documentation using the url : 
+			localhost:8080/v2/api-docs
+		we can access the swagger ui using the url : 
+			localhost:8080/swagger-ui.html
+	
+	Swagger is a specification for documenting REST API. 
+	It specifies the format(URL, method and representation) to describe REST web service.
+	It provides tools to generate/compute the documentation from the application code.
+	
+	Swagger scans application code, and exposes the documentation on URL. A client can consume this URL and learn how to use REST web services: which HTTP methods to call on which URL, which input documents to send, which status code to expect, etc.
+
+creating many to one relationship : 
+	we have two entities : 
+		post and user
+	
+	the post entity have the following fields : 
+		integer id
+		string description
+		User user
+	
+	In the post entity, we need to annotate the user entity as @ManyToOne annotation because a user can do many posts.
+	So the post entity will have : 
+		@ManyToOne(fetch=FetchType.LAZY)
+		User user;
+
+	we have configured the relationship on the post side now we want to configure is the user side.
+	
+	A user can have multiple posts, therefore, in the user entity, we have a list of Post and @OneToMany annotation with propery (mappedBy="user"), this will create a relationship column in the post entity.
+	So the user entity will have : 
+		@OneToMany(mappedBy="user")
+		private List<Post> posts;
+		
+Richardson Maturity model:
+	this model grades API by their RESTful maturity.
+	this model is a way to grade your API according to the constraints of REST.
+	It breaks down the principal element of the REST approach into four levels(0 to 3)
+	levels of REST approach : 
+		level 0 : swamp of POX
+		level 1 : resources 
+		level 2 : HTTP verbs
+		level 3 : hypermedia control
+	lower the level, lower is the RESTfulness
+	When API reaches level 3, we consider it as RESTful API.
+	
+	level 0 :
+		plain old XML (POX)
+		at this level, HTTP is only used as a transport protocol that is used as a remote interaction
+	https://www.javatpoint.com/restful-web-services-richardson-maturity-model
