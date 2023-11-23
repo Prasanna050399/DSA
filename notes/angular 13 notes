@@ -70,7 +70,16 @@ setting up local environment and workspace :
 Understanding angular : 
 	To understand the capabilities of angular framework, we need to learn about :
 		components :
-			
+			components are the main building blocks of angular applications
+			a component consists of : 
+				html template that declares what renders on the page
+				typescript class that defines behavior
+				css selector that defines how the component is used in a template
+				optionally css style applied to the template
+				
+		https://v13.angular.io/guide/component-overview
+		
+		
 		templates : 
 		directives : 
 		dependency injection :
