@@ -77,24 +77,210 @@ Understanding angular :
 				css selector that defines how the component is used in a template
 				optionally css style applied to the template
 				
-		how to create and configure an angular component : 
-			To create a component, we have two options : 
-				create using angular cli : 
-					open terminal window, navigate to the directory contianing the application.
-					run the command : 
-						ng generate component component-name
-						or
-						ng g c component-name
+			how to create and configure an angular component : 
+				To create a component, we have two options : 
+					create using angular cli : 
+						open terminal window, navigate to the directory contianing the application.
+						run the command : 
+							ng generate component component-name
+							or
+							ng g c component-name
 					
-					by default this command will generate :
-						a folder named after the component
-						a component file, component.ts
-						a template file, component.html
-						a css file, component.css
-						a testing specification file, component.spec.ts
-				create manually :
-		
-		
+						by default this command will generate :
+							a folder named after the component
+							a component file, component.ts
+							a template file, component.html
+							a css file, component.css
+							a testing specification file, component.spec.ts
+					
+					create manually :
+						the following steps provides information on how to create a core component file within an existing angular project :
+							1. create a new folder with the component name that you want to create a component with
+							2. create a file with name 
+								component-name.component.ts
+							3. in the file add import statement : 
+								import { Component } from "@angular/core";
+							4. after the import statement add a @Component decorator : 
+								@Component({})
+							5. in the @Component decorator, add one property : 
+								@Component({
+									selector : 'app-component-overview'
+								})
+								The selector is used to identify the component
+							6. define the html template in the @Component decorator that the component will use to display information. In most cases, this template is a separate HTML file.
+								@Component({
+									selector: 'app-component-overview',
+									templateUrl : './templatefile.component.html'
+								})
+							7. select the styles for the component's template. In most cases, we define the style of the components in different files : 
+								@Component({
+									selector : 'app-component-overview',
+									templateUrl : './component.html',
+									styleUrls: ['.component.css']
+								})
+							8. add a class that includes the code for the component : 
+								export class Component-NameComponet {
+								}
+								
+			specifying a components css selector : 
+				every component requires a css selector
+				selector instructs the angular to instatiate this component wherever if finds the corresponding tag in template HTML. : 
+					eg. : 
+						@Component({
+							selector : 'app-componet-overview',
+						})
+						
+						in the html we will use : 
+							<app-component-overview>
+							</app-component-overview>
+			
+			defining a components template : 
+				A template is a block of code that tells angular how to render the component.
+				To define the template in the component, we have two options : 
+					1. referencing an external html file
+					2. directly embedding the code within the component
+				
+				To define the template as an external file, we need to use the following property in the @Component decorator: 
+					templateUrl 
+				
+				To define the template within the component file, we need to use the following property in the @Component decorator : 
+					template
+					eg : 
+						@Component({	
+							selector: '',
+							template: '<h1></h1>' (if we want to use multiple lines, we need to enclose it within backticks ``)
+						})
+				the component requires a template defined using the template or templateUrl property. 
+				WE CANNOT HAVE BOTH THE STATEMENTS IN COMPONENT
+			
+			declaring component styles : 
+				similar to the template, we can define the styles to be used for the template in two ways : 
+					referencing external file : 
+						for this we use the following property of the @Component decorator : 
+							styleUrls : ['./component.css']
+					directly defining within the component : 
+						for this we use the following property of the @Component decorator : 
+							styles : ['h1 {font-weight:normal;}']
+				The styles property takes an array of strings that contains the CSS rule declarations.
+				
+			component lifecycle :
+				a component instance has a lifecycle that starts when angular instantiates the component class and renders the component view along with its child views
+				The lifecycle continues with change detection, as angular checks to see when data-bound properties change, and updates both the view and the component instance as needed.
+				the lifecycle ends when angular destroys the component instance and removes its rendered template from the DOM.
+				
+				lifecycle hooks : 
+					Respond to events in the lifecycle of a component or directive by implementing one or more of the lifecycle hook interfaces in the angular core library.
+					
+					The hooks allows us to act on a component or directive instance at the appropriate moment, as angular creates, updates or destroys that instance.
+					
+					each interface defines the prototype for a single hook method, whose name is the interface name prefixed with ng.
+					eg : 
+						OnInit interface has a hook method named ngOnInit()
+					
+					
+					After the application instantiates a component or directive by calling its constructor, angular calls the hook methods that we have implemented at appropriate point in the lifecycle of that instance
+					
+					So the hooks are implemented after the component or directive is instantiated.
+					
+					angular executes the hook methods in the following sequence : 
+						ngOnChanges() : 
+							purpose :
+							Respond when angular sets or resets data-bound input properties
+							The method receives a SimpleChanges object of current and previous property values.
+							
+							NOTE : This happens very frequently so any operation performed here will have impact on performance significantly.
+							
+							time :
+							Called before ngOnInit() and whenever one or more data-bound input properties change.
+							
+							NOTE : if the component has no inputs or we use it without providing any inputs, the framework will not call ngOnChanges()
+						
+						ngOnInit() : 
+							purpose :
+							initialize the directive or component after angular first displays the data bound properties and sets the directive or components input properties
+							
+							time :
+							called once, after the first ngOnChanges().
+							It is called even when ngOnChanges() is not present.
+						
+						ngDoCheck() :
+							purpose : 
+							detect and act upon changes that angular cant or wont detect on its own.
+							
+							time : 
+							called immediately after ngOnChanges() on every change detection run, and immediately after ngOnInit() on the first run.
+						
+						ngAfterContentInit() :
+							purpose :
+							respond after angular projects external content into the component's view, or into the view that a directive is in.
+							
+							time : 
+							called once after the first ngDoCheck()
+							
+						ngAfterContentChecked() :
+							purpose :
+							respond after angular checks the content projected into the directive or component.
+							
+							time :
+							called after ngAfterContentInit() and every subsequent ngDoCheck()
+						
+						ngAfterViewInit() :
+							purpose :
+							respond after angular initializes the component's views and child views, or the view that contains the directive.
+							
+							time :
+							called once after the first ngAfterContentChecked()
+						
+						ngAfterViewChecked() :
+							purpose :
+							respond after angular checks the component's views and child views or the view that contains the directive.
+							
+							time :
+							called after the ngAfterViewInit and every subsequent ngAfterContentChecked()
+							
+						ngOnDestroy() :
+							purpose:
+							cleanup just before angular destroys the directive or component.
+							Unsubscribe observables and detach event handlers to avoid memory leaks.
+							
+							time :
+							called immediately before angular destroys the component or directive
+							
+					example : 
+						https://v13.angular.io/guide/lifecycle-hooks
+					
+					The three hooks, DoCheck, AfterContentChecked and AfterViewChecked are often fired therefore the logic inside them should be as lean as possible.
+					
+					if an object is send as an input and we have implemented ngOnChanges() then the hook will not be called unless the input changes. So if we have an object as an input and the reference does not change, then the hook will not be called even if the content of the object changes.
+					
+			The input properties are not available in constructor. They are available to the onInit() method for further initialization.
+			
+			Component interaction : 
+				how two or more components share information?
+				
+				passing data from parent to child with input binding :
+					we use the @Input decorator for sharing data within the components,
+					the parent will call the child component and while calling the child component, will pass the value.
+					the child component will have the @Input decorator for the variables that we are binding.
+					We can set the alias as well for the variables in the child component which can be used to pass the data. The alias can be set using the following syntax : 
+						@Input('aliasName') variableName = '';
+				
+				parent listening for child event (sending data from child to parent) :
+					the child component exposes an eventEmitter property with which it emits events when something happens.
+					parent binds to that event property and reacts to those events.
+					The child's EventEmitter property is an output property, typically adorned with an @Output() decorator
+					we need to do 
+						in child component : 
+							@Output() eventName = new EventEmitter()
+						
+							(click) = "eventName.emit()"
+						
+						in parent component : 
+							<childSelector [inputVar] = "variableName"
+							(eventName)="methodOfParentComponent()">
+							</childSelector>
+	
+				
 		templates : 
 		directives : 
 		dependency injection :
