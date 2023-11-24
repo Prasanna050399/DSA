@@ -77,7 +77,22 @@ Understanding angular :
 				css selector that defines how the component is used in a template
 				optionally css style applied to the template
 				
-		https://v13.angular.io/guide/component-overview
+		how to create and configure an angular component : 
+			To create a component, we have two options : 
+				create using angular cli : 
+					open terminal window, navigate to the directory contianing the application.
+					run the command : 
+						ng generate component component-name
+						or
+						ng g c component-name
+					
+					by default this command will generate :
+						a folder named after the component
+						a component file, component.ts
+						a template file, component.html
+						a css file, component.css
+						a testing specification file, component.spec.ts
+				create manually :
 		
 		
 		templates : 
