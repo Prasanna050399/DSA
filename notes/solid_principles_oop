@@ -1,0 +1,12 @@
+the concepts of clean code, object oriented architecture and design patterns are connected and complementary to each other. They all serve the same purpose :
+	to create understandable, readable and testable code that many developers can collaboratively work on
+	
+SOLID : 
+	the single responsibility principle 
+	the open close principle
+	the liskov substitution principle
+	the interface segregation principle
+	the dependency inversion principle
+	
+	
+https://www.freecodecamp.org/news/solid-principles-explained-in-plain-english/

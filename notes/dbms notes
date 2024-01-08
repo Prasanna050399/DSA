@@ -1,0 +1,24 @@
+DBMS:
+
+Requirements from DBMS:
+	1.Availability
+	2.Security
+	3.Integrity
+	4.Independent of application
+	5.concurrent
+
+DBMS Systems:
+
+1. File based:
+	In file based systems all data is stored in the form of files.
+	It have the following disadvantages:
+
+
+Cardinality of a relation:
+	No. of rows, tuples, records.
+	It also means the uniqueness of records in a table.
+	
+degree of a relation:
+	No. of attributes, columns, fields.
+	Relation 1 to 1, 1 to n, n to n.
+	

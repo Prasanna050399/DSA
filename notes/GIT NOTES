@@ -1,0 +1,764 @@
+IT automation with python:
+
+Course 1:
+	Python Crash course:
+		Refer to python notes.
+	
+Course 2:
+	Using python to operate with Operating system:
+		What is Operating system?
+			It is a program that manages all other application programs and hardware in a computer.
+			Basically everything that goes on in the computer.
+			It does the task of reading, deleting, and creating files, the task of input and output handling, the task of network handling.
+			The OS consist of two parts kernal and the user space.
+			The kernal is the main core of the operating system and talks directly to the hardware and manages system resourses.
+			The userspace is the rest of the part. We interact with the userspace. The userspace can be the system programs or user interface.
+			
+			Here we will study only about managing files and processes on the OS running on the computer.
+			
+			Python is cross platformed. Meaning we can use the same code to interact with any operating system.
+			
+			
+			
+		Modules:
+			We can create our own modules for code reusibility.
+			In case we have a module made up of subfiles saved in a directory, for python interpreter to recognise the directory as a module, we need to write the init.py file. This file is read automatically by the interpreter when we import the module.
+		
+		shutil module:
+		We use this module to get the system health meaning info about, disk usage, processor load, are the security updated.
+			
+			disk_usage():
+				this function returns the total amount of disk bytes free, bytes used and total bytes.
+		
+		psutil module:
+		This module have a function that returns the cpu usage percentage.
+			cpu_percent():
+				This method returns the amount of cpu usage.
+				We can use this to find the usage of the cpu.
+				The method takes 1 as parameter and if we dont use it the method will return 0 since it is not averaging over a period of time.
+		Regular expression:
+			We use regular expression to search  a text for string matching a specific pattern.
+			We can use the re module to use the regular expression in pyhton use python notes for more information.
+			
+		shell:
+			A shell is a command line interface which is used to interact with the operating system.
+			Our python programs are executed inside a shell command line environment.
+			Environment variables are the variables that are set in command line environment. These are the variables with key value pair. The value of these variables are set outside the program.
+			We can read the value of these variables using python.
+			
+		Testing:
+			What is testing??
+				The process of evaluation of the code written to determine whether or not the does what we expect it to do.
+				Checking the correctness of the code.
+				Manual testing is done when we manually enter different testcases.
+				To test a function manually we can import the function in the interpreter using the from keyword,
+					from module_name import function_name
+				Then we can enter manual data for which outputs are known.
+			
+			What is unit testing?
+				It is used to evalute that whether a small isolated part of the code is working properly. Meaning we can test small parts of the code like a method or function.
+				We generally write unit tests side by side along with the code.
+				One of the characteristic of unit testing is isolation.
+				It should only test the unit of code that is targeted. This helps to make sure that the problem caused is due to the block of code in question and not due to some external factor.
+				We never modify the production environment, this term is used mostly by developers to describe the setting where software and other products are actually put into operation for their intended uses by end users.
+				This is the live environment that runs the software that users interact with.
+				We usually work in the test environment.
+				Since these tests focus on small part of the code they run quickly and also debugging them is easy.
+				To automate a unit test, we import the function which we want to test and write test cases for it. We can use the assert keyword for this purpose.
+				Or we can use the unittest module. More info for this is in python notes.
+				
+				What are edge cases?
+					The inputs that are at the extreme ends of the range of inputs we imagine our program will typically work with.
+
+			White box test:
+				aka transparent box
+				In white box testing the tester knows how the code works and can write tests accordingly. He then uses his understanding in how the code works and write test cases accordingly.
+			Black box testing:
+				aka opaque box
+				In this the tester does not know how the software works. These are written with the awarness with what the s/w is supposed to do(all its requirment and specifications) but not how it does it.
+			
+			Basically black box tester have no idea how the code works but they know what the code is supposed to do.
+			On the other hand white box testers know how the code works and hence the can test different functions and methods accordingly.
+			
+			Integration testing:
+				In integration testing we verify whether the interaction between different pieces of code in integreted environment is just the way we want them to. The goal is to verify the interactions and to make sure the whole system works how we expect it to work.
+				The code that we tested in unit test is combined together in a group and tested in this testing.
+				
+Version Control Systems(VCS):
+	These systems are useful for controlling the versions of the code and configuration files.
+	These are useful for rollbacking and share the source code of programs and scripts.
+	The concept of VCS is that to keep track of different versions of code.
+	
+	The most primitive form of version control was to save the previous copies of the data. This had disadvantage that it was hard to maintain.
+
+Persistent Training for git: 
+
+central version control :
+	In centralized version control, a single repository or vcs database to which all the developers are connected. 
+	Here if one developer is using the file or is making changes, all the other developers have to wait until he finishes. The file was locked for other users.
+	Here for all the operations we need to connect to central server.
+	Here central server was the authority and used to control who can have access to the repository.
+	All the versions are available in the server only.
+	CVS and subversion use this type of version control.
+	
+distributed systems :
+	Here different developers have their own version of the repository. 
+	git and mercurial use this type of version control.
+	
+What is VCS :
+	Keep track of changes made to file and allows rollback
+	Merge the contributions of multiple developers.
+	
+Benefits :
+	
+	Facilitates backups
+	increases productivity
+	encourages experimentations 
+	helps to identify/fix conflicts
+	makes source readily available - less duplicate effort
+	
+GIT : 
+	GIT is distributed version control system.
+	Most operations in git only need local files and resources to operate, every operation in git is local. Meaning everything is done offline. 
+	There is no authority like in central server. 
+	We can share changes without the server because everything is available locally and if not we can take it from peer.
+	Everyone has their own versions available locally.
+	Everything is stored in the form of snapshots. meaning both changed and unchanged are stored as a snapshot.
+	
+	GIT ONLY TRACKS FILES AND NOT FOLDERS.
+	
+	To edit we need to checkout from the database into working directory.
+	Now one might ask what is working directory??
+		Its your local directory where we are performing code edit.(Local win explorer directory)
+	To save changes one must commit from working directory to database.
+	
+	The data is stored in compressed format in the git database.
+	
+	We have 3 files in working dir.
+	We want to start tracking these files. 
+	To start tracking, we first need to put the file in staging area and second stage is to commit the file in the local repository.
+	
+	Why stage file, why can't we just commit?????? 
+		Before commiting we need to stage the files meaning we need to put the files in staging area.
+		Consider a scenario:
+			We are working on a task t1, and a high priority bug fixing comes in h1. And consider that the changes are in a large number of files. Now you have to commit it in the repository. Now how to differentiate between t1 and h1??
+			And there is a possibility that you add t1 in h1. 
+			So what we will do is that, while working on h1, 
+			once a task is done put the those changes/files in the staging area. Continue doing so for all the task in h1. So at  the end of task h1, all the associated files will be in staging area.
+			In this way we can differentiate between t1 and h1. 
+			
+			Its like when writing assignments we used to keep the current pages in a seperate stack so that we dont mix them. We can consider this stack as the staging area.
+		Staging area is also known as :
+			Caching area/Index area
+	GIT has 3 stages : 
+		1. Working directory
+		2. Staging area
+		3. Repository
+		
+	Each user has complete history.
+	
+	What is untracked file ???
+		This file which is not added to the staging area yet.
+	
+	SHA : 
+		What is SHA?
+			SHA stands for secure hash algorithm.
+			
+		SHA - 1 is the standard that git uses for generation of sha value.
+		
+		fixed size hash = SHA(input data(any digital data)) -> data can be in bits/bytes/GBS/TBS.
+		
+		Properties SHA -
+			1. It has to be deterministitic - for same input we always get same output. This is used to check the validity of the containt.
+			2. Output should be of fixed length.
+			3. Avalanche effect : 
+				A small change in input results in hugh change in output.
+			4. Unique value
+	
+	
+	Starting : 
+	
+	1. git init
+			It creates local repository.
+	2. git config --list: 
+			Gives a list of all configuration related settings.
+			
+			We have 3 levels :
+			global configuration : 
+				these paramerters Available for all the projects on the system  
+			system configuration :
+				Available for your git operation
+			local : 
+				they are actually a part of your .git repo
+			
+			To see these parameters 
+				
+				git config --list --global/local/system
+				
+				global parameters are present in .gitconfig file present in c directory.
+				system level file is present in git etc folder in that .gitconfig file
+				local is present in local folder in .git folder there will be a config file.
+				
+			Two most important config paramerters to be set at global levels
+			1. user.name
+			2. user.email
+			These two parameters should be available at global level. We need them for commit purpose because these are stored in the repo like who made the changes so user.name and user.email made the changes.
+			
+			How to :
+				
+				git config --global user.name <username>
+				git config --global user.email <email address>
+				
+			git config advice.addIgnoredFile false
+			
+	3. git status : 
+			It gives the status of the working directory.
+			
+	4. git add filename / . / *  or we can use the names of the file explicitly:
+			It adds the file to staging area.
+			If we use . or * in the add command, all the files in the directory are added to the caching/staging area.
+	
+	5. git rm --cached <filename> 
+			Removes file from staging/caching/index area
+			
+	6. git commit -m <meaningful message in double quotes>
+			commits the changes to the local repository along with the message.
+			I think if we dont use -m, it opens notepad and explicitly asks you to enter the message as per the google it automation course.
+			
+			git add + git commit -> git commit -a -m "<message>" --> here we can also combine a and m as -am
+			
+			Use this command only when the file is already being tracked.
+			However if there are files in the staging areas, then in that case the this command will not take files from the working directory and will just commit whatever is stored there in the staging area.
+			
+			NOTE : THIS METHOD DOES NOT TAKE THE NAME OF THE FILE AS INPUT MEANING IT TAKES ALL THE FILES IN THE WORKING DIRECTORY WHICH ARE ALREADY TRACKED AND ADDS THEM AND THEN COMMITS THEM. BETTER DONT USE THIS PERSONAL OPINION.
+			
+			
+			To update the message of the latest commit in the repository, we can use the --amed parameter : 
+				
+				git commit --amend -m "New message"
+			
+			If there is a file in the stage area, we can amend the new update in the latest commit using the --amend parameter.
+			
+	7. git log :
+			check the version history
+			it will give the details about the commits we made.
+			
+			the number after commit is the checksum value or sha 1 value.
+			
+			The latest commit appears first.
+			
+			to combine all the info in one line, we can use the --oneline parameter.
+			
+			- git log --oneline 
+			
+			- git log -2 :
+				This gives the latest 2 commits. We can change the number as per our need.
+			
+			- git log -p : 
+				This shows all the information regarding which lines were added in which commit. + -> insertion - -> removal
+				
+			We can use the above variations in combinations.
+			for eg.
+				git log -2 --oneline
+				git log -p -2
+				
+			- git log --grep = "Initial" (initial is just any word): 
+				This is used to find the commits using the message passed.
+				
+			- git log --author = "username" : 
+				This is used to find the commits created by username.
+				
+			- git log --since = "some date" and 
+			- git log --until = "some date" and 
+			- git log --before/after = "some date" :
+				This is used to find all the commits using the dates specified.
+				
+				
+	8. git restore --staged <filename> : 
+			This remove it from the staging area. This will take back the previous state of staging area. 
+			restores changes in staging area from LR 
+			
+	9. git diff : 
+			This actually gives the difference between stages(WD, SA, Local repository) of the file.
+			it compares changes between woking directory and staging area.
+			
+			git diff head  -> it gives the differnce between workign directory and local repository.
+	
+	10. git restore <filename> :
+			Restore changes in WD from the LR.
+	
+	11. Undoing of commited changes : 
+	
+		1. Safe way :
+			
+			git revert <SHA> :
+				press ':wq' to exit from the editor that the above command started.
+				Here a new commit will be added in the log stating that something is reverted. Meaning we can undo the revert. Therefore this is safe, even though we are reverting we still can undo the revert.
+				
+				When this is done we have the record of this step in the log file.
+		
+		2. Unsafe way :
+			
+			git reset --hard <sha> :
+				This changes the head pointer to point to the given sha value. All the commits that were done before the sha specified will be undone. Meaning if we commit it is removed and if we reverted, they are back.
+				So all the commits that are lost by change of header pointers are lost.
+				
+				We do not have any entry of this step in the log file.
+			git reset --hard HEAD~2 :
+				head pointer will go down 2 times. 2 can be any number.
+	
+			why do we need --hard??
+				removes everything in the logs.
+				
+	12. Ignore (from being tracked) certain types of files : 
+			Files that needs to be tracked - docs, project code files, manually updated files, webpages.
+			files that need not be tracked - log files, executable files, library file, .o file, .tmp files, etc.
+			
+			To do this create .gitignore 
+			just add the names of the files we want to ignore in the .gitignore file. 
+			We can use *.extention to select all the files with certain extention.
+			
+			Because we want everyone to ignore these files, we need to track .gitignore file.
+			
+			This is also used so that the empty folders are recognised by git.
+	
+	
+	13. git mv filename.ext newfilename.ext : 
+			This is used to change the name of the file. This too needs to be commited as this change is shown in the status command.
+	
+	If we need to see the docs, we can use the --help after the git command.
+	Touch : 
+		Sytax :
+			touch file_name.extention
+		This command is used in the git bash to create the file in the git directory we are working on.
+		eg.
+			touch math.py
+			This will create the specified file. After that open the file in any editor and edit.
+			
+	Rememeber master always points to latest commit. And head pointer points to the master branch.
+	
+	Branch :
+		We can create a new branch and work on it without affecting the original code. 
+	
+		How to create a new branch??
+			
+			Syntax : 
+				git branch branch_name
+			This will create a new branch.
+			Even if the new branch is created we are still not working on this branch yet.
+			
+			Whenever a new branch is created, it points to latest commit. Meaning it must be pointing to master.
+			
+			To start working on the newly created branch use checkout
+			
+			syntax : 
+				git checkout branchname
+				or 
+				git switch branchname
+			Head is now pointing to branchname.
+			
+			This will remain even after we close the cmd. The checkedout branch persists even after we restart the windows.
+			
+			Remember all branches work takes place within the same folder within your file system.
+			
+			Now to go back to master use,
+				
+				git checkout master
+			
+			If we commit something in the new branch, the master wont be pointing to the latest commit by branch.
+			So if master updates something, the file changes in branch will be lost. This is because the files are the same remember the branch works in the same directory.
+			We can get back to the branch using the checkout function.
+
+			git branch :
+				To list all the branches 
+				
+			
+			Delete branch :
+				Go in master,
+				
+				git branch -d branch_name
+				
+				This will delete the branch.
+
+			git branch + git recover :
+				
+				git checkout -b <branch>
+			
+			Recover :
+				
+				git checkout -b <branch> <sha>
+			
+			Rename branch: 
+				git branch -m oldname newname
+			
+			
+	Branching and merging :
+		
+		3 Scenarios :
+			1. Create new branch, perform commit on new branch and no extra commit happening on master branch.
+			Implementation :
+				git branch branch_name
+				git checkout branch_name
+				git commit -am "message" -> this goes on branch_name
+				
+			Merge :			
+				git checkout master 
+				git merge branch_name --> merge commit from branch_name into current branch
+				
+				This is not two way merge, only master will have commits from branch_name and not vice versa.
+				
+			2. One or more commit on new branch and one or more commit on master branch. (Parallel branches) and without conflict situation.
+			Implementation : 
+				git branch b2
+				git commit -am <message> --> perform 1 commit on master branch
+				git checkout b2
+				git commit -am <message> --> perform 1 commit on b2 branch
+				
+			Merge :
+				git checkout master
+				git merge b2 -> merge commit from b2 into current branch.
+				
+				After merging we can delete the branch.
+				
+			3. One or more commit on new branch and one or more commit on master branch. (Parallel branches) and with conflict situation.
+			Implementation : (implemet same function in different ways)
+				git branch b3
+				git commit -am <message> --> perform 1 commit on master branch
+				git checkout b3
+				git commit -am <message> --> perform 1 commit on b3 branch
+				
+			Merge :
+				git checkout master
+				git merge b3 -> merge commit from b3 into current branch.
+				
+				Resolve the conflict :
+					Meaning we need to manually change the code for which there is conflict and the commit it in the master branch. Here both the commits will be added in the code/text file. We need to delete the one we dont want and then manually commit in the master branch. Git tells you how to resolve such conflicts.
+					
+			Remember merge causes an extra commit in the log files stating that two branches have been merged.
+					
+			
+	git Rebase :
+		It is similar to merge however merging happens differently in rebaseing.
+		
+		This linearly arranges the commits and then merge the branches.
+		Due to this there is no extra commit that was done previously in normal merge process.
+		
+		It rebases the master.
+		
+		1. One or more commit on new branch and one or more commit on master branch. (Parallel branches) and without conflict situation.
+		Implementation : 
+			git branch b2
+			git commit -am <message> --> perform 1 commit on master branch
+			git checkout b2
+			git commit -am <message> --> perform 1 commit on b2 branch
+			
+		Merge :
+			git rebase master -> execute while on bug branch
+			git checkout master
+			git merge b2 -> merge commit from b2 into current branch.
+			
+			After merging we can delete the branch.
+			
+		2. One or more commit on new branch and one or more commit on master branch. (Parallel branches) and with conflict situation.
+		Implementation : (implemet same function in different ways)
+			git branch b3
+			git commit -am <message> --> perform 1 commit on master branch
+			git checkout b3
+			git commit -am <message> --> perform 1 commit on b3 branch
+			
+		Merge :
+			git rebase master -> execute while on bug branch
+			git checkout master
+			git merge b3 -> merge commit from b3 into current branch.
+				
+			Resolve the conflict :
+				Meaning we need to manually change the code for which there is conflict and the commit it in the master branch.
+		
+	
+	Tagging :
+		Tag is like a label while branch is like a seperate thread. Hence we cannot checkout tag. 
+		
+		
+		google search : 
+				
+			Tags are ref's that point to specific points in Git history. Tagging is generally used to capture a point in history that is used for a marked version release (i.e. v1. 0.1). A tag is like a branch that doesn't change.
+		
+		git tag tagname :
+			create tag on the latest commit.
+		
+		git tag tagname <sha> :
+			This creates a tag at some previous commit.
+			
+		git tag tagname -m "message" :
+			This gives some particular message to the tag.
+			
+		git tag -n :
+			It shows all the tags created along with the messages.
+			
+	Stashing :
+		
+		While resolving a bug on some branch and we are assigned some high priority task.
+		Here we can use stash
+		Stash can be used to save local changes temporarily.
+		
+		stash is stored in the form of stack therefore latest stash will have index 0.
+		
+		syntax :
+		
+			git stash 
+			
+		What this does is that local changes will be gone but saved. Now we can work on the high priority task.
+		
+		To get the local changes back that we were previously working on, use
+		
+			git stash apply [id,index] -> this will only apply the stash and wont remove the stash from the stash list.
+			
+			We can also use :
+			
+				git stash pop -> this will also remove the stash from the stash list.
+	
+		
+		git stash list :
+			Displays the list of the stash.
+		
+		git stash clear :
+			This is used to clear the entire list of stash.
+		
+		git stash -m "Message"
+			
+	Extra knowledge :
+		Git has 2 types of commands:
+		
+		1. Porcelain commands : 
+				git add, git commit, git status, git branch...
+		2. Plumbing commands :
+				core commands (never used in projects)
+				
+				do not mess with .git folder.
+				
+				git cat-file type_command hashvalue -> this will give info regarding all the commant type and who did it and what is the message and all.
+				
+				type_command can be commit, tree, blob
+					Blob -> binary large objects
+					to find the type_command use the -t parameter.
+	
+	GIT REMOTE :
+		
+		This remote repository is sort of a central clearing house for all of these different changes that are going on.
+		
+		The remote server is similar to our local repository.
+		
+		We sync up all our changes in remote repo
+		
+		Pull = fetch + merge
+		
+		There are 2 ways to add remote to local repo
+		
+		1. Add remote
+			git init
+			git remote add <name of the remote > < .giturl>  -> connect local repo to remote repo
+			git fetch origin main(default master branch name)
+			git merge origin/main
+			
+			anything in red color is in reference to the remote repo.
+		
+		2. Clone
+			git clone <.giturl>
+				this creates default branch as main and not master.
+				Incase you dont understand something visit the folder for more information.
+				
+		git pull origin 
+			This command takes files from the remote repository.
+			This pulls every thing in working directory.
+			
+		git push origin :		
+			We need to first need to commit the new changes in local repo. After that we can push the file to remote repo. This will commit the file on remote repo.
+			Remember here origin is the name we gave. This may differ if we are doing it using add remote.
+			
+		git push origin local_branch_name:remote_branch_name
+			It is bad practice to push in main branch on remote repo from a different branch in local repo.
+			Therefore use the above method. This will create a new branch in remote repo.
+			
+		To pull and checkout a branch made on remote repo,
+		first pull
+		
+		git pull origin
+		
+		then create a branch using the origin/branch_name reference
+		
+		git checkout -b local_B_name origin/branch_name
+			
+		Consider the branching scenario and in the end just add git push origin commands.
+		
+		Rebasing with remote repo
+		
+		Implementation :
+			perform 1 commit on remote repo on main branch
+			perform 1 commit on local repo on main branch
+		
+		Rebasing 
+			git fetch origin --> fetch the changes from remote to local repo and not in wd.
+			git rebase origin/main --> rebase local main with remote main and update local copy
+			git push origin --> updates remote copy.
+			
+		git remote :
+			lists all the remote connected
+		
+		git branch -a :
+			lists all the branches even remote.
+		
+		Good practice :
+			
+			Pull and then Push
+		
+		git remote rename oldname newname :
+			Used to rename the remote.
+			
+		git remote rm name :
+			used to remove the remote branch
+			
+			
+	Even if remote is not present we can share with our peers.
+	
+	Create a bundle :
+	
+		git bundle create name.bundle Head main
+		
+		now this bundle is created in the wd. After that we can share that bundle.
+		
+	Now how to use that bundle :
+		
+		git clone name.bundle name_new
+		
+	BOOK To REFER :
+		
+	https://git-scm.com/book/en/v2
+				
+Google IT automation :
+Git:
+	This is a VCS tool.
+	
+	The Git have 3 states:
+		modified	-> changes made
+		staged 		-> Changes are taken to be commited but not commited yet
+			(The use of this stage is that we can do multiple changes to the file. We can skip this state. However if a file was never added to the repo, we need this step to be completed. We can only skip this step when we have already added the changed file in the repo meaning the changes are made to file which is already tracked any untracked file must be added using the add command.)
+			
+				To skip the stage step, we can use the git commit -a [-m "text message" This is optional if we dont use it a new text file is opened for us to enter a commit message.]. However as stated previously, this works for only tracked files.
+		commit		-> Changes are commited.
+		
+		git commit:
+			This command is used to commit the changes to the git repo meaning commmiting all the changes that are staged.
+			The command by default opens a commit message text file which should contain a message stating the changes made in that commit.
+			we can use the -m flag followed by the commit message if the message is small in length.
+			
+			-a used to skip the add step for tracked file.
+			
+			--amend:
+				This is used to commit the current on the commit that was previously made.
+				In simple words using --amend we can overwrite on the previously commited message.
+				This should only be used on local repo and not on public.
+			
+		git add:
+			This is used to enter the file to the stage step. This is required to add a new file to the repo. Meaning adding a file which is untracked.
+			git add
+			git add filename
+			
+			-p:
+				This flag will show us what we have added and removed from the file and then will ask if we want to stage it or not.
+				git add -p
+		
+		git status:
+			This is used to show the current status of the repo.
+		
+		git diff:
+			This is used to display the changes that were made to the file. This only shows any unstaged changes by default.
+			So if we stage a file and then use the diff command it wont show any changes.
+			
+			--staged:
+				This is used to see the changes that are not commited but are staged. This way we can see the difference between the file commited before and the changes made that are staged.
+		
+		git log:
+			This is used to see the logs meaning all the commmits made to the repo. This states all the commits we made to the repo.
+			
+			patch:
+			We can use the patch flag (-p) which shows the changes that were made in each of the commits that were made to the repo.
+			This gives us extra info about what each of the commits changed.
+			This is very useful to see the changes made at each of the commits this way we can see what caused the error.
+			
+			stat:
+			This is similar to the patch flag. The only difference is that stat shows only the number of lines added and removed. 
+			
+			
+			Head:
+				This is the alias is used to represent the currently checked out snapshot of our project. 
+				It is used to indicate the currently checked out snapshot is. As a shortcut we can think head as a pointer to the current state of the file however it is more powerful than that.
+		
+		
+		git show:
+			This command takes the id of the commit as a parameter. This command shows the info like what is added and what is removed from the file in that commit. It is similar to the patch flag which was used in the log command. The only difference is that the log command display this info for all the commits, the show command only shows the info of the commit whose id is given as a parameter.
+			
+		git rm (remove):
+			This command is used to remove a file from the repo. This command will untrack the file from the git repo.
+			Deleting a file from the file follows the same procedure for adding a file in the repo.
+			When we use the command:
+				git rm filename
+			It will remove the file.
+			Now we still need to commit the changes and write a commit message as to why we removed the given files. The commit command is normal with no extra changes just the way we use it for commiting new files.
+			
+		git mv (rename):
+			This command is used to change the name of the file in the git repo.
+			Similar to adding a file or deleting/removing a file, we need to commit the changes as in saving the new name of the file.
+			when we use the command:
+				git mv old_filename new_filename
+			It will change the name of the file.
+			Now we still need to commit the changes and write a commit message stating that we changed the name of the file.
+			
+			This command is used to both move and rename the file as the mv command in the linux.
+			
+		.gitignore file:
+			Inside this file we tells the git as to which files the git status should ignore.
+			This is useful to reduce the noise in the git status.
+			We need to add this file in the repo and commit the changes.
+			
+			for more info:
+				https://git-scm.com/docs/gitignore
+			
+		git checkout:
+			Consider that we made changes to a file but we decide that we dont want to commit it. To do this we can use git checkout command.
+			This command is used to revert the changes to most recent commit before the file was staged.
+			It is just like loading a save file or loading a game to a last saved state. But here we use the name of the file that we want to revert since there are multiple files in a repo and we want to revert changes to only one file.
+			git checkout filename
+			Since we have not commited the file we can go back to the state where the changes were not made. This is specially useful if we changed the entire file and then after many changes we just decide that we want to revert all the changes and go back to a state when we last commited. 
+			This only works when the file is not staged.
+			
+		git reset:
+			This is used to revert the changes that are staged.
+			Meaning we remove remove the given file from the staging area.
+			The git reset uses the alias. This is used to so that we want to revert the changes to the current snapshot.
+			
+			consider we entered:
+				git add *
+				This will add all the files in the staging area.
+				
+				git reset Head filename(That we want to remove from staging area.)
+				
+				-p:
+					This is used in the reset command. This will ask all the changes one by on to keep or remove.
+					
+			We can think of reset as the counter part of add.
+			
+		Rollback:
+			This is useful when we have commited some changes and we want to revert those changes.
+			
+			git revert:
+				This is one of the way to rollback. 
+				This command does not undo the changes, on the contrary it inverts the changes that were made in the bad commit. For example if a line was added in the commend it is removed and if a line was removed it is added. This ends up in a situation where the file is in the previous state and the history of the project remains consistent.
+				This command creates a commit for us.
+				So git revert will create a new commit that is the opposite of the previous commit. We can use the head alias in this command.
+				
+				eg:
+					git revert HEAD  ---> this tells that we want to revert the last commit.
+					
+					This will open the text editor with the commit message that this is a revert commit. We dont need to commit.
+				One thing to notice here is that the we reverted the latest commit what if we need to revert a commit that was commited way before?
+		

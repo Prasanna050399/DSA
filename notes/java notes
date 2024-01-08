@@ -632,7 +632,7 @@ type conversion :
 			1. all byte, short, and char are promoted to integer
 			2. if one operand is long in the expression then all the operands will be automatically promoted.
 			3. if one operand is float in the expression then all the operands will be promoted to float.
-			4. if one operand is double in the expression then all the operands will be promoted to float.
+			4. if one operand is double in the expression then all the operands will be promoted to double.
 			5. the promotion with int and float is float. So int + float will give float.
 			
 Arrays : 
@@ -710,7 +710,7 @@ Operators :
 				2>>1 so right shift all the bits in 2 by 1 position.
 				right shift retains the sign bit. Meaning that if a number is negative then the sign bit is set, when we shift it right, the new bit which comes in positon of old sign bit is also set. So we right shift more than the number of bits in the variable we get -1 because all the bits will be set.
 			>>> : unsigned right shift operator. Shifts the bits by given number of time to the right, without preserving the sign bit.
-				-2 >> 99 so right shift all the bits in -2 by 99 positions.
+				-2 >>> 99 so right shift all the bits in -2 by 99 positions.
 				unsigned right shift does retain the old sign bit. Instead it replaces it with a 0. So after 100 shifts ideally all the types will contain 0.
 			<< : left shift operator. Shifts the bits by given number of time to the left.
 				New bit will contain 0. And the left most bit is lost.
@@ -901,7 +901,7 @@ Java virtual machine :
 				It destroys un-referenced objects.
 				This is the process by which java programs perform automatic memory management.
 				When the program runs on jvm, the objects are created on heap, which is a portion of memory dedicated to the program. The garbage collector finds unused objects on the heap and deletes them to free up memory.
-				Main object is to free heap memory by destroying unreachable objects.
+				Main objective is to free heap memory by destroying unreachable objects.
 				The garbage collector is the best example of Daemon thread because it is always running in the background.
 				
 				In-use object or referenced oject is the object that is still in use in the program meaning a pointer to this object is still maintained.
@@ -929,7 +929,7 @@ Java virtual machine :
 					1. nullifying the reference variable
 					2. re assigning the reference variable
 					3. an object created inside the method
-					4. island of isolation(group of object that reference each other but not referenced by any active object in the application. A sinle unreferenced object is also an island of isolation)
+					4. island of isolation(group of object that reference each other but not referenced by any active object in the application. A single unreferenced object is also an island of isolation)
 				
 				
 				How to request JVM to run garbage collector :
@@ -1027,3 +1027,105 @@ instance variable hiding :
 	In this case the local variables hide the instance variables.
 	Because this keyword allows us to access the object variable, we can use it to resolve any namespace collision that might occur between instance variables and local variables.
 	Therefore, we can use this keyword to overcome instance variable hiding.
+	
+	
+important points: 
+	1. both method parameters and local variables can be final.
+	2. we can initialize final variables in constructor or while declaring them.
+	3. method can also be final
+	4. arrays are implmeneted as objects therefore, we can make use of length instance variable.
+	5. the scope of the nested class is bounded by the scope of the enclosing class. So if B is in A then B cannot exist without A.
+	6. nested class has access to the member of its parent class including private members. But vice versa is not true, enclosing class does not have access to the members of the private class.
+	7. nested class can also be inside a block which makes it local to that block. Meaning that inner class can be defined within the body of a for loop as well.
+	8. there are two types of nested classes : 
+		static 
+		non-static
+	9. Inner class is a non-static nested class.
+	10. a class can be static if it is nested
+	11. inner class has access to all the variables and methods of the outer class and can access them directly
+	12. generally speaking the instance of inner class can only be created in context of outer class and is created within the enclosing code. But we can create an instance of the inner class outside the enclosing class as well.
+	13. string object is immutable but stringBuffer or stringBuilder is not immutable.
+	14. string methods : 
+		equals()
+		length()
+		charAt()
+	15. variable length arguments are written like this :
+		void method(int ...v)
+		... followed by variable name.
+		This means that v will have 0 or more arguments
+	16. we can access the elements of variable length arguments similar to arrays.
+	17. varargs can be used with normal parameters, but in that case, the varargs should be the last parameter.
+	18. there must be only one variable length argument in a method. More than one vararg will throw error
+	19. we can overload varargs methods as well, changing the vararg datatype, adding normal parameters with varargs.
+	20. We can overload the varargs method with a non-varargs method as well, in that case, if vaTest(int a), vaTest(int ...a) are both present, then if based on the number of parameters sent to the method, either will be called, for 1 argument, first method will be called and for 2 or more arguments, second method will be called.
+	21. ambiguous call in varargs :
+		in case we have two overloaded methods :
+			vaTest(int ...a)
+			vaTest(boolean ...a)
+		and then there is a call to the method : 
+			vaTest();
+		This will throw error, stating ambiguous call because both the boolean and int methods are a valid candidate.
+		
+		in case we have two overloaded methods : 
+			vaTest(int a, int ...b)
+			vaTest(int ...b)
+		This is also ambiguous for the following call :
+			vaTest(1);
+	22. local variable type inference works with user defined datatypes as well.
+	23. for inheritance : 
+		class subclass-name extends superclass-name {}
+	24. we cannot inherit or extend more than one class in java. Java does not support multiple inheritance.
+	25. multi-level inheritance is allowed.
+	26. class cannot extend itself, cannot inherit itself.
+	27. a parent class reference variable can hold a reference to an object of type subclass.
+	28. Important point to remember, it is the type of the reference variable and not the type of the object that it refers to that determines which all members can be accessed. Therefore, when a parent reference var holds a child object, it can only access the parent members of that object not the child object.
+	29. super : 
+		1. used to access the constructor of parent class : 
+			super(argument list)
+			This statement needs to be the first statement in the subclass constructor.
+			This is to prevent the subclass part of the object being initialized prior to the superclass part of the object.
+		2. access the members of the superclass that has been hidden by the members of the subclass. : 
+			This is similar to the use of this. Here instead of current class, super refers to immediate parent class.
+			super.member 
+			the member can be method or instance variable.
+			This form of super is most applicable to situations in which member names of a subclass hide members by the same name in the superclass.
+			i.e both the classes have a variable b.
+	30. super() refers to the superclass immediately above the calling subclass
+	31. order of constructor execution : 
+		the order is from superclass to subclass
+		basically the class hierarchy, constructors complete their execution in order of derivation, from superclasss to subclass.
+	32. if the super is not called in the constructor of a subclass, in that case, the default or parameter less constructor will be executed.
+	33. therefore, if the class hierarchy is as follows : 
+		a -> b -> c 
+		then the constructors will be called like this : 
+		inside a
+		inside b
+		inside c
+		This makes sense because super class is unaware of the existence of subclass, therefore, its execution must be completed first.
+	34. when the method in the parent class has the same name and type signature as the method in the child class it is called as method overriding.
+	35. dynamic method dispatch is the mechanism by which a call to an overridden method is resolved at run time. Dynamic method dispatch is how java implements run-time polymorphism
+	36. It is the type of the object being referred to that determines which version of an overridden method will be executed.
+	37. So for the following case : 
+		A -> B (B is subclass of A)
+		A -> C (C is subclass of A)
+		then :
+		A a = new A();
+		B b = new B();
+		C c = new C();
+		
+		A r; 
+		r = a;
+		r.x() -> calls a's method 
+		
+		r = b;
+		r.x() -> calls b's method
+		
+		r = c;
+		r.x() -> calls c's method
+		
+		Basically it is the object that will determine which method to call and not the reference variable.
+	38. why overridden methods ?
+		way for java to support run time polymorphism. It allows a general class to specify method that will be common to all its derivatives, while allowing subclasses to define its own specific implementation. : 
+		one interface many methods
+	39. superclass and subclass forms a hierarchy that moves from lesser to greater specialization.
+	current page : 319

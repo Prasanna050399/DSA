@@ -1,0 +1,118 @@
+web dev : 	
+	https://www.interviewbit.com/web-developer-interview-questions/
+
+	points : 
+		what is dom : 
+			dom describes the logical structure of the documents and how one can manipulate them.
+			These documents are usually treated as a tree structure in which every node is an object that represents a specific part of the document.
+		what are drivers and navigators in pair programming : 
+			the one that writes code is known as driver 
+			and the one that is monitoring the code is known as navigator.
+			the roles are inter changable.
+		
+		what is type coercion in javascript : 
+			type coercion means the process of converting value from one data type to another either automatically or implicitly.
+		
+		difference between window.onload and onDocumentReady : 
+			onload triggers when a web page is fully loaded, meaning DOM is loaded along with all the associated resources and then the code is executed
+			onDocumentReady triggers when the dom is loaded, meaning other things like images, videos and other contents are not considered while triggering the event.
+		
+		best way to integrate different stylesheets into a website : 
+			as per my understanding, since each angular component have a styles.css, what we can do is create a global style.css that will contain all the generic css information and then we can write any specific css in the local style.css
+		
+		how do you optimize the loading time of your web application : 
+			image compression and optimization 
+			put javascript and css in external files
+			reduce the number of redirects
+			css and javascript files should be loaded asynchronously 
+			minify html, css and javascript code.
+		
+		different pop up objects available in js : 
+			alert
+			confirm -> okay returns true cancel returns false
+			prompt -> has two buttons okay gives the user input value cancel returns null
+		
+		scope in js : 
+			global scope :
+			local scope : 
+		
+		what is ajax : 
+			asynchronous javascript and xml :
+				ajax refers to a set of technologies which are used for web dev that allows the web application to send and receive data asynchronously from the server without hampering the display or behaviour of the existing site
+				
+				using ajax we can exchange information from the server and upate a part of a webpage without reloading the entire web page.
+				
+		CDN in jquery : 
+			content delivery networks are geographically distributed groups of servers that deliver internet content quickly.
+			the servers are dispersed accross many physical and network locations this can significantly reduce the load times 
+		
+		what are css selectors :
+			css selectors are used to select or specify html elements that they want to style.
+				id selector :
+					#idName
+					So the element with the id idName will have the above css applied to it.
+				
+				class selector : 
+					.className
+					so the above css is applied to html element with class = "className"
+				
+				child selector or combinator : 
+					div > p 
+					so the above css is applied to all the p elements that are child of the div element
+		
+		what are pseudo-classes : 	
+			This is used to define a special state of an html element.
+			in css there are many pseudo-classes but the one that is most frequently used are : 
+				selector : pseudo-class {}
+			
+			they are : 
+				: visited 
+				: hover 
+				: active -> select the element that becomes active when the user clicks on it
+				: focus -> select an element that is currently focused by the user.
+		
+		use of media queries : 
+			used in css to create a responsive web design.
+			meaning based on the user's screen or media type, the web page will change appearance.
+			The following can be checked using media queries : 
+				dimensions of the view port
+				dimensions of the device
+				orientation
+				resolution
+		
+		what is long polling : 
+			The client initiates a request to the server, typically through an HTTP request.
+
+			Instead of immediately responding, the server holds the request open, keeping the connection active.
+
+			If no new data is available, the server waits until it has something to send back.
+
+			Once the server has new data or a predefined timeout occurs, it responds to the client with the latest information.
+
+			Upon receiving the response, the client immediately sends another request to the server to maintain the connection.
+
+			This cycle of sending requests and receiving responses continues, ensuring real-time updates.
+				
+database : 
+	https://www.interviewbit.com/dbms-interview-questions/
+
+computer networks : 
+	https://www.interviewbit.com/networking-interview-questions/
+	
+design patterns :
+	https://www.interviewbit.com/design-patterns-interview-questions/
+	
+	creational :
+		factory
+		builder
+		prototype
+	structural : 
+		adaptor 
+		proxy
+		bridge
+		structural
+	behaviour :
+		chain of responsibility
+		command
+		observer
+		

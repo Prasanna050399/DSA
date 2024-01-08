@@ -1,0 +1,130 @@
+sql notes : 
+
+table level constraint:
+
+constraint constraint_name constraint_value(table name)
+why do we need constraint name ?
+To drop the constraints we need the names either defined by us or the system.
+
+in where clause we cannot use columns alias
+but in order by clause we can use column alias. we can also use the column number in order by clause.
+
+sequence of clauses:
+select	-- column list
+from	-- table name
+where	-- row level filter 
+group by -- group the data
+having 	-- group level filter
+order by -- sort 
+
+User Input :
+	To take input from the user we need to use '&' sign. This sign is to be added in from of the variable before firing the query. Remember the datatype should be same. For example if the input is a string make sure that the variable along with the & sign are written in quotes/single inverted commas. Else the query will give error.
+
+We can use Case expression for performing if else condition.
+	simple casse for single case expression
+	searched for multiple column expression
+Decode Function is alternative for simple case.
+
+if we have date in different format we first need to convert it into default date format using the to_date() function.
+
+null value is ignored by sum, count , min, max, sum.
+
+with grant option:
+	If the user have privileges along with grant option, the user can pass on the same privileges to other users and not extra privileges.
+
+with admin option:
+	Similar to grant option, the user can grant the system previlages assigned to him to other users.
+
+user_tab_privs_made : 
+	This table is data dictionary table, it contains the information from regarding all the privileges grated and all the information regarding the same.
+	
+user_tab_privs_recd: 
+	This contains the previlages granted.
+
+cascading revoke : 
+	Will happen in case of object privileges assigned using with grant option
+	will not happend in cse of system privileges assigned using with admin options
+
+how to identify if a query is correlated query??
+just go through the nested sub query and see if the sub query references the table or column from outer query. If it does, it  is a correlated query. Else it is nested query.
+
+if inner query is large and outer is small go for correlated query
+if outer is large and inner is small go for nested query.
+
+the table containing the primary key is the parent table and the one with foreign key is child table.
+
+copy another table:
+we can use select statment to copy a table in this way all the structure and entries of the table will be copied however the constraints wont be copied.
+
+Data dictionary table : 
+	This is basically a meta data.
+	
+	user_table : 
+		This table contains 
+
+	user_constraints :
+
+		This table contains all the constraints implemented by us and the system.
+
+	user_cons_columns:
+
+		This also shows the constraints, however this shows the linking between columns
+		
+
+THE ONE WHO ASSIGNS THE privileges ONLY THAT USER CAN REVOKE THE PRIVILEGES
+
+
+Role : 
+	Role is a group of privileges.
+	instead of assigning seperate privileges to each user manually, assign them to role. After this we can just assign the role to the user.
+	
+	we can grant role to user just like granting object or system admin to the user.
+	
+	In the same way we can revoke the role from the user.
+	
+	
+Sequence : 
+The basic use of sequence is to populate the primary key in the column.
+create sequece seq_name 
+	start with x
+	increment by y
+	maxvalue z / nomaxvalue
+	cycle / nocycle -> repeats the sequence after max is reached
+	
+	select * from user_sequences -> data dictionary table for sequences
+	
+To generate values from the sequece,
+	nextval -> generates new value from the sequence
+	syntax : 
+	select seq_name.nextval from dual;
+	
+	currval -> generates current value from the sequence
+	syntax :
+	select seq_name.currval from dual
+	
+for sequence, alter statement is available. We can alter all the parameters of the sequence except start value.
+syntax : 
+alter sequence seq_name 
+	parameter newvalue;
+	
+	Use : 
+	
+	insert into table
+	values (seq_name.nextval,value,value)
+	
+Usually it is good habit to create seperate sequence for different tables.
+To delete the sequence we can use drop query
+	drop sequence seq_name;
+	
+INDEX : 
+
+Explicitly :
+	create index ind_name on tablename(column);
+	
+Implicitly :
+	Using primary key or unique key constraints on any column.
+	
+Synonym : 
+	it is used to give alternate name for the db objects.
+	
+	create synonym name for object_name;

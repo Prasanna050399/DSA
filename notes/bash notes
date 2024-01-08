@@ -1,0 +1,225 @@
+mkdir:
+	This is the command to create a new directory in the current directory.
+	
+cd:	
+	This command is used to change the current working directory.
+
+pwd:
+	This command prints the current working directory.
+	
+ps:
+	This lists the currently running processes.
+	
+kill:
+	This command is used to terminate a process whose pid is given as a command line argument.
+ls:
+	This command is used to list all the containts of the directory.
+	
+	command line arguments:
+		-l:
+			this command line argument gives us extra information about the files stored in the file.
+		
+		-la:
+			This command line argument displays the hidden files as well.
+			
+		name of the directory:
+			This will return the list of elements of the given directory.
+	
+
+chmod:
+	This command is used to change the the permission of the file.
+
+cat:
+	This command is used to show the containts of the file.
+
+cp:
+	This command is used to copy a file from one directory to another.
+	eg.
+		cp absolutepathofthefile destinationpath
+		
+		cp filename newfilename --> this will create a new copy of the file in the same file.
+		
+mv:
+	This command is used to rename a file or move a file.
+	eg.	
+		mv oldname.txt newname.txt
+	
+echo:
+	This command is used to print to the output screen meaning the terminal.
+	
+touch:
+	This command is used to create an empty file.
+	eg.
+		touch filename.txt
+		
+rm:
+	This command is used to delete a file from the directory.
+	eg.
+		re filename --> This will delete the given file
+		
+		re * --> This will delete everything from the directory.
+		
+rmdir:
+	This command is used to delete empty directories.
+	Remember the directory should be empty.
+	eg.
+		rmdir dirname
+		
+free:
+	This command displays the amount of free memory
+	
+uptime:
+	This command shows how long the computer has been on.
+	
+test:
+	This is the command that recieves a condition and exits with value zero when they are true and 1 when the condition is false.
+	There is an alias to this command
+	we can use [ condition ] instead of writting test. But when using this format we have to make sure that there is a space before closing bracket.
+	
+basename:
+	This command takes the file name and an extension and then returns the file name without the extension.
+	eg.
+		basename file.html .html
+		file --> this is the output.
+		
+https://www.coursera.org/learn/python-operating-system/supplement/bC5zL/basic-linux-commands-cheat-sheet		
+
+Redirecting the output:
+	
+	We can redirect the output of the program to something other than stdout.
+	>:
+		We can do this using the greater than character, '>'.
+		eg.
+			python3 filename.py > tempfile.txt ---> this will change the output location instead of displaying the file on the screen the output is stored in the file named tempfile.txt
+		
+			JUST LIKE THE 'w' MODE IN THE FILE HANDLING, EACH TIME WE EXECUTE THE SCRIPT THE FILE GETS OVERWRITTEN.
+		
+	>>:
+		We can redirect the output to the file but instead of overwritting the file we can append the result of the script to the given file.
+		eg.
+			python3 filename.py >> tempfile.txt ---> This will append the output of the file.
+
+Redirecting the input:
+	
+	We can redirect the input to the script from the keyboard to a file.
+	Meaning we can read the containts of the file instead of typing the input.
+	<:
+		To redirect the input from keyboard to a file we use the '<' symbol.
+		eg.	
+			python3 filename.py < input.txt
+		
+Redirecting the error output:
+	
+	We can redirect the stderr to a file as well.
+	2>:
+		To redirect the error raised by the script to a file we use '2>'.
+		The number 2 defines the file descriptor of the std err stream
+		Similarly 0 and 1 are defined for stdin and stdout
+		eg.
+			python3 filethatraiseerror.py 2> temp.txt
+			
+We can write these redirection in succession also.
+Meaning we write < followed by 2>
+eg.
+	python3 file.py < input.txt 2>error.txt
+	
+None of this is exclusive to python.
+We can write the echo command and redirect its output as well.
+eg.
+	echo "some string" > file.txt
+	
+Piping:
+	We can use this technique to perform io stream redirection.
+	Pipes:
+		It connects the output of one program to the input of another program to pass data between them.
+		They are represented using the '|' pipe character.
+		This will avoid the intermediate files.
+	We can pipe as many commands as we need.
+	eg.
+		cat filename | python3 file2.py | python3 file3.py | text.txt
+		Here the cat command will pass the containts of the file to the file2.py 
+		The output of file2.py is then passed to file3.py and last it is passed to text.txt
+		The problem here is that the input statement will only take line up until \n character.
+	There for to deal with this we use the sys module.
+	In sys module we have an attribute named stdin. 
+	eg.
+		import sys
+		for i in sys.stdin:
+			print(i) 
+		
+		Now this will consider all the data in the input file.
+		
+https://www.coursera.org/learn/python-operating-system/supplement/oU89b/redirections-pipes-and-signals
+
+We use globs like * and ? to create lists in bash.
+
+What is Bash script?
+	It is script that contains all of the system commands that we want to call one after the other. IT is a fully powered scripting language.
+
+Bash:
+
+In the bash scripts we just add the commands.This is just the half part. 
+We can define variables, new conditional operators, execute loops and also write functions in bash
+
+eg.
+	echo "starting at $(date)" --> here the date command is written inside paranthesis with $ sign at front prints the value of date in the echo command. It is like adding %d in the print statement in c.
+	uptime
+	echo
+	echo"free"
+	free
+	echo
+	echo"who"
+	who
+	echo
+	echo"finishing at $(date)"
+	
+	We can also write the command on the same line using the ';' to seperate them
+	
+We save the file with .sh extension
+to run the script we use the following syntax:
+./filename.sh
+OR we can use bash filename.sh  (I think so not sure.)
+
+In bash scripting, an exit status of zero means successful execution of command.
+
+if statment in bash:
+	syntax:
+		if condition(command); then
+			some statement
+		else
+			some statement
+		fi --> this tells that this is the end of the if block.
+loops:
+	There are for loops and while loops in python.
+	while loop:
+		syntax:
+			while test condition;/[ condition ]; do
+				statment
+				((arithmatic operation)) --> this is a bash construct to perform arithmatic operation with the variable. 
+			done
+			
+	for loops:
+		The for loops are somewhat similar to for loop in python i.e its a for each loop.
+		syntax:	
+			for loopvar in x y z; do
+				echo $loopvar
+			done
+			
+		We can do this to iterate over all the files in that directory.
+		eg.
+			for i in *.extension; do --> in this the *.extension matches all the file with given extension and returns a list. 
+				name=$(command eg. basename "$i" .extention) --> this will assign the base name to the variable 
+			done
+Variables:
+	TO define a variable we use the normal assigment operator.
+	However if we enter space then we will get an error.
+	eg.
+		temp=hello
+		echo $temp
+		
+	The variables are defined in the local environmet. We can export them using the export keyword.
+	We can define a variable in bash similar to python
+	But to access the variable we add the '$' before the variable name.
+	
+	To get the value of command line argument, we use the following construct:
+		var=$1 --> This is the used to access the first command line argument.

@@ -167,7 +167,7 @@ spring boot architecture :
 		4. we can also add the spring boot web dependency.
 			artifactid : spring-boot-starter-web
 		5. create a new class
-		6. inside the main method that new class call the static run method of the SpringApplication class and give the class name as the parameter to this run method.
+		6. inside the main method of the new class and call the static run method of the SpringApplication class and give the class name as the parameter to this run method.
 			SpringApplication.run(className.class)
 		7. We need to annotate the class with @SpringBootApplication annotation.
 		
@@ -594,6 +594,10 @@ spring boot starter test :
 	NOTE : IF WE ARE ADDING TEST DEPENDENCY MANUALLY, ADD IT TO THE BOTTOM OF THE POM FILE.
 	
 	Also while adding the test dependencies we can add the scope as test.
+	
+	
+caching in spring and spring boot : 
+https://www.baeldung.com/spring-cache-tutorial
 		<scope>test</scope>
 	This means that when the application is bundled and packaged for deployment, dependencies with scope as test will be ignored and are available only when running in development and maven test modes.
 	
