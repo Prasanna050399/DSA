@@ -1128,4 +1128,177 @@ important points:
 		way for java to support run time polymorphism. It allows a general class to specify method that will be common to all its derivatives, while allowing subclasses to define its own specific implementation. : 
 		one interface many methods
 	39. superclass and subclass forms a hierarchy that moves from lesser to greater specialization.
-	current page : 319
+	40. abstract class :
+		we use abstract class in the scenario where the superclass does not have a meaningful implementation of a method and it is upto the subclass to implement it.
+	41. To make sure that a subclass implements a method from the super class java have abstract methods : 
+		to declare a method as abstract we need to use the following format : 
+			abstract type methodName(paramList); -> no method body
+	42. Classes with abstract methods must also be defined as abstract : 
+		the way we define an abstract class is by adding abstract keyword before the class keyword : 
+			abstract class className {}
+	43. we cannot instantiate abstract classes because it does not make sense as there is not complete implementations of methods.
+	44. cannot declare abstract constructors or abstract factory methods.
+	45. if a class is abstract and a subclass extend it, it must define all the abstract methods or should be declared as abstract itself.
+	46. we can have concrete methods in abstract classes.
+	47. an abstract class can have zero abstract method
+	48. There are three uses of final keyword : 
+		1. to prevent the user from changing the value of a variable or in other words create a constant with a name
+		2. declaring a method as final. Declaring the method as final prevents it from getting overridden. So to prevent a method from getting overridden, we need to declare the method as final. Overriding a final method throws a compile time error. There is a possibility of performance enhancement because the compiler is free to add the bytecode for the subroutine directly thus eliminating the overhead associated with method call.
+		This is called as early binding
+		syntax : 
+			final returnType methodName() {}
+		3. using final to prevent inheritance. If we declare a class as final, all of its methods are declared as final implicitly.
+		A final class cannot be inherited.
+		A class cannot be abstract and final at the same time.
+		final class className {}
+	49. local variable type inference with inheritance : 
+		The local variable type inference infers the variable based on the initializer. Therefore, the type of the variable is based on initializer.
+		So if we have a method called as builder of type myClass
+		and it is returning the subclass objects,
+		since the method return type is myClass, and even though the actual object is of type subclass,
+		the inferred type will be myClass.
+		and therefore, we wont be able to access the subclass properties, because according to java it is of type myClass and not subclass.
+		refer to page number 331 if not clear.
+	50. Object is the super class of all the classes in java. Therefore, a reference variable of type object can refer to any object.
+	Since arrays are implemented as classes, a variable of type object can also refer to any array.
+	51. Object have some methods defined as well, which means that these methods are available in every object. These methods are as follows :
+		Object clone()
+		boolean equals(Object object)
+		void finalize() -> called before an unused object is recycled (deprecated)
+		Class<?> getClass() -> gets the class of an object at runtime.
+		int hashCode() -> returns the hashcode associated with the object
+		void notify() -> resumes execution of a thread.
+		void notifyAll() -> resumes execution of all the threads.
+		String toString() -> returns the string that describes the object
+		void wait(zeroParam/long milsec/long milsec, int nanosec) -> waits on another thread of execution
+		
+	the following methods from above are described as final : 
+		notify()
+		notifyAll()
+		getClass()
+		wait()
+	toString() is automatically called when we try to output the object in println()
+	52. packages are containers for classes.
+	It allows us to create a compartamentalized name space. Therefore, we can have a list of classes in a package and dont have to worry about the name colliding with another class of another list. 
+	Therefore, 
+	packageA -> classA 
+	packageB -> classB
+	So what packages do is partition the class names into more manageable chunks. 
+	package is both the naming and visibility control mechanism
+	Using packages we can have classes or class members which are not accessible outside the package.
+	
+	Defining package : 
+		package packageName;
+		This statement defines the namespace in which the classes are stored
+	We need to add this statement as the first line in the source code.
+	Any classes defined in this file will be under the given package name.
+	If there is no package name defined, the classes are put into default package which has no name
+	typically java uses file system directories to store packages
+	We can have hierarchy of packages. To have a multi level package system, we can use period : 
+		package package1[.package2[.package3]];
+		
+	The package hierarchy must be reflected in file system :
+		package a.b.c;
+		needs to be stored as 
+		a/b/c in file system.
+	53. how can java find the package??
+		in order for a program to find mypackage, there are three ways : 
+			1. execute the program from a directory immediately above mypackage
+			2. CLASSPATH must be set to include the path to mypackage.
+			3. -classpath option must specify the path to mypackage when the program is run via java
+		
+		for example refer to page no. 337
+		To use the class from another package using the dot operator may be tedious because the format is something like this : 
+			class a extends package1.b {}
+		So for this we have import statement.
+		Using import statment, we can import classes or entire packages and then we just need to use the class name.
+		import statment is convenience and not technically needed.
+		
+		import statement : 
+			written directly after the package statement and before the class definition.
+			syntax : 
+				import package1[.pkg2].(className|*);
+		
+		NOTE : 
+			java.lang PACKAGE IS IMPLICITLY IMPORTED BY THE COMPILER FOR ALL PROGRAMS.
+			
+		NOTE : 
+			IF THE NAME OF THE CLASS IS SAME IN TWO DIFFERENT PACKAGES AND WE IMPORT BOTH USING THE *, IN THAT CASE, THE COMPILER WILL REMAIN SILENT AS LONG AS WE ARE NOT USING THE CLASS. ONCE WE HAVE USED THE CLASS IT WILL THROW A COMPILE TIME ERROR AND WE HAVE TO EXPLICITLY NAME THE CLASS SPECIFYING ITS PACKAGE.
+			
+			SO The FOLLOWING EXAMPLES ARE SAME :
+				import java.util.*;
+				class MyDate extends Date {}
+					AND 
+				
+				class MyDate extends java.util.Date {}
+				
+	54. java addresses four categories of visibility for class members : 
+		1. subclass (childclass) in the same package
+		2. non-subclass in the same package
+		3. subclasses (childclass) in different packages
+		4. classes that are neither in the same package nor subclasses.
+		
+	for the table refer to page number : 339
+	
+	members access : 
+		1. anything declared as public, is accessible from different classes and different packages
+		2. anything declared as private, is only accessible within its own class
+		3. anything declared as default, is accessible from subclasses and other classes within the same package and not accessible from other package.
+		4. anything declared as protected, can be accessed anywhere within the same package, outside the package it can only be accessed by the subclass that is the child class.
+	non nested classes can either be public or default.
+		1. default classes can be accessed only within the same package
+		2. public classes can be accessed outside the package. 
+		NOTE : IF A CLASS IS DECLARED AS PUBLIC IT MUST BE THE ONLY PUBLIC CLASS IN THAT FILE AND IT'S NAME SHOULD BE THE SAME AS THAT OF FILE.
+	55. Interfaces : 
+		Using interface, we can specify a set of methods that can be implemented by one or more classes.
+		Interfaces define what a class must do but not how it does it.
+		In traditional form, interfaces does not define any implementation.
+		A class can implement more than one interfaces. Unlike abstract and normal classes where we can only extend one class.
+		If we are extending a class from another package and we have not written the import statement, in that case, we can write extend the class some thing like this : 
+			class protection2 extends p1.protection {}
+			for more details read the example on page number 342.
+	56. A class implementing an interface need to implement all the methods in that interface. 
+	57. using the interface keyword java allows us to fully utilize the "one interface, multiple methods" aspect of polymorphism.
+	58. defining an interface :
+		accessSpecifier interface interfaceName {} 
+		1. if the accessSpecifier is absent, then it results in default access, meaning interface is only available within the package.
+		2. if the accessSpecifier is public, the interface can be used outside the package. But in this case, it must be the only public interface in that file and the name of the file and the interface name should be same.
+	59. The interface can only have abstract methods and no concrete methods. Remember, that the methods declared in interfaces are implicitly abstract, therefore, no need to add the abstract keyword. 
+	NOTE : PRIOR TO JDK 8, INTERFACES ONLY HAD ABSTRACT METHODS. FROM JDK 8, INTERFACES CAN HAVE DEFAULT IMPLEMENTATION TO AN INTERFACE METHOD. ALSO IT CAN HAVE STATIC INTERFACE METHODS.
+	FROM JDK 9, AN INTERFACE CAN INCLUDE PRIVATE METHODS.
+	NOTE : ALL THE METHODS ARE IMPLICITLY PUBLIC
+	60. Attributes/variables in an interface are implicitly final and static meaning they cannot be changed by implementing classes and they must also be initialized.
+	NOTE : ALL THE VARIABLES ARE IMPLICITLY PUBLIC.
+	
+	61. syntax of implementing an interface :
+		class classname [extends superclass] [implements interface1, interface2, ...]
+	
+	62. The method that the subclass implements for an interface must have public access specifier.
+	
+	63. Similar to using a superClass variable to call a subClass object, we can use a reference variable of type interface to store an object of a class that implements that interface.
+	The method being called is determined at runtime based on the instance variable.
+	Since the reference variable in the above case is of type interface, it can only access the methods and variables that are declared in the interface and the variable have no information about other attributes of the subClass similar to superclasses.
+	
+	64. A class which does not implement all the methods of the interface being implemented must be declared as abstract.
+	And as a result the class inheriting this class should either implement the method or should be declared as abstract itself.
+	
+	65. An interface can be declared a member of a class or another interface. This is called as nested interfaces.
+	This nested interface can be private, protected or public
+	When this interface is used outside the parent class or interface, it must be qualified by the name of the parent class or interface. Its name should be fully qualified.
+	Example : 
+		class A {
+			public interface i1 {
+				returnType methodName();
+			}
+		}
+		
+		class B implements A.i1 {}
+		
+	If we want to create a reference variable using the interface, we need to use  : 
+		A.i1 variableName = new B();
+		
+	66.
+	
+	
+	
+	current page : 354 - applying interfaces
