@@ -825,6 +825,20 @@ Design patterns :
 	
 	
 ######################################################
+what is spring framework?
+	it is a lightweight and popular open source java base framework produced by Rod Johnson to build simple, reliable and scalable enterprise applications. It is an application framework and IOC container for the java platform.
+	It provides support to other frameworks that is why it is called the framework of frameworks. It is a collection of sub frameworks also known as layers such as :
+		spring AOP (aspect oriented programming)
+		spring ORM (object relational mapping)
+		spring web flow
+		spring web MVC
+	Spring framework is loosely coupled because of dependency injection.
+
+why to use spring? 
+	open source
+	feather weight (the basic version is about 2mb)
+	can create any java application using spring.
+	offers POJO-based programming model. Using this spring aims to make the J2EE development easier to use and promote good programming habits.
 
 what is spring framework?
 	spring is a dependency injection framework.
@@ -869,6 +883,8 @@ what is spring framework?
 		In this case @Primary have higher priority over the by name method. 
 		So if we have @Primary on bubbleSort and the name of the instance variable is quickSort, in that case the bubbleSort will be used to resolve the dependency
 	
+	@Primary : We can use this annotation with @Bean as well as with @Component annotation. If we are using it with @Component, then we need to annotate the class with the @Primary. And if we are using it with @Bean, then we need to annotate the method with @Primary.
+	
 	Another way to resolve the dependency if there are multiple candidate beans present.
 	@Qualifier("name") :
 		We need to specify the Qualifier on class as well as on the instance variable.
@@ -903,7 +919,7 @@ General architecture of web application (Java EE typical architecture) :
 		similarly web layer is dependent on the business layer because it will call a class in the business layer if it needs something.
 
 What is dependency injection?
-	
+	The process of populating a class dependency to create an instance of that class is called as dependency injection. We use dependency injection to implement IoC.
 	What is a dependency?
 		A dependency of a class is basically what all things it needs to perform its designated task.
 		
@@ -936,7 +952,7 @@ What is dependency injection?
 		
 		without spring in place, this will still need manual creation of both the instances that is the main class and the dependency class. And then calling the constructor or the setter method.
 		
-		remember the binary search and its dependency on sorting algorithm example, where we are creating a sort interface and then quicksort and bubblesort classed implementing this interface. This way the sorting part that is the dependency can be changed dynamically using constructor and interface type instance variable and without changing the binary search code.
+		remember the binary search and its dependency on sorting algorithm example, where we are creating a sort interface and then quicksort and bubblesort classes implementing this interface. This way the sorting part that is the dependency can be changed dynamically using constructor and interface type instance variable and without changing the binary search code.
 		
 		Spring helps us to avoid manual creation of beans and managing its dependencies.
 
@@ -979,7 +995,7 @@ Terminologies in spring framework :
 		what is an application context?
 			it is the one where all the beans are created and managed.
 		This is the most important part of the spring framework. All the core logic of spring framework happend here.
-		In spring framework a application context is a typical IoC container
+		In spring framework an application context is a typical IoC container
 		
 Spring project structure :
 	source/main/java :
@@ -1065,7 +1081,7 @@ What is JMS :
 	The java messaging service(JMS) api is a messaging standard that allows application components based on the Java EE to create, send, receive and read messages. It enables distributed communication that is loosely coupled, reliable and asynchronous.
 
 What is remoting :
-	Remoting is a word describing technologies that allow code in one process invokes a servvice in another process.
+	Remoting is a word describing technologies that allow code in one process invokes a service in another process.
 
 why is spring popular?
 	1. enables writing testable code.
@@ -1528,7 +1544,7 @@ Defining spring application context using XML :
 							The byName mode injects the object dependency according to the name of the bean. In this case, the bean name and the property name must be same. It internally calls the setter methods.
 						byType :
 							This mode injects object dependency according to the type. So property name and bean name can be different. It internally calls setter method.
-							The limitation here is that there must be only one one bean of a given type.
+							The limitation here is that there must be only one bean of a given type.
 						constructor :
 							This mode injects the dependency by calling the constructor of the class. It calls the constructor having large number of parameters.
 							In other words spring injects the dependency by highest parametrized constructor.
@@ -1671,9 +1687,9 @@ Reading values from external properties file:
 	
 	So we need to specify the file name while we are loading the application context.
 
-	To define the property file in the application context, we need to provide the @PropertySoruce annotation
+	To define the property file in the application context, we need to provide the @PropertySource annotation
 	
-	@PropertySoruce :
+	@PropertySource :
 		this annotation provides the name of the property file that we need to use for reading configuration values from external property file.
 		It takes the name of the property file as input.
 		Syntax :
@@ -1764,7 +1780,7 @@ mockito :
 		Once we have that object all we need to do is write the custom responses using the when(object.methodCall()).thenReturn() or thenThrow()
 		We also have a doThrow().when().method name
 		
-		This is requires less code as compared to writing stubs also this is easy to write.
+		This requires less code as compared to writing stubs also this is easy to write.
 		
 	Simplifying writing test case with mocks :
 		We can use following annotations to mock dependencies :
@@ -1841,7 +1857,7 @@ Testing with spring :
 Spring boot :
 	Overview of spring boot : 
 		world before spring boot :
-			1.Setting up spring project before spring was not easy.
+			1.Setting up spring project before spring boot was not easy.
 			2.required lots of configurations for production-ready application :  
 				dependency management : 
 					required to manage frameworks and their versions : 

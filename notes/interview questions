@@ -110,9 +110,348 @@ design patterns :
 		adaptor 
 		proxy
 		bridge
-		structural
+		decorator
 	behaviour :
 		chain of responsibility
 		command
 		observer
+
+Collections cheat sheet : 
+	https://courses.cs.washington.edu/courses/cse143x/15wi/cheat_sheet.pdf
+	
+Converting an array to arrayList : 
+	Integer number = new Integer[] {1, 2, 3};
+	List<Integer> numbers = Arrays.asList(number);
+	
+how to create singleton class in java ? 
+	1. make all the constructors private
+	2. create a static method that returns an instance of that class.
+	3. The instance is stored as a private static variable
+	
+	There are two types of instantiation lazy and early : 
+		in lazy instantiation : 
+			the instance is created when the method is called. 
+			add a condition in the method to check if the private variable is null that is no instance is created as of now. If true, create a new instance. If false return already existing instance.
+		in eary instantiation : 
+			we can assign the instance to the private variable at the time of defining the variable.
+			
+what are rest APIs : 
+	Rest or representational state transfer is an architectural style that defines a set of constraints that are required for creating web services.
+	
+	Rest api is a way of accessing web services in a simple and flexible way without having any processing.
+	
+	Request is made in the form of web url as : 
+		GET : read a representation of resource
+		POST : create a new resource. Post is neither safe nor idempotent
+		PUT : update a new resource. Put is not safe but is idempotent
+		DELETE :
+	Response is in the form of anything, HTML, XML, Image or JSON.
+	
+	Idempotent : 
+		sending a same request multiple times will produce the same result, without changing the state of the server or the resources
 		
+	Rest is stateless meaning that the requests are independent of each other or previous requests.
+	
+	
+microservices : 
+	https://www.interviewbit.com/microservices-interview-questions/
+	
+	main features of microservices : 
+		decoupling
+		componentization
+		buisiness capabilities
+		autonomy
+		continious delivery
+		responsibility
+		decentralized governance
+		agility
+		
+angular : 
+	https://www.interviewbit.com/angular-interview-questions/
+	
+what is web pack in angular ? 	
+	webpack is a static module bundler for modern js applications
+	we configure the following things in webpack : 
+		entry : the module where the webpack should start
+		output : where webpack emits the bundles it create
+		loaders : enable webpack to process more than just js files
+		plugins : perform a wide range of tasks like minification
+	All these configurations are kept in file : 
+		webpack.config.js
+	This file is not there for normal angular application using angular CLI.
+	To run the angular application using webpack, after we use ng eject,
+	we need to run
+	npm run start
+	which translates to 
+	webpack-dev-server --port=4200
+	for more information refer : 
+		https://medium.com/hackernoon/webpack-for-angular-developers-c8584a60e627
+what are functional interfaces ?
+what is functional programming in java ?
+what is difference between spring and spring boot?
+	1. Main feature of spring is dependency injection 
+	1. autoconfiguration is the main feature of spring boot
+	
+	2. need to explicitly set up the server for testing
+	2. has embedded servers like jetty and tomcat
+	
+	3. requires to write lot of boiler plate code
+	3. has less amount of boiler plate code
+	
+	4. does not provide in memory database
+	4. provides in memory database like H2
+	
+	5. need developers to add dependencies manually
+	5. provides starters which handles the dependencies internally
+	
+why do we need typescript over javascript?
+
+
+
+topics : 
+	spring : 
+		https://www.javatpoint.com/spring-interview-questions
+		https://www.interviewbit.com/spring-interview-questions/
+	spring boot
+	angular : 
+		https://github.com/Prasanna050399/angular-interview-questions 
+		read till question : 
+		52
+		skipped : 
+		53 till 63
+		current : 
+			66
+	typescript/javascript
+	mysql : 
+		https://www.interviewbit.com/mysql-interview-questions/
+	postgres : 
+		https://www.interviewbit.com/sql-interview-questions/
+	design pattern : 
+		https://www.interviewbit.com/design-patterns-interview-questions/
+	microservices
+	maven : 
+		https://www.javatpoint.com/maven-interview-questions
+	functional programming : 
+		https://www.geeksforgeeks.org/functional-programming-in-java-with-examples/
+	java 
+	java collections
+	java what is optional keyword ?
+		java reference book page number : 963
+	java encapsulation vs abstraction ?
+		https://www.geeksforgeeks.org/difference-between-abstraction-and-encapsulation-in-java-with-examples/
+	java string builder vs string buffer ?
+		https://www.javatpoint.com/difference-between-stringbuffer-and-stringbuilder
+		https://www.digitalocean.com/community/tutorials/string-vs-stringbuffer-vs-stringbuilder
+		
+		1. buffer synchronized
+		1. builder non synchronized
+		2. buffer thread safe
+		2. builder not thread safe
+		3. buffer slower
+		3. builder faster
+		4. available since 1.0
+		4. available since 1.5
+		
+	java what all features are added in java 8 and java 11 ?
+		jdk 8 : 
+			lambda expressions
+			date time api
+			nashone -> unknown
+			stream api
+			method references
+			forEach() method 
+			stringJoiner
+			default methods
+		jdk 11 : 
+			starting with JDK 11 we can run java file with a single command
+			local variable syntax for lambda parameters
+			JEP 321 HTTP client
+			new methods in string class like : 
+				isBlank()
+				lines() -> splits the lines to return an array/collections
+				strip() 
+				repeat()
+	what is the difference between postgres and mysql ?
+		https://www.integrate.io/blog/postgresql-vs-mysql-which-one-is-better-for-your-use-case/
+		https://www.geeksforgeeks.org/difference-between-rdbms-and-ordbms/
+		
+		postgres max limit : 32TB
+		mysql : MyISAM max limit : 256TB
+		
+	java streams ?
+	java reflections what are reflections? 
+		reference book page number 1522
+	java native methods ? 
+		reference book page number 538
+		https://www.geeksforgeeks.org/native-keyword-java/
+	java hashmap ?
+		reference book page number 893
+	java tree map?
+		reference book page number 895
+	java file handling
+	java modules
+	kafka : 
+		https://www.interviewbit.com/kafka-interview-questions/
+		
+		https://www.tutorialspoint.com/apache_kafka/index.htm
+		
+		https://www.javatpoint.com/apache-kafka
+	northern trust info	
+	
+	jpa and hibernate : 
+		jpa : 
+			https://www.javatpoint.com/jpa-introduction
+		hibernate : 
+			what is hibernate : 
+				Hibernate ORM is an object–relational mapping tool for the Java programming language. It provides a framework for mapping an object-oriented domain model to a relational database.
+			https://www.baeldung.com/spring-boot-hibernate
+			
+			NOTE : if we have created an entity, it will create a table automatically. We only need Repository class for interacting with the database
+	
+	how to implement postgres in spring boot : 
+		https://hackernoon.com/using-postgres-effectively-in-spring-boot-applications
+	stream interface : 
+		reference book chapter 29
+		
+	spring controllerAdvice ?
+		https://www.scaler.com/topics/spring-boot/controller-advice/
+	how to sort a hashmap ?
+	difference between @Repository vs @Service?
+		https://www.baeldung.com/spring-component-repository-service#:~:text=%40Service%20annotates%20classes%20at%20the,act%20as%20a%20database%20repository.
+	
+	if every class extends object, then how can it extend another class, because java allows the extension of only one class ?
+		https://stackoverflow.com/questions/25542691/in-java-every-class-extends-object-then-how-it-extend-other-class-because-one-c
+	
+	how to connect java application to database (both with and without spring) ?
+	process vs threads ? 
+		https://www.geeksforgeeks.org/difference-between-process-and-thread/
+	what is java inheritance?
+		https://www.digitalocean.com/community/tutorials/inheritance-java-example
+	
+	object oriented concepts ?
+		https://www.geeksforgeeks.org/object-oriented-programming-oops-concept-in-java/
+	what is JSON and its use ?
+		https://www.spiceworks.com/tech/devops/articles/what-is-json/
+	give an example of poorly designed java application?
+		I can give an example of this using the logs for the version one of the multi-omics app.
+		If we consider from the desing perspective we cannot directly say that it was poorly designed 
+	github or otherVSC tools?
+	outline the SDLC?
+		https://aws.amazon.com/what-is/sdlc/#:~:text=The%20software%20development%20lifecycle%20(SDLC,expectations%20during%20production%20and%20beyond.
+	give 3 benefits of working in an agile team environment?
+		https://builtin.com/agile/benefits-of-agile
+
+	where do you see yourself in five years ?
+		i still see myself in the development domain
+		i want to explore few technologies, so my career goals are aligned with those techonologies, i would be working on them 
+		
+	what is your role in a team?
+		my role in the team was majorly as a developer
+		connecting with my seniors for design discussions
+		was helping juniors to either review their code or help them with blockers
+		connect with our tester
+		if there was an issue with the stage environment code, then i also used to help them decode the issue.
+		
+	if you make a mistake how do you fix it?
+		https://in.indeed.com/career-advice/interviewing/managerial-round-interview-questions
+
+	What are some of the workplace successes that make you proud?
+		there was a time in the project that I was working on 7 out of 10 tasks that were assigned to me and the dependency on me was so much that everyone was connecting with me. What I am trying to say was that I was able to make myself an important part of the project such that for the designing of version two, I was allowed to take part in the design discussions to check if some points are missed.
+		Another one that I consider as success was when an architect was submitting the liscences list to the marketing team, he specifically asked me to check the list created by my team lead again. So that was the trust that i believe i earned.
+		
+	how do you resolve workplace conflicts ?
+	if your team resist your idea what will i do?
+	
+	why do you want to work for northern trust?
+	
+	what is the callable interface 
+	what is clonable interface
+	how to rebalance in kafka or consumer rebalance 
+	what is the difference between Thread.run and Thread.start()
+	thread.notify
+	thread.wait
+	kafka consumer group 
+	how can producer send a message to a particular partition in kafka
+	synchronized thread : how to make a thread synchronized.
+	
+	
+manager round questions : 
+	What is the relationship between leadership and management?
+	Have you ever disagreed with coworkers or management? 
+		yes there were a few occasions where we had disagreement within the team, but most of them were solved via a discussion. For eg. I was disagreeing with a field included in the table schema and i discussed this with my manager and she was satisfied with my reasoning and she agreed to it.
+		There were also few occasions where we had a discussion and people realized that there might be a better way and then it was sorted out.
+		There were also some occasions towards the end of my working period where we wanted to complete certain things and i was suggesting a better, but according to some instructions from senior management we didnt consider it and just implemented it. 
+		So ideally discussions solved most of the disagreements, but due to some external factors we had to keep our differences aside and complete the task.
+		
+	what do you think is better service based or product based?
+		as far as i understand, it depends on the project we are in, so lets say we are working in a service based organisation but the project is amazing the clients are amazing, they are liking you work and appreciating whatever we are doing, in that case, service base will be better, because, we then have on site opportunities, sometimes incentives, since the project is great, we enjoy working on it. 
+		So there are kind of satisfaction both in terms of work and financial. So to some extent this cannot be achieved in product base. But again we hear about the work culture in product based is better that service based.
+		so as per me, it depends on the project that we are working on.
+		
+	How do you introduce new concepts to your team?
+	
+	Can you please talk about your strength and weaknesses.
+		Actually i though about this question few weeks ago so yeah i have an answer to it,
+		for strength, I consider perseverance as on of my primary strength, then I also used to consider problem solving, but then i realized that it is like the basic necessity. I am easly motivated, I mean i just need to start thinking about my elder sister and my father and my causins and i get motivated.
+		
+		then to talk about my weaknesses, i consider that overthinking is probably my biggest weakness, it have some advantages though, you think about all the situations and then sometimes you are prepared for them.
+		Then there was this feedback that i got from my manager, which i now believe was right, she used to tell me that learn to say no to people, because what used to happen was people from different teams used to connect for some help, so lets say some developer is having some issue, or our devops guy was facing some issue with stage or prod where she was getting some behaviour which was not preffered. 
+	
+	Please walk me through your resume
+	What made you want to work for us?
+		amdocs : 
+			I mean the company is a market lead in terms of services provided for media and communication sector, for about 30 to 40 years, and then the job desciption was also aligning with my profile so I wanted to apply.
+			
+	What do you do if you make a mistake?
+		the first thing that i used to do was to inform my manager about the mistake, luckiliy we were working in an environment where we used to follow that we will stop development on wednesday and let the tester test it on thursday and if there were some immediate high priority issues that she used to find, we used to work on it on friday. But in case that the issue was not a minor where it will take some time, then we used to do 2 things, first was add it to the defect sheet and also create an issue on github with the relevent information for developers to understand.
+		
+	If your thoughts conflict with your co-worker, how would you handle the situation?
+	What keeps you going at work?
+		i like to write program, so most of the time i am not stopping, but yeah if i feel very low, sometimes i take a break of 10 mins just to cut off from the development. So yeah that keeps me going.
+		And i mean, this is what i want to create my career in so it works for me.
+		And again if i feel low and nothing is motivating me like really edge case, then i just need to open linkedin and see all my peers working hard and it motivates me.
+		also there was this movie which i used to love watching in college and school called bhag milkha bhag, and it used to motivate me.
+		
+	What should I do to prepare for the managerial interview?
+	What do you want to achieve professionally in the long run?
+	What will you do if your team is against your idea?
+	How do you prioritize work for your team and yourself?
+	What does Success mean to you?
+		I was in an internal project so unless we sold our project, we didnt have any recognition as such, 
+		So there used to be these assessments, so in the assessment, we had a scale out of 5, where 5 was excellent, 3 was you did your job, and 1 was you need to try harder.
+		So actually both the manager and the employee used to assess. So i gave myself 3 which was task completed as per expectation and my manager actaully gave me 4 in all.
+		
+	What kind of work atmosphere would you prefer?
+	Why do you have a career break?
+	What is your reason for leaving your current position?
+	What are your thoughts about our firm?
+	What is your ideal job? 
+	How can you help the company?
+	if you got a chance, Which animal would you choose to be? 
+	Have you ever held a position of leadership?
+	Do you prefer the corner office or the one closest to the corridor? 
+	What is the best term to describe your personality?
+	How do you handle stress?
+	What else would you instead do besides work? 
+	Explain your previous responsibilities.
+	What are your pay expectations?
+	Have you got any questions for us?
+	
+	
+	why did you leave previous job 
+	why did you leave previous job even when you didnt have an offer 
+	why do you want to work at amdocs
+	
+	what are work ethics to you like ?
+		take responsibilities in both good and bad scenarios
+		be honest in situations 
+		no point in discussing a mistake need to start working on it.
+		if we have a question ask it right away and dont think if this is a stupid question or not, because many times it helps getting a clear understanding
+	
+	questions to be asked for interview : 
+		do you suggest any imporvement?
+		which is the most important skill that you are searching in candidate
+		can you describe the day to day responsibilities for this role?
+		how is the return to office policy here?
+		
+	

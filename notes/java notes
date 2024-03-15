@@ -1044,6 +1044,8 @@ important points:
 	10. a class can be static if it is nested
 	11. inner class has access to all the variables and methods of the outer class and can access them directly
 	12. generally speaking the instance of inner class can only be created in context of outer class and is created within the enclosing code. But we can create an instance of the inner class outside the enclosing class as well.
+		OuterClass outerObject = new OuterClass();
+		OuterClass.InnerClass innerObject = outerObject.new InnerClass()
 	13. string object is immutable but stringBuffer or stringBuilder is not immutable.
 	14. string methods : 
 		equals()
@@ -1080,6 +1082,7 @@ important points:
 	27. a parent class reference variable can hold a reference to an object of type subclass.
 	28. Important point to remember, it is the type of the reference variable and not the type of the object that it refers to that determines which all members can be accessed. Therefore, when a parent reference var holds a child object, it can only access the parent members of that object not the child object.
 	29. super : 
+		NOTE : If there is no default constructor specified in the parent class, then in the child class constructor we need to call the super() as a first line to be executed.
 		1. used to access the constructor of parent class : 
 			super(argument list)
 			This statement needs to be the first statement in the subclass constructor.
@@ -1243,7 +1246,7 @@ important points:
 	members access : 
 		1. anything declared as public, is accessible from different classes and different packages
 		2. anything declared as private, is only accessible within its own class
-		3. anything declared as default, is accessible from subclasses and other classes within the same package and not accessible from other package.
+		3. anything declared as default, is accessible from subclasses and other classes within the same package and not accessible from other package, even the subclass from another package cannot access default.
 		4. anything declared as protected, can be accessed anywhere within the same package, outside the package it can only be accessed by the subclass that is the child class.
 	non nested classes can either be public or default.
 		1. default classes can be accessed only within the same package
@@ -1282,7 +1285,7 @@ important points:
 	64. A class which does not implement all the methods of the interface being implemented must be declared as abstract.
 	And as a result the class inheriting this class should either implement the method or should be declared as abstract itself.
 	
-	65. An interface can be declared a member of a class or another interface. This is called as nested interfaces.
+	65. An interface can be declared as a member of a class or another interface. This is called as nested interfaces.
 	This nested interface can be private, protected or public
 	When this interface is used outside the parent class or interface, it must be qualified by the name of the parent class or interface. Its name should be fully qualified.
 	Example : 
@@ -1297,8 +1300,617 @@ important points:
 	If we want to create a reference variable using the interface, we need to use  : 
 		A.i1 variableName = new B();
 		
-	66.
+	66. Interfaces can be extended. Meaning an interface can inherit another interface by using the "extends" keyword.
+	eg.
+		interface interfaceName extends interfaceName2 {}
 	
+	In this case, the class implementing the child interface needs to implement all the methods required by the interface inheritance chain.
 	
+	67. From JDK 8 we can have default methods in interfaces, which have some default implementations.
+	NOTE : DEFAULT METHODS ARE ALSO SOMETIMES REFERRED TO AS EXTENSION METHODS.
 	
-	current page : 354 - applying interfaces
+	68. The use of default method was to prevent the breaking of existing code if a new method is added to an interface which is not implemented by the existing code. 
+	The default behaviour is used if no implementation is provided.
+	Another motivation for default methods was to provide optional methods in interfaces.
+	
+	69. Even with the default implementation, we cannot create an instance of the interface.
+	
+	70. default methods : 
+		default methods can only be used inside an interface
+		Default methods are similar to normal class methods, only thing that is changed is the default keyword in front of the method
+		eg : 
+			default returnType functionName() { 
+				default implementations.
+			}
+		So the generalized form of default method is add "default" before method declaration
+	
+	71. So if no implementation for the default method is found in the implementing class, it will use the default implementation
+	
+	72. A class can hold state information especially with the use of instance variable but interface cannot.
+	
+	73. to handle ambiguous situations while implementing multiple interfaces with default methods, we have following rules : 
+		1. class implementation take priority over an interface default implementation
+		2. if class is not implementing the method and there are two interfaces with default methods implemented with the same name, in that case an error will be thrown, 
+			class a implements b,c {}
+			b and c have method named as method1(); -> this will throw an error.
+		3. if an interface is extending another interface and both are providing a default method with the same name and there is no implementation provided, in that case the interface that is extending that is the child interface's version of default method is used
+	
+	74. InterfaceName.super.methodName() this is the way child interface can refer to parent interfaces default method.
+	
+	75. Another capability added by JDK 8 is to define one or more static methods.
+	Similar to class static methods, interface static methods can be called independently of any object
+	THEREFORE, NO IMPLEMENTATION OF AN INTERFACE AND NO OBJECT ON AN INTERFACE IS REQUIRED TO CALL THIS METHOD
+	eg. 
+		InterfaceName.methodName()
+	
+	76. IMPORTANT POINT : 
+		STATIC METHODS ARE NOT INHERITED BY EITHER AN IMPLEMENTING CLASS OR A CHILD-INTERFACE(SUB-INTERFACE)
+	
+	77. private interface methods : 
+		from JDK 9, an interface can include private methods.
+		This method can only be used by methods which are default or are private.
+		Since these methods are private, they cannot be accessed by other interfaces or implementing classes.
+	
+	78. The advantage of private method is that it lets the default methods use common code avoiding code duplications.
+	for example refer to page number 371
+	
+	79. exceptions can be generated by our code or by the java run time system
+	
+	80. for exception handling we have five keywords : 
+		try : 
+			contains code that may throw an error/exception.
+		catch :
+			code handling the exception is written here
+		throw :
+			to manually throw an exception we use the throw keyword
+		throws :
+			This specifies an exception that will be thrown by the method.
+		finally :
+			This block contains code that needs to be executed irrespective of an exception being thrown or not.
+	
+	81. There is one more form of try statement called as try-with-resources.
+	
+	82. All the exceptions are subclass of built-in class Throwable.
+	
+	83. Throwable have two sub classes :
+		Error class implies a problem that mostly arises due to the shortage of system resources and exceptions occur during runtime and compile time
+		1. Exception
+		2. Error : 
+			Exceptions of this type that is error are used by java run time systems to indicate errors having to do with run time environment itself
+			eg :
+				stackOverflow
+			
+			Errors are typically created in response to catastrophic failures that cannot usually be handled by program
+	
+	84. If an exception is not caught by a handler in our program, the default handler provided by java run time system will handle it. 
+	The default handler prints a string describing that exception, prints the stack trace from the point of exception and terminates the program
+	
+	85. the exception stack trace contains the method calls in sequence of the exception occured.
+		eg.
+			at class.subroutine()
+			at class.main()
+		here main is calling subroutine
+		and subroutine has the exception
+	
+	86. A try block should have at least one of the following blocks associtated with it : 
+		finally block 
+		catch block
+	We can have multiple catch clauses. The first match of the exception catch block will be executed.
+	
+	87. Throwable overrides the toString() method, so that it returns a string. Therefore, we can pass the exception object to the println method to display the exception.
+	
+	88. All the super classes in exception handling should be at the end of the catch chain. 
+	NOTE : IN JAVA AN UNREACHABLE CODE IS AN ERROR. SO IF WE HAVE AN UNREACHABLE CODE, THE COMPILER WILL THROW AN ERROR.
+	
+	89. We can have nested try statements in java. So a try statement can have a try within it.
+	If an exception occurs in the nested try block, all of its catch statements are checked. If there is no match, outer try blocks catch statements are checked. If matched, it will handle, else it will look for outer one.
+	If there is no match, java run time system will handle it using default catch and will terminate the program.
+	The nesting of try can occur because of method calls as well, if a method call within a try block contains a try block then it also nesting of try.
+	
+	90. If we want to throw an exception explicitly, then we use the throw statment :
+		eg  :
+			throw ThrowablInstance;
+	Primitive types like int, char or non-throwable classes like string and Object cannot be used in throw statement.
+	We can create a Throwable object using parameter in the catch clause or using a new operator.
+	
+	91. Throwable has a method defined in it called as the getMessage() method that can be used to get the description message of the exception.
+	
+	92. Throws : 
+		This keyword specifies the list of all the exceptions that a method can throw.
+		We need to specify these exceptions so that the calling code can guard it self against these exceptions.
+		Syntax : 
+			type methodName() throws exception1, exception2 {}
+		NOTE : 
+			IF THERE IS A THROW STATEMENT IN THE METHOD THAT IT IS NOT HANDLING, MEANING THAT THE METHOD MIGHT PRODUCE AN EXCEPTION THAT IT IS NOT HANDLING AND WE ARE NOT DEFINING THIS IN THE THROWS CLAUSE, IN THAT CASE WE WILL GET A COMPILE TIME EXCEPTION.
+			
+	93. If we are calling a method which has a throws clause, then we need to call that method in a try catch block or we need update the calling method definition stating that it might also throw that exception.
+	Basically the parent method needs to define a throws clause as well stating it is not handling that exception just rethrowing it.
+	
+	94. finally clause is used to execute statements that we need to execute irrespective of the exception occuring or not.
+	This block will be executed in all the scenarios :
+		1. if there is no exception and a return statment is called, finally block will be executed.
+		2. if there is no exception and no return statment, still finally block iwll be executed.
+		3. if there is an exception and a catch block is present, still finally will be executed after catch.
+		4. if there is an exception and no catch is present, still finally will be executed.
+	
+	95. RuntimeException : 
+		These are unchecked exceptions and therefore, compiler does not check for them. Therefore, these exceptions need not be included in any method's throws list.
+		
+	95. Unchecked exceptions need not be defined in throws clause, however, checked exceptions need to be listed or defined in the throws clause of a method.
+	pageNo.395 or table 10.1 gives unchecked exceptions.
+	pageN0.396 or table 10.2 gives checked exceptions.
+	
+	97. Custom exception classes : 
+		create a subclass of exception (which is a subclass of Throwable)
+		
+		We do not need to implement anything. Exception class does not define any method. Throwable class do that Exception inherits.
+		We can override these methods as and when required.
+		Some common methods of Throwable class are : 
+			toString()
+			getMessage()
+			getStackTrace()
+		For more info on methods : pageNo. 397, table 10.3
+		
+	98. there is another form of exception called as chained exception. Here there is an underlying exception that caused the current exception.
+	So while creating that exception we can set the underlying exception using either the constructor of the form : 
+		Throwable(Throwable causeExc);
+	or using the initCause(Throwable causeExc) method available in Throwable class.
+	If we use constructor we cannot use the initCause() method and initCause() method can only be used once.
+	We also have a getCause() method which can be used to get the underlying exception.
+	
+	99. Multi-catch feature : 
+		Same catch clause allows two or more exceptions to be caught.
+		syntax : 
+			catch(ExceptionClass1 | ExceptionClass2 variableName) {}
+		
+		precise rethrow : 
+			we need to declare the variables as final.
+	
+	100. Mutli-threaded program have multiple threads where each part of the program have different path of execution and is getting executed concurrently.
+	Multi-threading is a specialized form of multi-tasking.
+	
+	101. There are two distinct types of multi-tasking : 
+		thread based :
+			in thread based multi-tasking, a thread is the smallest unit of code.
+			A single program can have multiple tasks running simultaneously.
+		process based : 
+			basically two processes or programs run concurrently
+			In process based multi-tasking, a program is the smallest unit of code that can be dispatched by the scheduler
+	
+	So process based multi-tasking handles the big picture and thread based multi-tasking handles the details.
+	
+	102. 
+		Switching between processes is costly
+		Switching between threads is less costly
+		
+		Processes are heavy weight
+		threads are lighter
+		
+		Interprocess communication is costly
+		InterThread communication is less costly
+		
+		Processes have different address space
+		Threads share same address space.
+		
+	103. In single core system, threads are given a slice of CPU time, therefore, threads don't run concurrently instead they run when the CPU is in idle state because other thread has paused its execution.
+	On other hand multi-core cpus concurrently run threads.
+	
+	104. Threads exist in several states : 
+		running 
+		suspended (can be resumed)
+		resumed (picks up where it left)
+		blocked (waiting for resources)
+		terminated (cannote be resumed)
+	
+	105. java assigns each thread a priority.
+	These priorities are integers that are assigned to threads that specify relative priority from one thread to another
+	
+	106. Java priorities decides when to switch from one running thread to the next. This is called as context switch.
+	Rules to determine when context switch takes place are as follows : 
+		1. thread voluntarily relinquishes/gives up the control. This can happen when the thread has completed its execution, sleeping or when blocked. In this case the priorities of other threads are checked and the highest priority thread is given CPU.
+		2. Thread is preemptied by a higher-priority thread. This happens when a lower priority thread that does not yeild the processor is simply preemptied as soon as a higher priority thread wants to execute.
+		THIS IS CALLED AS PREEMPTIVE MULTITASKING.
+		
+	If there are two threads with same priority, in that case, either the threads are ran in time slice in round robin fashion or the threads must voluntarily yeild control, if they don't then the other threads will not run.
+	
+	107. Synchronization : 
+		To implement synchronization, java has something called as a monitor. 
+		Inside a monitor only one thread can run and all the other threads wait for its execution.
+		In java all objects have an implicit monitor that is automatically entered when one of the object's synchronized method is called.
+		Once inside the synchronized method, no other thread can call any other synchronized method on the same object.
+		
+	108. Messaging : 
+		Java provides a low cost way for two threads to communicate.
+		
+	109. To create a new thread, we need to either extend the Thread class or implement the Runnable interface.
+	
+	110. The thread class have following methods that help manage threads : 
+		getName() -> return threads name
+		getPriority()
+		isAlive() -> tells if thread is still running 
+		join() -> wait for a thread to terminate 
+		run() -> defines the entry point for a thread
+		sleep() -> suspends thread for given period of time
+		start() -> starts the thread by calling its run method
+		
+	111. main thread : 
+		When java program starts, this thread starts running immediately.
+		It does two important things :
+			1. all the child threads are spawned from main thread
+			2. This thread must be the last thread to finish execution because it performs shutdown actions.
+		
+	112. how to control main thread : 
+		To control main thread, we need to call the currentThread() of the Thread class.
+		This is a static method and its form is like : 
+			static Thread currentThread()
+			
+		This returns the reference of the current thread in which it is called.
+		
+	113. Displaying a thread in println statement : 
+		When we print a reference containing a thread, it follows a general format : 
+			Thread[threadName, priorityInt, groupName];
+		By default main thread has the name as main, priority as 5 and group name as main.
+			eg. 
+				Thread[main, 5 main]
+	
+	114. What is a thread group ? 
+		a thread group is a data structure that controls the state of a collection of thread as a whole.
+		
+	115. How to set name of a thread ?
+		we can use the setName() of the thread instance to change the internal name of the thread
+		
+	116. How to suspend execution of a thread ?
+		To suspend the execution of a thread we need to use the sleep() method which is of the form : 
+			static void sleep(long milsec) throws InterruptedException
+		
+		eg. : 
+			Thread.sleep(5000) -> suspended for 5 sec
+			
+	117. Creating a thread : 
+		We create a thread by instantiating an object of type Thread. There are two ways to accomplish this :
+			implement Runnable interface :
+				easiest way to create a thread
+				Runnable abstracts a unit of executable code
+				we need to implement only run()
+				Inside the run() we need to define the code that constitutes the new thread. It can contain any variable, class calls object instantiation etc. Whatever that a main thread can do.
+				this run() establishes an entry point for concurrent thread execution.
+				This new thread will end when run() returns.
+				
+				Once the class is created with run() method, we need to instantiate the Thread object.
+				
+				The contructor of the Thread object that we can use to create thread using Runnable is as follows : 
+					Thread(Runnable obj, String threadName);
+					OR
+					Thread(Runnable obj);
+					
+					obj is the instance of the class that has implemented Runnable interface
+					
+				After the new Thread is created, it will not start running. 
+				We need to call the start() method. This method call will initiate the call to the run() declared in the class implementing runnable.
+			extend Thread class : 
+				In this our class extends the Thread class.
+				We need to override the run() method to define the thread execution steps.
+				To create a thread, we can simply create an object of this class.
+				To start the execution of the thread we need to call the start() of this object. The start() method is inherited from the Thread class in this case.
+			
+			The difference between the two methods is that : 
+				for runnable we need to create a thread and then send an implementation instance to the constructor and the call the start method of the thread.
+				For extending the thread class since we already are extending the thread class we can use the object of the same class and call the start method of the same class.
+	
+	118. when to use runnable and when to use Thread ? 
+		one is extended one is inherited 
+		many programmers fill that a class should be extended only when they are being enhanced or adapted in some ways. So if we are not overriding any other method apart from run() from the Thread class, then we should probably use Runnable.
+		
+	119. How to ensure that the main thread is the last one to terminate ?
+		We can do this using two methods of the thread class : 
+			isAlive() : 
+				This method returns true if the thread is still running and returns false otherwise.
+			join() :
+				This method waits until the thread on which it is called is termintated.
+				eg. 
+					nt.t1.start();
+					nt.t1.join(); -> waits until t1 terminates
+		both isAlive and join are final methods therefore cannot be overriden.
+		
+	120. How to set priority to a thread ?
+		use the method setPriority of the Thread class : 
+			final void setPriority(int level);
+			level should be between MIN_PRIORITY AND MAX_PRIORITY which is having value as 1 and 10 respectively
+			
+	121. Synchronization : 
+		The process to ensure a common resource is being used by only one thread at a time is called as synchronization
+		This is done by the monitor object. Only one thread can own a monitor at a time.
+	
+	122. implementing synchronization : 
+		using synchronized methods : 
+			we need to add the synchronized keyword before the method definition :
+				synchronized void methodName() {}
+			
+			Remember when a thread enters a synchronized method, no other method can access any synchronized method in the same instance. Non-synchronized methods are callable.
+		Usign synchronized statement : 
+			But what if we are not writing the class definition and therefore cannot add synchronized keyword to the method ?
+				in this case we need to call the method in a synchronized block.
+				syntax :
+					synchronized(objRef) {
+						//statement to be synchronized.
+					}
+					objRef is the object whose method we want to run in sync env
+	123. What is a race condition : 
+		the situation in which more than one thread is trying to access and update a common resource.
+	
+	124. To avoid polling, java includes an elegant interprocess communication mechanism via the wait(), notify() and notifyAll() methods
+	All three of these methods can be called from a synchronized context.
+	
+	wait() :
+		This method tells the calling thread to give up the monitor and go to sleep until another thread enters the same monitor and calls the notify() or notifyAll() method.
+	notify() : 
+		wakes up a thread that called wait() on the same object
+	notifyAll() : 
+		wakes up all the threads that called wait() on the same object.
+	
+	125. Deadlock happens when a pair of threads have a circular dependency on a pair of synchronized objects
+	
+	126. we can obtain the current state of the thread by calling the 
+		getState() method.
+		it returns a value of type : 
+			Thread.State
+		
+		Thread.State is an enumeration and it has the following values : 
+			BlOCKED : suspended because waiting to acquare lock
+			NEW : not begun execution
+			RUNNABLE : is running or is waiting for access to CPU
+			TERMINATED : completed
+			TIMED_WAITING : when called sleep() or timed version of join() or timed version of wait()
+			WAITING : untimed version of wait() or join()
+	
+	127. Too many threads also degrade the performance because context switching also takes some processing.
+	
+	128. A lambda expression is an anonymous/unnamed method
+	lambda expressions are not executed on their own.
+	They are used to implement a method defined by a functional interface.
+	Therefore, a lambda expression results in a form of anonymous class.
+	they are also commonly referred to as closures
+	
+	129. what is a functional interface ?
+		It is an interface that contain only one abstract method.
+		This method specifies the intended purpose of the interface.
+		eg: 
+			Runnable interface
+	
+		Functional interface defines the target type of a lambda expression.
+		Meaning, it gets the type of the expression from the context rather than specifying the type explicitly.
+		
+		NOTE : FUNCTIONAL INTERFACE IS SOMETIMES REFERRED TO AS SAM TYPE. WHERE SAM STANDS FOR SINGLE ABSTRACTION METHOD
+		
+	130. Implementing lambda expression : 
+		we need to implement the lambda using the arrow operator : 
+			"->"
+		
+		The arrow divides the lambda expression in two parts : 
+			left side :
+				defines the parameters of the lambda expression.
+				It is a list of parameters.
+				If no parameters then provide an empty list.
+				eg. 
+					() -> // no parameters
+					(a, b) -> // two parameters			
+				NOTE : WE CAN MENTION THE TYPE OF THE PARAMETER FOR A LAMBDA FUNCTION BUT IN MANY CASES IT CAN BE INFERRED
+				
+				If there is only one parameter in the lambda expression, then no need to specify (), we can have something like this : 
+					n -> (n%2)==0
+				
+			right side : 
+				it contains the lambda body which specifies the actions of the lambda expression.
+				There are two type of bodies :
+					single expression 
+					eg.
+						() -> 123.1 
+						This means that this expression is simply returning 123.1
+					block of code
+					eg.
+						() -> {}
+						Need explicit return statements
+				Lambdas with single statements are called as expression lambda 
+				Lambdas with block statements are called as block lambda
+		The -> can be verbalized as "becomes" or "goes to"
+		
+	131. A lambda expression is not executed on its own, rather it forms the implementation of the abstract method defined by the functional interface that specifies its target type.
+	
+	132. Lambda expression with functional interface : 
+		We create a reference variable of the type of functional interface.
+		Then we assign the lambda expression to the reference variable.
+		
+		Now consider we have functional interface of the form : 
+			interface MyNumber {
+				double getNumber();
+			}
+		and we have a reference variable as : 
+			MyNumber obj;
+		
+		Now we need to assign lambda expression to this : 
+			obj = () -> 1.1;
+		
+		When this happens an instance of a class is automatically created that implements the functional interface, with the lambda expression defining the behaviour of the abstract method of the interface. When the method is called using the reference variable, the lambda is executed.
+		
+		This gives us a way to transform a code segment into an object
+		
+		NOTE : IN ORDER FOR LAMBDA EXPRESSION TO BE USED IN A TARGET TYPE CONTEXT, THE TYPE OF THE ABSTRACT METHOD AND TYPE OF LAMBDA EXPRESSION SHOULD BE COMPATIBLE.
+		ALSO THE NUMBER OF PARAMETERS OF THE METHOD AND LAMBDA SHOULD BE COMPATIBLE
+		ALSO THE EXCEPTION THROWN SHOULD BE ACCEPTABLE
+		
+	133. Lambda expressions cannot be generic, however, the functional interface can be generic.
+	In this case, the type specified while creating a reference will be used as a target type
+	
+	134. passing lambda expressions as arguments :
+		since lambdas can be used in any context that provides a target type, we can use them as arguments
+		For this to work, the parameter type should be of the functional interface type.
+		So basically we are sending an instance that is created implicitly as a parameter to the method.
+		
+	135. If lamda throws a checked exception then in that case, the functional interface should specify the list of that exception in the throws clause
+	
+	136. A lambda expression can access and use an instance or static variable of the enclosing class.
+	Thus, lambda can set the values of instance and static variable and also call method defined by its enclosing class.
+	Although, when the local variables from the enclosing scope is used, this is called variable capturing. And they are used in the expression it should be effectively final.
+	For example refer : 
+		page no. 639
+		
+	It is important to emphasize that a lambda expression can use and modify an instance variable from its invoking class. It just can’t use a local variable of its enclosing scope unless that variable is effectively final.
+	
+	137. prior to collection framework, java provided ad hoc classes such as dictionary, vector, stack and properties
+	
+	138. The entire collection framework is built upon a set of standard interfaces. Several implementations of these interfaces are provided that we can use as it is.
+	
+	139. we can also implement our own collection.
+	
+	140. Algorithms are another important part of the collections. Algorithms operate on collections and are defined as static methods within the Collections class.
+	
+	141. Iterator interface is also closely related to the collections. Iterator allows a general-purpose, standardized way of accessing each element of the collection.
+	
+	142. since each collection provides an iterator, the elements of any collection class can be accessed through the methods defined by Iterator
+	
+	143. From JDK 8 we have another type of iterator called as spliterator. Spliterator are iterators that provide support for parallel iteration.
+	
+	144. Although maps are part of the Collections framework, they are not "collections" in the strict use of term
+	However we can have a collection view of a map.
+
+	145. The Collections framework defines several core interfaces.
+	The interfaces available in the collections framework : 
+		Collection : 
+			top of collections hierarchy.
+			it enables us to work with groups of objects.
+		Queue : 
+			this interface extends Collection interface to handle special types of lists that follow queue DS, meaning elements can be removed only from head.
+		List :
+			This interface extends collection to handle sequences(list of objects)
+		Set :
+			This interface extends collection to implement set, meaning sequence of unique objects.
+		SortedSet : 
+			This interface extends the set interface to handle sorted sets as the name suggests.
+		NavigableSet :
+			This interface extends sortedSet interface to handle retrievel of elements based on closest match searches.
+		Deque : 
+			This interface extends Queue interface to handle doubly ended queues.
+			
+	146. Comparator interface is used to compare two objects.
+	
+	147. To provide flexibility the collection interface allows some methods to be optional. The optional methods enables us to modify the contents of the collection. 
+	
+	Collections that support these methods are called as modifiable.
+	Collections that do not support the methods that modify the content of the collection are called as unmodifiable collections.
+	
+	Collections can only store references and not values of primitive types.
+	
+	148. Collection Interface : 
+		Foundation of collections
+		must be implemented by any class that defines the collection.
+		generic interface 
+			interface Collection<E>
+			E -> type of object that the collection will hold
+		NOTE : 
+			COLLECTION EXTENDS THE ITERABLE INTERFACE, THEREFORE, ALL THE COLLECTIONS CAN BE ITERATED THROUGH THE USE OF FOR-EACH STYLE LOOP.
+		
+		Collection interface declares the core methods that all collections will have.
+		These methods are as follows : 
+			boolean add(E obj) -> returns true if object added successfully else false if object cannot be added.
+			
+			boolean addAll(Collection<? extends E> c) -> adds all the elements of c in the invoking collection.
+			
+			void clear() -> removes all the elements 
+			
+			boolean contains(Object obj) -> checks if obj is present in the collection.
+			
+			boolean containsAll(Collection<?> c) -> returns true if invoking collection contains all the elements from c else false.
+			
+			boolean equals(Object obj) -> returns true if the obj and invoking collections are equal.
+			
+			int hashCode() -> returns the hashcode for the collection
+			
+			boolean isEmpty() 
+			boolean remove(Object obj)
+			boolean removeAll(Collection<?> c)
+			boolean retainAll(Collection <?> c)
+			int size()
+			Iterator<E> iterator()
+			default Spliterator<E> spliterator()
+			default Stream<E> stream/parallelStream()
+			
+	149. List interface : 
+		extends Collection interface
+		stores a sequence of elements
+		elements can be accessed and inserted using the position in the list using zero-based index.
+		can contain duplicate elements.
+		generic interface :
+			interface List<E> 
+		Since list is extending the Collection interface it will have those methods in it and it also have some methods of its own. They are as follows : 
+			void add(int index, E obj)
+			boolean addAll(int index, Collection<? extends E> c)
+			static <E> List<E> copyOf(Collection <? extends E> from)
+			IMP : E get(int index) -> retrievel method
+			IMP : int indexOf(Object obj) -> returns index of first instance if not present returns -1
+			int lastIndexOf(Object obj) 
+			ListIterator<E> listIterator()
+			ListIterator<E> listIterator(int index) -> iterator starting from that index.
+			IMP : E remove(int index) -> deletes the element at index and all the subsequent element indexes are decremented by one.
+			IMP : E set(int index, E obj) -> assigns the object to the location of index and returns the old value.
+			IMP : default void sort(Comparator <? super E> comp) -> sorts using the comparator.
+			IMP : List<E> subList<int start, int end) -> sublist from start to end-1
+		
+	150. set interface : 
+		extends the collection interface
+		specifies the behaviour of the collection that dont allow duplicate elements.
+		does not have additional methods of its own.
+		is a generic interface :
+			interface Set<E>
+	
+	151. sortedSet interface : 
+		extends the set interface 
+		declares the behaviour of a set stored in ascending order.
+		is a generic interface :
+			interface SortedSet<E>
+		Apart from methods from set which are essentially methods from collection SortedSet have some methods of its own. They are : 
+			Comparater<? super E> comparator() 
+			IMP : E first() -> returns first element
+			SortedSet<E> headSet(E end) -> returns a sortedSet of elements that are less than "end" param.
+			IMP : E last() -> returns the last element.
+			IMP : SortedSet<E> subSet(E start, E end) -> returns subset from start and end-1
+			SortedSet<E> tailSet(E start) -> returns all the elements that are greater that start.
+			
+	152. NavigableSet interface : 
+		extends SortedSet interface
+		declares the behaviour of a collection that supports the retrieval of elements based on the closest match to a given value or values.
+		is generic interface : 
+			interface NavigableSet<E>
+	153.
+	154.
+	155.
+	156.
+	157.
+	158.
+	159.
+	160.
+	161.
+	162.
+	163.
+	164.
+	165.
+	166.
+	167.
+	168.
+	169.
+	170.
+	171.
+	172.
+	173.
+	174.
+	175.
+	176.
+	177.
+	178.
+	179.
+	180.
+	current page : 849 - queue interfaces
+	
+	topics remaining : JDBC, I/O, try-with-resources(chaptor 13), generics(chaptor 14)
+	annotation, enumeration (chapter 12)
+	method references (page 641)
+

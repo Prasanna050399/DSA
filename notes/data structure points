@@ -1,16 +1,11 @@
-data structure points :
-	binary trees : 
-		top most nodes are called roots
-		bottom most are called as leaves
-	
-	binary search tree:
-	heap :
-	hashing :
-	graph :
-	matrix :
-	misc :
-	array :
-	linked list :
+data structures :
+	arrays :
+	queue : 
 	stack :
-	queue :
-	advanced data structures :
+	linked list :
+	tree : 
+	graph :
+	
+	
+Syllabus : 
+https://www.codechef.com/certification/data-structures-and-algorithms/prepare
