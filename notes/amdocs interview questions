@@ -1,0 +1,63 @@
+private and default methods
+
+
+
+interface temp {
+	int sum(int a, int b);
+}
+
+
+(a, b) -> a + b; 
+
+
+
+
+public static void main(string[] a) {
+	int a = 1;
+	int b = 2;
+	temp t1 = (a, b) -> a+b;
+	int result = t1.sum(a, b);
+	Thread t1 = new Thread(new Thread1());
+	t1.start();
+	Thread1.run()
+}
+
+
+list = [1,]
+
+l1.stream.filter(a -> a<50).collect(Collectors.toList());
+
+
+class Thread1 implements Runnable {
+
+	void run() {
+		synchronized(Thread1.class) {
+			
+		}
+		println();
+	}
+}
+
+
+
+
+class SingleTon {
+	private SingleTon() {}
+	private Static instance ;
+	
+	
+	Static getInstance() {
+		return intance;
+	}
+	
+	Static getInstance() {
+		if(instance == null) {
+			instance = new SingleTon();
+			return instance
+		}
+		return instance;
+	}
+}
+
+
+

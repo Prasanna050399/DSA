@@ -1,0 +1,469 @@
+Running time of an algorithm : 
+	running time of an algorithm should be a function of the input size.
+Asymptotics notations : 
+	what is the asymptotic complexity : 
+		This tells how does our program grow based on the inputs.
+	Big O : 
+		This is the upper bound of the algorithm
+		
+		While finding the time complexity first approach would be to find the number of lines executed.
+		All the operations should be considered :
+			
+			1. find the time complexity of a sorted list of sorted strings : 
+				the sorting of the string takes s log s time (s is the length of the string)
+					then the time complexity of this problem will be : 
+						n * s log s  for sorting all the strings
+						and for sorting the list, 
+						we have :
+							comparing all the strings : O (s)
+							sorting the list : n log n
+							
+							therefore, 
+								s * n log n
+						
+						final complexity : 
+							n*slogs + s*nlogn
+							n*s*(log s + log n)
+			
+		
+		Finding the time complexity of recursion :
+			Each recursion calls itself with some different parameters.
+			We want to understand the how many calls are made in the tree structure which is formed.
+			The runtime complexity of this pattern mostly but not always will be : 
+				O (branches ^ depth of the tree)
+				
+			For the actual derivation refer to page number 44 of cracking the coding interview.
+						
+		
+		Formal definition :
+			if a function f(x) runs in the order g(x)
+				if there exists some value x0 and a constant c 
+				for which 
+					f(x) <= c.g(x) for all x >= x0
+		
+			for better understanding refer to the graph which shows that after x > x0, all the values of f(x) will be smaller than g(x)
+	
+	Big omega : 
+		This is the lower bound of the algorithm.
+		
+		formal definition :
+			if a function f(x) runs in the order g(x)
+				if there exists some value x0 and constant c 
+				for which 
+					f(x) >= c.g(x) for all x >= x0
+			
+			or we can say that f(x) is big omega of g(x) if g(x) is big O of f(x)
+			
+			for better understanding refer to the graph which shows that after x > x0, all the values of f(x) will be larger that g(x)
+	
+	Big theta : 
+		this is the average bound of the algorith, where the algorithm is both the big o and big omega.
+		This notation allows us to say that functions grow at the same rate up to constant factors.
+		
+		formal definition : 
+			we say that f(n) is big theta of g(n) if :
+				1. f(n) is Big O of g(n)
+				2. f(n) is Big omega of g(n)
+			
+			if a function f(x) runs in the order of g(x)
+				if there exists some value x0 and two constanst c' and c'' such that
+				
+					c'.g(n) <= f(n) <= c''g(n) for all x >= x0
+					
+		one example of this is :
+			finding the maximum from the list of arrays :
+				we have to traverse the entire array irrespective of the current value, i.e. the worst and best case exist at the same time.
+what is amortization :
+	This is the time complexity of an algorithm which performs well in most of the test cases but in a rare ocassion will require very high time. 
+	example of this is : 
+		adding an element in an array which is full.
+		in this case, we will have to create a new array. 
+		add all the elements from the previous element in the new array and then add the new element.
+		so for this instance, the time complexity is N.
+	
+What is a data structure :
+	data structure is a systematic way of organizing and accessing data.
+	a special format of storage and organization of data is known as data structure.
+
+algorithm :
+	collection of steps to perform a task in finite amount of time.
+
+
+
+Data structures :
+	Link : https://www.geeksforgeeks.org/learn-data-structures-and-algorithms-dsa-tutorial/
+	Arrays : 
+		Operations : 
+			Traversal :
+				sorted array: 
+					
+				unsorted array: 
+					the search time is O(N).
+					Because the we have to go through the entire array to find the element
+					Auxilary Space O(1) 
+			Insertion :
+				sorted array:
+					If we are adding at the end, it will take O(1)
+					If we are adding in middle, the insertion time will be : 
+						O(log n) for searching the right position and then moving all the elements to the right which takes O(N)
+					
+				unsorted array:
+					insertion time is O(1)
+					This depends on where we are inserting. If we are inserting at the end of the array, then the time is O(1)
+					if we are inserting in the middle of the array where the position is empty it is still O(1) but if the insertion is in middle and we want to move the elements to new position, the insertion will be O(n)
+			Deletion :
+				sorted array :
+					To find the element we will need O(logn) time
+					but to shift the elements we need O(n) time 
+					Therefore to delete an element from the array we need O(N) time.
+				unsorted array :
+					The delete time is O(N)
+					This is because we need to search the element in the array -> O(N) 
+					and then move all the elements which are on the right of the array to left by one which again takes O(n)
+					Auxilary space : O(1)
+			Searching :
+				sorted array : 
+					The search time in sorted array takes : O(log n) 
+					This is because of the binary sort algorith : 
+						
+						binSearch(arr, low, high, key) :
+							mid = (low + high) // 2
+							if arr[mid] == key :
+								return mid
+							if arr[mid] > key :
+								return binSearch(arr, low, mid-1, key)
+							if arr[mid] < key :
+								return binSearch(arr, mid+1, high, key)
+							return -1
+							
+					The space complexity : 
+						for recursion, the space complexity -> O(logn)
+						for iterative, the space complexity -> O(1)
+				
+				unsorted array :
+					the time complexity is O(N)
+		
+		
+		Sorting an array : 
+			Arranging elements in a sequence (increasing/decreasing)
+			Algorithms : 
+				bubble sort : 
+					best : O(n)
+					worst : O(n^2)
+					avg : O(n^2)
+				insertion sort : 
+					best : O(n)
+					worst : O(n^2)
+					avg : O(n^2)
+				merge sort : 
+					best : O(nlogn)
+					worst : O(nlogn)
+					avg : O(nlogn)
+				quick sort : 
+					best : O(nlogn)
+					worst : O(n^2)
+					avg : O(nlogn)
+					
+		Top 50 array coding problems : 
+			Find the minimum and maximum element in an array : 
+				in python : 
+					for minimum value we can use negative number 
+					for max value we can use : 
+						variableName = float("inf")
+			
+			Write a program to reverse the array :
+				in python :
+					for reversing the array : 
+						str[::-1] -> we use the third parameter to reverse the array.
+			
+			Write a program to reverse the array : 
+				in python :  
+					arr.sort() -> this will sort the array in place. Therefore, it does not return anything.
+					sorted(arr) -> this will not sort the array arr. It will return a sorted array.
+					
+					arr.sort(key = function())
+					here the function returns the sorting criteria.
+					
+					arr.sort(key = lambda input : return value)
+			
+			Find the Kth largest and Kth smallest number in an array : 
+				accepted approach : 
+					sort the array.
+					return the kth element from the array.
+					
+					arr.sort()
+					return arr[k-1]
+					
+					or sorted(arr)[k-1]
+			
+			Find the occurrence of an integer in the array : 
+				here the question was to find the frequency of the element in the array :
+					simple for loop and keeping a counter.
+					
+			Sort the array of 0s, 1s, and 2s :
+				expected time -> O(n)
+				the idea is simple, 
+					keep track of 0s, 1s, 2s
+					and then add them accordingly in the array.
+					so if the count of 0, 1 and 2 are :
+					count_0 
+					count_1
+					count_2
+					then the answer would be : 
+						return [0]*count_0 + [1]*count_1 + [2]*count_2
+			
+			Subarray with given Sum : 
+				The solution to this problem is sliding window algorithm.
+				Sliding window has two variations :
+					window size is fixed :
+					window size is variable:
+				
+				In our case we are using the second option where the window size is variable.
+				The idea is to maintain two pointers :
+					i and j
+				we keep increasing j until the total is less than the required sum. If the total is greater than the required sum, we will increase i and reduce the total by the element that i represented previously.
+				So basically we are reducing the window from left and also adjusting the total by the value of removed element.
+				i = 0
+				j = 0
+				total = 0
+				while i < n and i <= j:
+					total += arr[j]
+					if total == s:
+						return [i+1, j+1]
+					if total < s:
+						j += 1
+						if j >= n:
+							return [-1]
+						continue
+					if total > s:
+						if i == j:
+							if i+1 < n:
+								total -= arr[i]
+								i += 1
+								j += 1
+								continue
+						total -= arr[i]
+						i += 1
+						total -= arr[j]
+							
+				return [-1]
+				The above solution will take O(n) time
+			Move all the negative elements to one side of the array : 
+				for time O(n) we can use two pointers :
+					maintain two pointers :
+						i = 0
+						j = n-1
+				
+					if i > 0 and j < 0 then swap i and j and increase i and decrease j
+					if i < 0 and j < 0 then increase i
+					if i > 0 and j > 0 then decrease j
+	
+	Graphs : 
+		depth first traversal :
+			for depth first traversal we use stack data structure.
+			the algorithm for depth first traversal is simple,
+				we take the root node,
+				push it on stack 
+				check if stack is empty.
+				if not, pop the node.
+				push all the adjecent nodes of the poped node inside the stack.
+				check if the stack is empty if not pop a node from the stack and add all the adjecent nodes of this node into the stack.
+				
+		breadth first traversal :
+			for breadth first traversal, we use queue data structure
+			the algorithm for breadth first traversal is simple,
+				we take the root node,
+				push it in queue,
+				check if queue is empty.
+				if not, pop a node.
+				push all the adjecent nodes of the popped node inside the queue.
+				check if the queue is empty. if not pop a node from the queue and add all the adjecent nodes of this node into the queue.
+	
+	dynamic programming : 
+		
+		recursive calls : 
+			when we are making recursive calls with input which creates a sub problem of the main problem,
+			the time and space complexity without any customization as in memoization meaning pure recursion will be : 
+				time complexity : 	
+					number of nodes ^ depth of the tree.
+				
+				space complexity :
+					depth of the tree.
+			
+				for example consider an example : 
+					we are having a method : 
+						def fun(n) :
+							if n <= 1 :
+								return 1
+							fun(n-1)
+							fun(n-1)
+					
+					this method is calling itself 2 times meaning that the child node of the parent call is 2. i.e. 2 child nodes per node.
+					So this creates a tree.
+					each level of the tree contains 2 times as much calls as the previous level.
+					therefore, 
+					we multiply number of call by 2 for each level.
+					this causes total of 2^n calls where n is the height of the tree.
+					
+					for space,
+						we calculate the space complexity of the program by taking into consideration of how much stack memory is used.
+						so we need to understand at a given point, how much max stack is occupied.
+						When we think of the recursion tree, we can undertand that until a leaf node returns a value, other recursive calls is not made.
+						so at a time, the number of calls held in stack is equal to the height of the tree.
+					
+					therefore,
+						the space complexity is :
+							O(n) -> n is the height of the tree.
+				
+				So to generalize the time and space complexity of a recursive call,
+				time : 
+					O(m^n) -> m is the number of recursive calls and n is the height of the tree
+				space :
+					O(n) -> n is the height of the tree
+			
+		fibonacci : 
+			the basic algorithm to find fib using recursion is : 
+				time O(2^n)
+				space O(n)
+				because we know that 
+				the time complexity of 2 recursive call with call using n-1 is O(2^n) and time complexity of 2 recursive call with call using n-2 is O(2^n)
+				as fib method uses recursion and calls 2 method n-1 and n-2,
+				therefore the time complexity should be between 2 calls of n-1 and 2 calls of n-2.
+				and since both n-1 and n-2 have O(2^n), time complexity of fibonacci series is O(2^n)
+				and space complexity is O(n)
+		
+		
+		memoization : 
+			we use a dict/hashmap for implementing memoization.
+			the key is the input to the recursive method and value is the output of the recursive method.
+			this is a top down approach.
+			
+		questions : 
+			1. finding the number of ways to travel in a 2d greed from top left to bottom right corner. We can only go down or right. 
+				we can still use memoization for this question.
+				as mentioned above the key will  be the parameter of the method 
+				so to find all the paths in a grid of 2 rows and 3 columns, we create map with key = (2, 3)
+				try to create a tree,
+				try to find the smaller sub problems.
+				
+				the time complexity of this type of problem is : 
+					O(2^(m+n))
+					this is because we want to travel the entire grid and the base condition is when we are at the end of the grid.
+					so a particular path in the tree will contain m+n nodes.
+					therefore it is 2^(m+n)
+					
+				space complexity of this type of problem : 
+					O(m+n)
+					
+				when we want to memoize this type of problem,
+				the the order of the input does not matter.
+				for example, the value of (2,1) and (1,2) will be same.
+				
+				
+				with memoization : 
+					the time complexity with memoization is equal to the number of time we reach a unique node.
+					so in our case, the number of unique node is : 
+						n*m
+						therefore, 
+							time complexity is : 
+								O(n*m)
+					the space complexity :
+						if we dont consider the sequence of the nodes, then the space complexity will be : 
+							O(n+m)
+						if we consider the sequence of inputs, 
+						space complexity will be : 
+							O(m*n)
+			
+			2. Target sum : 
+				we have a targetSum and an array of integers. We need to return a boolean value depending stating if the targetSum can be achieved from the integers. 
+				we can use the integers as many time as required.
+				For now we can assume that the target numbers are non-negative.
+				
+				the idea behind this problem is that : 
+					consider the target as the root node and then subtract from this root node all the elements of the array.
+					for example :
+						targetSum(7, [5, 3, 4, 7])
+						for this the root will be 7.
+						then subtract each number from 7, that will be the new sub problem. 
+						recursively call this and check.
+						if the leaf node is 0 return true if less that 0 return false.
+				
+				the time complexity without memoization :
+					n -> number array 
+					t -> target sum 
+					then time complexity : 
+						O(n^t)
+				the space complexity without memo : 
+					O(t) -> height of the tree.
+				
+				with memoization : 
+					create a map and add the target sum in it as key and the value will be boolean
+					the time complexity is : 
+						O(n*t)
+					space complexity is :
+						O(t)
+						
+			3. how sum : 
+				similar to previous version,
+				we have a target sum but the function should return an array of numbers which lead up to the target sum
+				the idea is similar to the previous algo only thing is that it changes the return type. 
+				Instead of returning a boolean value, it returns an array.
+			4. best sum : 
+				similar to previous version,
+				we have a target sum but the function should return the smallest array which adds up to the target sum.
+				The idea to solve this is similar to how sum,
+				just the difference is that for each subproblem, we compare the list length. 
+				Initially the length of the shortestlist will be null, if the length of the shortestList is null we need to assign the new list to shortestList.
+				and then for each successive recursive call check the length of the two lists.
+				
+				memoization : 
+					we need to store the shortest list for each number in our memo object.
+					
+		Imp Note : 
+			1. when we get the question, try to find the smaller subsets of the problem.
+				for example in the find the number of ways to travel 2 d greed from top left to bottom right we can consider a small grid. (2 rows 3 columns, 1 row 1 column)
+			2. find the solution with recursion (should be correct)
+				1. find the recursive tree 
+				2. break the problem into smaller problems
+				3. the leaves of the tree are the base case.
+			3. once we have a recursive solution, we can add memoization to make it efficient.
+				1. add a memo object(dictionary, hashmap)
+				2. add a new base case to the previous recursive solution. So now we have 2 types of base cases, first are the leaves of recursion tree, second is finding node instance in memo.
+				3. if the current case is not present in the memo, compute the solution and add this case to the memo object.
+				4. flow the memo object through the tree.
+			
+			follow 2nd and 3rd steps in sequence first create a brute force algo. And then memoize it.
+			
+
+
+
+Algorithms :
+	1. counting sort : 
+		we keep track of another book which contains the frequency of the elements in the input array.
+		This algorithm works if the input is smaller in size.
+		So if we have an input array :
+			[9, 8 , 10, 4, 5, 5, 6, 1, 2, 3, 3, 4, 5, 7]
+		
+			the idea is to keep a track of frequency of elements.
+			and then just traverse the frequency element to sort the array.
+			So the idea will be like :
+				have an array of size 11 (max element + 1) and store the frequency of the element at the index.
+				[0, 1, 1, 2, 2, 3, 1, 1, 1, 1, 1]
+				[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+			
+			So when we traverse the array we can simply create an array which will be sorted.
+	
+	2. kadane's algorithm : 
+	3. generating sub-sets : 
+		1. recursive :
+			the approach will be to write a recursive algorithm where at each stage, we either add an element or skip that element
+			so it creates a binary tree where at each level we have an option of either adding an element or skipping it.
+		2. bit masking :
+			the idea is to use the binary annotation of a number to create sub sets.
+			The idea is that each bitmask will represent a single subset.
+			for example :
+				array = {1, 2, 3, 4, 5}
+				mask = 01110
+				so the sub set will contain : 
+					{2, 3, 4}
+				

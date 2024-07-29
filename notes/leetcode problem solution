@@ -1,0 +1,24 @@
+leet code : 
+	reveal cards in increasing order :
+		sort the deck
+		create a queue with indices in it
+		for each card in the deck, pop the position from the queue and use that position in the answer list. At this position place the element from the deck.
+		After placing the element, pop from the queue again and append it at the back of the queue.
+		so we are simulating the process, placing the element then poping and placing next element to the end. 
+		For more information follow : 
+		https://leetcode.com/problems/reveal-cards-in-increasing-order/description/?envType=daily-question&envId=2024-04-10
+		
+		class Solution:
+			def deckRevealedIncreasing(self, deck: List[int]) -> List[int]:
+				ans = [0]*len(deck)
+				deck.sort()
+				queue = deque(range(len(deck)))
+				for i in deck : 
+					ans[queue.popleft()] = i
+					if queue:
+						queue.append(queue.popleft())
+            
+				return ans
+	
+	Find if path exist in graph :
+		https://leetcode.com/problems/find-if-path-exists-in-graph/submissions/1238455817/?envType=daily-question&envId=2024-04-21
