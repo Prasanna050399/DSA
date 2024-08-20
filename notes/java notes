@@ -38,7 +38,7 @@ Classes:
 		Methods represents the behaviour of the class. How the data will be used etc.
 		These are the functions that interact with the member variables.
 		Parameters in java are always passed by value and not by reference.
-			So even if we are writing a variable name as an argument, we are passing it by value and not by reference meaning the name of the variable is first evaluated and then passed to the function. Just like python.
+			So even if we are writing a variable name as an argument, we are passing it by value and not by reference meaning the name of the variable is first evaluated and then passed to the function. Just like python where the variable is passed by object reference.
 		
 		No these are the things that are important for defining a function:
 			1. access-specifier
@@ -84,7 +84,7 @@ Access specifier:
 		public:
 			This means that the given variable can be accessed from any class.
 			Meaning we can access and control the value of instance variable from other classes.
-			Consider we have a main method is some other class.
+			Consider we have a main method in some other class.
 			We can access the variable and set its value using the object of the respected class.
 			eg.	
 				Classname ob1=new Classname; ---> this is the creation of an object
@@ -160,7 +160,7 @@ Lists in java:
 		get():
 			This method takes the index of the list and returns that element of the list.
 				eg.
-					var.get(index);  --> No this method return type is generic, it returns element of the type that is specified by the us while declaration.
+					var.get(index);  --> Note this method return type is generic, it returns element of the type that is specified by us while declaration.
 		remove():
 			This method is used to remove the element at the given index.
 		
@@ -200,7 +200,7 @@ HashMap:
 		This method is used to add an element in hashtable.
 		The function takes two parameters. The key and the value.
 		eg.
-			variable.add(key,value);
+			variable.put(key,value);
 			
 	get():
 		This method is used to access the element of the hashmap.
@@ -272,7 +272,7 @@ Polymorphism:
 		d. Cannot reduce accessibility of the overridden method. Meaning if method is public in parent class then it cannot be protected, private or class private.
 		e. But we can increase the accessibility of the method meaning if it is protected we can make overridden method public.
 		f. Cannot override private, static, and final method 
-		g. Slower that overloading.
+		g. Slower than overloading.
 
 
 final:
@@ -301,7 +301,7 @@ Abstract:
 Interfaces:
 	This defines the behaviour that a class must implement.
 	Like abstract classes, interfaces cannot be used to create objects (in the example above, it is not possible to create an "Animal" object in the MyMainClass)
-	Interface methods do not have a body - the body is provided by the "implement" class
+	Interface methods do not have a body - the body is provided by the "implementing+" class
 	On implementation of an interface, you must override all of its methods
 	Interface methods are by default abstract and public
 	Interface attributes are by default public, static and final
@@ -373,11 +373,12 @@ Java Applets :
 	Portability : 
 		The issue with portability was that different systems on the internet have different OS, browser, CPUs. So the same program was supposed to be compatible with different environments. 
 		The same solution for security solves this problem.
+		
 		The java execution environment sovles the dependency issue.
 	
 	
 	Bytecode :
-		When we said that the security and portability was handled using the jave execution environment we were talking about the JVM (java virtual machine).
+		When we said that the security and portability was handled using the java execution environment we were talking about the JVM (java virtual machine).
 		JVM is a part of java runtime environment which resides on the browser/client. 
 		When the java code is compiled, the compiler does not convert it into native code or executable code directly. It converts it into Bytecode. Bytecode is highly optimized set of instruction to be executed by JVM.
 		The original JVM is designed as an interpreter for the bytecode.
@@ -935,7 +936,7 @@ Java virtual machine :
 				How to request JVM to run garbage collector :
 					1. using System.gc()
 					2. using Runtime.getRuntime().gc()
-					There is not guarantee that any of the above method will run garbage collector.
+					There is no guarantee that any of the above method will run garbage collector.
 					the call System.gc() is equivalent to the call Runtime.getRuntime().gc()
 					
 				Just before destroying an object the GC calls the finalize() to perform cleanup activities. We can override this method to provide a custom cleanup activity. finalize() method is called by GC not the JVM. The default implementation of finalize() is empty(no actions).
@@ -1139,7 +1140,7 @@ important points:
 	42. Classes with abstract methods must also be defined as abstract : 
 		the way we define an abstract class is by adding abstract keyword before the class keyword : 
 			abstract class className {}
-	43. we cannot instantiate abstract classes because it does not make sense as there is not complete implementations of methods.
+	43. we cannot instantiate abstract classes because it does not make sense as there are no complete implementations of methods.
 	44. cannot declare abstract constructors or abstract factory methods.
 	45. if a class is abstract and a subclass extend it, it must define all the abstract methods or should be declared as abstract itself.
 	46. we can have concrete methods in abstract classes.
