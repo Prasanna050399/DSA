@@ -1,0 +1,9 @@
+programming interview questions : 
+
+
+
+1. Find the number of unique strings. You can perform the operation once : remove two consecutive characters from the string.
+test case : 	
+abc : a, c -> return 2
+aabc : bc, ac, aa -> return 3
+aaaaa : aaa -> return 1
