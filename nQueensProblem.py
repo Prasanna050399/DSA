@@ -42,7 +42,9 @@ def canPlace(row, col, rows, cols, n):
 def placeQueens(col, row, queensPos, rows, cols, n) :
     if canPlace(row, col, rows, cols, n):
         queenPos.append((row, col))
+    else :
 
+            
 ##        need to add logic if the placement is wrong till now need to replace the current queens
 
 def nQueenProblem() :

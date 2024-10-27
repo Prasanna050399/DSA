@@ -1,0 +1,41 @@
+Requirements for Running This Tomorrow
+Zerodha Account with sufficient funds and active API subscription.
+Kite Connect API Key: Obtain the API key and set up an access token for the Kite Connect platform.
+Python Environment with Kite Connect Library: Install required libraries:
+bash
+Copy code
+pip install kiteconnect pandas
+Scheduler Setup (Optional): You may want to schedule the script to run at regular intervals, especially at market open. Use cron jobs or task schedulers as needed.
+
+
+
+
+
+
+
+Requirements and Steps to Use This Algorithm on Zerodha:
+
+Since you already have a Zerodha account, here’s how to set up and use the algorithm:
+
+Step 1: Set Up Kite API Access
+
+Log in to your Zerodha Console.
+Go to "Profile" > "API" and generate an API Key and API Secret by creating an API app with "Kite Connect".
+Use these keys in the code to initialize the KiteConnect instance.
+Step 2: Install the Kite Connect Python Library
+
+Run this command to install the necessary library:
+bash
+Copy code
+pip install kiteconnect
+Step 3: Generate an Access Token
+
+Use the API Key and API Secret to generate a temporary access token daily (Zerodha requires daily renewal for session security).
+Alternatively, you can automate token generation using OAuth2 flows, though it might require server configuration.
+Step 4: Add Code and Adjust Configurations
+
+Add the API keys and tokens to the code.
+Customize any investment caps or filters as needed.
+Step 5: Set Up a Scheduler (Optional)
+
+For daily execution, you may use a scheduler, like cron on Linux or Task Scheduler on Windows, to run the script at specific intervals during trading hours.

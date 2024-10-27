@@ -466,4 +466,123 @@ Algorithms :
 				mask = 01110
 				so the sub set will contain : 
 					{2, 3, 4}
-				
+					
+
+################################################# Cracking the coding interview ########################################
+
+Data structure : 
+	linked list :
+	trees :
+	tries :
+	graphs :
+	stack :
+	queue :
+	heaps :
+	vectors :
+	arrayList :
+	hash tables :
+
+
+Algorithms :
+	Breadth first search :
+	Depth first search :
+	binary search :
+	merge sort :
+	quick sort :
+
+Concepts :
+	bit manipulation :
+	memory (stack vs heap) :
+	recursion :
+	dynamic programming :
+	big O time and space :
+	
+Optimize and solve techniques : 
+	BUD :
+		B -> Bottlenecks 
+		U -> Unnecessary Work
+		D -> Duplicate Work
+	
+	DIY : 
+		Do it your self
+		Run through the example manually try to find the solution manually and create an algorithm for it. 
+		try to write what you are thinking manually.
+	
+	Simplify and generalize :
+		try to create a simplified version of the problem. Break the problem and find a solution to it.
+		Once the solution is found, try to implement the complex problem with it.
+	
+	Base case and build :
+		We solve the problem for base case and then try to build from it
+		example : for base case n = 1 we solve then try to solve it for a complex case like n = 4 using the prior solution
+		
+	Data structure brainstrom :
+		Run the problem through each of the datastructure. This may lead to a case where using a certain datastructure can solve the problem trivially.
+		
+Best conceivable runtime :
+	this is the time complexity of the problem which cannot be made better anymore.
+	This is the best time complexity that you can get.
+	It is not necessary that you can achieve this complexity for a given problem. It just tells that this is the best you can do.
+	For example : 
+		for find the common elements in two arrays of length a and b,
+		the best time complexity is a + b, you cannot do better than a + b.
+	
+	There is one more thing, any work we do in time less than BCR(best conceivable runtime) will not affect the time complexity of the algorithm therefore, this is essentially free work.
+	so we can use this work repeatedly. We might need to eleminate this but not top priority
+	
+	If we have reached BCR, then we cannot make it any better, then we need to think for optimization in terms of space complexity
+	
+Good code :
+	It should have be :
+		Correct :
+		efficient : space and time 
+		simple : if possible to do in 10 lines than in 100, do it
+		readable : should be easy to understand, can add comments
+		maintanable : should be easy to maintain and update
+		
+	To achieve above, we need the following :
+		use data structures generously :
+			choose the data structure carefully for solving the problem
+		appropriate code reuse :
+			try to use the same code available, for example if it is possible to use the same method with some additional parameters to be used for different functionality we can do this.
+			Try to reuse the code available
+		modular (important from interview perspective, interviewer will look for this): 
+			separating an isolated code into a different method.
+			improves readability
+		Flexible and robust :
+			create the solution which can be used for a general case, if the solution is complex for general case then no need to do this, just provide the solution for expected case.
+			For example making it general is like using variables instead of hard coded values, or use generics to work with different type of input
+			But then again if the problem is complex focus on this point later not top priority.
+		error checks :
+			the code should contain error checking code,
+			for example checking if the input is within valid range.
+			should add these in the code.
+			if there is time crunch, add a comment and leave some space and inform interviewer that need to add these checks in the code and we will add it later once done with main logic.
+			but need to do this
+		Dont give up :
+			even if the solution is not available keep trying 
+			
+Negotiation : 
+	for more information refer to page no. : 84
+	
+Arrays and strings : 
+	page no. 88.
+
+
+##################################################### AlgoMap.io ######################################################
+1. find the closest number to zero -> straight forward
+
+2. merge strings alternatively :
+	the string manipulation is space efficient but slow because each time a new string is created.
+	Using a list is more time efficient because we use a single list to manipulate the data but takes extra space 
+	time comlexity : 
+		O(max(a, b)) where a and b are the lengths of word1 and word2 respectively
+		
+3. Roman to integer :
+	the question is given a roman string, find the value of the string in integer
+	the idea is to create map/dict for all the roman numbers
+	then iterate from right to left on that string 
+	if the current roman number is less than the previous roman number, subtract it from the total 
+	if it is greater than or equal to the previous number, add it to the total.
+	update the previous number to current number 
+	
