@@ -1,5 +1,7 @@
 from kiteconnect import KiteConnect
 import pandas as pd
+import json
+import os
 
 # Initialize Kite API
 kite = KiteConnect(api_key="your_api_key")
@@ -8,8 +10,19 @@ kite.set_access_token("your_access_token")
 # User-specified investment amount per stock
 investment_amount = 500
 
-# Active trades dictionary to track stocks with open positions
+# File path for storing active trades
+active_trades_file = "active_trades.json"
 active_trades = {}
+
+# Load active trades from file (if any)
+if os.path.exists(active_trades_file):
+    with open(active_trades_file, "r") as file:
+        active_trades = json.load(file)
+
+# Function to save active trades to a file
+def save_active_trades():
+    with open(active_trades_file, "w") as file:
+        json.dump(active_trades, file)
 
 # Function to check available funds in the wallet
 def check_funds():
@@ -27,15 +40,20 @@ def dynamic_stock_screener():
             if stock['instrument_type'] == 'EQ':  # Only equity stocks
                 ltp = kite.ltp(f"{exchange}:{stock['tradingsymbol']}")[f"{exchange}:" + stock['tradingsymbol']]['last_price']
                 if ltp <= investment_amount and stock['tradingsymbol'] not in active_trades:
-                    affordable_stocks.append((exchange, stock['tradingsymbol']))
+                    # Only add stock if it has sufficient trading volume
+                    stock_info = kite.quote(f"{exchange}:{stock['tradingsymbol']}")
+                    avg_volume = stock_info['volume']['average']
+                    if stock_info['volume']['last'] > 1.5 * avg_volume:
+                        affordable_stocks.append((exchange, stock['tradingsymbol']))
     return affordable_stocks
 
 # Function to calculate indicators for momentum
 def calculate_indicators(stock_symbol, exchange):
-    data = kite.historical_data(f"{exchange}:{stock_symbol}", "day", "2023-01-01", "2023-12-31")  # Adjust dates as needed
+    data = kite.historical_data(f"{exchange}:{stock_symbol}", "day", "2023-01-01", "2023-12-31")
     df = pd.DataFrame(data)
     df['20_MA'] = df['close'].rolling(window=20).mean()
     df['50_MA'] = df['close'].rolling(window=50).mean()
+    df['5_MA'] = df['close'].rolling(window=5).mean()
     df['Volume_Avg'] = df['volume'].rolling(window=10).mean()
     df['RSI'] = compute_rsi(df['close'])
     return df
@@ -55,13 +73,11 @@ def enter_trade(stock_symbol, exchange):
     latest = df.iloc[-1]
     prev = df.iloc[-2]
 
-    # Check if funds are available for the trade
     available_funds = check_funds()
     if available_funds < investment_amount:
         print(f"Insufficient funds to buy {stock_symbol}. Available funds: {available_funds}")
         return
 
-    # Entry Condition: Momentum indicators + Price within investment amount
     if prev['20_MA'] < prev['50_MA'] and latest['20_MA'] > latest['50_MA'] \
             and 50 <= latest['RSI'] <= 65 and latest['volume'] > 1.5 * latest['Volume_Avg']:
         quantity = int(investment_amount / latest['close'])
@@ -78,9 +94,10 @@ def enter_trade(stock_symbol, exchange):
             'purchase_price': latest['close'],
             'entry_date': latest['date']
         }
+        save_active_trades()
         print(f"Buy order placed for {exchange}:{stock_symbol} with quantity {quantity}")
 
-# Function to exit a trade if exit conditions are met
+# Function to exit a trade if exit conditions (RSI, Trailing Stop-Loss, Moving Average Crossover) are met
 def exit_trade(stock_symbol):
     stock_info = active_trades[stock_symbol]
     exchange = stock_info['exchange']
@@ -88,8 +105,10 @@ def exit_trade(stock_symbol):
     latest = df.iloc[-1]
     quantity = stock_info['quantity']
 
-    # Exit Condition: Profit-taking or minimal stop-loss
-    if latest['RSI'] > 70 or (latest['close'] < stock_info['purchase_price'] * 0.99):  # Reduced stop-loss to 1%
+    highest_price_since_entry = max(df[df['date'] >= stock_info['entry_date']]['close'])
+    trailing_stop_price = highest_price_since_entry * 0.985  # 1.5% below highest price
+
+    if latest['RSI'] > 70 or latest['close'] <= trailing_stop_price or latest['5_MA'] < latest['20_MA']:
         kite.place_order(variety="regular",
                          exchange=exchange,
                          tradingsymbol=stock_symbol,
@@ -98,18 +117,14 @@ def exit_trade(stock_symbol):
                          order_type="MARKET",
                          product="CNC")
         del active_trades[stock_symbol]
+        save_active_trades()
         print(f"Sell order placed for {exchange}:{stock_symbol}")
 
 # Main function to execute the strategy daily
 def execute_strategy():
-    # Step 1: Screen stocks dynamically and consider only stocks within investment limit
     affordable_stocks = dynamic_stock_screener()
-
-    # Step 2: Check for new trade entries
     for exchange, stock in affordable_stocks:
         enter_trade(stock, exchange)
-
-    # Step 3: Monitor active trades (purchased stocks) for exit conditions
     for stock in list(active_trades.keys()):
         exit_trade(stock)
 
