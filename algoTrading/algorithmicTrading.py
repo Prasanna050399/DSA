@@ -54,7 +54,7 @@ def dynamic_stock_screener():
                         log_message(f"Stock added to monitoring list: {exchange}:{stock['tradingsymbol']} at price {ltp}")
     return affordable_stocks
 
-# Function to calculate indicators for momentum
+# Function to calculate indicators for sideways market
 def calculate_indicators(stock_symbol, exchange):
     data = kite.historical_data(f"{exchange}:{stock_symbol}", "day", "2023-01-01", "2023-12-31")
     df = pd.DataFrame(data)
@@ -74,7 +74,7 @@ def compute_rsi(series, period=14):
     rsi = 100 - (100 / (1 + rs))
     return rsi
 
-# Function to enter a trade if entry conditions and funds are met
+# Function to enter a trade with updated conditions
 def enter_trade(stock_symbol, exchange):
     df = calculate_indicators(stock_symbol, exchange)
     latest = df.iloc[-1]
@@ -86,7 +86,7 @@ def enter_trade(stock_symbol, exchange):
         return
 
     if prev['20_MA'] < prev['50_MA'] and latest['20_MA'] > latest['50_MA'] \
-            and 50 <= latest['RSI'] <= 65 and latest['volume'] > 1.5 * latest['Volume_Avg']:
+            and 40 <= latest['RSI'] <= 60 and latest['volume'] > 1.5 * latest['Volume_Avg']:
         quantity = int(investment_amount // latest['close'])
         kite.place_order(variety="regular",
                          exchange=exchange,
@@ -127,7 +127,7 @@ def exit_trade(stock_symbol):
         save_active_trades()
         log_message(f"Sell order placed for {exchange}:{stock_symbol}")
 
-# Modified main function to execute the strategy with a combination purchase approach
+# Execute the strategy with modified conditions for sideways market
 def execute_strategy():
     affordable_stocks = dynamic_stock_screener()
     available_funds = check_funds()
