@@ -24,7 +24,7 @@ Classes:
 	syntax:
 		access-specifier class classname
 		{
-			class defination
+			class definition
 		}
 		
 	Member/instance variables:
@@ -90,7 +90,7 @@ Access specifier:
 				Classname ob1=new Classname; ---> this is the creation of an object
 				ob1.var=10;
 				System.out.println(ob1.var);
-			Similar to variables, methods can also be public. This is used often because we want to access the functions from the main funcion.	
+			Similar to variables, methods can also be public. This is used often because we want to access the functions from the main function.	
 			
 		private:
 			This means that the given variable is accessible only within the same class it is declared in.
@@ -101,10 +101,10 @@ Access specifier:
 		protected
 		
 getter and setter:
-	These are the methods which as the name suggest are used to get the value of the data member or set the value of the date member. The variable can be returned using the getter function. On the other hand we can set the value of a private member from outside the class using the setter variable.
+	These are the methods which as the name suggest are used to get the value of the data member or set the value of the data member. The variable can be returned using the getter function. On the other hand we can set the value of a private member from outside the class using the setter variable.
 	Then the question is if we are providing access to the variable then why dont we make the variable public in the first place?
 	The setter functions allow us to get more control over the variable. We can apply insertion constraints, we can only provide this function to selected users etc.
-	These are the methods which as the name suggest are used to get the value of the data member or set the value of the date member. The variable can be returned using the getter function. On the other hand we can set the value of a private member from outside the class using the setter variable.
+	These are the methods which as the name suggest are used to get the value of the data member or set the value of the data member. The variable can be returned using the getter function. On the other hand we can set the value of a private member from outside the class using the setter variable.
 Variables:
 	syntax:
 		datatype variable_name;
@@ -175,6 +175,44 @@ Lists in java:
 		eg.
 			Collections.sort(arr1); --> here arr1 in an arraylist.
 			
+		If we want to sort an implementation of List for example ArrayList(), then we need to provide an implementation of Comparator interface. 
+			Collections.sort(arr1, comparatorImplementation);
+			
+	Comparator interface :
+		This is a functional interface as well just like comparable.
+		We need to implement the following method :
+			int compare(object1, object2);
+		
+		Therefore we can implement a lambda which will take two objects as input.
+		
+		The compare method will return :
+			-1 : if first object is less than second 
+			0  : if both objects are equal
+			1  : if first object is greater than second
+		
+	
+
+	sorting an array :
+		to sort an array we can call : 
+			Arrays.sort(variableName);
+		If we want to sort the array where the type of array is userDefined(class), then we need to implement the comparable interface.
+		Our class will override the compareTo method and the Arrays.sort() method will be able to sort the array.
+	
+	Comparable interface :
+		this is a functional interface that has the method :
+			int compareTo(<?> obj);
+		This method is used for comparing two objects.
+		If we want to sort a array of user defined objects, we need to implement Comparable interface.
+		Class className implements Comparable {}
+		Then we can call 
+			className[] variableName = new ClassName[]();
+			Arrays.sort(arrayVariable);
+		
+		the method should return -ve number if the current object is smaller than the given object
+		the method should return +ve number if the current object is greater than the give object 
+		0 if the two objects are equal.
+			
+			
 	LinkedList:
 		Similar to the array list we also have linked list.	
 		How to create a linkedlist?
@@ -231,6 +269,7 @@ HashMap:
 		
 HashSet:
 	This is like set in python
+	this is unordered
 	How to define a hashset?
 		HashSet <datatype> var = new HashSet<datatype>();
 		
@@ -254,10 +293,18 @@ Loops:
 		
 SOLID JAVA Code:
 	S : Single responsibility Principle
-	O : Open close principle
+	O : Open close principle (open for extension closed for modification)
 	L : Liskov Substitution Principle
+		LSP ensures that derived classes can be used in place of their base classes without causing errors or changing the program's behavior.
+		It emphasizes that subclasses should be able to take on the responsibilities of their superclass without any side effects.
 	I : Interface Segregation Principle
+		ISP splits large interfaces into smaller, more specific interfaces.
+		This allows clients to only know about the methods that are relevant to them.
+		ISP helps keep code clean and easy to work with. 
 	D : Dependency inversion Principle
+		High-level modules don't depend on low-level modules: Major functionalities shouldn't be affected by implementation details. 
+		Abstractions don't depend on details: Instead, details should depend on abstractions. 
+		Use interfaces: Program to interfaces instead of implementations. This allows for greater flexibility, maintainability, and testability. 
 
 Polymorphism:
 	1. Overloading:
@@ -296,8 +343,12 @@ Abstract:
 		
 	abstract method:
 		The method without a body and is preceeded by abstract keyword.
+		eg : 
+			abstract void methodName();	
 		
-		
+fundamental difference between abstract class and interface : 
+	The fundamental difference between an abstract class and an interface is that an abstract class can provide partial implementation of methods, including concrete methods with code, while an interface only defines method signatures without any implementation, essentially acting as a contract that classes must adhere to when implementing it; meaning an abstract class can provide some shared functionality while an interface only specifies required behaviors without dictating how to achieve them. 
+	
 Interfaces:
 	This defines the behaviour that a class must implement.
 	Like abstract classes, interfaces cannot be used to create objects (in the example above, it is not possible to create an "Animal" object in the MyMainClass)
@@ -323,6 +374,7 @@ What is local variable type inference ?
 	It allows the programmer to define a variable without specifying the type of it using the var keyword.
 	The compiler will infer the type of the variable based on the value that is provided to it.
 	The idea is that if the type of the variable should be same or compatible for both left hand and right hand side then we can use this to define the type of variable using the rhs.
+	This feature was introduced in java 10.
 	
 	declaration :
 		var idenifier = value;
@@ -390,7 +442,7 @@ Java Applets :
 		
 		Coming back to the portability, since the program is now converted into a bytecode, which is interpreted by the JVM, the code on its own is independent of the OS, CPU, browser. However, the implementation of JVM will differ as per the underlying architecture.
 		
-		The issue with JVM was that it interprets the bytecode. This may look like performance bottle-neck, but it is not. The compiled bytecode is highly optimised. And on top of that, the HotSpot technology was introduced not log after java release. This hotSpot technology provides a just in time compiler(JIT compiler) for the bytecode.
+		The issue with JVM was that it interprets the bytecode. This may look like performance bottle-neck, but it is not. The compiled bytecode is highly optimised. And on top of that, the HotSpot technology was introduced not long after java release. This hotSpot technology provides a just in time compiler(JIT compiler) for the bytecode.
 		
 		When a JIT compiler is part of the JVM, selected portion of the bytecode is compiled into execution code in real time, on a piece-by-piece, demand basis.
 		The entire code is not compiled all at once, piece by piece. Also only that part of the code will be compiled which will benefit from compilation. Rest is interpreted. This just in time approach yields a significant boost.
@@ -473,7 +525,12 @@ Object oriented programming (OOP) :
 	Inheritance :
 		inheritance is the process by which one object acquires the properties of another object.
 	Encapsulation :
-		encapsulation is the mechanism that binds together code and the data that it manipulates and keeps them safe from outside interfernece and misuse.
+		encapsulation is the mechanism that binds together code and the data that it manipulates and keeps them safe from outside interference and misuse.
+		Encapsulation is a programming technique that limits direct access to certain parts of an object. It's a key concept in object-oriented programming (OOP). 
+		How it works
+			Encapsulation hides data members and methods from other objects. 
+			It restricts which users or functions can access certain information. 
+			It makes data private, so it can only be accessed and modified through methods within the same class
 	polymorphism :
 		polymorphism is a feature that allows one interface to be used for a general class of action.
 		this concept can be expressed by the phrase "one interface, multiple methods"
@@ -579,11 +636,11 @@ variables :
 	
 	variables are created when the scope is entered and are destroyed when the scope is ended/left.
 	
-	we cannot declare a variable with a name which already exist in the outer scope.
+	we can define variable within the inner scope with the same name as the outer scope but in this case if the variable is class variable then we can use this.variableName to access that variable.
 
 
 type conversion :
-	If the variables are compatible then java will allow automatic type conversion. if the variables are not compatible then we need a to type cast the variable(use a cast).
+	If the variables are compatible then java will allow automatic type conversion. if the variables are not compatible then we need+ to type cast the variable(use a cast).
 	automatic conversion/ implicit type casting :
 		When the conversion of data type is done without an external cast metioned it is implicit or automatic type casting.
 		it happens if one of the two conditions below is satisfied : 
@@ -627,7 +684,11 @@ type conversion :
 		for example :
 			byte x = 1;
 			x = x*2;  -> this will throw error because the operand were automatically promoted to int while the expression was being evaluated.
+			this will throw the following error :
+			error: incompatible types: possible lossy conversion from int to byte
+			So internally, even though the variable is still byte, when it is as a part of evaluation, it is converted to int.
 			Thus we cannot assign the value without the cast operator.
+			that is why we call this as explicit type conversion because if the cast is not provided then the compiler throws error to confirm that this will be a lossy convertions
 			
 		type promotion rules : 
 			1. all byte, short, and char are promoted to integer
@@ -805,7 +866,18 @@ Control statements :
 						
 						the break should be within the block, but this doesnt mean that the block should be the immediate enclosing block.
 						so basically we can escape a nested block but we cannot escape a block for which the break is not a part of.
+						lable: {
+							{
+								break lable; ->  this will work and break out of the blocks
+							}
+						}
 						
+						but the below will not work :
+						lable: {
+							{
+							}
+						}
+						break lable; -> because it is not a part of that block.
 						
 					To name a block we need to add a label in front of it.
 					We can use this label to target the transfer from that block. When the break is used with this label, the control will jump to the end of that labelled block.

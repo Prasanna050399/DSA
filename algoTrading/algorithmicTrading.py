@@ -54,7 +54,7 @@ def dynamic_stock_screener():
                         log_message(f"Stock added to monitoring list: {exchange}:{stock['tradingsymbol']} at price {ltp}")
     return affordable_stocks
 
-# Function to calculate indicators for sideways market
+# Function to calculate indicators for combined strategy
 def calculate_indicators(stock_symbol, exchange):
     data = kite.historical_data(f"{exchange}:{stock_symbol}", "day", "2023-01-01", "2023-12-31")
     df = pd.DataFrame(data)
@@ -74,37 +74,47 @@ def compute_rsi(series, period=14):
     rsi = 100 - (100 / (1 + rs))
     return rsi
 
-# Function to enter a trade with updated conditions
+# Function to enter trade with combined strategy
 def enter_trade(stock_symbol, exchange):
     df = calculate_indicators(stock_symbol, exchange)
     latest = df.iloc[-1]
     prev = df.iloc[-2]
-
     available_funds = check_funds()
+
     if available_funds < investment_amount:
         log_message(f"Insufficient funds to buy {stock_symbol}. Available funds: {available_funds}")
         return
 
+    # Momentum Condition: MA crossover and RSI between 50-65
     if prev['20_MA'] < prev['50_MA'] and latest['20_MA'] > latest['50_MA'] \
-            and 40 <= latest['RSI'] <= 60 and latest['volume'] > 1.5 * latest['Volume_Avg']:
+            and 50 <= latest['RSI'] <= 65 and latest['volume'] > 1.5 * latest['Volume_Avg']:
         quantity = int(investment_amount // latest['close'])
-        kite.place_order(variety="regular",
-                         exchange=exchange,
-                         tradingsymbol=stock_symbol,
-                         transaction_type="BUY",
-                         quantity=quantity,
-                         order_type="MARKET",
-                         product="CNC")
-        active_trades[stock_symbol] = {
-            'exchange': exchange,
-            'quantity': quantity,
-            'purchase_price': latest['close'],
-            'entry_date': latest['date']
-        }
-        save_active_trades()
-        log_message(f"Buy order placed for {exchange}:{stock_symbol} with quantity {quantity}")
+        place_buy_order(stock_symbol, exchange, quantity, latest['close'])
 
-# Function to exit a trade if exit conditions are met
+    # Mean Reversion Condition: Price drop below 50-MA and RSI < 35
+    elif latest['close'] < latest['50_MA'] and latest['RSI'] < 35:
+        quantity = int(investment_amount // latest['close'])
+        place_buy_order(stock_symbol, exchange, quantity, latest['close'])
+
+# Function to place buy order
+def place_buy_order(stock_symbol, exchange, quantity, price):
+    kite.place_order(variety="regular",
+                     exchange=exchange,
+                     tradingsymbol=stock_symbol,
+                     transaction_type="BUY",
+                     quantity=quantity,
+                     order_type="MARKET",
+                     product="CNC")
+    active_trades[stock_symbol] = {
+        'exchange': exchange,
+        'quantity': quantity,
+        'purchase_price': price,
+        'entry_date': datetime.now().strftime('%Y-%m-%d')
+    }
+    save_active_trades()
+    log_message(f"Buy order placed for {exchange}:{stock_symbol} with quantity {quantity}")
+
+# Function to exit trade with combined strategy
 def exit_trade(stock_symbol):
     stock_info = active_trades[stock_symbol]
     exchange = stock_info['exchange']
@@ -112,22 +122,31 @@ def exit_trade(stock_symbol):
     latest = df.iloc[-1]
     quantity = stock_info['quantity']
 
+    # Trailing Stop Loss or Momentum Reversal
     highest_price_since_entry = max(df[df['date'] >= stock_info['entry_date']]['close'])
     trailing_stop_price = highest_price_since_entry * 0.985  # 1.5% below highest price
 
     if latest['RSI'] > 70 or latest['close'] <= trailing_stop_price or latest['5_MA'] < latest['20_MA']:
-        kite.place_order(variety="regular",
-                         exchange=exchange,
-                         tradingsymbol=stock_symbol,
-                         transaction_type="SELL",
-                         quantity=quantity,
-                         order_type="MARKET",
-                         product="CNC")
-        del active_trades[stock_symbol]
-        save_active_trades()
-        log_message(f"Sell order placed for {exchange}:{stock_symbol}")
+        place_sell_order(stock_symbol, exchange, quantity)
 
-# Execute the strategy with modified conditions for sideways market
+    # Mean Reversion Exit: RSI above 60
+    elif latest['RSI'] > 60:
+        place_sell_order(stock_symbol, exchange, quantity)
+
+# Function to place sell order
+def place_sell_order(stock_symbol, exchange, quantity):
+    kite.place_order(variety="regular",
+                     exchange=exchange,
+                     tradingsymbol=stock_symbol,
+                     transaction_type="SELL",
+                     quantity=quantity,
+                     order_type="MARKET",
+                     product="CNC")
+    del active_trades[stock_symbol]
+    save_active_trades()
+    log_message(f"Sell order placed for {exchange}:{stock_symbol}")
+
+# Execute the strategy with combined conditions
 def execute_strategy():
     affordable_stocks = dynamic_stock_screener()
     available_funds = check_funds()
@@ -145,23 +164,7 @@ def execute_strategy():
 
         # Check if funds and calculated quantity are sufficient for a purchase
         if quantity > 0 and available_funds >= price * quantity:
-            kite.place_order(
-                variety="regular",
-                exchange=exchange,
-                tradingsymbol=stock,
-                transaction_type="BUY",
-                quantity=quantity,
-                order_type="MARKET",
-                product="CNC"
-            )
-            available_funds -= price * quantity  # Update remaining funds after each purchase
-            active_trades[stock] = {
-                'exchange': exchange,
-                'quantity': quantity,
-                'purchase_price': price
-            }
-            save_active_trades()
-            log_message(f"Buy order placed for {exchange}:{stock} with quantity {quantity}")
+            enter_trade(stock, exchange)
 
     # Log existing trades read from file
     log_message(f"Existing trades from file: {json.dumps(active_trades)}")
@@ -173,4 +176,4 @@ def execute_strategy():
 # Example loop for daily execution
 while True:
     execute_strategy()
-    # Schedule this to run daily at market open
+    # Schedule this to run
