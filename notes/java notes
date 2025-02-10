@@ -1422,7 +1422,7 @@ important points:
 	69. Even with the default implementation, we cannot create an instance of the interface.
 	
 	70. default methods : 
-		default methods can only be used inside an interface
+		default methods can only be used inside an interface. Cannot be defined within an abstract class.
 		Default methods are similar to normal class methods, only thing that is changed is the default keyword in front of the method
 		eg : 
 			default returnType functionName() { 
@@ -1498,7 +1498,7 @@ important points:
 		here main is calling subroutine
 		and subroutine has the exception
 	
-	86. A try block should have at least one of the following blocks associtated with it : 
+	86. A try block can exist without : 
 		finally block 
 		catch block
 	We can have multiple catch clauses. The first match of the exception catch block will be executed.
@@ -1702,6 +1702,25 @@ important points:
 			The difference between the two methods is that : 
 				for runnable we need to create a thread and then send an implementation instance to the constructor and the call the start method of the thread.
 				For extending the thread class since we already are extending the thread class we can use the object of the same class and call the start method of the same class.
+				
+			eg  :
+				class Thread1 implements Runnable {
+					public void run() {
+						System.out.println("inside thread 1");
+					}
+				}
+
+				class Thread2 extends Thread {
+					public void run() {
+						System.out.println("inside thread 2");
+					}
+				}
+				
+				Thread t1 = new Thread(new Thread1());
+				t1.start();
+				
+				Thread t2 = new Thread2();
+				t2.start();
 	
 	118. when to use runnable and when to use Thread ? 
 		one is extended one is inherited 
