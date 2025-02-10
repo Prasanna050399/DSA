@@ -1108,18 +1108,51 @@ important points:
 	3. method can also be final
 	4. arrays are implmeneted as objects therefore, we can make use of length instance variable.
 	5. the scope of the nested class is bounded by the scope of the enclosing class. So if B is in A then B cannot exist without A.
-	6. nested class has access to the member of its parent class including private members. But vice versa is not true, enclosing class does not have access to the members of the private class.
+	6. nested class has access to the member of its parent class including private members and vice versa enclosing class does not have access to the members of the private class.
 	7. nested class can also be inside a block which makes it local to that block. Meaning that inner class can be defined within the body of a for loop as well.
 	8. there are two types of nested classes : 
 		static 
 		non-static
 	9. Inner class is a non-static nested class.
-	10. a class can be static if it is nested
+	10. a class can be static if it is nested. We cannot make an outer class static. We might need inner class to be static to remove the dependency of instance of outer class. 
+	One example for the use case of this is :
+		implementing builder pattern for an immutable class.
+		class car {
+			String name; 
+			String model;
+			
+			public car(CarBuilder carBuilder) {
+				this.name = carBuilder.name;
+				this.model = carBuilder.model;
+			}
+			
+			public static class CarBuilder {
+				String name;
+				String model;
+				
+				public CarBuilder setName(String name) {
+					this.name = name;
+					return this;
+				}
+				public CarBuilder setModel(String model) {
+					this.model = model;
+					return this;
+				}
+				
+				public CarBuilder build() {
+					return new Car(this);
+				}
+			}
+		}
+		in another class : 
+		public static void main(String arg[]) {
+			Car car = Car.CarBuilder().setName().setModel().build();
+		}
 	11. inner class has access to all the variables and methods of the outer class and can access them directly
 	12. generally speaking the instance of inner class can only be created in context of outer class and is created within the enclosing code. But we can create an instance of the inner class outside the enclosing class as well.
 		OuterClass outerObject = new OuterClass();
 		OuterClass.InnerClass innerObject = outerObject.new InnerClass()
-	13. string object is immutable but stringBuffer or stringBuilder is not immutable.
+	13. string object is immutable but stringBuffer or stringBuilder are mutable.
 	14. string methods : 
 		equals()
 		length()
