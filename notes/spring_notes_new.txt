@@ -170,32 +170,41 @@ IoC(inversion of control) and dependency injection :
 		
 		We most often use it in terms of object oriented programming.
 		
+		In simpler terms, instead of the program creating or managing the objects and dependencies it needs, it delegates that responsibility to an external system or container. This is useful because it reduces the tight coupling between different components, making the system more modular, flexible, and easier to maintain.
+		One of the most common forms of IoC is Dependency Injection (DI), where dependencies (e.g., services or objects) are injected into a class rather than the class creating them.
+		
 		In contrast with traditional programming where the our custom code makes call to a library, IoC enables the framework to take control of the flow of a program and make calls to our custom code.
 		To enable this, frameworks use abstractions with additional behavior built in. If we want to add our own behavior, we need to extend the classes of the framework or plugin our own classes.
 		
 		Advantages :
-			1. decoupling the execution of a task from its implementation
-			2. making it easier to switch between different implementation of code
-			3. greater modularity of the program
-			4. greater ease in testing a program by isolating a component or mocking its dependencies and allowing components to communicate through contracts.
+			Decoupling: Classes and components are less dependent on each other, making the system more flexible.
+			Testability: Dependencies can be easily replaced with mocks or stubs during unit testing.
+			Maintainability: With clear boundaries between components, maintenance becomes easier and more modular.
+			Extensibility: New components or behaviors can be added without changing the core logic.
 		
 		To achieve inversion of control we can use different mechanisms :
-			strategy design pattern
-			service locator pattern
-			factory pattern
-			dependency injection
+			strategy design pattern : 
+				The Strategy Design Pattern can also be used to implement Inversion of Control (IoC) by enabling the dynamic selection of a strategy (or algorithm) at runtime, without the client needing to know the details of how the strategy is implemented. This promotes loose coupling between the context (client) and the strategies, which is a key goal of IoC.
+			service locator pattern : 
+				In this approach, the system calls a central registry (the service locator) to retrieve dependencies. However, this can still create some hidden coupling and reduce transparency, so it’s less favored in modern development compared to DI.
+			factory pattern :
+				In this pattern, the responsibility of creating objects is deligated to a factory class or method.While the Factory Pattern is typically used to create objects based on certain conditions or configurations, it can also be used to manage dependencies and promote loose coupling, which is a key aspect of IoC.
+			dependency injection : 
+				Dependency Injection is the most common form of IoC. It involves passing dependencies (objects or services) into a class, rather than allowing the class to create or manage those dependencies itself.
+			event based IoC :
+				in this approach the components or objects do not call the methods directly, instead they publish an event and the other objects can subscribe to these events.
 		
 		dependency injection :
 			It is a pattern we can use to implement IoC, where the control being inverted is setting an object's dependencies.
 			Design pattern that removes the dependency from the programming code so that it can be easy to manage and test the application.
 			makes the code loosely coupled.
 			
-			to understand DI, we need to understand Dependency Loopup(DL)
+			to understand DI, we need to understand Dependency Lookup(DL)
 			dependency lookup :
 				The dependency lookup is an approach where we get the resource after demand.
 				For example when we use the new keyword directly in the program we are creating the instance and hence getting the resource directly.
 				Other option is the use of factory methods where we get the resource by calling the static factory method.
-				Other option is option is to use the java naming directory interface.
+				Other option is to use the java naming directory interface.
 				
 				2 main problems with dependency lookup :
 					Tight coupling :
