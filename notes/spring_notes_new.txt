@@ -212,7 +212,7 @@ IoC(inversion of control) and dependency injection :
 					Not easy for testing :
 						this approach creates a lot of problems while testing especially black box testing.
 			
-			Since DI removes the dependency from the prgrams, the information related to dependency is provided from an external source such as XML file either by constructor or setter method. This makes our code loosely coupled and easier for testing.
+			Since DI removes the dependency from the programs, the information related to dependency is provided from an external source such as XML file either by constructor or setter method. This makes our code loosely coupled and easier for testing.
 			
 			connecting objects by other objects or "injecting" objects into other objects is done by an assembler rather than by the objects themselves.
 			
@@ -236,9 +236,9 @@ IoC(inversion of control) and dependency injection :
 			DI in spring can be done through constructors, setters or fields :
 				constructor based DI : 
 					In constructor based DI the container will invoke a constructor with arguments each representing a dependency we want to set.
-					The <constructor-arg> subelement/property of the <bean> tag is used for constructor injection.
+					The <constructor-arg> sub-element/property of the <bean> tag is used for constructor injection.
 					1. Injecting primitive or string based values :
-						For injecting primitive type or string based values in the bean, we use the same <constructor-arg> subelement of the <bean> tag.
+						For injecting primitive type or string based values in the bean, we use the same <constructor-arg> sub-element of the <bean> tag.
 						The <constructor-arg> element have the following properties to configure the dependencies :
 							value : to set the value of the elements
 							type : to identify which constructor should be used and if there are more than one constructor argument, then which argument should be assigned the value to.
@@ -663,7 +663,7 @@ Aspect oriented programming(AOP) :
 		to provide declarative enterprise services such as declarative transaction management.
 		It allows users to implement custom aspects.
 	
-	AOP conscepts and terminologies :
+	AOP concepts and terminologies :
 		Aspect :
 			An aspect is a class that implements enterprise application concerns that cut across multiple classes, such as transaction management. Aspects can be a normal class configured through spring xml configuration or we can use spring AspectJ integration to define a class as Aspect using @Aspect annotation.
 			
