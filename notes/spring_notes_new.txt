@@ -867,6 +867,7 @@ what is spring framework?
 		Internally spring would create an instance of the dependency and will pass that instance to the constructor of that required class which requires that dependency.
 		
 		spring will make sure that all the instances of the classes that it manages are created with dependencies properly populated.
+  if we have autowired a dependency, and the dependency does not exist, in that case if we want to define the dependency as optional, we can use the required property of the annotation. @Autowired(required = false)
 
 @Autowired :
 	there are two types of autowiring methods :
