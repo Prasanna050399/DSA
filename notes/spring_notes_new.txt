@@ -2640,7 +2640,7 @@ Spring JDBC and JPA :
 			@Entity :
 				this annotation defines the class as an entity.
 			@Table : 
-				we can define this at the class level. We can give name to the table using @Table annotation.
+				we can define this at the class level. We can give name to the table using @Table annotation. Not just name, we can also define table schema, indexes and catalog.
 			@Column : 
 				we can define this at variable level to give custom name to the column.
 			@Id : 
