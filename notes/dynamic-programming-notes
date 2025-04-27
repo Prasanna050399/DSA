@@ -1,1 +1,261 @@
 https://chatgpt.com/canvas/shared/680e0c61cf848191b3ecdab2405a2589
+
+
+# Dynamic Programming (DP) - Full Notes
+
+---
+
+# 1. What is Dynamic Programming?
+
+Dynamic Programming (DP) is an optimization technique used to solve complex problems by breaking them into simpler subproblems.
+
+- **Key Principle:** Solve each subproblem once and store its result (**memoization**) to avoid duplicate work.
+- **Ideal for:** Problems with **overlapping subproblems** and **optimal substructure**.
+
+# 2. Two Main Approaches:
+
+- **Top-Down (Memoization)**
+
+  - Solve problems recursively.
+  - Cache solutions to subproblems.
+
+- **Bottom-Up (Tabulation)**
+
+  - Solve all subproblems first and build the solution iteratively.
+  - Usually uses a DP table (array, matrix).
+
+---
+
+# 3. DP Problem Patterns
+
+Here are the major patterns with explanation and examples:
+
+## Pattern 1: **0/1 Knapsack Pattern**
+
+**Characteristics:**
+
+- Choose between taking or not taking an item.
+- Decision: Include or exclude.
+
+**Common Problems:**
+
+- 0/1 Knapsack Problem
+- Subset Sum Problem
+- Partition Equal Subset Sum
+
+**Template:**
+
+```python
+for i in range(1, n+1):
+    for c in range(1, capacity+1):
+        if weight[i-1] <= c:
+            dp[i][c] = max(dp[i-1][c], profit[i-1] + dp[i-1][c-weight[i-1]])
+        else:
+            dp[i][c] = dp[i-1][c]
+```
+
+---
+
+## Pattern 2: **Unbounded Knapsack Pattern**
+
+**Characteristics:**
+
+- Items can be chosen multiple times.
+
+**Common Problems:**
+
+- Unbounded Knapsack
+- Coin Change (minimum/maximum coins)
+- Rod Cutting Problem
+
+**Template:**
+
+```python
+for i in range(1, n+1):
+    for c in range(1, capacity+1):
+        if weight[i-1] <= c:
+            dp[i][c] = max(dp[i][c], profit[i-1] + dp[i][c-weight[i-1]])
+```
+
+---
+
+## Pattern 3: **Fibonacci Pattern**
+
+**Characteristics:**
+
+- Solve problems by summing previous results.
+
+**Common Problems:**
+
+- Fibonacci Numbers
+- Stair Climbing Ways
+- House Robber Problem
+
+**Template:**
+
+```python
+def fib(n):
+    if n <= 1:
+        return n
+    dp = [0] * (n+1)
+    dp[1] = 1
+    for i in range(2, n+1):
+        dp[i] = dp[i-1] + dp[i-2]
+    return dp[n]
+```
+
+---
+
+## Pattern 4: **Longest Common Subsequence (LCS) Pattern**
+
+**Characteristics:**
+
+- Compare two sequences.
+- Use 2D DP table.
+
+**Common Problems:**
+
+- Longest Common Subsequence
+- Longest Palindromic Subsequence
+- Edit Distance
+- Sequence Alignment
+
+**Template:**
+
+```python
+for i in range(m+1):
+    for j in range(n+1):
+        if text1[i-1] == text2[j-1]:
+            dp[i][j] = 1 + dp[i-1][j-1]
+        else:
+            dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+```
+
+---
+
+## Pattern 5: **Matrix DP**
+
+**Characteristics:**
+
+- 2D Grid/Matrix based problems.
+
+**Common Problems:**
+
+- Unique Paths
+- Minimum Path Sum
+- Coin Change Grid Version
+
+**Template:**
+
+```python
+for i in range(m):
+    for j in range(n):
+        dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + grid[i][j]
+```
+
+---
+
+## Pattern 6: **Palindrome Based DP**
+
+**Characteristics:**
+
+- Problems involve checking if substrings are palindromic.
+
+**Common Problems:**
+
+- Longest Palindromic Substring
+- Minimum Cuts to Make a Palindrome
+
+**Template:**
+
+```python
+for length in range(2, n+1):
+    for i in range(n-length+1):
+        j = i + length - 1
+        if s[i] == s[j]:
+            dp[i][j] = dp[i+1][j-1]
+```
+
+---
+
+## Pattern 7: **Bitmask DP**
+
+**Characteristics:**
+
+- Small number of elements (n <= 20)
+- Each state represented by a bitmask.
+
+**Common Problems:**
+
+- Traveling Salesman Problem (TSP)
+- Minimum Cost to Connect All Cities
+
+**Template:**
+
+```python
+def tsp(mask, pos):
+    if mask == (1<<n) - 1:
+        return cost[pos][0]
+    if dp[mask][pos] != -1:
+        return dp[mask][pos]
+    ans = float('inf')
+    for city in range(n):
+        if (mask & (1<<city)) == 0:
+            ans = min(ans, cost[pos][city] + tsp(mask | (1<<city), city))
+    dp[mask][pos] = ans
+    return ans
+```
+
+---
+
+# 4. General Steps to Solve DP Problems
+
+1. **State Definition:**
+
+   - What does `dp[i]` represent?
+
+2. **State Transition:**
+
+   - How to move from smaller problems to larger ones.
+
+3. **Initialization:**
+
+   - Base cases.
+
+4. **Order of Solving:**
+
+   - Bottom-up (for loops) or Top-down (recursion + memoization).
+
+5. **Answer:**
+
+   - What to return or look for after building the table.
+
+---
+
+# 5. Tips for Dynamic Programming Interviews
+
+- Start with **recursion**, then **optimize with memoization**.
+- Draw small examples and observe patterns.
+- Clearly define your **DP State and Transition**.
+- Practice, practice, practice!
+
+---
+
+# 6. Common DP Problems to Practice
+
+| Problem                       | Pattern            |
+| ----------------------------- | ------------------ |
+| 0/1 Knapsack                  | 0/1 Knapsack       |
+| Coin Change                   | Unbounded Knapsack |
+| Fibonacci Series              | Fibonacci          |
+| House Robber                  | Fibonacci          |
+| Longest Common Subsequence    | LCS                |
+| Longest Palindromic Substring | Palindrome         |
+| Edit Distance                 | LCS                |
+| Unique Paths                  | Matrix DP          |
+| TSP                           | Bitmask DP         |
+
+---
+
+# END OF NOTES
+
