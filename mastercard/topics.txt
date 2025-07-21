@@ -1,0 +1,304 @@
+✅ Java and Core Concepts
+JVM, JRE, JDK
+
+Data Types, Type Casting
+
+Operators and Control Statements
+
+Classes, Objects, and Methods
+
+Constructor (Default, Param, Copy)
+
+this, super, static, final, transient, volatile, synchronized
+
+Object-Oriented Principles (OOP: Encapsulation, Inheritance, Polymorphism, Abstraction)compositions
+
+Access Modifiers (public, private, protected, default)
+
+Method Overloading vs Overriding
+
+Abstract Class vs Interface
+
+Functional Interfaces, Lambda Expressions
+
+Wrapper Classes
+
+Autoboxing and Unboxing
+
+Exception Handling (Checked vs Unchecked, try-catch-finally, try-with-resources)
+
+Garbage Collection (GC types, GC tuning, memory leaks)
+
+Memory Model (Heap vs Stack, ClassLoader, Metaspace)
+
+equals() vs ==, hashCode(), toString(), hash collisions
+
+Enums and Annotations
+
+✅ Java 8+ and Modern Java Features
+Streams API (map, filter, reduce, collect, parallel streams)
+
+Optional Class
+
+Method References
+
+Functional Interfaces (Function, Predicate, Consumer, etc.)
+
+CompletableFuture and async patterns
+
+Default and Static methods in interfaces
+
+Records (Java 16+)
+
+Sealed Classes (Java 17+)
+
+Pattern Matching and Switch Enhancements (Java 14+)
+
+✅ Collections and Concurrency
+Collection Interfaces (List, Set, Map, Queue)
+
+ArrayList vs LinkedList, HashMap vs TreeMap
+
+Fail-fast vs Fail-safe
+
+Concurrent Collections (ConcurrentHashMap, CopyOnWriteArrayList)
+
+Iterator and Iterable
+
+Multithreading Concepts: Thread, Runnable, Callable, ExecutorService, semaphores
+
+Synchronization and Locks
+
+Thread Lifecycle
+
+Deadlock, Livelock, Starvation
+
+Atomic classes (AtomicInteger, etc.)
+
+ForkJoinPool and Work Stealing
+
+Virtual Threads (Java 21)
+
+✅ Spring & Spring Boot
+Dependency Injection (DI), Inversion of Control (IoC)
+
+Bean Scopes, Lifecycle
+
+@Component, @Service, @Repository, @Controller, spring annotations
+
+ApplicationContext vs BeanFactory
+
+Spring Boot Starters, Auto-configuration
+
+Spring Boot Actuator
+
+Spring Profiles
+
+Exception Handling with @ControllerAdvice
+
+Properties and YML configuration
+
+Spring Security Basics (JWT, Filters)
+
+Validation using @Valid, @Validated
+
+aop
+
+✅ RESTful APIs
+HTTP Methods (GET, POST, PUT, DELETE, PATCH)
+
+REST Constraints (Statelessness, Cacheability, Uniform Interface)
+
+Status Codes and Error Handling
+
+Idempotency
+
+URI Design
+
+Request/Response DTOs
+
+Versioning Strategies
+
+Content Negotiation
+
+rest vs soap
+
+graph ql
+
+cdn
+
+✅ JPA & Hibernate
+Entity, @Table, @Id, @GeneratedValue
+
+Relationships: @OneToOne, @OneToMany, @ManyToOne, @ManyToMany
+
+Cascade Types, Fetch Types (LAZY vs EAGER)
+
+Entity Lifecycle (Transient, Persistent, Detached, Removed)
+
+HQL vs JPQL vs Native SQL
+
+Criteria API
+
+N+1 Problem and Fetch Joins
+
+@Transactional
+
+Caching (1st Level, 2nd Level)
+
+Dirty Checking, Flushing, Merging
+
+Soft Deletes, Auditing
+
+✅ Microservices Architecture
+Advantages & Challenges
+
+Service Registry & Discovery (Eureka, Consul)
+
+Spring Cloud Config
+
+API Gateway (Zuul, Spring Cloud Gateway)
+
+Circuit Breakers (Resilience4j, Hystrix)
+
+Feign Client, RestTemplate, WebClient
+
+Load Balancing (Ribbon, client-side/server-side)
+
+OAuth2, JWT, Security between services
+
+SAGA and Event-Driven Architecture
+
+Logging and Tracing (Sleuth, Zipkin)
+
+caching, lru
+
+publish subscribe
+
+logging
+
+✅ System Design (HLD & LLD)
+Scalability (Horizontal vs Vertical)
+
+Load Balancers
+
+Database Design (ER Model, Indexing, Joins, Denormalization)
+
+Caching (Redis, Memcached)
+
+Rate Limiting
+
+Message Queues (Kafka, RabbitMQ)
+
+Sharding and Replication
+
+CAP Theorem
+
+Consistency Patterns (Eventual, Strong)
+
+Designing a REST API, File Upload Service, Chat App, URL Shortener, etc.
+
+
+
+✅ Kafka
+Producer, Consumer, Broker, Topic, Partition
+
+Kafka Producer configs (acks, retries, batch.size)
+
+Kafka Consumer Groups
+
+Offset Management (auto/manual commit)
+
+Kafka Streams & KSQL
+
+Exactly-once semantics
+
+Kafka with Spring Integration
+
+Dead Letter Queue (DLQ) and Error Handling
+
+✅ Databases & SQL (Postgres, MySQL)
+SQL Joins, Aggregations, Subqueries
+
+Indexing and Performance Tuning
+
+ACID Properties
+
+Transactions and Isolation Levels
+
+Normalization and Denormalization
+
+Stored Procedures and Triggers
+
+Postgres specific: JSONB, Array Types, UPSERT
+
+migration
+
+✅ Design Patterns
+Creational: Singleton, Factory, Abstract Factory, Builder, Prototype
+
+Structural: Adapter, Decorator, Composite, Proxy, Facade
+
+Behavioral: Observer, Strategy, Command, Chain of Responsibility, Template
+
+Real-world usage in Spring and Microservices
+
+solid
+
+✅ DevOps & CI/CD
+Git (branching strategy, merge vs rebase, cherry-pick)
+
+Jenkins pipelines
+
+Maven vs Gradle
+
+Docker basics (image, container, volume)
+
+Kubernetes basics (pods, deployments, services)
+
+Helm (Charts, Values.yaml, Upgrade/Rollback)
+
+Monitoring (Prometheus, Grafana)
+
+Logging (ELK stack)
+
+✅ Cloud (AWS Essentials)
+EC2, S3, RDS basics
+
+IAM roles and policies
+
+AWS CLI, SDK Integration
+
+Lambda (basic event-driven understanding)
+
+VPC and Subnet concepts
+
+✅ Testing & Quality
+Unit Testing: JUnit 5, Mockito
+
+Integration Testing: @SpringBootTest, TestContainers
+
+Code Quality: SonarQube, PMD, Checkstyle
+
+Contract Testing (Pact)
+
+Load Testing (JMeter, Gatling)
+
+✅ Behavioral & HR Rounds
+STAR Format (Situation, Task, Action, Result)
+
+Handling Production Issues
+
+Conflict in Team
+
+Ownership & Initiative
+
+Mentoring Juniors
+
+Working Across Teams
+
+Demo Preparation
+
+Time Management and Estimations
+
+Project-specific deep dives

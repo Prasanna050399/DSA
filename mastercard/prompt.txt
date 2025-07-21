@@ -1,0 +1,3 @@
+give me in depth questions which should cover both basic and deep knowledge for the below topic : 
+JVM
+think like you are senior software engineer at google of amazon interview me for software engineer 2 role
