@@ -95,6 +95,9 @@ web dev :
 				
 database : 
 	https://www.interviewbit.com/dbms-interview-questions/
+	
+postgres : 
+	https://www.geeksforgeeks.org/postgresql/postgresql-interview-questions/
 
 computer networks : 
 	https://www.interviewbit.com/networking-interview-questions/
@@ -209,6 +212,7 @@ why do we need typescript over javascript?
 
 
 topics : 
+	o auth
 	spring : 
 		https://www.javatpoint.com/spring-interview-questions
 		https://www.interviewbit.com/spring-interview-questions/
@@ -373,6 +377,355 @@ topics :
 	kafka consumer group 
 	how can producer send a message to a particular partition in kafka
 	synchronized thread : how to make a thread synchronized.
+	
+	
+	what is 0,1 and all in kafka?	(mastercard)
+	what is vertical partitioning in dbms? (mastercard)
+	@async annotation vs completable future? (mastercard)
+	how will you handle back pressure (mastercard)
+	202 and 204 -> accepted and no-content (mastercard)
+	performance improvement for api calls (mastercard)
+	encryption algo we used ? (mastercard)
+	caching (mastercard)
+	what is your sla/tps? (mastercard)
+	how to create immutable class in java 
+	ArrayList vs List, Set vs List, Queue vs Stack  
+	new features of java 17
+	what are different ways to create java objects?
+	completable futures?
+	callable interface?
+	
+	
+	@async annotation vs completable future?
+	@Async and CompletableFuture both facilitate asynchronous programming in Java, but they operate at different levels and offer distinct advantages.
+	@Async (Spring Framework):
+	Purpose:
+	@Async is a Spring annotation used to mark methods for asynchronous execution. When a method annotated with @Async is called, Spring executes it in a separate thread from a thread pool managed by Spring's task executor.
+	Convenience:
+	It offers a declarative way to make methods asynchronous without directly managing threads or executors. Spring handles the thread pool configuration and execution.
+	Integration:
+	It integrates seamlessly within Spring applications, leveraging Spring's dependency injection and aspect-oriented programming capabilities.
+	Limitations:
+	By default, @Async methods called from within the same class (self-invocation) will not be executed asynchronously due to Spring's proxy-based AOP implementation.
+	CompletableFuture (Java 8):
+	Purpose:
+	CompletableFuture is a class in Java 8 that represents a future result of an asynchronous computation. It provides a rich API for composing, combining, and handling asynchronous tasks, including chaining operations and handling exceptions in a non-blocking manner.
+	Flexibility:
+	It offers fine-grained control over asynchronous operations, allowing for complex workflows and advanced error handling.
+	Independence:
+	It is a core Java feature and can be used in any Java application, not just Spring applications.
+	Composition:
+	Its strength lies in its ability to chain multiple asynchronous operations together, enabling complex data pipelines and reactive programming patterns.
+	Key Differences Summarized:
+	Scope:
+	@Async is a Spring-specific annotation for making methods asynchronous within a Spring context, while CompletableFuture is a core Java utility for representing and managing asynchronous computations.
+	Control:
+	@Async provides a higher-level, more declarative approach to asynchronous execution, with Spring managing the underlying threads. CompletableFuture offers more explicit control over task execution and composition.
+	Features:
+	@Async primarily focuses on offloading method execution to a separate thread. CompletableFuture provides extensive features for chaining, combining, and handling the results and exceptions of asynchronous tasks.
+	Usage:
+	@Async is ideal for simple asynchronous tasks within a Spring application. CompletableFuture is better suited for complex asynchronous workflows, data pipelines, and situations requiring advanced composition and error handling.
+	In essence, @Async is a convenience feature provided by Spring for basic asynchronous method execution, while CompletableFuture is a powerful, low-level tool for building sophisticated asynchronous systems in Java. They can also be used together, where an @Async method might return a CompletableFuture to enable further asynchronous composition.
+	
+	
+how to create immutable class in java  ?
+
+	1. Making an object immutable using the Proxy pattern involves intercepting operations that would typically modify the object's state and preventing them. This is achieved by creating a proxy object that wraps the original (mutable) object and enforces immutability rules.
+	
+	2.
+	Declare the Class as final:
+	This prevents other classes from extending it and potentially overriding methods or modifying its behavior, which could compromise immutability.
+	Make All Fields private and final:
+	private restricts direct access to the fields from outside the class.
+	final ensures that the fields are initialized only once, typically in the constructor, and their values cannot be reassigned afterward.
+	Provide a Constructor to Initialize All Fields:
+	All fields must be initialized during object creation via a constructor. This is the only point where the state of the object is set.
+	Do Not Provide Setter Methods:
+	Setter methods would allow modification of the object's state after creation, violating the principle of immutability.
+	Handle Mutable Objects Carefully (Defensive Copying):
+	If your class contains references to mutable objects (e.g., Date, ArrayList), you must perform a deep copy of these objects in the constructor to prevent external modifications to the internal state.
+	Similarly, when returning mutable objects from getter methods, return a defensive copy instead of the original reference. This ensures that callers cannot modify the internal state of your immutable object.
+	Override equals() and hashCode() (Optional but Recommended):
+	For proper behavior in collections like HashMap or HashSet, and for meaningful comparisons, override equals() and hashCode() to reflect the immutable state of the object.
+	Example:
+	Java
+
+	import java.util.Date;
+
+	public final class ImmutablePerson {
+		private final String name;
+		private final int age;
+		private final Date birthDate; // Mutable object
+
+		public ImmutablePerson(String name, int age, Date birthDate) {
+			this.name = name;
+			this.age = age;
+			// Defensive copy for mutable object
+			this.birthDate = new Date(birthDate.getTime()); 
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public int getAge() {
+			return age;
+		}
+
+		public Date getBirthDate() {
+			// Defensive copy to prevent external modification
+			return new Date(this.birthDate.getTime()); 
+		}
+	}
+
+	Handling mutable objects within an immutable class requires careful implementation to preserve the immutability of the outer class. The core principle is to prevent external modifications to the mutable objects from affecting the internal state of the immutable class. This is achieved through defensive copying:
+	In the Constructor: When initializing the immutable class, if it takes a mutable object as a constructor argument, create a deep copy of that mutable object and store the copy, not the original reference. This prevents external code from modifying the mutable object passed during construction and thus altering the immutable class's state.
+	Java
+
+		public final class ImmutableClass {
+			private final List<String> mutableList;
+
+			public ImmutableClass(List<String> list) {
+				// Defensive copy in the constructor
+				this.mutableList = new ArrayList<>(list);
+			}
+
+			// ... other methods
+		}
+	In Getter Methods: If the immutable class provides a getter method for a mutable object, return a deep copy of that object instead of the direct reference. This prevents external code from obtaining a reference to the internal mutable object and modifying it, which would violate the immutability of the outer class.
+	Java
+
+		public final class ImmutableClass {
+			private final List<String> mutableList;
+
+			// ... constructor
+
+			public List<String> getMutableList() {
+				// Defensive copy in the getter
+				return new ArrayList<>(this.mutableList);
+			}
+		}
+	Key Points:
+	Deep Copy:
+	Ensure the copy operation is a deep copy if the mutable object itself contains other mutable objects. A shallow copy would still leave references to nested mutable objects, compromising immutability.
+	No Setters:
+	Immutable classes should not have setter methods for any of their fields, including those that hold mutable objects.
+	Final Fields:
+	Declare all fields, including those holding mutable objects, as final to ensure they are assigned only once during construction.
+	Final Class:
+	Declare the class itself as final to prevent subclassing and potential modification of behavior by subclasses.
+
+
+
+
+
+
+what is 0,1 and all in kafka?
+	In Apache Kafka, "0, 1, and all" refer to the acks (acknowledgments) configuration setting for producers, which dictates the level of durability and performance trade-off for message writes.
+	acks=0 (No Acknowledgement):
+	The producer sends the message to the leader broker and does not wait for any acknowledgment.
+	This offers the highest throughput and lowest latency but carries the highest risk of data loss. If the leader broker fails before writing the message to its log, the message is lost without the producer knowing.
+	Suitable for use cases where some data loss is acceptable, such as metrics collection or log aggregation.
+	acks=1 (Leader Acknowledgement):
+	The producer sends the message to the leader broker and waits for an acknowledgment from the leader only.
+	This provides a balance between performance and durability. The message is considered successfully written once the leader has received and written it to its log.
+	Data loss can still occur if the leader fails after acknowledging but before the message is replicated to any in-sync replicas.
+	acks=all (Full Acknowledgement):
+	Also represented as acks=-1.
+	The producer sends the message to the leader broker and waits for acknowledgment from the leader and all current in-sync replicas (ISRs).
+	This offers the highest level of durability and guarantees no data loss as long as at least one in-sync replica remains alive.
+	It comes with the lowest throughput and highest latency due to the need to wait for multiple acknowledgments.
+	Often combined with min.insync.replicas broker configuration to ensure a minimum number of in-sync replicas are available before accepting writes.
+	Ideal for critical data where data loss is unacceptable, such as financial transactions
+	
+	
+	to set this configuration, we set the acks property in kafka producer properties : 
+	
+
+		props.put("acks", "all"); // Can also be "0" or "1"
+	
+		KafkaProducer<String, String> producer = new KafkaProducer<>(props);
+		
+
+
+	
+	
+what is vertical partitioning in dbms?	
+	Vertical partitioning in DBMS refers to the process of splitting a database table by columns, creating multiple tables, each with a subset of the original table's columns. This approach aims to improve performance and manageability by reducing the number of columns accessed in common operations. 
+	Vertical Partitioning vs Horizontal Partitioning - GeeksforGeeks
+	Here's a more detailed explanation:
+	How it works:
+	Splitting by columns:
+	Instead of storing all columns in one table, vertical partitioning divides them into multiple tables. 
+	Shared primary key:
+	Each resulting table typically includes the primary key of the original table, enabling joins to reconstruct the full record. 
+	Reduced I/O:
+	By partitioning columns based on access patterns, frequently accessed columns can be stored together, minimizing the data read during common queries. 
+	Improved performance:
+	Vertical partitioning can lead to faster query execution, especially when dealing with large tables containing many columns or when some columns are accessed much more frequently than others. 
+	
+
+
+how will you handle back pressure
+
+	1. On the Consumer Side:
+	Scaling Consumer Instances:
+	The most common approach is to increase the number of consumer instances within a consumer group. Kafka's partitioning allows for parallel processing, so adding more consumers can distribute the load and increase consumption throughput.
+	Optimizing Consumer Processing:
+	Improve the efficiency of the consumer application itself. This could involve optimizing database queries, reducing network calls, or streamlining business logic to process messages faster.
+	Explicit Polling and Controlled Consumption:
+	Instead of relying on a continuous poll() loop, implement a controlled polling mechanism where the consumer only fetches new messages after successfully processing a previous batch. This can be achieved by pausing the consumer (e.g., using consumer.pause()) when a certain threshold of unhandled messages is reached and resuming (e.g., using consumer.resume()) once processing catches up.
+	Batch Processing and Commit Control:
+	Process messages in batches and commit offsets only after the entire batch has been successfully processed and persisted, ensuring data integrity even if the consumer slows down.
+	2. On the Producer Side:
+	Producer Throttling/Rate Limiting:
+	Implement mechanisms to limit the rate at which producers send messages to Kafka, especially if the downstream system is known to have limited capacity. Kafka itself allows for setting quotas per client to throttle requests.
+	Buffering and Asynchronous Sending:
+	Producers can buffer messages before sending them to Kafka, using asynchronous sending to avoid blocking the producer thread while waiting for acknowledgements from the broker.
+	3. System-Wide Considerations:
+	Monitoring Consumer Lag:
+	Continuously monitor consumer lag, which indicates how far behind a consumer is from the latest message in a partition. High or increasing lag is a clear sign of backpressure.
+	Adjusting Kafka Configurations:
+	Fine-tune Kafka broker and topic configurations, such as retention policies, batch sizes, and fetch configurations, to optimize performance and manage message flow.
+	Implementing Exponential Backoff Strategies:
+	For retrying failed operations in downstream systems, implement exponential backoff to give the system time to recover and prevent further overwhelming it with retries.
+
+
+
+performance improvement for api calls
+	Caching:
+	Implement caching at multiple levels (server-side, client-side, CDN) to store frequently accessed data and reduce the need for repeated requests to the origin server or database.
+	
+	Payload Optimization:
+	Compression: Use compression techniques (e.g., Gzip, Brotli) to reduce the size of data transferred over the network.
+	Selective Fields/Partial Resources: Design APIs to allow clients to request only the necessary data fields, avoiding the transfer of unneeded information.
+	Pagination and Filtering: For large datasets, implement pagination and filtering to retrieve data in manageable chunks, reducing payload size and processing time.
+	
+	Database Optimization:
+	Efficient Queries: Write optimized database queries and ensure proper indexing of frequently queried columns.
+	Connection Pooling: Utilize database connection pooling to reduce the overhead of establishing new connections for each request.
+	
+	Asynchronous Processing:
+	Employ asynchronous programming to prevent blocking I/O operations from slowing down the API and allow for concurrent handling of requests.
+	
+	Minimize API Calls:
+	Batch Requests: Group multiple related operations into a single API call when possible to reduce network round trips.
+	Reduce Redundant Calls: Avoid making unnecessary or repeated calls for the same data within a short period.
+	
+	Infrastructure and Network:
+	Content Delivery Networks (CDNs): Use CDNs to serve static assets and cached API responses from locations geographically closer to users, reducing latency.
+	Load Balancing: Distribute incoming requests across multiple servers to prevent bottlenecks and ensure high availability.
+	HTTP/2 Protocol: Leverage HTTP/2 for features like multiplexing and header compression, which can improve performance over HTTP/1.1.
+	Monitoring and Testing:
+	Implement robust monitoring to track API performance metrics (latency, error rates, throughput) and conduct regular load testing to identify and address performance bottlenecks proactively.
+	
+	
+
+new features of java 17 :
+
+	SEALED class : 
+	
+	A sealed class in Java is a feature introduced to restrict the inheritance hierarchy of a class or interface. It allows a developer to explicitly declare which classes are permitted to extend a sealed class or implement a sealed interface. This provides more control over the class hierarchy and prevents unintended or unauthorized extensions. 
+	Key characteristics of sealed classes:
+	Restricted Inheritance:
+	A sealed class or interface explicitly lists the classes or interfaces that are allowed to extend or implement it using the permits keyword.
+	Controlled Hierarchy:
+	This mechanism ensures that only the specified subtypes can be created, leading to a more predictable and manageable class hierarchy.
+	Subtype Requirements:
+	Subclasses of a sealed class must be declared as one of the following:
+	final: The subclass cannot be extended further.
+	sealed: The subclass can be extended, but only by a specified set of classes (it also uses the permits keyword).
+	non-sealed: The subclass can be extended without any restrictions.
+	Enhanced Maintainability and Security:
+	By limiting the inheritance, sealed classes can improve code maintainability, prevent unexpected behavior, and potentially enhance security by preventing the creation of malicious or unintended subclasses.
+	Example:
+	Java
+
+	sealed class Shape permits Circle, Rectangle, Triangle {
+		// ... common methods for shapes
+	}
+
+	final class Circle extends Shape {
+		// ... circle specific methods
+	}
+
+	non-sealed class Rectangle extends Shape {
+		// ... rectangle specific methods
+	}
+
+	sealed class Triangle extends Shape permits EquilateralTriangle {
+		// ... triangle specific methods
+	}
+
+	final class EquilateralTriangle extends Triangle {
+		// ... equilateral triangle specific methods
+	}
+
+
+what are different ways to create java objects?
+	
+	There are several ways to create objects in Java:
+	Using the new keyword: This is the most common and straightforward method. It directly invokes a constructor of the class to create and initialize a new object.
+	Java
+
+		ClassName objectName = new ClassName();
+	Using Class.forName().newInstance() (Reflection): This method allows creating an instance of a class dynamically at runtime. It requires the class to have a public no-argument constructor.
+	Java
+
+		Object obj = Class.forName("com.example.ClassName").newInstance();
+	Using Constructor.newInstance() (Reflection): This provides more control than Class.newInstance(), allowing the invocation of parameterized or even private constructors.
+	Java
+
+		Constructor constructor = ClassName.class.getConstructor(String.class); // For a constructor with a String argument
+		Object obj = constructor.newInstance("someValue");
+	Using the clone() method: This method creates a shallow copy of an existing object. The class must implement the Cloneable interface and override the clone() method.
+	Java
+
+		MyObject originalObject = new MyObject();
+		MyObject clonedObject = (MyObject) originalObject.clone();
+	Using Deserialization: When an object is deserialized from a byte stream, a new object is created in memory without explicitly calling a constructor. The class must implement the Serializable interface.
+	Java
+
+		FileInputStream fileIn = new FileInputStream("object.ser");
+		ObjectInputStream in = new ObjectInputStream(fileIn);
+		MyObject deserializedObject = (MyObject) in.readObject();
+	Using Factory Methods: A static method within a class or a separate factory class can encapsulate the object creation logic, providing a more controlled way to create instances.
+	Java
+
+
+	
+	
+	
+	
+	Web Security / Secure Coding
+	What are the most common OWASP Top 10 vulnerabilities and how do you mitigate them in Java?
+
+	How does SQL Injection work and how do you prevent it in Spring Boot?
+
+	What is CSRF? How do you configure CSRF protection in Spring Security?
+
+	Authentication & Authorization
+	How would you implement JWT-based authentication in a microservice architecture?
+
+	What is OAuth2 authorization code flow and how would you integrate it in a Spring Boot API?
+
+	How do you design role-based access control using Spring Security authorities?
+
+	Transport Security and Configuration
+	How does TLS 1.3 differ from TLS 1.2? How would you enforce TLS configuration in Tomcat or Spring Boot apps?
+
+	What security headers (like CSP, HSTS) would you configure for a REST backend?
+
+	Secure Software Development
+	What is SAST and DAST? How would you integrate static/dynamic code analysis in your CI pipeline?
+
+	How do you manage third-party dependencies to avoid vulnerabilities?
+
+	Incident Response / Log Auditing
+	How would you securely log authentication failures or suspicious API calls?
+
+	Describe how you would implement monitoring/alerts for security events in backend services.
+	
 	
 	
 manager round questions : 
